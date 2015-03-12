@@ -1,0 +1,50 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/light_blue"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:longClickable="true">
+
+    <ImageView
+        android:id="@+id/image_user_pic"
+        android:src="@drawable/no_photo"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:layout_width="@dimen/event_pic_preview_size"
+        android:layout_height="@dimen/event_pic_preview_size" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginStart="@dimen/label_margin"
+        android:layout_marginLeft="@dimen/label_margin"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/label_user_name"
+            android:text="@string/label_user_name"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/label_text_size"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/label_user_age"
+            android:text="@string/label_user_age"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/label_text_size"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/label_user_location"
+            android:text="@string/label_user_location"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/label_text_size"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+</LinearLayout>

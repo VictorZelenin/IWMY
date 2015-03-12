@@ -1,0 +1,188 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/light_blue"
+    android:gravity="center_horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:background="@color/blue"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" >
+
+        <ImageButton
+            android:id="@+id/button_options"
+            android:src="@drawable/menu"
+            android:background="@android:color/transparent"
+            android:paddingRight="@dimen/margin"
+            android:paddingTop="@dimen/margin"
+            android:paddingBottom="@dimen/margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/label_couple"
+            android:text="@string/toolbar_couple"
+            android:textSize="@dimen/toolbar_text_size"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:id="@+id/button_ok"
+                    android:src="@drawable/ok"
+                    android:background="@android:color/transparent"
+                    android:paddingRight="@dimen/margin"
+                    android:paddingTop="@dimen/margin"
+                    android:paddingBottom="@dimen/margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageButton
+                    android:id="@+id/button_settings"
+                    android:src="@drawable/settings"
+                    android:background="@android:color/transparent"
+                    android:paddingRight="@dimen/margin"
+                    android:paddingTop="@dimen/margin"
+                    android:paddingBottom="@dimen/margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image_user_pic"
+                android:src="@drawable/no_photo"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/label_name_and_surname"
+                android:text="@string/label_name_and_surname"
+                android:textSize="@dimen/label_text_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/label_email"
+                android:text="@string/label_email"
+                android:textSize="@dimen/label_text_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/label_phone"
+                android:text="@string/label_phone"
+                android:textSize="@dimen/label_text_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/label_gender"
+                android:text="@string/label_gender"
+                android:textSize="@dimen/label_text_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/label_birth_date"
+                android:text="@string/label_birth_date"
+                android:textSize="@dimen/label_text_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/label_orientation"
+                android:text="@string/label_orientation"
+                android:textSize="@dimen/label_text_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/label_appearance"
+                android:text="@string/label_appearance"
+                android:textSize="@dimen/label_text_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/label_goal"
+                android:text="@string/label_goal"
+                android:textSize="@dimen/label_text_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/label_affairs"
+                android:text="@string/label_affairs"
+                android:textSize="@dimen/label_text_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/label_children"
+                android:text="@string/label_children"
+                android:textSize="@dimen/label_text_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/label_height"
+                android:text="@string/label_height"
+                android:textSize="@dimen/label_text_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/label_weight"
+                android:text="@string/label_weight"
+                android:textSize="@dimen/label_text_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/label_attitude_to_smoking"
+                android:text="@string/label_attitude_to_smoking"
+                android:textSize="@dimen/label_text_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/label_attitude_to_alcohol"
+                android:text="@string/label_attitude_to_alcohol"
+                android:textSize="@dimen/label_text_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

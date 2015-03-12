@@ -1,0 +1,40 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.google.appengine:gradle-appengine-plugin:1.9.15'
+    }
+}
+
+repositories {
+    mavenCentral();
+}
+
+apply plugin: 'java'
+apply plugin: 'appengine'
+apply plugin: 'war'
+
+compileJava {
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+}
+
+dependencies {
+    appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.15'
+    compile 'com.google.appengine:appengine-endpoints:1.9.15'
+    compile 'com.google.appengine:appengine-endpoints-deps:1.9.15'
+    compile 'com.sun.jersey:jersey-servlet:1.19'
+    compile 'com.sun.jersey:jersey-json:1.19'
+    compile 'com.sun.jersey.contribs:jersey-multipart:1.19'
+    compile 'org.codehaus.jackson:jackson-jaxrs:1.9.13'
+    compile 'com.googlecode.objectify:objectify:5.1.5'
+    compile project(':shared')
+}
+
+appengine {
+    downloadSdk = true
+    appcfg {
+        oauth2 = true
+    }
+}

@@ -1,0 +1,117 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/light_blue"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:background="@color/blue"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" >
+
+        <ImageButton
+            android:id="@+id/button_options"
+            android:src="@drawable/menu"
+            android:background="@android:color/transparent"
+            android:paddingRight="@dimen/margin"
+            android:paddingTop="@dimen/margin"
+            android:paddingBottom="@dimen/margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/label_organizer"
+            android:text="@string/toolbar_organizer"
+            android:textSize="@dimen/toolbar_text_size"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:id="@+id/button_ok"
+                    android:src="@drawable/ok"
+                    android:background="@android:color/transparent"
+                    android:paddingRight="@dimen/margin"
+                    android:paddingTop="@dimen/margin"
+                    android:paddingBottom="@dimen/margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageButton
+                    android:id="@+id/button_settings"
+                    android:src="@drawable/settings"
+                    android:background="@android:color/transparent"
+                    android:paddingRight="@dimen/margin"
+                    android:paddingTop="@dimen/margin"
+                    android:paddingBottom="@dimen/margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:background="@color/gray"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/label_number"
+            android:layout_weight="@integer/label_number"
+            android:textSize="@dimen/label_text_size"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="@string/label_selection"
+            android:layout_weight="@integer/label_selection"
+            android:textSize="@dimen/label_text_size"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="@string/label_comment"
+            android:layout_weight="@integer/label_comment"
+            android:textSize="@dimen/label_text_size"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rating_list_holder"
+            android:layout_above="@+id/button_send"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent" />
+
+        <Button
+            android:id="@+id/button_send"
+            android:text="@string/button_send"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,21 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+repositories {
+    mavenCentral();
+}
+
+apply plugin: 'java'
+
+compileJava {
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+}
+
+dependencies {
+    compile 'com.googlecode.objectify:objectify:5.1.5'
+    compile 'org.codehaus.jackson:jackson-jaxrs:1.9.13'
+}

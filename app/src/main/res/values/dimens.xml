@@ -1,0 +1,15 @@
+<resources>
+    <dimen name="margin">10dp</dimen>
+    <dimen name="label_margin">10dp</dimen>
+
+    <dimen name="event_pic_preview_size">50dp</dimen>
+
+    <dimen name="start_title_text_size">50sp</dimen>
+    <dimen name="toolbar_text_size">25sp</dimen>
+    <dimen name="label_text_size">20sp</dimen>
+
+    <integer name="label_number">2</integer>
+    <integer name="label_selection">1</integer>
+    <integer name="label_comment">4</integer>
+
+</resources>
