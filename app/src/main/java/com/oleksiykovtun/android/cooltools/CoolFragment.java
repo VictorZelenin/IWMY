@@ -24,7 +24,8 @@ import java.util.List;
  * Base fragment with support of clickable elements and recycler items clicks processing
  */
 public abstract class CoolFragment extends Fragment implements View.OnClickListener,
-        CoolRecyclerAdapter.CoolClickListener, CoolWebAsyncTask.CoolWebAsyncResponse {
+        CoolRecyclerAdapter.CoolClickListener, CoolWebAsyncTask.CoolWebAsyncResponse,
+        CoolDatePickerFragment.DateSetListener, CoolTimePickerFragment.TimeSetListener {
 
     private View containerView;
     private AsyncTask task = null;
@@ -37,6 +38,22 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
 
     protected String getEditText(int editTextId) {
         return "" + ((EditText)containerView.findViewById(editTextId)).getText();
+    }
+
+    protected String getLabelText(int textViewId) {
+        return "" + ((TextView)containerView.findViewById(textViewId)).getText();
+    }
+
+    protected void openDatePicker() {
+        CoolDatePickerFragment datePickerFragment = new CoolDatePickerFragment();
+        datePickerFragment.setDateSetListener(this);
+        datePickerFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
+    }
+
+    protected void openTimePicker() {
+        CoolTimePickerFragment timePickerFragment = new CoolTimePickerFragment();
+        timePickerFragment.setTimeSetListener(this);
+        timePickerFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
     }
 
     protected long getDateMillis(int datePickerId) {
@@ -144,6 +161,14 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
             InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
+    }
+
+    @Override
+    public void onDateSet(String dateString) {
+    }
+
+    @Override
+    public void onTimeSet(String timeString) {
     }
 
     @Override

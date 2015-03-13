@@ -71,7 +71,7 @@ public class RegisteringFragment extends CoolFragment {
                 && ! user.getUsername().isEmpty()
                 && ! user.getPhone().isEmpty()
                 && ! user.getOrganization().isEmpty()
-                && user.getWebsite().contains(".");
+                && ! user.getWebsite().isEmpty();
     }
 
 }

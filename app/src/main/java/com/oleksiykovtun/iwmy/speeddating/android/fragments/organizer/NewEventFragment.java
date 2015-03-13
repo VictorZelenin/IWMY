@@ -27,6 +27,8 @@ public class NewEventFragment extends CoolFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_organizer_new_event, container, false);
         registerContainerView(view);
+        registerClickListener(R.id.button_select_date);
+        registerClickListener(R.id.button_select_time);
         registerClickListener(R.id.button_apply);
         return view;
     }
@@ -34,9 +36,15 @@ public class NewEventFragment extends CoolFragment {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.button_select_date:
+                openDatePicker();
+                break;
+            case R.id.button_select_time:
+                openTimePicker();
+                break;
             case R.id.button_apply:
-                String time = CoolFormatter.getDateTime(getDateMillis(R.id.date_picker)
-                        + getTimeMillis(R.id.time_picker));
+                String time = getLabelText(R.id.label_event_date) + " "
+                        + getLabelText(R.id.label_event_time);
                 String place = getEditText(R.id.input_event_place);
                 String photoBase64 = "";
                 String streetAddress = getEditText(R.id.input_event_place);
@@ -68,6 +76,16 @@ public class NewEventFragment extends CoolFragment {
         } else {
             showToast(R.string.message_connection_error);
         }
+    }
+
+    @Override
+    public void onDateSet(String dateString) {
+        setText(R.id.label_event_date, dateString);
+    }
+
+    @Override
+    public void onTimeSet(String timeString) {
+        setText(R.id.label_event_time, timeString);
     }
 
 }

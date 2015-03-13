@@ -10,6 +10,7 @@ import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.iwmy.speeddating.android.Account;
+import com.oleksiykovtun.android.cooltools.CoolDatePickerFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 import java.util.List;
@@ -25,12 +26,16 @@ public class RegisteringFragment extends CoolFragment {
         View view = inflater.inflate(R.layout.fragment_user_registering, container, false);
         registerContainerView(view);
         registerClickListener(R.id.button_register);
+        registerClickListener(R.id.button_select_date);
         return view;
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.button_select_date:
+                openDatePicker();
+                break;
             case R.id.button_register:
                 String email = getEditText(R.id.input_email);
                 String password = getEditText(R.id.input_password);
@@ -39,7 +44,7 @@ public class RegisteringFragment extends CoolFragment {
                 String nameAndSurname = getEditText(R.id.input_name_and_surname);
                 String photoBase64 = "";
                 String phone = getEditText(R.id.input_phone);
-                String birthDate = CoolFormatter.getDateTime(getDateMillis(R.id.date_picker));
+                String birthDate = getLabelText(R.id.label_birth_date);
                 String gender = isRadioButtonChecked(R.id.gender_male) ? "male" : "female";
                 String orientation = "";
                 String goal = "";
@@ -82,6 +87,11 @@ public class RegisteringFragment extends CoolFragment {
         } else {
             showToastLong(R.string.message_connection_error);
         }
+    }
+
+    @Override
+    public void onDateSet(String dateString) {
+        setText(R.id.label_birth_date, dateString);
     }
 
 }

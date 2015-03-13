@@ -56,12 +56,18 @@
                 android:text="@string/label_event_date"
                 android:textSize="@dimen/label_text_size"/>
 
-            <DatePicker
-                android:id="@+id/date_picker"
+            <Button
+                android:id="@+id/button_select_date"
+                android:text="@string/label_select_date"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:endYear="2050"
-                android:startYear="2015" />
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/label_event_date"
+                android:text="@string/label_empty"
+                android:textSize="@dimen/label_text_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
             <TextView
                 android:layout_width="fill_parent"
@@ -69,10 +75,18 @@
                 android:text="@string/label_event_time"
                 android:textSize="@dimen/label_text_size"/>
 
-            <TimePicker
-                android:id="@+id/time_picker"
+            <Button
+                android:id="@+id/button_select_time"
+                android:text="@string/label_select_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/label_event_time"
+                android:text="@string/label_empty"
+                android:textSize="@dimen/label_text_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
             <TextView
                 android:layout_width="fill_parent"

@@ -1,6 +1,7 @@
 package com.oleksiykovtun.iwmy.speeddating.android.fragments.organizer;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ public class NewParticipantFragment extends CoolFragment {
         View view = inflater.inflate(R.layout.fragment_organizer_new_participant, container, false);
         registerContainerView(view);
         registerClickListener(R.id.button_register);
+        registerClickListener(R.id.button_select_date);
         registerClickListener(R.id.button_settings);
 
         event = (Event)getAttachment();
@@ -41,6 +43,9 @@ public class NewParticipantFragment extends CoolFragment {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.button_select_date:
+                openDatePicker();
+                break;
             case R.id.button_register:
                 String email = getEditText(R.id.input_email);
                 String password = getEditText(R.id.input_password);
@@ -49,7 +54,7 @@ public class NewParticipantFragment extends CoolFragment {
                 String nameAndSurname = getEditText(R.id.input_name_and_surname);
                 String photoBase64 = "";
                 String phone = getEditText(R.id.input_phone);
-                String birthDate = CoolFormatter.getDateTime(getDateMillis(R.id.date_picker));
+                String birthDate = getLabelText(R.id.label_birth_date);
                 String gender = isRadioButtonChecked(R.id.gender_male) ? "male" : "female";
                 String orientation = "";
                 String goal = "";
@@ -93,9 +98,12 @@ public class NewParticipantFragment extends CoolFragment {
         if (! response.isEmpty()) {
             showToast(R.string.message_participant_added);
             CoolFragmentManager.switchToPreviousFragment();
-        } else {
-            showToast(R.string.message_connection_error);
         }
+    }
+
+    @Override
+    public void onDateSet(String dateString) {
+        setText(R.id.label_birth_date, dateString);
     }
 
 }

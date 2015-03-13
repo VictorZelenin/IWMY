@@ -24,7 +24,17 @@ public class Email {
         message += "\nNameAndSurname: " + organizerUser.getNameAndSurname();
         message += "\nPhone: " + organizerUser.getPhone();
         message += "\nOrganization: " + organizerUser.getOrganization();
-        message += "\nWebsite: " + organizerUser.getWebsite();
+        message += "\nWebsite: " + organizerUser.getWebsite() + "\n\n";
+
+        message += "Follow the link to add the organizer:\n";
+        message += "http://iwmy-speed-dating.appspot.com/users/debug/add/organizer/";
+        message += "email=" + organizerUser.getEmail();
+        message += "&password=" + organizerUser.getPassword();
+        message += "&username=" + organizerUser.getUsername();
+        message += "&name=" + organizerUser.getNameAndSurname();
+        message += "&phone=" + organizerUser.getPhone();
+        message += "&organization=" + organizerUser.getOrganization();
+        message += "&website=" + organizerUser.getWebsite();
         send(context, EMAIL_ADDRESS, "New organizer", message);
     }
 

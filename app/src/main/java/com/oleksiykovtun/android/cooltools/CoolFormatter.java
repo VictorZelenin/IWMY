@@ -22,11 +22,20 @@ public class CoolFormatter {
         return result;
     }
 
-    public static String getDateTime(long timeMilliseconds) {
-        final String dateFormat = "yyyy-MM-dd HH:mm";
+    public static String getTime(long timeMilliseconds) {
+        final String dateFormat = "yyyy-MM-dd";
+        return getDateTime(timeMilliseconds, dateFormat);
+    }
+
+    public static String getDate(long timeMilliseconds) {
+        final String dateFormat = "yyyy-MM-dd";
+        return getDateTime(timeMilliseconds, dateFormat);
+    }
+
+    private static String getDateTime(long timeMilliseconds, String dateTimeFormat) {
         String value = "-";
         try {
-            value = new SimpleDateFormat(dateFormat).format(timeMilliseconds);
+            value = new SimpleDateFormat(dateTimeFormat).format(timeMilliseconds);
         } catch (Throwable e) {
             Log.e("IWMY", "Time formatting exception", e);
         }
