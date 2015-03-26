@@ -5,6 +5,8 @@ import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
+import org.codehaus.jackson.annotate.JsonRawValue;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.TreeSet;
@@ -33,7 +35,6 @@ public class UserRestService extends GeneralRestService {
     public List getForEventActiveReset(List<Event> wildcardEvents) {
         // cleanup
         RatingRestService.deleteForEvent(wildcardEvents);
-        CoupleRestService.deleteForEvent(wildcardEvents);
         // listing event-related attendances
         Set<User> users = new TreeSet<>();
         List<Attendance> eventAttendances = AttendanceRestService.getForEvent(wildcardEvents);
@@ -108,7 +109,8 @@ public class UserRestService extends GeneralRestService {
         return users;
     }
 
-    @Path(Api.ADD) @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.ADD) @POST
+    @Consumes(JSON) @Produces(JSON)
     public List add(List<User> items) {
         ObjectifyService.ofy().save().entities(items).now();
         return items;

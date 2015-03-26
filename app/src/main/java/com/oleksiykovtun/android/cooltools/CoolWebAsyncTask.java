@@ -3,6 +3,8 @@ package com.oleksiykovtun.android.cooltools;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.google.common.escape.UnicodeEscaper;
+import com.google.common.net.PercentEscaper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -18,9 +20,13 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by alx on 2014-11-20.
@@ -56,9 +62,7 @@ class CoolWebAsyncTask extends AsyncTask<String, Void, Void> {
         try {
             HttpPost httpPost = new HttpPost(urls[0]);
             httpPost.addHeader(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-            String jsonStringUpload
-                    = new Gson().toJson(uploadData,
-                    TypeToken.get(uploadData.getClass()).getRawType());
+            String jsonStringUpload = getJsonString(uploadData);
             Log.d("IWMY", "Sending\n" + uploadData.length + " items TO " + urls[0]
                     + "\n" + jsonStringUpload + "\n");
             httpPost.setEntity(new StringEntity(jsonStringUpload));
@@ -72,8 +76,7 @@ class CoolWebAsyncTask extends AsyncTask<String, Void, Void> {
             if (status == HTTP_OK) {
                 String jsonString = EntityUtils.toString(response.getEntity());
                 if (responseClass != null) {
-                    parsedResponse = Arrays.asList(
-                            (Object[]) new Gson().fromJson(jsonString, responseClass));
+                    parsedResponse = getObjectList(jsonString, responseClass);
                 }
                 Log.d("IWMY", "Received\n" + parsedResponse.size() + " items FROM " + urls[0]
                         + "\n" + jsonString + "\n");
@@ -105,6 +108,19 @@ class CoolWebAsyncTask extends AsyncTask<String, Void, Void> {
                 delegate.onReceiveWebData(parsedResponse);
             }
         }
+    }
+
+    private String getJsonString(Object[] objectArray) {
+        final String safeCharacters = " @-/:_[]{}.,\"\\'";
+        String rawJsonString = new Gson().toJson(objectArray,
+                TypeToken.get(objectArray.getClass()).getRawType());
+        return new PercentEscaper(safeCharacters, false).escape(rawJsonString);
+    }
+
+    private List getObjectList(String jsonString, Class objectClass) throws Throwable {
+        final String encoding = "UTF-8";
+        String rawJsonString = URLDecoder.decode(jsonString, encoding);
+        return Arrays.asList((Object[]) new Gson().fromJson(rawJsonString, objectClass));
     }
 
 }

@@ -28,11 +28,13 @@ import javax.ws.rs.Produces;
 public class CoupleRestService extends GeneralRestService {
 
     @Path(Api.GENERATE_FOR_EVENT) @POST @Consumes(JSON) @Produces(JSON)
-    public List createForEvent(List<Event> wildcardEvents) {
+    public List generateForEvent(List<Event> wildcardEvents) {
+        // cleanup
+        deleteForEvent(wildcardEvents);
+        // making all possible couples
         Event event = wildcardEvents.get(0);
         List<Rating> ratingsSelected = RatingRestService.getForEventSelected(wildcardEvents);
         Map<String, String> coupleMap = new TreeMap<>();
-        // making all possible couples
         for (Rating rating : ratingsSelected) {
             if (! coupleMap.containsKey(rating.getThisUserEmail())
                     && ! coupleMap.containsKey(rating.getOtherUserEmail())
