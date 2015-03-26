@@ -30,7 +30,7 @@ public class SettingsFragment extends CoolFragment {
         switch (view.getId()) {
             case R.id.button_logout:
                 Account.removeUser(this);
-                CoolFragmentManager.switchToRootFragment(new StartFragment());
+                CoolFragmentManager.showAtBottom(new StartFragment());
         }
     }
 

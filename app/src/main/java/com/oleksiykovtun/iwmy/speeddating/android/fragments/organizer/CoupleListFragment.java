@@ -63,10 +63,10 @@ public class CoupleListFragment extends CoolFragment {
                 postForNoResult(Api.COUPLES + Api.PUT, coupleList.toArray());
                 // todo send results to offline clients by email - get email addresses from temp
                 showToast(R.string.message_couples_sent);
-                CoolFragmentManager.switchToRootFragment(new MyEventListFragment());
+                CoolFragmentManager.showAtBottom(new MyEventListFragment());
                 break;
             case R.id.button_settings:
-                CoolFragmentManager.switchToFragment(new SettingsFragment());
+                CoolFragmentManager.showAtTop(new SettingsFragment());
                 break;
         }
     }

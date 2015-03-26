@@ -38,9 +38,9 @@ public class StartFragment extends CoolFragment implements View.OnClickListener 
         super.onStart();
         if (Account.hasUser(this)) {
             if (Account.getUser(this).getGroup().equals(User.ORGANIZER)) {
-                CoolFragmentManager.switchToRootFragment(new MyEventListFragment());
+                CoolFragmentManager.showAtBottom(new MyEventListFragment());
             } else {
-                CoolFragmentManager.switchToRootFragment(new EventListFragment());
+                CoolFragmentManager.showAtBottom(new EventListFragment());
             }
         }
     }
@@ -49,14 +49,14 @@ public class StartFragment extends CoolFragment implements View.OnClickListener 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_login:
-                CoolFragmentManager.switchToFragment(new AuthorizationFragment());
+                CoolFragmentManager.showAtTop(new AuthorizationFragment());
                 break;
             case R.id.button_register:
-                CoolFragmentManager.switchToFragment(new com.oleksiykovtun.iwmy.speeddating.android
+                CoolFragmentManager.showAtTop(new com.oleksiykovtun.iwmy.speeddating.android
                         .fragments.user.RegisteringFragment());
                 break;
             case R.id.button_for_organizers:
-                CoolFragmentManager.switchToFragment(new com.oleksiykovtun.iwmy.speeddating.android
+                CoolFragmentManager.showAtTop(new com.oleksiykovtun.iwmy.speeddating.android
                         .fragments.organizer.RegisteringFragment());
                 break;
         }

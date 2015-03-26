@@ -26,14 +26,16 @@ public class AppActivity extends FragmentActivity {
         CoolFragment.setUrlPrefix(Api.BACKEND_URL);
         CoolFragmentManager.setup(this, R.id.fragment_holder);
 
-        CoolFragmentManager.switchToFragment(new StartFragment()); // show the first fragment
+        CoolFragmentManager.showAtBottom(new StartFragment()); // show the first fragment
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed(); // pop the top fragment from the stack
-        if (!CoolFragmentManager.areAnyOlderFragments()) {
-            // If there are no fragments in the stack to show, go back from the activity itself
+        if (CoolFragmentManager.isNotEmpty()) {
+            CoolFragmentManager.showPrevious(); // pop the top fragment from the stack
+        }
+        // If there are no fragments in the stack to show, go back from the activity itself
+        if (! CoolFragmentManager.isNotEmpty()) {
             super.onBackPressed();
         }
     }

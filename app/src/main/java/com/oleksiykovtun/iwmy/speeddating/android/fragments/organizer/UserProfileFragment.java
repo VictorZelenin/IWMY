@@ -41,7 +41,7 @@ public class UserProfileFragment extends CoolFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_settings:
-                CoolFragmentManager.switchToFragment(new SettingsFragment());
+                CoolFragmentManager.showAtTop(new SettingsFragment());
                 break;
         }
     }

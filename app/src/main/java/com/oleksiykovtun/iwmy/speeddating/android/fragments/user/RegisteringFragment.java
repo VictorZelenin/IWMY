@@ -83,7 +83,7 @@ public class RegisteringFragment extends CoolFragment {
         if (!response.isEmpty()) {
             Account.saveUser(this, response.get(0));
             showToast(R.string.message_registered);
-            CoolFragmentManager.switchToRootFragment(new EventListFragment());
+            CoolFragmentManager.showAtBottom(new EventListFragment());
         } else {
             showToastLong(R.string.message_connection_error);
         }

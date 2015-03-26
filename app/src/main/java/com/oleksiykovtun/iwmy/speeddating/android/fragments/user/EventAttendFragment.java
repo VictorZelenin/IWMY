@@ -67,7 +67,7 @@ public class EventAttendFragment extends CoolFragment {
                         new Attendance(Account.getUser(this), event));
                 break;
             case R.id.button_settings:
-                CoolFragmentManager.switchToFragment(new SettingsFragment());
+                CoolFragmentManager.showAtTop(new SettingsFragment());
                 break;
         }
     }
@@ -75,8 +75,7 @@ public class EventAttendFragment extends CoolFragment {
     @Override
     public void onReceiveWebData(List response) {
         if (!response.isEmpty()) {
-            CoolFragmentManager.removeThisFragment();
-            CoolFragmentManager.switchToFragment(new EventStartFragment(), event);
+            CoolFragmentManager.show(new EventStartFragment(), event);
         }
     }
 

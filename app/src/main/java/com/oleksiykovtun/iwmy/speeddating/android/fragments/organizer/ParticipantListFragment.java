@@ -94,17 +94,17 @@ public class ParticipantListFragment extends CoolFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_add_participant:
-                CoolFragmentManager.switchToFragment(new NewParticipantFragment(), event);
+                CoolFragmentManager.showAtTop(new NewParticipantFragment(), event);
                 break;
             case R.id.button_settings:
-                CoolFragmentManager.switchToFragment(new SettingsFragment());
+                CoolFragmentManager.showAtTop(new SettingsFragment());
                 break;
         }
     }
 
     @Override
     public void onClick(Serializable objectAtClicked) {
-        CoolFragmentManager.switchToFragment(new UserProfileFragment(), objectAtClicked);
+        CoolFragmentManager.showAtTop(new UserProfileFragment(), objectAtClicked);
     }
 
     @Override

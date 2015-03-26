@@ -32,9 +32,10 @@ public class UserRestService extends GeneralRestService {
      * @return
      */
     @Path(Api.GET_FOR_EVENT_ACTIVE_RESET) @POST @Consumes(JSON) @Produces(JSON)
-    public List getForEventActiveReset(List<Event> wildcardEvents) {
-        // cleanup
+    public static List getForEventActiveReset(List<Event> wildcardEvents) {
+        // current ratings and previous couples cleanup - before the couple selection process
         RatingRestService.deleteForEvent(wildcardEvents);
+        CoupleRestService.deleteForEvent(wildcardEvents);
         // listing event-related attendances
         Set<User> users = new TreeSet<>();
         List<Attendance> eventAttendances = AttendanceRestService.getForEvent(wildcardEvents);

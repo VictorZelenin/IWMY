@@ -29,8 +29,6 @@ public class CoupleRestService extends GeneralRestService {
 
     @Path(Api.GENERATE_FOR_EVENT) @POST @Consumes(JSON) @Produces(JSON)
     public List generateForEvent(List<Event> wildcardEvents) {
-        // cleanup
-        deleteForEvent(wildcardEvents);
         // making all possible couples
         Event event = wildcardEvents.get(0);
         List<Rating> ratingsSelected = RatingRestService.getForEventSelected(wildcardEvents);
@@ -55,6 +53,8 @@ public class CoupleRestService extends GeneralRestService {
                         user2.getNameAndSurname(), user2.getBirthDate()));
             }
         }
+        // user active attendances cleanup - after the couple selection process
+        UserRestService.getForEventActiveReset(wildcardEvents);
         return couples;
     }
 

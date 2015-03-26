@@ -28,7 +28,7 @@ public class AppliedFragment extends CoolFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_ok:
-                CoolFragmentManager.switchToRootFragment(new StartFragment());
+                CoolFragmentManager.showAtBottom(new StartFragment());
                 break;
         }
     }

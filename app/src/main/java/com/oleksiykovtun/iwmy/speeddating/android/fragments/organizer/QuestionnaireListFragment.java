@@ -96,12 +96,12 @@ public class QuestionnaireListFragment extends CoolFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_add_questionnaire:
-                CoolFragmentManager.switchToFragment(new QuestionnaireOfflineFragment(), event);
+                CoolFragmentManager.showAtTop(new QuestionnaireOfflineFragment(), event);
                 break;
             case R.id.button_send_questionnaires:
                 if (selectedCountMale > 0 && selectedCountMale == selectedCountFemale) {
                     showToast(R.string.message_questionnaires_sent);
-                    CoolFragmentManager.switchToFragment(new WaitFragment(), event);
+                    CoolFragmentManager.showAtTop(new WaitFragment(), event);
                 } else {
                     showToastLong(R.string.message_select_equal);
                 }

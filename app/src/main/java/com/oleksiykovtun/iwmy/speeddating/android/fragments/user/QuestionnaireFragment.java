@@ -18,7 +18,6 @@ import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import com.oleksiykovtun.iwmy.speeddating.data.Rating;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,10 +67,10 @@ public class QuestionnaireFragment extends CoolFragment {
                 if (!ratingList.isEmpty()) {
                     postForNoResult(Api.RATINGS + Api.PUT, ratingList.toArray());
                 }
-                CoolFragmentManager.switchToFragment(new WaitFragment(), event);
+                CoolFragmentManager.show(new WaitFragment(), event);
                 break;
             case R.id.button_settings:
-                CoolFragmentManager.switchToFragment(new SettingsFragment());
+                CoolFragmentManager.showAtTop(new SettingsFragment());
                 break;
         }
     }

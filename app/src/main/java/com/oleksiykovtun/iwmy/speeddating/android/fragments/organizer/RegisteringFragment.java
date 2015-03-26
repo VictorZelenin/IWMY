@@ -55,7 +55,7 @@ public class RegisteringFragment extends CoolFragment {
                         website);
                 if (checkUser(user)) {
                     Email.sendOrganizerRequest(getActivity(), user);
-                    CoolFragmentManager.switchToRootFragment(new AppliedFragment());
+                    CoolFragmentManager.showAtBottom(new AppliedFragment());
                 } else {
                     showToast(R.string.message_inputs_error);
                 }

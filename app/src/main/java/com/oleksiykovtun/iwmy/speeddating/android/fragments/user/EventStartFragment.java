@@ -51,11 +51,10 @@ public class EventStartFragment extends CoolFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_start:
-                CoolFragmentManager.removeThisFragment();
-                CoolFragmentManager.switchToFragment(new QuestionnaireFragment(), event);
+                CoolFragmentManager.showAtTop(new QuestionnaireFragment(), event);
                 break;
             case R.id.button_settings:
-                CoolFragmentManager.switchToFragment(new SettingsFragment());
+                CoolFragmentManager.showAtTop(new SettingsFragment());
                 break;
         }
     }

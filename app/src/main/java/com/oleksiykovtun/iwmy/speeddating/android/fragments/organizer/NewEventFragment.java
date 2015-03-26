@@ -70,7 +70,7 @@ public class NewEventFragment extends CoolFragment {
     public void onReceiveWebData(List response) {
         if (!response.isEmpty()) {
             showToast(R.string.message_event_added);
-            CoolFragmentManager.switchToPreviousFragment();
+            CoolFragmentManager.showPrevious();
         } else {
             showToast(R.string.message_connection_error);
         }

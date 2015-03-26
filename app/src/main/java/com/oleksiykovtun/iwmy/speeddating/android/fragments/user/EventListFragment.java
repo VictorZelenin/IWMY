@@ -55,7 +55,7 @@ public class EventListFragment extends CoolFragment {
 
     @Override
     public void onClick(Serializable objectAtClicked) {
-        CoolFragmentManager.switchToFragment(new EventAttendFragment(), (Event) objectAtClicked);
+        CoolFragmentManager.showAtTop(new EventAttendFragment(), (Event) objectAtClicked);
     }
 
 
@@ -63,7 +63,7 @@ public class EventListFragment extends CoolFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_settings:
-                CoolFragmentManager.switchToFragment(new SettingsFragment());
+                CoolFragmentManager.showAtTop(new SettingsFragment());
                 break;
         }
     }

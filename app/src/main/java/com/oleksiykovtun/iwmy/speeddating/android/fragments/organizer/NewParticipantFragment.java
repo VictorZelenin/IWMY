@@ -77,7 +77,7 @@ public class NewParticipantFragment extends CoolFragment {
                 }
                 break;
             case R.id.button_settings:
-                CoolFragmentManager.switchToFragment(new SettingsFragment());
+                CoolFragmentManager.showAtTop(new SettingsFragment());
                 break;
         }
     }
@@ -94,7 +94,7 @@ public class NewParticipantFragment extends CoolFragment {
     public void onReceiveWebData(List response) {
         if (!response.isEmpty()) {
             showToast(R.string.message_participant_added);
-            CoolFragmentManager.switchToPreviousFragment();
+            CoolFragmentManager.showPrevious();
         }
     }
 

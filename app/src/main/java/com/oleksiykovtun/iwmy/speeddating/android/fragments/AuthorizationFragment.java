@@ -52,9 +52,9 @@ public class AuthorizationFragment extends CoolFragment {
         } else {
             Account.saveUser(this, response.get(0));
             if (Account.getUser(this).getGroup().equals(User.ORGANIZER)) {
-                CoolFragmentManager.switchToRootFragment(new MyEventListFragment());
+                CoolFragmentManager.showAtBottom(new MyEventListFragment());
             } else {
-                CoolFragmentManager.switchToRootFragment(new EventListFragment());
+                CoolFragmentManager.showAtBottom(new EventListFragment());
             }
         }
     }

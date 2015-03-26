@@ -52,13 +52,13 @@ public class EventFragment extends CoolFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_edit_start:
-                CoolFragmentManager.switchToFragment(new QuestionnaireListFragment(), event);
+                CoolFragmentManager.showAtTop(new QuestionnaireListFragment(), event);
                 break;
             case R.id.button_participants_list:
-                CoolFragmentManager.switchToFragment(new ParticipantListFragment(), event);
+                CoolFragmentManager.showAtTop(new ParticipantListFragment(), event);
                 break;
             case R.id.button_settings:
-                CoolFragmentManager.switchToFragment(new SettingsFragment());
+                CoolFragmentManager.showAtTop(new SettingsFragment());
                 break;
         }
     }

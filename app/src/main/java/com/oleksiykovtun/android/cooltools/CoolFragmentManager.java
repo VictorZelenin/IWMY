@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Manager for fragments in a single activity
@@ -16,6 +19,7 @@ public abstract class CoolFragmentManager {
 
     private static FragmentManager fragmentManager;
     private static int fragmentHolderId;
+    private static List<Fragment> fragmentStack = new ArrayList<>();
 
     /**
      * Remembers activity and fragment holder for the underlying functions
@@ -29,59 +33,67 @@ public abstract class CoolFragmentManager {
     }
 
     /**
-     * Shows the fragment, removing all previous fragments.
-     * Back button will remove this fragment
+     * Shows the fragment, removing all other fragments from the stack.
      *
      * @param fragment the fragment to show
      */
-    public static void switchToRootFragment(Fragment fragment) {
-        switchToRootFragment(fragment, null);
+    public static void showAtBottom(Fragment fragment) {
+        showAtBottom(fragment, null);
     }
 
     /**
-     * Shows the fragment, removing all previous fragments.
-     * Back button will remove this fragment
-     *
-     * @param fragment the fragment to show
-     * @param object   the object attached to the fragment
-     */
-    // debug not really root fragment
-    public static void switchToRootFragment(Fragment fragment, Serializable object) {
-        cleanBackStack();
-        switchToFragment(fragment, object);
-    }
-
-    /**
-     * Shows the fragment atop of the previous fragment.
-     * Back button will return to the previous fragment in the stack
-     *
-     * @param fragment the fragment to show
-     */
-    public static void switchToFragment(Fragment fragment) {
-        switchToFragment(fragment, null);
-    }
-
-    /**
-     * Shows the fragment atop of the previous fragment.
-     * Back button will return to the previous fragment in the stack
+     * Shows the fragment, removing all other fragments from the stack.
      *
      * @param fragment the fragment to show
      * @param object   the object attached to the fragment
      */
-    public static void switchToFragment(Fragment fragment, Serializable object) {
-        fragment = attachObject(fragment, object);
-        fragmentManager.beginTransaction()
-                .replace(fragmentHolderId, fragment)
-                .addToBackStack(fragment.getClass().getName())
-                .commit();
+    public static void showAtBottom(Fragment fragment, Serializable object) {
+        clear();
+        push(fragment);
+        replaceWith(fragment, object);
     }
 
     /**
-     * Shows the previous fragment. Acts like Back button
+     * Shows the fragment at top of the stack.
+     *
+     * @param fragment the fragment to show
      */
-    public static void switchToPreviousFragment() {
-        if (fragmentManager.getBackStackEntryCount() > 0) {
-            fragmentManager.popBackStack();
+    public static void showAtTop(Fragment fragment) {
+        showAtTop(fragment, null);
+    }
+
+    /**
+     * Shows the fragment at top of the stack.
+     *
+     * @param fragment the fragment to show
+     * @param object   the object attached to the fragment
+     */
+    public static void showAtTop(Fragment fragment, Serializable object) {
+        push(fragment);
+        replaceWith(fragment, object);
+    }
+
+    /**
+     * Shows the fragment.
+     *
+     * @param fragment the fragment to show
+     * @param object   the object attached to the fragment
+     */
+    public static void show(Fragment fragment, Serializable object) {
+        pop();
+        push(fragment);
+        replaceWith(fragment, object);
+    }
+
+    /**
+     * Shows the previous fragment.
+     */
+    public static void showPrevious() {
+        pop().onDetach();
+        Fragment fragment = pop();
+        if (fragment != null) {
+            push(fragment);
+            replaceWith(fragment, null);
         }
     }
 
@@ -95,12 +107,21 @@ public abstract class CoolFragmentManager {
     }
 
     /**
-     * Indicates presence of other fragments in the back stack
+     * Indicates presence of fragments in the back stack
      *
      * @return boolean presence
      */
-    public static boolean areAnyOlderFragments() {
-        return (fragmentManager.getBackStackEntryCount() > 0);
+    public static boolean isNotEmpty() {
+        return (! fragmentStack.isEmpty());
+    }
+
+    private static void replaceWith(Fragment fragment, Serializable object) {
+        fragment = attachObject(fragment, object);
+        fragmentManager.beginTransaction()
+                .replace(fragmentHolderId, fragment)
+                .commit();
+        Log.d("IWMY", "SHOWING: " + fragment.getClass().getSimpleName()
+                + " (" + fragmentStack.size() + " in stack)");
     }
 
     private static Fragment attachObject(Fragment fragment, Serializable object) {
@@ -108,19 +129,29 @@ public abstract class CoolFragmentManager {
         if (object != null) {
             bundle.putSerializable(TAG, object);
         }
-        fragment.setArguments(bundle);
+        if (fragment.getArguments() == null) {
+            fragment.setArguments(bundle);
+        }
         return fragment;
     }
 
-    public static void removeThisFragment() {
-        if (areAnyOlderFragments()) {
-            fragmentManager.popBackStack();
+    private static void clear() {
+        while (isNotEmpty()) {
+            pop().onDetach();
         }
     }
 
-    private static void cleanBackStack() {
-        for (int i = 0; i < fragmentManager.getBackStackEntryCount(); ++i) {
-            fragmentManager.popBackStack();
+    private static Fragment pop() {
+        if (isNotEmpty()) {
+            return fragmentStack.remove(fragmentStack.size() - 1);
+        } else {
+            return null;
+        }
+    }
+
+    private static void push(Fragment fragment) {
+        if (fragment != null) {
+            fragmentStack.add(fragment);
         }
     }
 
