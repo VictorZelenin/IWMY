@@ -19,6 +19,7 @@ public class Attendance implements Serializable, Comparable<Attendance> {
     @Id
     private String _attendanceId;
     private String userEmail;
+    private String userGender;
     private String eventOrganizerEmail;
     private String eventTime; // format "2099-12-31 23:59"
 
@@ -26,10 +27,12 @@ public class Attendance implements Serializable, Comparable<Attendance> {
 
     public Attendance() { }
 
-    public Attendance(String userEmail, String eventOrganizerEmail, String eventTime,
-                      String active) {
-        this._attendanceId = userEmail + "_" + eventOrganizerEmail + "_" + eventTime;
+    public Attendance(String userEmail, String userGender, String eventOrganizerEmail,
+                      String eventTime, String active) {
+        this._attendanceId = System.currentTimeMillis() + "_" + userEmail + "_"
+                + eventOrganizerEmail + "_" + eventTime; // comparable by time of creation
         this.userEmail = userEmail;
+        this.userGender = userGender;
         this.eventOrganizerEmail = eventOrganizerEmail;
         this.eventTime = eventTime;
         this.active = active;
@@ -38,6 +41,7 @@ public class Attendance implements Serializable, Comparable<Attendance> {
     public Attendance(User user, Event event) {
         this._attendanceId = user.getEmail() + "_" + event.getOrganizerEmail() + "_" + event.getTime();
         this.userEmail = user.getEmail();
+        this.userGender = user.getGender();
         this.eventOrganizerEmail = event.getOrganizerEmail();
         this.eventTime = event.getTime();
         this.active = "false";
@@ -62,6 +66,14 @@ public class Attendance implements Serializable, Comparable<Attendance> {
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
+    }
+
+    public String getUserGender() {
+        return "" + userGender;
+    }
+
+    public void setUserGender(String userGender) {
+        this.userGender = userGender;
     }
 
     public String getEventOrganizerEmail() {

@@ -1,7 +1,6 @@
 package com.oleksiykovtun.iwmy.speeddating.android.fragments.organizer;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +8,9 @@ import android.view.ViewGroup;
 import com.oleksiykovtun.android.cooltools.CoolFormatter;
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
+import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
-import com.oleksiykovtun.iwmy.speeddating.android.Account;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.SettingsFragment;
-import com.oleksiykovtun.iwmy.speeddating.android.fragments.user.EventListFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
@@ -35,7 +33,7 @@ public class NewParticipantFragment extends CoolFragment {
         registerClickListener(R.id.button_select_date);
         registerClickListener(R.id.button_settings);
 
-        event = (Event)getAttachment();
+        event = (Event) getAttachment();
 
         return view;
     }
@@ -50,12 +48,12 @@ public class NewParticipantFragment extends CoolFragment {
                 String email = getEditText(R.id.input_email);
                 String password = getEditText(R.id.input_password);
                 String username = getEditText(R.id.input_username);
-                String group = "user";
+                String group = User.USER;
                 String nameAndSurname = getEditText(R.id.input_name_and_surname);
                 String photoBase64 = "";
                 String phone = getEditText(R.id.input_phone);
                 String birthDate = getLabelText(R.id.label_birth_date);
-                String gender = isRadioButtonChecked(R.id.gender_male) ? "male" : "female";
+                String gender = isRadioButtonChecked(R.id.gender_male) ? User.MALE : User.FEMALE;
                 String orientation = "";
                 String goal = "";
                 String affair = "";
@@ -72,9 +70,8 @@ public class NewParticipantFragment extends CoolFragment {
                         weight, attitudeToSmoking, attitudeToAlcohol, location, organization,
                         website);
                 if (checkUser(user)) {
-                    post("http://iwmy-speed-dating.appspot.com/attendances/add",
-                            new Attendance(user, event));
-                    post("http://iwmy-speed-dating.appspot.com/users/add", User[].class, user);
+                    post(Api.ATTENDANCES + Api.ADD, new Attendance(user, event));
+                    post(Api.USERS + Api.ADD, User[].class, user);
                 } else {
                     showToast(R.string.message_inputs_error);
                 }
@@ -87,15 +84,15 @@ public class NewParticipantFragment extends CoolFragment {
 
     private boolean checkUser(User user) {
         return user.getEmail().contains("@")
-                && ! user.getNameAndSurname().isEmpty()
-                && ! user.getPassword().isEmpty()
-                && ! user.getUsername().isEmpty()
+                && !user.getNameAndSurname().isEmpty()
+                && !user.getPassword().isEmpty()
+                && !user.getUsername().isEmpty()
                 && CoolFormatter.isDateValid(user.getBirthDate());
     }
 
     @Override
     public void onReceiveWebData(List response) {
-        if (! response.isEmpty()) {
+        if (!response.isEmpty()) {
             showToast(R.string.message_participant_added);
             CoolFragmentManager.switchToPreviousFragment();
         }

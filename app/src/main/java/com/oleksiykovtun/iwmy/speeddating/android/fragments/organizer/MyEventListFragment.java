@@ -6,17 +6,17 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.oleksiykovtun.android.cooltools.CoolFormatter;
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
-import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.android.cooltools.CoolPagerAdapter;
+import com.oleksiykovtun.iwmy.speeddating.Api;
+import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.Account;
-import com.oleksiykovtun.android.cooltools.CoolFormatter;
 import com.oleksiykovtun.iwmy.speeddating.android.adapters.EventRecyclerAdapter;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.SettingsFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
@@ -43,7 +43,7 @@ public class MyEventListFragment extends CoolFragment {
         super.onStart();
         Event eventWildcard = new Event(Account.getUser(this).getEmail(), "", "", "", "", "",
                 "", "");
-        post("http://iwmy-speed-dating.appspot.com/events/get", Event[].class, eventWildcard);
+        post(Api.EVENTS + Api.GET, Event[].class, eventWildcard);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class MyEventListFragment extends CoolFragment {
     public void onReceiveWebData(List response) {
         currentEventList.clear();
         pastEventList.clear();
-        for (Event event : (List<Event>)response) {
+        for (Event event : (List<Event>) response) {
             if (CoolFormatter.isDateTimeFuture(event.getTime())) {
                 currentEventList.add(event);
             } else {
@@ -107,27 +107,26 @@ public class MyEventListFragment extends CoolFragment {
 
     @Override
     public void onLongClick(Serializable objectAtClicked) {
-        final Event event = (Event)objectAtClicked;
+        final Event event = (Event) objectAtClicked;
         new AlertDialog.Builder(getActivity()).setTitle(R.string.label_delete)
-            .setMessage(getText(R.string.label_delete_this_event) + event.getPlace() +
-                    " " + event.getStreetAddress())
-            .setPositiveButton(R.string.button_delete, new DialogInterface.OnClickListener() {
+                .setMessage(getText(R.string.label_delete_this_event) + event.getPlace() +
+                        " " + event.getStreetAddress())
+                .setPositiveButton(R.string.button_delete, new DialogInterface.OnClickListener() {
 
-                public void onClick(DialogInterface dialog, int whichButton) {
-                    post("http://iwmy-speed-dating.appspot.com/events/delete", Event[].class,
-                            event);
-                    dialog.dismiss();
-                }
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        post(Api.EVENTS + Api.DELETE, Event[].class, event);
+                        dialog.dismiss();
+                    }
 
-            })
-            .setNegativeButton(R.string.button_cancel, new DialogInterface.OnClickListener() {
+                })
+                .setNegativeButton(R.string.button_cancel, new DialogInterface.OnClickListener() {
 
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
 
-            })
-            .create().show();
+                })
+                .create().show();
     }
 
 }

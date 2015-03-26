@@ -20,10 +20,10 @@ import javax.ws.rs.Produces;
 /**
  * The REST service which accesses user data.
  */
-@Path("/attendances/")
-public class AttendanceRestService extends RestService {
+@Path(Api.ATTENDANCES)
+public class AttendanceRestService extends GeneralRestService {
 
-    @Path("toggle") @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.TOGGLE) @POST @Consumes(JSON) @Produces(JSON)
     public List toggle(List<Attendance> wildcardAttendances) {
         Set<Attendance> attendanceSet = new TreeSet<>();
         for (Attendance wildcardAttendance : wildcardAttendances) {
@@ -43,7 +43,7 @@ public class AttendanceRestService extends RestService {
         return new ArrayList<>();
     }
 
-    @Path("get") @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.GET) @POST @Consumes(JSON) @Produces(JSON)
     public List get(List<Attendance> wildcardAttendances) {
         List<Attendance> attendances = new ArrayList<>();
         if (wildcardAttendances.size() == 1) {
@@ -61,7 +61,7 @@ public class AttendanceRestService extends RestService {
      * @param wildcardEvents events for active attendants
      * @return ratings created by all active attendants or empty if not by all of them
      */
-    @Path("check/for/event/active/all") @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.CHECK_FOR_EVENT_ACTIVE_ALL) @POST @Consumes(JSON) @Produces(JSON)
     public static List checkForEventActiveAll(List<Event> wildcardEvents) {
         List<Attendance> attendances = getForEventActive(wildcardEvents);
         boolean allActive = true;
@@ -73,7 +73,12 @@ public class AttendanceRestService extends RestService {
         return allActive ? attendances : new ArrayList();
     }
 
-    @Path("get/for/event/active") @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.ADD) @POST @Consumes(JSON) @Produces(JSON)
+    public static List add(List<Attendance> items) {
+        ObjectifyService.ofy().save().entities(items).now();
+        return items;
+    }
+
     public static List<Attendance> getForEventActive(List<Event> wildcardEvents) {
         Set<Attendance> attendances = new TreeSet<>();
         for (Event wildcardEvent : wildcardEvents) {
@@ -85,7 +90,6 @@ public class AttendanceRestService extends RestService {
         return new ArrayList<>(attendances);
     }
 
-    @Path("get/for/event") @POST @Consumes(JSON) @Produces(JSON)
     public static List<Attendance> getForEvent(List<Event> wildcardEvents) {
         Set<Attendance> attendances = new TreeSet<>();
         for (Event wildcardEvent : wildcardEvents) {
@@ -96,7 +100,6 @@ public class AttendanceRestService extends RestService {
         return new ArrayList<>(attendances);
     }
 
-    //@Path("get/for/user") @POST @Consumes(JSON) @Produces(JSON)
     public static List<Attendance> getForUser(List<User> wildcardUsers) {
         List<Attendance> attendances = new ArrayList<>();
         for (User wildcardUser : wildcardUsers) {
@@ -106,46 +109,48 @@ public class AttendanceRestService extends RestService {
         return attendances;
     }
 
-    @Path("get/all") @POST @Consumes(JSON) @Produces(JSON)
     public static List getAll() {
         return new ArrayList<>(ObjectifyService.ofy().load().type(Attendance.class).list());
     }
 
-    @Path("add") @POST @Consumes(JSON) @Produces(JSON)
-    public static List add(List<Attendance> items) {
-        ObjectifyService.ofy().save().entities(items).now();
-        return items;
-    }
-
-    @Path("debug/create") @GET @Produces(JSON)
+    @Path(Api.DEBUG_CREATE) @GET @Produces(JSON)
     public static List debugCreate() {
         List list = Arrays.asList(
-                new Attendance("Joe@email.com", "John@email.com", "2015-02-28 20:00", "false"),
-                new Attendance("Mih@email.com", "John@email.com", "2015-02-28 20:00", "false"),
-                new Attendance("Joe@email.com", "Annika@email.com", "2015-03-28 22:00", "false"),
-                new Attendance("Mih@email.com", "Annika@email.com", "2015-03-28 22:00", "false"),
-                new Attendance("Rei@email.com", "Annika@email.com", "2015-03-28 22:00", "false"),
-                new Attendance("Joe@email.com", "Rei@email.com", "2015-03-28 23:00", "false"),
-                new Attendance("Mih@email.com", "Rei@email.com", "2015-03-28 23:00", "false"),
-                new Attendance("Joe@email.com", "Rei@email.com", "2015-02-28 21:00", "false"),
-                new Attendance("Mih@email.com", "Rei@email.com", "2015-02-28 21:00", "false"));
+                new Attendance("Joe@email.com", "male", "John@email.com", "2015-02-28 20:00",
+                        "false"),
+                new Attendance("Mih@email.com", "female", "John@email.com", "2015-02-28 20:00",
+                        "false"),
+                new Attendance("Joe@email.com", "male", "Annika@email.com", "2015-03-28 22:00",
+                        "false"),
+                new Attendance("Mih@email.com", "female", "Annika@email.com", "2015-03-28 22:00",
+                        "false"),
+                new Attendance("Rei@email.com", "female", "Annika@email.com", "2015-03-28 22:00",
+                        "false"),
+                new Attendance("Joe@email.com", "male", "Rei@email.com", "2015-03-28 23:00",
+                        "false"),
+                new Attendance("Mih@email.com", "female", "Rei@email.com", "2015-03-28 23:00",
+                        "false"),
+                new Attendance("Joe@email.com", "male", "Rei@email.com", "2015-02-28 21:00",
+                        "false"),
+                new Attendance("Mih@email.com", "female", "Rei@email.com", "2015-02-28 21:00",
+                        "false"));
         ObjectifyService.ofy().save().entities(list).now();
         return list;
     }
 
-    @Path("debug/delete/all") @GET @Produces(JSON)
+    @Path(Api.DEBUG_DELETE_ALL) @GET @Produces(JSON)
     public static String debugDeleteAll() {
         ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(Attendance.class).keys());
         return "Deleted.";
     }
 
-    @Path("debug/reset") @GET @Produces(JSON)
+    @Path(Api.DEBUG_RESET) @GET @Produces(JSON)
     public static List debugReset() {
         debugDeleteAll();
         return debugCreate();
     }
 
-    @Path("debug/get/all") @GET @Produces(JSON)
+    @Path(Api.DEBUG_GET_ALL) @GET @Produces(JSON)
     public static List debugGetAll() {
         return getAll();
     }

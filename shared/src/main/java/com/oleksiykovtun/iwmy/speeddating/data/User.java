@@ -16,6 +16,11 @@ import java.io.Serializable;
 @JsonPropertyOrder(alphabetic=true)
 public class User implements Serializable, Comparable<User> {
 
+    public static final String USER = "user";
+    public static final String ORGANIZER = "organizer";
+    public static final String MALE = "male";
+    public static final String FEMALE = "female";
+
     @Id
     private String _userId;
     private String email;

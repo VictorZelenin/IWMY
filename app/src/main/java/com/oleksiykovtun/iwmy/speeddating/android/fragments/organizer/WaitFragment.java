@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
+import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
-import com.oleksiykovtun.iwmy.speeddating.data.Couple;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 
 import java.util.List;
@@ -29,7 +29,7 @@ public class WaitFragment extends CoolFragment {
         View view = inflater.inflate(R.layout.fragment_organizer_wait, container, false);
         registerContainerView(view);
 
-        event = (Event)getAttachment();
+        event = (Event) getAttachment();
 
         return view;
     }
@@ -50,12 +50,12 @@ public class WaitFragment extends CoolFragment {
             @Override
             public void onTick(long millisUntilFinished) {
                 // checking until all active attendants put ratings
-                post("http://iwmy-speed-dating.appspot.com/attendances/check/for/event/active/all",
-                        Attendance[].class, event);
+                post(Api.ATTENDANCES + Api.CHECK_FOR_EVENT_ACTIVE_ALL, Attendance[].class, event);
             }
 
             @Override
-            public void onFinish() { }
+            public void onFinish() {
+            }
 
         }.start();
     }

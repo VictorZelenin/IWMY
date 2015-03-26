@@ -3,9 +3,11 @@ package com.oleksiykovtun.iwmy.speeddating.android;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.util.Log;
 
+import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 /**
@@ -27,8 +29,9 @@ public class Email {
         message += "\nWebsite: " + organizerUser.getWebsite() + "\n\n";
 
         message += "Follow the link to add the organizer:\n";
-        message += "http://iwmy-speed-dating.appspot.com/users/debug/add/organizer/";
-        message += "email=" + organizerUser.getEmail();
+        message += Api.BACKEND_URL;
+        message += Api.USERS + Api.DEBUG_ADD_ORGANIZER;
+        message += "/email=" + organizerUser.getEmail();
         message += "&password=" + organizerUser.getPassword();
         message += "&username=" + organizerUser.getUsername();
         message += "&name=" + organizerUser.getNameAndSurname();
@@ -45,7 +48,7 @@ public class Email {
         gMailIntent.putExtra(Intent.EXTRA_TEXT, text);
         try {
             context.startActivity(Intent.createChooser(gMailIntent, "Send email..."));
-        } catch(ActivityNotFoundException e) {
+        } catch (ActivityNotFoundException e) {
             Log.e("IWMY", "Email sending failed", e);
         }
     }

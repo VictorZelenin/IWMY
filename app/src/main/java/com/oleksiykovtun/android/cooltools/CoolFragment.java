@@ -29,19 +29,21 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
 
     private View containerView;
     private AsyncTask task = null;
+    private static String urlPrefix = "";
 
-    public CoolFragment() { }
+    public CoolFragment() {
+    }
 
     protected boolean isRadioButtonChecked(int radioButtonId) {
-        return ((RadioButton)containerView.findViewById(radioButtonId)).isChecked();
+        return ((RadioButton) containerView.findViewById(radioButtonId)).isChecked();
     }
 
     protected String getEditText(int editTextId) {
-        return "" + ((EditText)containerView.findViewById(editTextId)).getText();
+        return "" + ((EditText) containerView.findViewById(editTextId)).getText();
     }
 
     protected String getLabelText(int textViewId) {
-        return "" + ((TextView)containerView.findViewById(textViewId)).getText();
+        return "" + ((TextView) containerView.findViewById(textViewId)).getText();
     }
 
     protected void openDatePicker() {
@@ -57,7 +59,7 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
     }
 
     protected long getDateMillis(int datePickerId) {
-        DatePicker datePicker = (DatePicker)containerView.findViewById(datePickerId);
+        DatePicker datePicker = (DatePicker) containerView.findViewById(datePickerId);
         Calendar calendar = Calendar.getInstance();
         calendar.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(),
                 0, 0, 0);
@@ -65,7 +67,7 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
     }
 
     protected long getTimeMillis(int timePickerId) {
-        TimePicker timePicker = (TimePicker)containerView.findViewById(timePickerId);
+        TimePicker timePicker = (TimePicker) containerView.findViewById(timePickerId);
         return (timePicker.getCurrentHour() * 60 + timePicker.getCurrentMinute()) * 60 * 1000;
     }
 
@@ -83,7 +85,7 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
     }
 
     protected void setImageFromBase64String(int imageViewId, String base64String) {
-        if (! base64String.isEmpty()) {
+        if (!base64String.isEmpty()) {
             try {
                 ((ImageView) containerView.findViewById(imageViewId))
                         .setImageBitmap(CoolFormatter.getImageBitmap(base64String));
@@ -125,19 +127,23 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
         setText(textViewId, getText(textId) + " " + text);
     }
 
-    protected void post(String url, Class responseClass, Object... postData) {
-        cancelPost();
-        task = new CoolWebAsyncTask(this, responseClass, postData).execute(url);
-    }
-
-    protected void cancelPost() {
-        if (task != null && ! task.isCancelled()) {
-            task.cancel(true);
-        }
+    public static void setUrlPrefix(String urlPrefixNew) {
+        urlPrefix = urlPrefixNew;
     }
 
     protected void post(String url, Object... postData) {
-        new CoolWebAsyncTask(this, null, postData).execute(url);
+        new CoolWebAsyncTask(this, null, postData).execute(urlPrefix + url);
+    }
+
+    protected void post(String url, Class responseClass, Object... postData) {
+        cancelPost();
+        task = new CoolWebAsyncTask(this, responseClass, postData).execute(urlPrefix + url);
+    }
+
+    protected void cancelPost() {
+        if (task != null && !task.isCancelled()) {
+            task.cancel(true);
+        }
     }
 
     @Override
@@ -147,7 +153,7 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
     @Override
     public void onFailReceivingWebData(String webDataErrorString) {
         String messageConnectionError =
-            "Connection error! Please check your internet connection and try again.";
+                "Connection error! Please check your internet connection and try again.";
         showToastLong(messageConnectionError);
     }
 

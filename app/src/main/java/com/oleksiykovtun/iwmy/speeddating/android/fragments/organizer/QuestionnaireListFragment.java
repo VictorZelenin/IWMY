@@ -2,12 +2,10 @@ package com.oleksiykovtun.iwmy.speeddating.android.fragments.organizer;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +13,11 @@ import android.view.ViewGroup;
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.android.cooltools.CoolPagerAdapter;
+import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.adapters.UserRecyclerAdapter;
 import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
-import com.oleksiykovtun.iwmy.speeddating.data.Rating;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 import java.io.Serializable;
@@ -34,7 +32,8 @@ public class QuestionnaireListFragment extends CoolFragment {
     private List<User> userListGuys = new ArrayList<User>();
     private List<User> userListLadies = new ArrayList<User>();
     private Event event = null;
-    private int selectedCount = 0;
+    private int selectedCountMale = 0;
+    private int selectedCountFemale = 0;
 
     private UserRecyclerAdapter userRecyclerAdapterGuys
             = new UserRecyclerAdapter(userListGuys);
@@ -50,7 +49,7 @@ public class QuestionnaireListFragment extends CoolFragment {
         registerClickListener(R.id.button_add_questionnaire);
         registerClickListener(R.id.button_send_questionnaires);
 
-        event = (Event)getAttachment();
+        event = (Event) getAttachment();
 
         RecyclerView userRecyclerViewGuys = (RecyclerView) view
                 .findViewById(R.id.user_list_holder_guys);
@@ -68,9 +67,9 @@ public class QuestionnaireListFragment extends CoolFragment {
         pager.setAdapter(new CoolPagerAdapter(this,
                 R.id.page_users_guys, R.id.page_users_ladies));
 
-        selectedCount = 0;
-        post("http://iwmy-speed-dating.appspot.com/users/get/for/event/active/reset",
-                User[].class, event);
+        selectedCountMale = 0;
+        selectedCountFemale = 0;
+        post(Api.USERS + Api.GET_FOR_EVENT_ACTIVE_RESET, User[].class, event);
 
         return view;
     }
@@ -81,7 +80,7 @@ public class QuestionnaireListFragment extends CoolFragment {
             userListGuys.clear();
             userListLadies.clear();
             for (User user : (List<User>) response) {
-                if (user.getGender().equals("male")) {
+                if (user.getGender().equals(User.MALE)) {
                     userListGuys.add(user);
                 } else {
                     userListLadies.add(user);
@@ -89,9 +88,7 @@ public class QuestionnaireListFragment extends CoolFragment {
             }
             userRecyclerAdapterGuys.notifyDataSetChanged();
             userRecyclerAdapterLadies.notifyDataSetChanged();
-            setText(R.id.toolbar_questionnaires, R.string.toolbar_questionnaires_empty, ""
-                    + selectedCount + getText(R.string.label_out_of)
-                    + (userListGuys.size() + userListLadies.size()));
+            updateToolbarTitle();
         }
     }
 
@@ -102,30 +99,46 @@ public class QuestionnaireListFragment extends CoolFragment {
                 CoolFragmentManager.switchToFragment(new QuestionnaireOfflineFragment(), event);
                 break;
             case R.id.button_send_questionnaires:
-                showToast(R.string.message_questionnaires_sent);
-                CoolFragmentManager.switchToFragment(new WaitFragment(), event);
+                if (selectedCountMale > 0 && selectedCountMale == selectedCountFemale) {
+                    showToast(R.string.message_questionnaires_sent);
+                    CoolFragmentManager.switchToFragment(new WaitFragment(), event);
+                } else {
+                    showToastLong(R.string.message_select_equal);
+                }
                 break;
         }
     }
 
     @Override
     public void onClick(Serializable objectAtClicked, View view) {
-        toggleSelectionBackgroundColor(view);
+        toggleSelectionBackgroundColor((User) objectAtClicked, view);
         // todo post selected after Send button pressed
-        post("http://iwmy-speed-dating.appspot.com/attendances/toggle", Attendance[].class,
-                new Attendance((User)objectAtClicked, event));
+        post(Api.ATTENDANCES + Api.TOGGLE, Attendance[].class,
+                new Attendance((User) objectAtClicked, event));
     }
 
-    private void toggleSelectionBackgroundColor(View view) {
-        if (isItemSelected(view)) {
-            view.setBackgroundColor(Color.TRANSPARENT);
-            selectedCount--;
+    private void toggleSelectionBackgroundColor(User selectedUser, View selectedView) {
+        if (isItemSelected(selectedView)) {
+            selectedView.setBackgroundColor(Color.TRANSPARENT);
+            if (selectedUser.getGender().equals(User.MALE)) {
+                selectedCountMale--;
+            } else {
+                selectedCountFemale--;
+            }
         } else {
-            view.setBackgroundColor(Color.GREEN);
-            selectedCount++;
+            selectedView.setBackgroundColor(Color.GREEN);
+            if (selectedUser.getGender().equals(User.MALE)) {
+                selectedCountMale++;
+            } else {
+                selectedCountFemale++;
+            }
         }
+        updateToolbarTitle();
+    }
+
+    private void updateToolbarTitle() {
         setText(R.id.toolbar_questionnaires, R.string.toolbar_questionnaires_empty, ""
-                + selectedCount + getText(R.string.label_out_of)
+                + (selectedCountMale + selectedCountFemale) + getText(R.string.label_out_of)
                 + (userListGuys.size() + userListLadies.size()));
     }
 

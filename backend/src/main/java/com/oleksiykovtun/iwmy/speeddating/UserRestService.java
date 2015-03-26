@@ -21,15 +21,15 @@ import javax.ws.rs.Produces;
 /**
  * The REST service which accesses user data.
  */
-@Path("/users/")
-public class UserRestService extends RestService {
+@Path(Api.USERS)
+public class UserRestService extends GeneralRestService {
 
     /**
      * Set active=false for event participants and delete associated ratings
      * @param wildcardEvents
      * @return
      */
-    @Path("get/for/event/active/reset") @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.GET_FOR_EVENT_ACTIVE_RESET) @POST @Consumes(JSON) @Produces(JSON)
     public List getForEventActiveReset(List<Event> wildcardEvents) {
         Set<User> users = new TreeSet<>();
         // listing event-related attendances
@@ -52,7 +52,7 @@ public class UserRestService extends RestService {
      * @param wildcardAttendances attendances to delete
      * @return remaining users for events in given attendances
      */
-    @Path("remove/attendance") @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.REMOVE_ATTENDANCE) @POST @Consumes(JSON) @Produces(JSON)
     public List removeAttendance(List<Attendance> wildcardAttendances) {
         for (Attendance eventAttendance : wildcardAttendances) {
             ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load()
@@ -65,16 +65,7 @@ public class UserRestService extends RestService {
         return getForEventByAttendance(wildcardAttendances);
     }
 
-    public List getForEventByAttendance(List<Attendance> attendances) {
-        List<Event> wildcardEvents = new ArrayList<>();
-        for (Attendance attendance : attendances) {
-            wildcardEvents.add(new Event(attendance.getEventOrganizerEmail(),
-                    attendance.getEventTime(), "", "", "", "", "", ""));
-        }
-        return getForEvent(wildcardEvents);
-    }
-
-    @Path("get/for/event") @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.GET_FOR_EVENT) @POST @Consumes(JSON) @Produces(JSON)
     public List getForEvent(List<Event> wildcardEvents) {
         Set<User> users = new TreeSet<>();
         // listing event-related attendances
@@ -87,7 +78,7 @@ public class UserRestService extends RestService {
         return Arrays.asList(users.toArray());
     }
 
-    @Path("get") @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.GET) @POST @Consumes(JSON) @Produces(JSON)
     public static List get(List<User> wildcardUsers) {
         List<User> users = new ArrayList<>();
         if (wildcardUsers.size() == 1) {
@@ -98,7 +89,7 @@ public class UserRestService extends RestService {
         return users;
     }
 
-    @Path("get/login") @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.GET_LOGIN) @POST @Consumes(JSON) @Produces(JSON)
     public List getLogin(List<User> wildcardUsers) {
         List<User> users = new ArrayList<>();
         if (wildcardUsers.size() == 1) {
@@ -115,23 +106,53 @@ public class UserRestService extends RestService {
         return users;
     }
 
-    @Path("get/all") @POST @Consumes(JSON) @Produces(JSON)
-    public static List getAll() {
-        return new ArrayList<>(ObjectifyService.ofy().load().type(User.class).list());
-    }
-
-    @Path("add") @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.ADD) @POST @Consumes(JSON) @Produces(JSON)
     public List add(List<User> items) {
         ObjectifyService.ofy().save().entities(items).now();
         return items;
     }
 
-    @Path("debug/get/email={email}") @GET @Produces(JSON)
+    public static List getAll() {
+        return new ArrayList<>(ObjectifyService.ofy().load().type(User.class).list());
+    }
+
+    public List getForEventByAttendance(List<Attendance> attendances) {
+        List<Event> wildcardEvents = new ArrayList<>();
+        for (Attendance attendance : attendances) {
+            wildcardEvents.add(new Event(attendance.getEventOrganizerEmail(),
+                    attendance.getEventTime(), "", "", "", "", "", ""));
+        }
+        return getForEvent(wildcardEvents);
+    }
+
+    /**
+     * Example:
+     *      debug/add/organizer/email=org1@mail.com&password=123&username=org1&name=org1&phone=123
+     *          &organization=org1&website=org1.com
+     * @return JSON object for User
+     */
+    @Path(Api.DEBUG_ADD_ORGANIZER + "/email={email}&password={password}&username={username}" +
+            "&name={nameAndSurname}&phone={phone}&organization={organization}&website={website}")
+    @GET @Produces(JSON)
+    public String debugAddOrganizer(@PathParam("email") String email,
+                                    @PathParam("password") String password,
+                                    @PathParam("username") String username,
+                                    @PathParam("nameAndSurname") String nameAndSurname,
+                                    @PathParam("phone") String phone,
+                                    @PathParam("organization") String organization,
+                                    @PathParam("website") String website) {
+        User user = new User(email, password, username, "organizer", nameAndSurname, "", phone,
+                "", "", "", "", "", "", "", "", "", "", organization, website);
+        ObjectifyService.ofy().save().entity(user).now();
+        return "Organizer added.";
+    }
+
+    @Path(Api.DEBUG_GET + "/email={email}") @GET @Produces(JSON)
     public static List debugGet(@PathParam("email") String email) {
         return get(Arrays.asList(new User(email)));
     }
 
-    @Path("debug/create") @GET @Produces(JSON)
+    @Path(Api.DEBUG_CREATE) @GET @Produces(JSON)
     public static List debugCreate() {
         List list = Arrays.asList(
                 new User("Joe@email.com", "qwerty", "joe3", "user",
@@ -248,38 +269,21 @@ public class UserRestService extends RestService {
         return list;
     }
 
-    @Path("debug/delete/all") @GET @Produces(JSON)
+    @Path(Api.DEBUG_DELETE_ALL) @GET @Produces(JSON)
     public static String debugDeleteAll() {
         ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(User.class).keys());
         return "Deleted.";
     }
 
-    @Path("debug/reset") @GET @Produces(JSON)
+    @Path(Api.DEBUG_RESET) @GET @Produces(JSON)
     public static List debugReset() {
         debugDeleteAll();
         return debugCreate();
     }
 
-    @Path("debug/get/all") @GET @Produces(JSON)
+    @Path(Api.DEBUG_GET_ALL) @GET @Produces(JSON)
     public static List debugGetAll() {
         return getAll();
-    }
-
-    @Path("debug/add/organizer/email={email}&password={password}&username={username}" +
-            "&name={nameAndSurname}&phone={phone}&organization={organization}&website={website}")
-    // debug/add/organizer/email=org1@mail.com&password=123&username=org1&name=org1&phone=123&organization=org1&website=org1.com
-    @GET @Produces(JSON)
-    public String debugAddOrganizer(@PathParam("email") String email,
-                                    @PathParam("password") String password,
-                                    @PathParam("username") String username,
-                                    @PathParam("nameAndSurname") String nameAndSurname,
-                                    @PathParam("phone") String phone,
-                                    @PathParam("organization") String organization,
-                                    @PathParam("website") String website) {
-        User user = new User(email, password, username, "organizer", nameAndSurname, "", phone,
-                "", "", "", "", "", "", "", "", "", "", organization, website);
-        ObjectifyService.ofy().save().entity(user).now();
-        return "Organizer added.";
     }
 
 }

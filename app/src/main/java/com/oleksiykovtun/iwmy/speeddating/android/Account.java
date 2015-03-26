@@ -12,6 +12,8 @@ import com.oleksiykovtun.iwmy.speeddating.data.User;
  */
 public class Account {
 
+    private static final String USER = "user";
+
     public static boolean hasUser(Fragment fragment) {
         return getUser(fragment).getEmail().contains("@")
                 && getUser(fragment).getPassword().length() > 0;
@@ -21,7 +23,7 @@ public class Account {
         try {
             fragment.getActivity().getApplicationContext()
                     .getSharedPreferences("", Context.MODE_PRIVATE).edit()
-                    .putString("user", new Gson().toJson(object, User.class)).commit();
+                    .putString(USER, new Gson().toJson(object, User.class)).commit();
         } catch (Throwable e) {
             Log.e("IWMY", "User saving to settings failed.", e);
         }
@@ -32,7 +34,7 @@ public class Account {
         User user = new User();
         try {
             String userJsonString = fragment.getActivity().getApplicationContext()
-                .getSharedPreferences("", Context.MODE_PRIVATE).getString("user", "");
+                    .getSharedPreferences("", Context.MODE_PRIVATE).getString(USER, "");
             user = new Gson().fromJson(userJsonString, User.class);
         } catch (Throwable e) {
             Log.e("IWMY", "User getting from settings failed.", e);

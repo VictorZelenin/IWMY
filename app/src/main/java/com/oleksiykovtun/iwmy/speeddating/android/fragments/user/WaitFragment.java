@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
+import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.Account;
 import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
@@ -30,7 +31,7 @@ public class WaitFragment extends CoolFragment {
         View view = inflater.inflate(R.layout.fragment_user_wait, container, false);
         registerContainerView(view);
 
-        event = (Event)getAttachment();
+        event = (Event) getAttachment();
 
         return view;
     }
@@ -51,13 +52,13 @@ public class WaitFragment extends CoolFragment {
             @Override
             public void onTick(long millisUntilFinished) {
                 // checking until for this attendant couples are put
-                post("http://iwmy-speed-dating.appspot.com/couples/get/for/attendance",
-                        Couple[].class,
+                post(Api.COUPLES + Api.GET_FOR_ATTENDANCE, Couple[].class,
                         new Attendance(Account.getUser(WaitFragment.this), event));
             }
 
             @Override
-            public void onFinish() { }
+            public void onFinish() {
+            }
 
         }.start();
     }

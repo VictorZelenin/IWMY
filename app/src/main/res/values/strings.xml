@@ -99,6 +99,7 @@
     <string name="message_event_added">Event added</string>
     <string name="message_inputs_error">Please check your inputs and try again.</string>
     <string name="message_questionnaires_sent">Questionnaires sent</string>
+    <string name="message_select_equal">Please select equal number of guys and ladies.</string>
 
     <string name="hint_email_or_username">Email or username</string>
     <string name="hint_password">Password</string>

@@ -6,9 +6,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.oleksiykovtun.android.cooltools.CoolFormatter;
 import com.oleksiykovtun.android.cooltools.CoolRecyclerAdapter;
 import com.oleksiykovtun.iwmy.speeddating.R;
-import com.oleksiykovtun.android.cooltools.CoolFormatter;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 import java.util.List;
@@ -30,10 +30,10 @@ public class UserRecyclerAdapter extends CoolRecyclerAdapter {
 
         public ViewHolder(View view) {
             super(view);
-            nameTextView = (TextView)view.findViewById(R.id.label_user_name);
-            ageTextView = (TextView)view.findViewById(R.id.label_user_age);
-            locationTextView = (TextView)view.findViewById(R.id.label_user_location);
-            photoImageView = (ImageView)view.findViewById(R.id.image_user_pic);
+            nameTextView = (TextView) view.findViewById(R.id.label_user_name);
+            ageTextView = (TextView) view.findViewById(R.id.label_user_age);
+            locationTextView = (TextView) view.findViewById(R.id.label_user_location);
+            photoImageView = (ImageView) view.findViewById(R.id.image_user_pic);
         }
 
     }
@@ -42,16 +42,16 @@ public class UserRecyclerAdapter extends CoolRecyclerAdapter {
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(
                 LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.view_user_list_item, parent, false));
+                        .inflate(R.layout.view_user_list_item, parent, false));
     }
 
     @Override
     public void onBindViewHolder(CoolRecyclerAdapter.ViewHolder holder, int position) {
-        User user = (User)(dataSet.get(position));
-        ((ViewHolder)holder).nameTextView.setText(user.getNameAndSurname() + ", ");
-        ((ViewHolder)holder).ageTextView.setText(CoolFormatter.getYearsFromDate(user
+        User user = (User) (dataSet.get(position));
+        ((ViewHolder) holder).nameTextView.setText(user.getNameAndSurname() + ", ");
+        ((ViewHolder) holder).ageTextView.setText(CoolFormatter.getYearsFromDate(user
                 .getBirthDate()));
-        ((ViewHolder)holder).locationTextView.setText(", " + user.getLocation());
+        ((ViewHolder) holder).locationTextView.setText(", " + user.getLocation());
         setImageFromBase64String(((ViewHolder) holder).photoImageView, user.getPhotoBase64());
     }
 

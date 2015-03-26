@@ -9,7 +9,6 @@ import com.google.common.base.Charsets;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by alx on 2015-03-06.

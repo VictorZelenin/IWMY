@@ -5,9 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.R;
-import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.SettingsFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 
@@ -26,7 +26,7 @@ public class EventStartFragment extends CoolFragment {
         registerClickListener(R.id.button_start);
         registerClickListener(R.id.button_settings);
 
-        event = (Event)getAttachment();
+        event = (Event) getAttachment();
 
         setImageFromBase64String(R.id.image_event_pic, event.getPhotoBase64());
         setText(R.id.label_organizer, event.getOrganizerEmail());

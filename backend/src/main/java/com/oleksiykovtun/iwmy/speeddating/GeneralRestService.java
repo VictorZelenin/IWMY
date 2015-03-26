@@ -8,23 +8,24 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 /**
- * The REST service which accesses the original content directly.
+ * The general backend REST service.
  */
-@Path("/")
-public class DefaultRestService extends RestService {
+@Path(Api.GENERAL)
+public class GeneralRestService extends AbstractRestService {
 
     private static final String DEFAULT_MESSAGE = "IWMY Speed Dating\n\n"
             + "http://want2meetu.com\n"
             + "https://github.com/oleksiykovtun/IWMY-Speed-Dating\n\n"
             + "Please use the Android app for accessing the service";
 
-    @GET @Path("") @Produces(JSON)
+    @GET
+    @Path(Api.EMPTY) @Produces(JSON)
     public String getDefaultMessage() {
         return DEFAULT_MESSAGE;
     }
 
-    @Path("debug/get/all") @GET @Produces(JSON)
-    public List debugGetAll() {
+    @Path(Api.DEBUG_GET_ALL) @GET @Produces(JSON)
+    public static List debugGetAll() {
         List<Object> items = new ArrayList<>();
         items.addAll(AttendanceRestService.debugGetAll());
         items.addAll(CoupleRestService.debugGetAll());
@@ -34,8 +35,8 @@ public class DefaultRestService extends RestService {
         return items;
     }
 
-    @Path("debug/reset") @GET @Produces(JSON)
-    public List debugReset() {
+    @Path(Api.DEBUG_RESET) @GET @Produces(JSON)
+    public static List debugReset() {
         List<Object> items = new ArrayList<>();
         items.addAll(AttendanceRestService.debugReset());
         items.addAll(CoupleRestService.debugReset());

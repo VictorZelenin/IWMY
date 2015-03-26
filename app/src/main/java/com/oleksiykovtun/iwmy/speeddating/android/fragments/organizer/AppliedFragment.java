@@ -9,7 +9,6 @@ import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.StartFragment;
-import com.oleksiykovtun.iwmy.speeddating.android.fragments.user.EventListFragment;
 
 /**
  * Created by alx on 2015-02-12.

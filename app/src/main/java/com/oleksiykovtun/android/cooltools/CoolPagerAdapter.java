@@ -34,12 +34,12 @@ public class CoolPagerAdapter extends PagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return  ((Activity)context).findViewById(viewIds[position]).getTag().toString();
+        return ((Activity) context).findViewById(viewIds[position]).getTag().toString();
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        return ((Activity)context).findViewById(viewIds[position]);
+        return ((Activity) context).findViewById(viewIds[position]);
     }
 
     @Override

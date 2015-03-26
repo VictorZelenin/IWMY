@@ -8,7 +8,7 @@
         android:id="@+id/toolbar"
         android:background="@color/blue"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent" >
+        android:layout_width="match_parent">
 
         <ImageView
             android:src="@drawable/logo"
@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/toolbar_text_size"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white" />
 
     </android.support.v7.widget.Toolbar>
 
@@ -42,7 +42,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/label_email"
-                android:textSize="@dimen/label_text_size"/>
+                android:textSize="@dimen/label_text_size" />
 
             <EditText
                 android:id="@+id/input_email"
@@ -55,7 +55,7 @@
                 android:text="@string/label_username"
                 android:textSize="@dimen/label_text_size"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <EditText
                 android:id="@+id/input_username"
@@ -68,7 +68,7 @@
                 android:text="@string/label_password"
                 android:textSize="@dimen/label_text_size"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <EditText
                 android:id="@+id/input_password"
@@ -81,7 +81,7 @@
                 android:text="@string/label_name_and_surname"
                 android:textSize="@dimen/label_text_size"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <EditText
                 android:id="@+id/input_name_and_surname"
@@ -94,7 +94,7 @@
                 android:text="@string/label_phone"
                 android:textSize="@dimen/label_text_size"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <EditText
                 android:id="@+id/input_phone"
@@ -107,7 +107,7 @@
                 android:text="@string/label_birth_date"
                 android:textSize="@dimen/label_text_size"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/button_select_date"
@@ -120,13 +120,13 @@
                 android:text="@string/label_empty"
                 android:textSize="@dimen/label_text_size"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:text="@string/label_gender"
                 android:textSize="@dimen/label_text_size"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <RadioGroup
                 android:orientation="vertical"
@@ -152,7 +152,7 @@
                 android:id="@+id/button_register"
                 android:text="@string/button_register"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

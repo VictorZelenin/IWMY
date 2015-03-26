@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
+import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.Account;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.SettingsFragment;
@@ -28,13 +29,13 @@ public class UserProfileCoupleFragment extends CoolFragment {
         registerContainerView(view);
         registerClickListener(R.id.button_settings);
 
-        Couple couple = (Couple)getAttachment();
+        Couple couple = (Couple) getAttachment();
         String coupleUserEmail
                 = (Account.getUser(this).getEmail().equals(couple.getUserEmail2()))
                 ? couple.getUserEmail1() : couple.getUserEmail2();
         User coupleUser = new User(coupleUserEmail,
                 "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
-        post("http://iwmy-speed-dating.appspot.com/users/get", User[].class, coupleUser);
+        post(Api.USERS + Api.GET, User[].class, coupleUser);
 
         return view;
     }
@@ -42,8 +43,8 @@ public class UserProfileCoupleFragment extends CoolFragment {
     @Override
     public void onReceiveWebData(List response) {
         User coupleUser;
-        if (! response.isEmpty() && response.size() > 0) {
-            coupleUser = (User)response.get(0);
+        if (!response.isEmpty() && response.size() > 0) {
+            coupleUser = (User) response.get(0);
             setImageFromBase64String(R.id.image_user_pic, coupleUser.getPhotoBase64());
             setText(R.id.label_couple, coupleUser.getNameAndSurname());
             setText(R.id.label_name_and_surname, R.string.label_name_and_surname,

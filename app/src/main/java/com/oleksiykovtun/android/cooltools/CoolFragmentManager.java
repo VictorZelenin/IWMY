@@ -19,7 +19,8 @@ public abstract class CoolFragmentManager {
 
     /**
      * Remembers activity and fragment holder for the underlying functions
-     * @param activity FragmentActivity which has fragments
+     *
+     * @param activity               FragmentActivity which has fragments
      * @param fragmentHolderIdPassed ID of the fragment holding view
      */
     public static void setup(final FragmentActivity activity, final int fragmentHolderIdPassed) {
@@ -30,6 +31,7 @@ public abstract class CoolFragmentManager {
     /**
      * Shows the fragment, removing all previous fragments.
      * Back button will remove this fragment
+     *
      * @param fragment the fragment to show
      */
     public static void switchToRootFragment(Fragment fragment) {
@@ -39,8 +41,9 @@ public abstract class CoolFragmentManager {
     /**
      * Shows the fragment, removing all previous fragments.
      * Back button will remove this fragment
+     *
      * @param fragment the fragment to show
-     * @param object the object attached to the fragment
+     * @param object   the object attached to the fragment
      */
     // debug not really root fragment
     public static void switchToRootFragment(Fragment fragment, Serializable object) {
@@ -51,6 +54,7 @@ public abstract class CoolFragmentManager {
     /**
      * Shows the fragment atop of the previous fragment.
      * Back button will return to the previous fragment in the stack
+     *
      * @param fragment the fragment to show
      */
     public static void switchToFragment(Fragment fragment) {
@@ -60,8 +64,9 @@ public abstract class CoolFragmentManager {
     /**
      * Shows the fragment atop of the previous fragment.
      * Back button will return to the previous fragment in the stack
+     *
      * @param fragment the fragment to show
-     * @param object the object attached to the fragment
+     * @param object   the object attached to the fragment
      */
     public static void switchToFragment(Fragment fragment, Serializable object) {
         fragment = attachObject(fragment, object);
@@ -82,13 +87,18 @@ public abstract class CoolFragmentManager {
 
     /**
      * Retrieves the attached object from the fragment
+     *
      * @param fragment fragment which has the attached object
      */
     public static Serializable getAttachment(Fragment fragment) {
         return fragment.getArguments().getSerializable(TAG);
     }
 
-    // todo document
+    /**
+     * Indicates presence of other fragments in the back stack
+     *
+     * @return boolean presence
+     */
     public static boolean areAnyOlderFragments() {
         return (fragmentManager.getBackStackEntryCount() > 0);
     }

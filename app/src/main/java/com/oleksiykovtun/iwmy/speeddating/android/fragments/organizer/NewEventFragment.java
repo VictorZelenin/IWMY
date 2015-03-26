@@ -1,18 +1,16 @@
 package com.oleksiykovtun.iwmy.speeddating.android.fragments.organizer;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
 
 import com.oleksiykovtun.android.cooltools.CoolFormatter;
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
+import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.Account;
-import com.oleksiykovtun.iwmy.speeddating.android.fragments.SettingsFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 
 import java.util.List;
@@ -55,7 +53,7 @@ public class NewEventFragment extends CoolFragment {
                 Event event = new Event(Account.getUser(this).getEmail(), time, place,
                         streetAddress, photoBase64, freePlaces, cost, description);
                 if (checkEvent(event)) {
-                    post("http://iwmy-speed-dating.appspot.com/events/add", Event[].class, event);
+                    post(Api.EVENTS + Api.ADD, Event[].class, event);
                 } else {
                     showToast(R.string.message_inputs_error);
                 }
@@ -70,7 +68,7 @@ public class NewEventFragment extends CoolFragment {
 
     @Override
     public void onReceiveWebData(List response) {
-        if (! response.isEmpty()) {
+        if (!response.isEmpty()) {
             showToast(R.string.message_event_added);
             CoolFragmentManager.switchToPreviousFragment();
         } else {

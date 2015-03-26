@@ -5,12 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.oleksiykovtun.iwmy.speeddating.R;
-import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.android.cooltools.CoolFragment;
+import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
+import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.Account;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.organizer.MyEventListFragment;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.user.EventListFragment;
+import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 
 /**
@@ -36,7 +37,7 @@ public class StartFragment extends CoolFragment implements View.OnClickListener 
     public void onStart() {
         super.onStart();
         if (Account.hasUser(this)) {
-            if (Account.getUser(this).getGroup().equals("organizer")) {
+            if (Account.getUser(this).getGroup().equals(User.ORGANIZER)) {
                 CoolFragmentManager.switchToRootFragment(new MyEventListFragment());
             } else {
                 CoolFragmentManager.switchToRootFragment(new EventListFragment());

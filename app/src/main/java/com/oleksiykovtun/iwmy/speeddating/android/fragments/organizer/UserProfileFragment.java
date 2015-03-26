@@ -23,7 +23,7 @@ public class UserProfileFragment extends CoolFragment {
         registerContainerView(view);
         registerClickListener(R.id.button_settings);
 
-        User user = (User)getAttachment();
+        User user = (User) getAttachment();
 
         setImageFromBase64String(R.id.image_user_pic, user.getPhotoBase64());
         setText(R.id.label_name_and_age, user.getNameAndSurname() + ", " + user.getBirthDate());

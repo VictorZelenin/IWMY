@@ -1,7 +1,6 @@
 package com.oleksiykovtun.iwmy.speeddating.android.fragments.organizer;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,11 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.oleksiykovtun.android.cooltools.CoolFragment;
+import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.adapters.RatingRecyclerAdapter;
 import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import com.oleksiykovtun.iwmy.speeddating.data.Rating;
+import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -43,12 +44,11 @@ public class QuestionnaireOfflineFragment extends CoolFragment {
         registerContainerView(view);
         registerClickListener(R.id.button_send);
 
-        event = (Event)getAttachment();
+        event = (Event) getAttachment();
 
         // generate ratings for all active attendants of this event using a dummy user
-        post("http://iwmy-speed-dating.appspot.com/ratings/generate/for/attendance/active",
-                Rating[].class, new Attendance(
-                        event.getOrganizerEmail(), event.getTime(), "dummy@mail.com", "false"));
+        post(Api.RATINGS + Api.GENERATE_FOR_ATTENDANCE_ACTIVE, Rating[].class, new Attendance(
+                "user@mail.com", User.FEMALE, event.getTime(), event.getOrganizerEmail(), "false"));
 
         RecyclerView ratingRecyclerView = (RecyclerView) view.findViewById(R.id.rating_list_holder);
         ratingRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -72,11 +72,6 @@ public class QuestionnaireOfflineFragment extends CoolFragment {
                 //todo send questionnaires by email, add this email address to temp
                 break;
         }
-    }
-
-    @Override
-    public void onClick(Serializable objectAtClicked) {
-        // todo select/deselect, but this data is unlikely to be sent
     }
 
 }

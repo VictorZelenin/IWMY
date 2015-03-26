@@ -13,8 +13,8 @@ import android.view.ViewGroup;
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.android.cooltools.CoolPagerAdapter;
+import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
-import com.oleksiykovtun.iwmy.speeddating.android.Account;
 import com.oleksiykovtun.iwmy.speeddating.android.adapters.UserRecyclerAdapter;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.SettingsFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
@@ -42,7 +42,7 @@ public class ParticipantListFragment extends CoolFragment {
     @Override
     public void onStart() {
         super.onStart();
-        post("http://iwmy-speed-dating.appspot.com/users/get/for/event", User[].class, event);
+        post(Api.USERS + Api.GET_FOR_EVENT, User[].class, event);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class ParticipantListFragment extends CoolFragment {
         registerClickListener(R.id.button_add_participant);
         registerClickListener(R.id.button_settings);
 
-        event = (Event)getAttachment();
+        event = (Event) getAttachment();
 
         RecyclerView userRecyclerViewGuys = (RecyclerView) view
                 .findViewById(R.id.user_list_holder_guys);
@@ -79,8 +79,8 @@ public class ParticipantListFragment extends CoolFragment {
     public void onReceiveWebData(List response) {
         userListGuys.clear();
         userListLadies.clear();
-        for (User user : (List<User>)response) {
-            if (user.getGender().equals("male")) {
+        for (User user : (List<User>) response) {
+            if (user.getGender().equals(User.MALE)) {
                 userListGuys.add(user);
             } else {
                 userListLadies.add(user);
@@ -109,15 +109,15 @@ public class ParticipantListFragment extends CoolFragment {
 
     @Override
     public void onLongClick(Serializable objectAtClicked) {
-        final User user = (User)objectAtClicked;
+        final User user = (User) objectAtClicked;
         new AlertDialog.Builder(getActivity()).setTitle(R.string.label_delete)
                 .setMessage(getText(R.string.label_remove_this_user_from_event)
                         + user.getNameAndSurname() + " " + user.getEmail())
                 .setPositiveButton(R.string.button_delete, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        post("http://iwmy-speed-dating.appspot.com/users/remove/attendance",
-                                User[].class, new Attendance(user, event));
+                        post(Api.USERS + Api.REMOVE_ATTENDANCE, User[].class,
+                                new Attendance(user, event));
                         dialog.dismiss();
                     }
 

@@ -10,9 +10,9 @@ import com.oleksiykovtun.iwmy.speeddating.data.User;
 import javax.ws.rs.core.MediaType;
 
 /**
- * The back end REST service.
+ * The abstract backend REST service.
  */
-public abstract class RestService {
+public abstract class AbstractRestService {
 
     static {
         ObjectifyService.register(Attendance.class);

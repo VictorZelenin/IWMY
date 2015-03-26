@@ -7,10 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.oleksiykovtun.iwmy.speeddating.R;
-import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.android.cooltools.CoolFragment;
-import com.oleksiykovtun.iwmy.speeddating.android.Account;
+import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
+import com.oleksiykovtun.iwmy.speeddating.Api;
+import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.adapters.EventRecyclerAdapter;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.SettingsFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
@@ -34,7 +34,7 @@ public class EventListFragment extends CoolFragment {
         registerContainerView(view);
         registerClickListener(R.id.button_settings);
 
-        post("http://iwmy-speed-dating.appspot.com/events/get/all", Event[].class);
+        post(Api.EVENTS + Api.GET_ALL, Event[].class);
 
         RecyclerView eventRecyclerView = (RecyclerView) view.findViewById(R.id.event_list_holder);
         eventRecyclerView.setHasFixedSize(true);
@@ -55,7 +55,7 @@ public class EventListFragment extends CoolFragment {
 
     @Override
     public void onClick(Serializable objectAtClicked) {
-        CoolFragmentManager.switchToFragment(new EventAttendFragment(), (Event)objectAtClicked);
+        CoolFragmentManager.switchToFragment(new EventAttendFragment(), (Event) objectAtClicked);
     }
 
 

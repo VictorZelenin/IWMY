@@ -20,10 +20,47 @@ import javax.ws.rs.Produces;
 /**
  * The REST service which accesses user data.
  */
-@Path("/events/")
-public class EventRestService extends RestService {
+@Path(Api.EVENTS)
+public class EventRestService extends GeneralRestService {
 
-    @Path("get/for/user") @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.GET) @POST @Consumes(JSON) @Produces(JSON)
+    public static List<Event> get(List<Event> wildcardEvents) {
+        List<Event> events = new ArrayList<>();
+        for (Event wildcardEvent : wildcardEvents) {
+            events.addAll(ObjectifyService.ofy().load().type(Event.class)
+                    .filter("organizerEmail", wildcardEvent.getOrganizerEmail()).list());
+        }
+        return events;
+    }
+
+    @Path(Api.GET_ALL) @POST @Consumes(JSON) @Produces(JSON)
+    public static List getAll() {
+        return new ArrayList<>(ObjectifyService.ofy().load().type(Event.class).list());
+    }
+
+    @Path(Api.ADD) @POST @Consumes(JSON) @Produces(JSON)
+    public List add(List<Event> items) {
+        ObjectifyService.ofy().save().entities(items).now();
+        return items;
+    }
+
+    /**
+     * Deletes events that match wildcard events by organizerEmail and time
+     * @param wildcardEvents events with organizerEmail and time specified to delete by
+     * @return events which remain and match wildcard events by organizerEmail
+     */
+    @Path(Api.DELETE) @POST @Consumes(JSON) @Produces(JSON)
+    public List delete(List<Event> wildcardEvents) {
+        // todo delete orphan attendances
+        for (Event wildcardEvent : wildcardEvents) {
+            ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(Event.class)
+                    .filter("organizerEmail", wildcardEvent.getOrganizerEmail())
+                    .filter("time", wildcardEvent.getTime())
+                    .keys()).now();
+        }
+        return get(wildcardEvents);
+    }
+
     public List getForUser(List<User> wildcardUsers) {
         Set<Event> events = new TreeSet<>();
         // listing user-related attendances
@@ -37,45 +74,7 @@ public class EventRestService extends RestService {
         return Arrays.asList(events.toArray());
     }
 
-    @Path("get") @POST @Consumes(JSON) @Produces(JSON)
-    public static List<Event> get(List<Event> wildcardEvents) {
-        List<Event> events = new ArrayList<>();
-        for (Event wildcardEvent : wildcardEvents) {
-            events.addAll(ObjectifyService.ofy().load().type(Event.class)
-                    .filter("organizerEmail", wildcardEvent.getOrganizerEmail()).list());
-        }
-        return events;
-    }
-
-    @Path("get/all") @POST @Consumes(JSON) @Produces(JSON)
-    public static List getAll() {
-        return new ArrayList<>(ObjectifyService.ofy().load().type(Event.class).list());
-    }
-
-    @Path("add") @POST @Consumes(JSON) @Produces(JSON)
-    public List add(List<Event> items) {
-        ObjectifyService.ofy().save().entities(items).now();
-        return items;
-    }
-
-    /**
-     * Deletes events that match wildcard events by organizerEmail and time
-     * @param wildcardEvents events with organizerEmail and time specified to delete by
-     * @return events which remain and match wildcard events by organizerEmail
-     */
-    @Path("delete") @POST @Consumes(JSON) @Produces(JSON)
-    public List delete(List<Event> wildcardEvents) {
-        // todo delete orphan attendances
-        for (Event wildcardEvent : wildcardEvents) {
-            ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(Event.class)
-                    .filter("organizerEmail", wildcardEvent.getOrganizerEmail())
-                    .filter("time", wildcardEvent.getTime())
-                    .keys()).now();
-        }
-        return get(wildcardEvents);
-    }
-
-    @Path("debug/create") @GET @Produces(JSON)
+    @Path(Api.DEBUG_CREATE) @GET @Produces(JSON)
     public static List debugCreate() {
         List list = Arrays.asList(
                 new Event("John@email.com", "2015-02-28 20:00", "Tokyo", "Roger st. 23 apt. 2",
@@ -195,19 +194,19 @@ public class EventRestService extends RestService {
         return list;
     }
 
-    @Path("debug/delete/all") @GET @Produces(JSON)
+    @Path(Api.DEBUG_DELETE_ALL) @GET @Produces(JSON)
     public static String debugDeleteAll() {
         ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(Event.class).keys());
         return "Deleted.";
     }
 
-    @Path("debug/reset") @GET @Produces(JSON)
+    @Path(Api.DEBUG_RESET) @GET @Produces(JSON)
     public static List debugReset() {
         debugDeleteAll();
         return debugCreate();
     }
 
-    @Path("debug/get/all") @GET @Produces(JSON)
+    @Path(Api.DEBUG_GET_ALL) @GET @Produces(JSON)
     public static List debugGetAll() {
         return getAll();
     }

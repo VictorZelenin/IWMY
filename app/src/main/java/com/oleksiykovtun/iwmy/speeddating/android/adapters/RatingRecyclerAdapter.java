@@ -30,9 +30,9 @@ public class RatingRecyclerAdapter extends CoolRecyclerAdapter {
 
         public ViewHolder(View view) {
             super(view);
-            numberTextView = (TextView)view.findViewById(R.id.label_number);
-            selectionTextView = (CheckBox)view.findViewById(R.id.checkbox_selection);
-            commentTextView = (TextView)view.findViewById(R.id.label_comment);
+            numberTextView = (TextView) view.findViewById(R.id.label_number);
+            selectionTextView = (CheckBox) view.findViewById(R.id.checkbox_selection);
+            commentTextView = (TextView) view.findViewById(R.id.label_comment);
         }
 
     }
@@ -41,29 +41,29 @@ public class RatingRecyclerAdapter extends CoolRecyclerAdapter {
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final ViewHolder viewHolder = new ViewHolder(
                 LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.view_rating_list_item, parent, false));
+                        .inflate(R.layout.view_rating_list_item, parent, false));
         viewHolder.selectionTextView.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                try {
-                    int position = Integer.parseInt("" + viewHolder.selectionTextView.getTag());
-                    ((Rating) dataSet.get(position)).setSelection(isChecked ? "selected" : "");
-                } catch (Throwable e) {
-                    Log.d("IWMY", "Checkbox toggling failed");
-                }
-            }
-        });
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        try {
+                            int position = Integer.parseInt("" + viewHolder.selectionTextView.getTag());
+                            ((Rating) dataSet.get(position)).setSelection(isChecked ? "selected" : "");
+                        } catch (Throwable e) {
+                            Log.d("IWMY", "Checkbox toggling failed");
+                        }
+                    }
+                });
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(CoolRecyclerAdapter.ViewHolder holder, int position) {
-        Rating rating = (Rating)(dataSet.get(position));
-        ((ViewHolder)holder).numberTextView.setText(rating.getNumber());
-        ((ViewHolder)holder).selectionTextView.setChecked(! rating.getSelection().isEmpty());
-        ((ViewHolder)holder).selectionTextView.setTag(Integer.valueOf(position));
-        ((ViewHolder)holder).commentTextView.setText(rating.getComment());
+        Rating rating = (Rating) (dataSet.get(position));
+        ((ViewHolder) holder).numberTextView.setText(rating.getNumber());
+        ((ViewHolder) holder).selectionTextView.setChecked(!rating.getSelection().isEmpty());
+        ((ViewHolder) holder).selectionTextView.setTag(Integer.valueOf(position));
+        ((ViewHolder) holder).commentTextView.setText(rating.getComment());
     }
 
 }

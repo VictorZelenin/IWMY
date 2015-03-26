@@ -9,7 +9,7 @@
         android:id="@+id/toolbar"
         android:background="@color/blue"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent" >
+        android:layout_width="match_parent">
 
         <ImageView
             android:src="@drawable/logo"
@@ -25,7 +25,7 @@
             android:textSize="@dimen/toolbar_text_size"
             android:textColor="@color/white"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
     </android.support.v7.widget.Toolbar>
 
@@ -33,6 +33,6 @@
         android:id="@+id/button_logout"
         android:text="@string/button_logout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

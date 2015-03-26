@@ -28,9 +28,9 @@ public class EventRecyclerAdapter extends CoolRecyclerAdapter {
 
         public ViewHolder(View view) {
             super(view);
-            placeTextView = (TextView)view.findViewById(R.id.label_event_organizer_and_place);
-            timeTextView = (TextView)view.findViewById(R.id.label_event_time);
-            photoImageView = (ImageView)view.findViewById(R.id.image_event_pic);
+            placeTextView = (TextView) view.findViewById(R.id.label_event_organizer_and_place);
+            timeTextView = (TextView) view.findViewById(R.id.label_event_time);
+            photoImageView = (ImageView) view.findViewById(R.id.image_event_pic);
         }
 
     }
@@ -39,14 +39,14 @@ public class EventRecyclerAdapter extends CoolRecyclerAdapter {
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(
                 LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.view_event_list_item, parent, false));
+                        .inflate(R.layout.view_event_list_item, parent, false));
     }
 
     @Override
     public void onBindViewHolder(CoolRecyclerAdapter.ViewHolder holder, int position) {
-        Event event = (Event)(dataSet.get(position));
-        ((ViewHolder)holder).placeTextView.setText(event.getStreetAddress());
-        ((ViewHolder)holder).timeTextView.setText(event.getTime());
+        Event event = (Event) (dataSet.get(position));
+        ((ViewHolder) holder).placeTextView.setText(event.getStreetAddress());
+        ((ViewHolder) holder).timeTextView.setText(event.getTime());
         setImageFromBase64String(((ViewHolder) holder).photoImageView, event.getPhotoBase64());
     }
 

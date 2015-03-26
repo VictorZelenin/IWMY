@@ -20,17 +20,17 @@ import javax.ws.rs.Produces;
 /**
  * The REST service which accesses user data.
  */
-@Path("/ratings/")
-public class RatingRestService extends RestService {
+@Path(Api.RATINGS)
+public class RatingRestService extends GeneralRestService {
 
     /**
-     * Generates ratings for all other active attendances except the provided one.
+     * Generates ratings for other active attendances.
      * @param wildcardAttendances attendances (the first one will be used)
      * @return ratings rating list
      */
-    @Path("generate/for/attendance/active") @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.GENERATE_FOR_ATTENDANCE_ACTIVE) @POST @Consumes(JSON) @Produces(JSON)
     public static List generateForAttendanceActive(List<Attendance> wildcardAttendances) {
-        Set<Rating> outputSet = new TreeSet<>();
+        Set<Rating> ratingSet = new TreeSet<>();
         if (wildcardAttendances.size() > 0) {
             Attendance wildcardAttendance = wildcardAttendances.get(0);
             List<Event> eventsWildcard = new ArrayList<>();
@@ -39,25 +39,28 @@ public class RatingRestService extends RestService {
             // listing active event-related attendances
             List<Attendance> activeAttendances
                     = AttendanceRestService.getForEventActive(eventsWildcard);
+            // and adding ratings from them
+            int ratingNumber = 1;
             for (Attendance activeAttendance : activeAttendances) {
-                // and adding ratings - from each of them except the same one
-                if (! wildcardAttendance.getUserEmail().equals(activeAttendance.getUserEmail())) {
-                    outputSet.add(new Rating(wildcardAttendance.getEventOrganizerEmail(),
+                if (! wildcardAttendance.getUserEmail().equals(activeAttendance.getUserEmail())
+                        && ! wildcardAttendance.getUserGender().equals(activeAttendance
+                        .getUserGender())) {
+                    ratingSet.add(new Rating(wildcardAttendance.getEventOrganizerEmail(),
                             wildcardAttendance.getEventTime(), wildcardAttendance.getUserEmail(),
-                            activeAttendance.getUserEmail(), "", "", ""));
+                            activeAttendance.getUserEmail(), "" + ratingNumber, "", ""));
+                    ++ratingNumber;
                 }
             }
         }
-        return Arrays.asList(outputSet.toArray());
+        return Arrays.asList(ratingSet.toArray());
     }
 
-    @Path("put") @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.PUT) @POST @Consumes(JSON) @Produces(JSON)
     public List put(List<Rating> items) {
         ObjectifyService.ofy().save().entities(items).now();
         return items;
     }
 
-    @Path("get/for/event") @POST @Consumes(JSON) @Produces(JSON)
     public static List getForEvent(List<Event> wildcardEvents) {
         Set<Rating> outputSet = new TreeSet<>();
         // listing event-related attendances
@@ -76,7 +79,6 @@ public class RatingRestService extends RestService {
      * @param wildcardEvents
      * @return
      */
-    @Path("delete/for/event") @POST @Consumes(JSON) @Produces(JSON)
     public static List deleteForEvent(List<Event> wildcardEvents) {
         Set<Rating> outputSet = new TreeSet<>();
         // listing event-related attendances
@@ -91,7 +93,6 @@ public class RatingRestService extends RestService {
         return new ArrayList();
     }
 
-    @Path("get/for/event/selected") @POST @Consumes(JSON) @Produces(JSON)
     public static List getForEventSelected(List<Event> wildcardEvents) {
         Set<Rating> outputSet = new TreeSet<>();
         // listing event-related attendances
@@ -106,7 +107,6 @@ public class RatingRestService extends RestService {
         return Arrays.asList(outputSet.toArray());
     }
 
-    @Path("get/for/attendance") @POST @Consumes(JSON) @Produces(JSON)
     public static List getForAttendance(List<Attendance> attendanceList) {
         Set<Rating> outputSet = new TreeSet<>();
         for (Attendance userAttendance : attendanceList) {
@@ -118,18 +118,16 @@ public class RatingRestService extends RestService {
         return Arrays.asList(outputSet.toArray());
     }
 
-    @Path("get/all") @POST @Consumes(JSON) @Produces(JSON)
     public static List getAll() {
         return new ArrayList<>(ObjectifyService.ofy().load().type(Rating.class).list());
     }
 
-    @Path("add") @POST @Consumes(JSON) @Produces(JSON)
     public List add(List<Rating> items) {
         ObjectifyService.ofy().save().entities(items).now();
         return items;
     }
 
-    @Path("debug/create") @GET @Produces(JSON)
+    @Path(Api.DEBUG_CREATE) @GET @Produces(JSON)
     public static List debugCreate() {
         List list = Arrays.asList(
                 new Rating("John@email.com", "2015-02-28 20:00",
@@ -150,19 +148,19 @@ public class RatingRestService extends RestService {
         return list;
     }
 
-    @Path("debug/delete/all") @GET @Produces(JSON)
+    @Path(Api.DEBUG_DELETE_ALL) @GET @Produces(JSON)
     public static String debugDeleteAll() {
         ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(Rating.class).keys());
         return "Deleted.";
     }
 
-    @Path("debug/reset") @GET @Produces(JSON)
+    @Path(Api.DEBUG_RESET) @GET @Produces(JSON)
     public static List debugReset() {
         debugDeleteAll();
         return debugCreate();
     }
 
-    @Path("debug/get/all") @GET @Produces(JSON)
+    @Path(Api.DEBUG_GET_ALL) @GET @Produces(JSON)
     public static List debugGetAll() {
         return getAll();
     }

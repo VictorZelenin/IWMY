@@ -27,7 +27,7 @@ public class EventFragment extends CoolFragment {
         registerClickListener(R.id.button_participants_list);
         registerClickListener(R.id.button_settings);
 
-        event = (Event)getAttachment();
+        event = (Event) getAttachment();
 
         setImageFromBase64String(R.id.image_event_pic, event.getPhotoBase64());
         setText(R.id.label_organizer, event.getStreetAddress());

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
+import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.adapters.CoupleRecyclerAdapter;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.SettingsFragment;
@@ -36,15 +37,14 @@ public class CoupleListFragment extends CoolFragment {
         registerClickListener(R.id.button_send_results);
         registerClickListener(R.id.button_settings);
 
-        event = (Event)getAttachment();
+        event = (Event) getAttachment();
 
         RecyclerView coupleRecyclerView = (RecyclerView) view.findViewById(R.id.couple_list_holder);
         coupleRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         registerItemClickListener(coupleRecyclerAdapter);
         coupleRecyclerView.setAdapter(coupleRecyclerAdapter);
 
-        post("http://iwmy-speed-dating.appspot.com/couples/create/for/event",
-                Couple[].class, event);
+        post(Api.COUPLES + Api.CREATE_FOR_EVENT, Couple[].class, event);
 
         return view;
     }

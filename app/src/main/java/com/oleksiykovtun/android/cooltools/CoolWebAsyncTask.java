@@ -8,10 +8,7 @@ import com.google.gson.reflect.TypeToken;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
@@ -21,9 +18,6 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
-import java.io.Serializable;
-import java.lang.reflect.Array;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -47,11 +41,12 @@ class CoolWebAsyncTask extends AsyncTask<String, Void, Void> {
 
         this.delegate = delegate;
         this.responseClass = responseClass;
-        this.uploadData = (uploadData != null) ? uploadData : new Object[] {};
+        this.uploadData = (uploadData != null) ? uploadData : new Object[]{};
     }
 
     public interface CoolWebAsyncResponse {
         void onReceiveWebData(List webDataString);
+
         void onFailReceivingWebData(String webDataErrorString);
     }
 
@@ -102,7 +97,7 @@ class CoolWebAsyncTask extends AsyncTask<String, Void, Void> {
 
     @Override
     protected void onPostExecute(Void result) {
-        if (delegate != null && ! isCancelled()) {
+        if (delegate != null && !isCancelled()) {
             if (errorString != null) {
                 delegate.onFailReceivingWebData(errorString);
                 cancel();

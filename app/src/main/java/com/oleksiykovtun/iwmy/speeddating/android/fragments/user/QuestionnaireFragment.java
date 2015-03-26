@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
+import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.Account;
 import com.oleksiykovtun.iwmy.speeddating.android.adapters.RatingRecyclerAdapter;
@@ -39,11 +40,11 @@ public class QuestionnaireFragment extends CoolFragment {
         registerClickListener(R.id.button_send);
         registerClickListener(R.id.button_settings);
 
-        event = (Event)getAttachment();
+        event = (Event) getAttachment();
 
-        // generate ratings for this attendant except this logged-in attendant
-        post("http://iwmy-speed-dating.appspot.com/ratings/generate/for/attendance/active",
-                Rating[].class, new Attendance(Account.getUser(this), event));
+        // generate ratings for this attendant
+        post(Api.RATINGS + Api.GENERATE_FOR_ATTENDANCE_ACTIVE, Rating[].class,
+                new Attendance(Account.getUser(this), event));
 
         RecyclerView ratingRecyclerView = (RecyclerView) view.findViewById(R.id.rating_list_holder);
         ratingRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -64,8 +65,8 @@ public class QuestionnaireFragment extends CoolFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_send:
-                if (! ratingList.isEmpty()) {
-                    post("http://iwmy-speed-dating.appspot.com/ratings/put", ratingList.toArray());
+                if (!ratingList.isEmpty()) {
+                    post(Api.RATINGS + Api.PUT, ratingList.toArray());
                 }
                 CoolFragmentManager.switchToFragment(new WaitFragment(), event);
                 break;
@@ -73,11 +74,6 @@ public class QuestionnaireFragment extends CoolFragment {
                 CoolFragmentManager.switchToFragment(new SettingsFragment());
                 break;
         }
-    }
-
-    @Override
-    public void onClick(Serializable objectAtClicked) {
-        // todo select/deselect
     }
 
 }
