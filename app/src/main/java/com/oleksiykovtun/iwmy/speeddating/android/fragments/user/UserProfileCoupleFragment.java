@@ -77,10 +77,6 @@ public class UserProfileCoupleFragment extends CoolFragment {
                     coupleUser.getAttitudeToSmoking());
             setText(R.id.label_attitude_to_alcohol, R.string.label_attitude_to_alcohol,
                     coupleUser.getAttitudeToAlcohol());
-        } else {
-            // todo xml
-            Log.e("IWMY", "No couple found.");
-            showToastLong("No couple found.");
         }
     }
 

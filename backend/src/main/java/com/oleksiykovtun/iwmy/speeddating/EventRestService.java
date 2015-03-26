@@ -1,15 +1,11 @@
 package com.oleksiykovtun.iwmy.speeddating;
 
 import com.googlecode.objectify.ObjectifyService;
-import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
-import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.TreeSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -59,19 +55,6 @@ public class EventRestService extends GeneralRestService {
                     .keys()).now();
         }
         return get(wildcardEvents);
-    }
-
-    public List getForUser(List<User> wildcardUsers) {
-        Set<Event> events = new TreeSet<>();
-        // listing user-related attendances
-        List<Attendance> userAttendances = AttendanceRestService.getForUser(wildcardUsers);
-        for (Attendance userAttendance : userAttendances) {
-            // and adding events - from each of them
-            events.addAll(ObjectifyService.ofy().load().type(Event.class)
-                    .filter("organizerEmail", userAttendance.getEventOrganizerEmail())
-                    .filter("time", userAttendance.getEventTime()).list());
-        }
-        return Arrays.asList(events.toArray());
     }
 
     @Path(Api.DEBUG_CREATE) @GET @Produces(JSON)

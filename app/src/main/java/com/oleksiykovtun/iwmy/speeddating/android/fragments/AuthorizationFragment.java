@@ -48,8 +48,7 @@ public class AuthorizationFragment extends CoolFragment {
     @Override
     public void onReceiveWebData(List response) {
         if (response.size() != 1) {
-            // todo xml
-            showToastLong("No such user or incorrect password");
+            showToastLong(R.string.message_no_user_wrong_password);
         } else {
             Account.saveUser(this, response.get(0));
             if (Account.getUser(this).getGroup().equals(User.ORGANIZER)) {

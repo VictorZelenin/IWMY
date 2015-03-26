@@ -44,7 +44,7 @@ public class CoupleListFragment extends CoolFragment {
         registerItemClickListener(coupleRecyclerAdapter);
         coupleRecyclerView.setAdapter(coupleRecyclerAdapter);
 
-        post(Api.COUPLES + Api.CREATE_FOR_EVENT, Couple[].class, event);
+        post(Api.COUPLES + Api.GENERATE_FOR_EVENT, Couple[].class, event);
 
         return view;
     }
@@ -60,7 +60,9 @@ public class CoupleListFragment extends CoolFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_send_results:
+                postForNoResult(Api.COUPLES + Api.PUT, coupleList.toArray());
                 // todo send results to offline clients by email - get email addresses from temp
+                showToast(R.string.message_couples_sent);
                 CoolFragmentManager.switchToRootFragment(new MyEventListFragment());
                 break;
             case R.id.button_settings:

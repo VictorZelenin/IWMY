@@ -112,7 +112,7 @@ public class QuestionnaireListFragment extends CoolFragment {
     @Override
     public void onClick(Serializable objectAtClicked, View view) {
         toggleSelectionBackgroundColor((User) objectAtClicked, view);
-        // todo post selected after Send button pressed
+        // todo change to post selected after Send button pressed
         post(Api.ATTENDANCES + Api.TOGGLE, Attendance[].class,
                 new Attendance((User) objectAtClicked, event));
     }

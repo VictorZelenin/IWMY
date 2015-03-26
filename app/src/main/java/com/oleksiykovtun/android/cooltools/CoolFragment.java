@@ -131,7 +131,7 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
         urlPrefix = urlPrefixNew;
     }
 
-    protected void post(String url, Object... postData) {
+    protected void postForNoResult(String url, Object... postData) {
         new CoolWebAsyncTask(this, null, postData).execute(urlPrefix + url);
     }
 

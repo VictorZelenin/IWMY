@@ -70,7 +70,7 @@ public class NewParticipantFragment extends CoolFragment {
                         weight, attitudeToSmoking, attitudeToAlcohol, location, organization,
                         website);
                 if (checkUser(user)) {
-                    post(Api.ATTENDANCES + Api.ADD, new Attendance(user, event));
+                    postForNoResult(Api.ATTENDANCES + Api.ADD, new Attendance(user, event));
                     post(Api.USERS + Api.ADD, User[].class, user);
                 } else {
                     showToast(R.string.message_inputs_error);

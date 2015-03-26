@@ -30,7 +30,7 @@ public class Api {
             = "generate/for/attendance/active";
 
     public static final String COUPLES = "/couples/";
-    public static final String CREATE_FOR_EVENT = "create/for/event";
+    public static final String GENERATE_FOR_EVENT = "create/for/event";
     public static final String GET_FOR_ATTENDANCE = "get/for/attendance";
 
     public static final String GENERAL = "/";

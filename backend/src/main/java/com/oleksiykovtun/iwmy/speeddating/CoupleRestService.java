@@ -27,7 +27,7 @@ import javax.ws.rs.Produces;
 @Path(Api.COUPLES)
 public class CoupleRestService extends GeneralRestService {
 
-    @Path(Api.CREATE_FOR_EVENT) @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.GENERATE_FOR_EVENT) @POST @Consumes(JSON) @Produces(JSON)
     public List createForEvent(List<Event> wildcardEvents) {
         Event event = wildcardEvents.get(0);
         List<Rating> ratingsSelected = RatingRestService.getForEventSelected(wildcardEvents);
@@ -53,9 +53,13 @@ public class CoupleRestService extends GeneralRestService {
                         user2.getNameAndSurname(), user2.getBirthDate()));
             }
         }
-        // Writing couples
-        ObjectifyService.ofy().save().entities(couples).now();
         return couples;
+    }
+
+    @Path(Api.PUT) @POST @Consumes(JSON) @Produces(JSON)
+    public List put(List<Couple> items) {
+        ObjectifyService.ofy().save().entities(items).now();
+        return items;
     }
 
     @Path(Api.GET_FOR_ATTENDANCE) @POST @Consumes(JSON) @Produces(JSON)
@@ -74,16 +78,6 @@ public class CoupleRestService extends GeneralRestService {
         return Arrays.asList(couples.toArray());
     }
 
-    public List getForEvent(List<Event> wildcardEvents) {
-        Set<Couple> couples = new TreeSet<>();
-        for (Event wildcardEvent : wildcardEvents) {
-            couples.addAll(ObjectifyService.ofy().load().type(Couple.class)
-                    .filter("eventOrganizerEmail", wildcardEvent.getOrganizerEmail())
-                    .filter("eventTime", wildcardEvent.getTime()).list());
-        }
-        return Arrays.asList(couples.toArray());
-    }
-
     public static List deleteForEvent(List<Event> wildcardEvents) {
         for (Event wildcardEvent : wildcardEvents) {
             ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(Couple.class)
@@ -95,11 +89,6 @@ public class CoupleRestService extends GeneralRestService {
 
     public static List getAll() {
         return new ArrayList<>(ObjectifyService.ofy().load().type(Couple.class).list());
-    }
-
-    public List add(List<Couple> items) {
-        ObjectifyService.ofy().save().entities(items).now();
-        return items;
     }
 
     @Path(Api.DEBUG_CREATE) @GET @Produces(JSON)

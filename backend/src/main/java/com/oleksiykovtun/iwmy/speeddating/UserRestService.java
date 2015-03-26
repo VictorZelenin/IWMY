@@ -31,8 +31,11 @@ public class UserRestService extends GeneralRestService {
      */
     @Path(Api.GET_FOR_EVENT_ACTIVE_RESET) @POST @Consumes(JSON) @Produces(JSON)
     public List getForEventActiveReset(List<Event> wildcardEvents) {
-        Set<User> users = new TreeSet<>();
+        // cleanup
+        RatingRestService.deleteForEvent(wildcardEvents);
+        CoupleRestService.deleteForEvent(wildcardEvents);
         // listing event-related attendances
+        Set<User> users = new TreeSet<>();
         List<Attendance> eventAttendances = AttendanceRestService.getForEvent(wildcardEvents);
         for (Attendance eventAttendance : eventAttendances) {
             // reset active state
@@ -43,7 +46,6 @@ public class UserRestService extends GeneralRestService {
         }
         // save attendances and return users
         AttendanceRestService.add(eventAttendances);
-        RatingRestService.deleteForEvent(wildcardEvents);
         return Arrays.asList(users.toArray());
     }
 

@@ -61,26 +61,12 @@ public class RatingRestService extends GeneralRestService {
         return items;
     }
 
-    public static List getForEvent(List<Event> wildcardEvents) {
-        Set<Rating> outputSet = new TreeSet<>();
-        // listing event-related attendances
-        List<Attendance> userAttendances = AttendanceRestService.getForEvent(wildcardEvents);
-        for (Attendance userAttendance : userAttendances) {
-            // and adding ratings - from each of them
-            outputSet.addAll(ObjectifyService.ofy().load().type(Rating.class)
-                    .filter("eventOrganizerEmail", userAttendance.getEventOrganizerEmail())
-                    .filter("eventTime", userAttendance.getEventTime()).list());
-        }
-        return Arrays.asList(outputSet.toArray());
-    }
-
     /**
      * Delete ratings and couples for event
      * @param wildcardEvents
      * @return
      */
     public static List deleteForEvent(List<Event> wildcardEvents) {
-        Set<Rating> outputSet = new TreeSet<>();
         // listing event-related attendances
         List<Attendance> userAttendances = AttendanceRestService.getForEvent(wildcardEvents);
         for (Attendance userAttendance : userAttendances) {
@@ -89,7 +75,6 @@ public class RatingRestService extends GeneralRestService {
                     .filter("eventOrganizerEmail", userAttendance.getEventOrganizerEmail())
                     .filter("eventTime", userAttendance.getEventTime()).keys()).now();
         }
-        CoupleRestService.deleteForEvent(wildcardEvents);
         return new ArrayList();
     }
 
@@ -120,11 +105,6 @@ public class RatingRestService extends GeneralRestService {
 
     public static List getAll() {
         return new ArrayList<>(ObjectifyService.ofy().load().type(Rating.class).list());
-    }
-
-    public List add(List<Rating> items) {
-        ObjectifyService.ofy().save().entities(items).now();
-        return items;
     }
 
     @Path(Api.DEBUG_CREATE) @GET @Produces(JSON)

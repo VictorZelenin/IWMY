@@ -66,7 +66,7 @@ public class QuestionnaireFragment extends CoolFragment {
         switch (view.getId()) {
             case R.id.button_send:
                 if (!ratingList.isEmpty()) {
-                    post(Api.RATINGS + Api.PUT, ratingList.toArray());
+                    postForNoResult(Api.RATINGS + Api.PUT, ratingList.toArray());
                 }
                 CoolFragmentManager.switchToFragment(new WaitFragment(), event);
                 break;
