@@ -3,10 +3,10 @@ package com.oleksiykovtun.iwmy.speeddating.android;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.util.Log;
 
+import com.oleksiykovtun.android.cooltools.CoolFormatter;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
@@ -29,15 +29,14 @@ public class Email {
         message += "\nWebsite: " + organizerUser.getWebsite() + "\n\n";
 
         message += "Follow the link to add the organizer:\n";
-        message += Api.BACKEND_URL;
-        message += Api.USERS + Api.DEBUG_ADD_ORGANIZER;
-        message += "/email=" + organizerUser.getEmail();
-        message += "&password=" + organizerUser.getPassword();
-        message += "&username=" + organizerUser.getUsername();
-        message += "&name=" + organizerUser.getNameAndSurname();
-        message += "&phone=" + organizerUser.getPhone();
-        message += "&organization=" + organizerUser.getOrganization();
-        message += "&website=" + organizerUser.getWebsite();
+        message += Api.BACKEND_URL + Api.USERS + Api.DEBUG_ADD_ORGANIZER;
+        message += "/email=" + CoolFormatter.escapeUrl(organizerUser.getEmail());
+        message += "&password=" + CoolFormatter.escapeUrl(organizerUser.getPassword());
+        message += "&username=" + CoolFormatter.escapeUrl(organizerUser.getUsername());
+        message += "&name=" + CoolFormatter.escapeUrl(organizerUser.getNameAndSurname());
+        message += "&phone=" + CoolFormatter.escapeUrl(organizerUser.getPhone());
+        message += "&organization=" + CoolFormatter.escapeUrl(organizerUser.getOrganization());
+        message += "&website=" + CoolFormatter.escapeUrl(organizerUser.getWebsite());
         send(context, EMAIL_ADDRESS, "New organizer", message);
     }
 

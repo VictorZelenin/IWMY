@@ -6,7 +6,11 @@ import android.util.Base64;
 import android.util.Log;
 
 import com.google.common.base.Charsets;
+import com.google.common.net.PercentEscaper;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -14,6 +18,10 @@ import java.text.SimpleDateFormat;
  * Created by alx on 2015-03-06.
  */
 public class CoolFormatter {
+
+    public static String escapeUrl(String unescapedString) {
+        return new PercentEscaper("", false).escape(unescapedString);
+    }
 
     public static Bitmap getImageBitmap(String base64String) throws Throwable {
         byte[] imageData = Base64.decode(base64String.getBytes(Charsets.UTF_8), Base64.DEFAULT);

@@ -5,8 +5,6 @@ import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
-import org.codehaus.jackson.annotate.JsonRawValue;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.TreeSet;
