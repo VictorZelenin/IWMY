@@ -3,6 +3,11 @@ package com.oleksiykovtun.iwmy.speeddating;
 public class Api {
 
     public static final String BACKEND_URL = "http://iwmy-speed-dating.appspot.com";
+    public static final String APP_EMAIL = "iwmy.speed.dating@gmail.com";
+    public static final String APP_NAME = "IWMY Speed Dating";
+
+    public static final String SUBJECT_COUPLES = "Couples found";
+    public static final String SUBJECT_COUPLE = "Couple found";
 
     public static final String USERS = "/users/";
     public static final String ADD = "add";

@@ -31,7 +31,7 @@ public class EmailRestService extends GeneralRestService {
      * @return unsent emails
      */
     @Path(Api.SEND) @POST @Consumes(JSON) @Produces(JSON)
-    public List send(List<Email> emailList) {
+    public static List send(List<Email> emailList) {
         List<Email> unsentEmailList = new ArrayList<>();
         for (Email email : emailList) {
             try {
