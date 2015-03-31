@@ -29,26 +29,6 @@ public class CoolFormatter {
         return result;
     }
 
-    public static String getTime(long timeMilliseconds) {
-        final String dateFormat = "yyyy-MM-dd";
-        return getDateTime(timeMilliseconds, dateFormat);
-    }
-
-    public static String getDate(long timeMilliseconds) {
-        final String dateFormat = "yyyy-MM-dd";
-        return getDateTime(timeMilliseconds, dateFormat);
-    }
-
-    private static String getDateTime(long timeMilliseconds, String dateTimeFormat) {
-        String value = "-";
-        try {
-            value = new SimpleDateFormat(dateTimeFormat).format(timeMilliseconds);
-        } catch (Throwable e) {
-            Log.e("IWMY", "Time formatting exception", e);
-        }
-        return value;
-    }
-
     private static boolean isDateOrTimeValid(String dateString, String formatString) {
         boolean value = true;
         try {
@@ -78,21 +58,6 @@ public class CoolFormatter {
             Log.d("IWMY", "Time format exception", e);
         }
         return value;
-    }
-
-    public static String getYearsFromDate(String dateString) {
-        final String dateFormat = "yyyy-MM-dd";
-        long value = -1;
-        try {
-            long unixTimeOfDate = new SimpleDateFormat(dateFormat).parse(dateString).getTime();
-            long unixTimeElapsed = System.currentTimeMillis() - unixTimeOfDate;
-            if (unixTimeElapsed > 0) {
-                value = unixTimeElapsed / 1000 / 60 / 60 / 24 / 365;
-            }
-        } catch (Throwable e) {
-            Log.e("IWMY", "Date formatting exception", e);
-        }
-        return "" + value;
     }
 
 }

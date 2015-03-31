@@ -1,16 +1,18 @@
 package com.oleksiykovtun.iwmy.speeddating.android.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.oleksiykovtun.android.cooltools.CoolFormatter;
 import com.oleksiykovtun.android.cooltools.CoolRecyclerAdapter;
 import com.oleksiykovtun.iwmy.speeddating.R;
+import com.oleksiykovtun.iwmy.speeddating.TimeConverter;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -49,8 +51,12 @@ public class UserRecyclerAdapter extends CoolRecyclerAdapter {
     public void onBindViewHolder(CoolRecyclerAdapter.ViewHolder holder, int position) {
         User user = (User) (dataSet.get(position));
         ((ViewHolder) holder).nameTextView.setText(user.getNameAndSurname() + ", ");
-        ((ViewHolder) holder).ageTextView.setText(CoolFormatter.getYearsFromDate(user
-                .getBirthDate()));
+        try {
+            ((ViewHolder) holder).ageTextView.setText(TimeConverter.getYearsFromDate(user
+                    .getBirthDate()));
+        } catch (ParseException e) {
+            Log.e("IWMY", "Time conversion error", e);
+        }
         ((ViewHolder) holder).locationTextView.setText(", " + user.getLocation());
         setImageFromBase64String(((ViewHolder) holder).photoImageView, user.getPhotoBase64());
     }

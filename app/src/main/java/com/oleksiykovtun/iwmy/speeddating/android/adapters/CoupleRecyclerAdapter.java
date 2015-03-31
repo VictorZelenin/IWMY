@@ -1,15 +1,17 @@
 package com.oleksiykovtun.iwmy.speeddating.android.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.oleksiykovtun.android.cooltools.CoolFormatter;
 import com.oleksiykovtun.android.cooltools.CoolRecyclerAdapter;
 import com.oleksiykovtun.iwmy.speeddating.R;
+import com.oleksiykovtun.iwmy.speeddating.TimeConverter;
 import com.oleksiykovtun.iwmy.speeddating.data.Couple;
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -48,11 +50,15 @@ public class CoupleRecyclerAdapter extends CoolRecyclerAdapter {
     public void onBindViewHolder(CoolRecyclerAdapter.ViewHolder holder, int position) {
         Couple couple = (Couple) (dataSet.get(position));
         ((ViewHolder) holder).nameTextView1.setText(couple.getName1());
-        ((ViewHolder) holder).ageTextView1.setText(CoolFormatter.getYearsFromDate(couple
-                .getBirthDate1()));
         ((ViewHolder) holder).nameTextView2.setText(couple.getName2());
-        ((ViewHolder) holder).ageTextView2.setText(CoolFormatter.getYearsFromDate(couple
-                .getBirthDate2()));
+        try {
+            ((ViewHolder) holder).ageTextView1.setText(TimeConverter.getYearsFromDate(couple
+                    .getBirthDate1()));
+            ((ViewHolder) holder).ageTextView2.setText(TimeConverter.getYearsFromDate(couple
+                    .getBirthDate2()));
+        } catch (ParseException e) {
+            Log.e("IWMY", "Time conversion error", e);
+        }
     }
 
 }

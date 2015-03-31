@@ -8,6 +8,7 @@ import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import com.oleksiykovtun.iwmy.speeddating.data.Rating;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
@@ -33,25 +34,23 @@ public class CoupleRestService extends GeneralRestService {
         // making all possible couples
         Event event = wildcardEvents.get(0);
         List<Rating> ratingsSelected = RatingRestService.getForEventSelected(wildcardEvents);
-        Map<String, String> coupleMap = new TreeMap<>();
-        for (Rating rating : ratingsSelected) {
-            if (! coupleMap.containsKey(rating.getThisUserEmail())
-                    && ! coupleMap.containsKey(rating.getOtherUserEmail())
-                    && ! coupleMap.containsValue(rating.getThisUserEmail())
-                    && ! coupleMap.containsValue(rating.getOtherUserEmail()))
-            coupleMap.put(rating.getThisUserEmail(), rating.getOtherUserEmail());
-        }
-        // making couple objects from the couple map
         List<Couple> couples = new ArrayList<>();
-        for (Map.Entry<String, String> coupleEntry : coupleMap.entrySet()) {
-            String email1 = coupleEntry.getKey();
-            String email2 = coupleEntry.getValue();
-            User user1 = (User)UserRestService.get(Arrays.asList(new User(email1))).get(0);
-            User user2 = (User)UserRestService.get(Arrays.asList(new User(email2))).get(0);
-            if (! user1.getGender().equals(user2.getGender())) {
-                couples.add(new Couple(event.getOrganizerEmail(), event.getTime(), email1, email2,
-                        user1.getNameAndSurname(), user1.getBirthDate(),
-                        user2.getNameAndSurname(), user2.getBirthDate()));
+        // detecting couples (mutual choice)
+        for (int i = 0; i < ratingsSelected.size(); ++i) {
+            for (int j = 0; j < i; ++j) {
+                Rating rating1 = ratingsSelected.get(i);
+                Rating rating2 = ratingsSelected.get(j);
+                if (rating2.getThisUserEmail().equals(rating1.getOtherUserEmail())
+                        && rating2.getOtherUserEmail().equals(rating1.getThisUserEmail())) {
+                    // making a couple object from the current rating
+                    String email1 = rating1.getThisUserEmail();
+                    String email2 = rating2.getThisUserEmail();
+                    User user1 = (User) UserRestService.get(Arrays.asList(new User(email1))).get(0);
+                    User user2 = (User) UserRestService.get(Arrays.asList(new User(email2))).get(0);
+                    couples.add(new Couple(event.getOrganizerEmail(), event.getTime(),
+                            email1, email2, user1.getNameAndSurname(), user1.getBirthDate(),
+                            user2.getNameAndSurname(), user2.getBirthDate()));
+                }
             }
         }
         // user active attendances cleanup - after the couple selection process
@@ -82,9 +81,9 @@ public class CoupleRestService extends GeneralRestService {
     }
 
     private Email getEmailForOrganizer(List<Couple> couples) {
-        String message = Api.SUBJECT_COUPLES + "\n";
+        String message = Api.SUBJECT_COUPLES + ":\n";
         for (Couple couple : couples) {
-            message += "Couple:\n";
+            message += "\nCouple:\n";
             message += getCoupleMessageForUser(couple.getName1(), couple.getBirthDate1());
             message += getCoupleMessageForUser(couple.getName2(), couple.getBirthDate2());
         }
@@ -96,21 +95,25 @@ public class CoupleRestService extends GeneralRestService {
     private Email getEmailForCoupleUser1(Couple couple) {
         return new Email(Api.APP_EMAIL, Api.APP_NAME,
                 couple.getUserEmail1(), couple.getName1(),
-                Api.SUBJECT_COUPLE + " - " + Api.APP_NAME, Api.SUBJECT_COUPLE + "\n"
+                Api.SUBJECT_COUPLE + " - " + Api.APP_NAME, Api.SUBJECT_COUPLE + ":\n"
                     + getCoupleMessageForUser(couple.getName2(), couple.getBirthDate2()));
     }
 
     private Email getEmailForCoupleUser2(Couple couple) {
         return new Email(Api.APP_EMAIL, Api.APP_NAME,
                 couple.getUserEmail2(), couple.getName2(),
-                Api.SUBJECT_COUPLE + " - " + Api.APP_NAME, Api.SUBJECT_COUPLE + "\n"
+                Api.SUBJECT_COUPLE + " - " + Api.APP_NAME, Api.SUBJECT_COUPLE + ":\n"
                     + getCoupleMessageForUser(couple.getName1(), couple.getBirthDate1()));
     }
 
     private String getCoupleMessageForUser(String name, String birthDate) {
         String message = "Name: " + name;
-        message += "\nAge: " + birthDate;
-        message += "\n\n";
+        try {
+            message += "\nAge: " + TimeConverter.getYearsFromDate(birthDate);
+        } catch (ParseException e) {
+            // todo process wrong birth date case
+        }
+        message += "\n";
         return message;
     }
 
