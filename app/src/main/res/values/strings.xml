@@ -119,4 +119,7 @@
     <color name="white">#FFFFFF</color>
     <color name="gray">#CCCCCC</color>
 
+    <string name="mail_address">iwmy.speed.dating@gmail.com</string>
+    <string name="mail_organizer_registering">Organizer registering request</string>
+
 </resources>

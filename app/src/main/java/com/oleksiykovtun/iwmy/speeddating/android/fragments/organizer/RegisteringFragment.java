@@ -5,11 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.oleksiykovtun.android.cooltools.CoolFormatter;
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
+import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
-import com.oleksiykovtun.iwmy.speeddating.android.Email;
+import com.oleksiykovtun.iwmy.speeddating.data.Email;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
+
+import java.util.List;
 
 /**
  * Created by alx on 2015-02-12.
@@ -54,12 +58,20 @@ public class RegisteringFragment extends CoolFragment {
                         weight, attitudeToSmoking, attitudeToAlcohol, location, organization,
                         website);
                 if (checkUser(user)) {
-                    Email.sendOrganizerRequest(getActivity(), user);
-                    CoolFragmentManager.showAtBottom(new AppliedFragment());
+                    post(Api.MAIL + Api.SEND, Email[].class, getOrganizerRequestEmail(user));
                 } else {
                     showToast(R.string.message_inputs_error);
                 }
                 break;
+        }
+    }
+
+    @Override
+    public void onReceiveWebData(List unsentEmails) {
+        if (unsentEmails.isEmpty()) {
+            CoolFragmentManager.showAtBottom(new AppliedFragment());
+        } else {
+            showToastLong(R.string.message_connection_error);
         }
     }
 
@@ -71,6 +83,31 @@ public class RegisteringFragment extends CoolFragment {
                 && !user.getPhone().isEmpty()
                 && !user.getOrganization().isEmpty()
                 && !user.getWebsite().isEmpty();
+    }
+
+    private Email getOrganizerRequestEmail(User organizerUser) {
+        String message = "A new organizer wants to be registered:\n";
+        message += "\nEmail: " + organizerUser.getEmail();
+        message += "\nPassword: " + organizerUser.getPassword();
+        message += "\nUsername: " + organizerUser.getUsername();
+        message += "\nNameAndSurname: " + organizerUser.getNameAndSurname();
+        message += "\nPhone: " + organizerUser.getPhone();
+        message += "\nOrganization: " + organizerUser.getOrganization();
+        message += "\nWebsite: " + organizerUser.getWebsite() + "\n\n";
+
+        message += "Follow the link to add the organizer:\n";
+        message += Api.BACKEND_URL + Api.USERS + Api.DEBUG_ADD_ORGANIZER;
+        message += "/email=" + CoolFormatter.escapeUrl(organizerUser.getEmail());
+        message += "&password=" + CoolFormatter.escapeUrl(organizerUser.getPassword());
+        message += "&username=" + CoolFormatter.escapeUrl(organizerUser.getUsername());
+        message += "&name=" + CoolFormatter.escapeUrl(organizerUser.getNameAndSurname());
+        message += "&phone=" + CoolFormatter.escapeUrl(organizerUser.getPhone());
+        message += "&organization=" + CoolFormatter.escapeUrl(organizerUser.getOrganization());
+        message += "&website=" + CoolFormatter.escapeUrl(organizerUser.getWebsite());
+
+        return new Email("" + getText(R.string.mail_address), "" + getText(R.string.app_name),
+                "" + getText(R.string.mail_address), "" + getText(R.string.app_name),
+                "" + getText(R.string.mail_organizer_registering), message);
     }
 
 }

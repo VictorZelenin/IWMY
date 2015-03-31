@@ -30,6 +30,10 @@ public class Api {
     public static final String GENERATE_FOR_EVENT = "create/for/event";
     public static final String GET_FOR_ATTENDANCE = "get/for/attendance";
 
+    public static final String MAIL = "/mail/";
+    public static final String SEND = "send";
+    public static final String DEBUG_SEND = "debug/send";
+
     public static final String GENERAL = "/";
     public static final String EMPTY = "";
     public static final String DEBUG_CREATE = "debug/create";

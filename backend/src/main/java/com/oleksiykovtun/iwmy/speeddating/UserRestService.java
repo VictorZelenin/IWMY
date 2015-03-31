@@ -108,8 +108,7 @@ public class UserRestService extends GeneralRestService {
         return users;
     }
 
-    @Path(Api.ADD) @POST
-    @Consumes(JSON) @Produces(JSON)
+    @Path(Api.ADD) @POST @Consumes(JSON) @Produces(JSON)
     public List add(List<User> items) {
         ObjectifyService.ofy().save().entities(items).now();
         return items;
@@ -130,8 +129,7 @@ public class UserRestService extends GeneralRestService {
 
     /**
      * Example:
-     *      debug/add/organizer/email=org1@mail.com&password=123&username=org1&name=org1&phone=123
-     *          &organization=org1&website=org1.com
+     *      debug/add/organizer/email=org1@mail.com&password=123&username=org1&name=org1&phone=123&organization=org1&website=org1.com
      * @return JSON object for User
      */
     @Path(Api.DEBUG_ADD_ORGANIZER + "/email={email}&password={password}&username={username}" +
