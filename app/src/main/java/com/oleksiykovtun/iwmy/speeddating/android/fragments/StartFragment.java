@@ -26,9 +26,10 @@ public class StartFragment extends CoolFragment implements View.OnClickListener 
         registerContainerView(view);
         registerClickListener(R.id.button_login);
         registerClickListener(R.id.button_register);
-        registerClickListener(R.id.button_vk);
-        registerClickListener(R.id.button_facebook);
-        registerClickListener(R.id.button_google_plus);
+        // todo social login
+        //registerClickListener(R.id.button_vk);
+        //registerClickListener(R.id.button_facebook);
+        //registerClickListener(R.id.button_google_plus);
         registerClickListener(R.id.button_for_organizers);
         return view;
     }

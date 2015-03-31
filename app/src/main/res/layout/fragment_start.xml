@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@color/blue"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
+    android:gravity="center"
     android:paddingLeft="@dimen/margin"
     android:paddingRight="@dimen/margin"
     android:paddingTop="@dimen/margin"
@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <LinearLayout
+    <!--LinearLayout todo social login
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -70,11 +70,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-    </LinearLayout>
+    </LinearLayout-->
 
     <Button
         android:id="@+id/button_for_organizers"
         android:text="@string/button_for_organizers"
+        android:layout_marginTop="@dimen/margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
