@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.R;
+import com.oleksiykovtun.iwmy.speeddating.android.ImageManager;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.SettingsFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
@@ -25,7 +26,7 @@ public class UserProfileFragment extends CoolFragment {
 
         User user = (User) getAttachment();
 
-        setImageFromBase64String(R.id.image_user_pic, user.getPhotoBase64());
+        ImageManager.setUserPic(getImageView(R.id.image_user_pic), user);
         setText(R.id.label_name_and_age, user.getNameAndSurname() + ", " + user.getBirthDate());
         setText(R.id.label_name_and_surname,
                 R.string.label_name_and_surname, user.getNameAndSurname());

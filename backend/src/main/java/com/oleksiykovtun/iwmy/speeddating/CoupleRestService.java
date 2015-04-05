@@ -43,13 +43,16 @@ public class CoupleRestService extends GeneralRestService {
                 if (rating2.getThisUserEmail().equals(rating1.getOtherUserEmail())
                         && rating2.getOtherUserEmail().equals(rating1.getThisUserEmail())) {
                     // making a couple object from the mutual ratings
-                    String email1 = rating1.getThisUserEmail();
-                    String email2 = rating2.getThisUserEmail();
-                    User user1 = (User) UserRestService.get(Arrays.asList(new User(email1))).get(0);
-                    User user2 = (User) UserRestService.get(Arrays.asList(new User(email2))).get(0);
+                    User user1 = (User) UserRestService.get(Arrays
+                            .asList(new User(rating1.getThisUserEmail()))).get(0);
+                    User user2 = (User) UserRestService.get(Arrays
+                            .asList(new User(rating2.getThisUserEmail()))).get(0);
+                    User userMale = user1.getGender().equals(User.MALE) ? user1 : user2;
+                    User userFemale = user2.getGender().equals(User.FEMALE) ? user2 : user1;
                     couples.add(new Couple(event.getOrganizerEmail(), event.getTime(),
-                            email1, email2, user1.getNameAndSurname(), user1.getBirthDate(),
-                            user2.getNameAndSurname(), user2.getBirthDate()));
+                            userMale.getEmail(), userFemale.getEmail(),
+                            userMale.getNameAndSurname(), userMale.getBirthDate(),
+                            userFemale.getNameAndSurname(), userFemale.getBirthDate()));
                 }
             }
         }

@@ -1,5 +1,6 @@
 package com.oleksiykovtun.iwmy.speeddating.android.adapters;
 
+import android.content.res.Resources;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.oleksiykovtun.android.cooltools.CoolRecyclerAdapter;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.TimeConverter;
+import com.oleksiykovtun.iwmy.speeddating.android.ImageManager;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 import java.text.ParseException;
@@ -58,7 +60,7 @@ public class UserRecyclerAdapter extends CoolRecyclerAdapter {
             Log.e("IWMY", "Time conversion error", e);
         }
         ((ViewHolder) holder).locationTextView.setText(", " + user.getLocation());
-        setImageFromBase64String(((ViewHolder) holder).photoImageView, user.getPhotoBase64());
+        ImageManager.setUserPic(((ViewHolder) holder).photoImageView, user);
     }
 
 }

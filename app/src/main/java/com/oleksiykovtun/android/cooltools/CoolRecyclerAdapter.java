@@ -28,16 +28,6 @@ public abstract class CoolRecyclerAdapter extends RecyclerView
 
     }
 
-    protected void setImageFromBase64String(ImageView imageView, String base64String) {
-        try {
-            if (!base64String.isEmpty()) {
-                imageView.setImageBitmap(CoolFormatter.getImageBitmap(base64String));
-            }
-        } catch (Throwable e) {
-            Log.e("IWMY", "Image setting failed", e);
-        }
-    }
-
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
             View.OnLongClickListener {
 

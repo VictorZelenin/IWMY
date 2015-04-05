@@ -84,15 +84,8 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
         recyclerAdapter.setOnItemClickListener(this);
     }
 
-    protected void setImageFromBase64String(int imageViewId, String base64String) {
-        if (!base64String.isEmpty()) {
-            try {
-                ((ImageView) containerView.findViewById(imageViewId))
-                        .setImageBitmap(CoolFormatter.getImageBitmap(base64String));
-            } catch (Throwable e) {
-                Log.e("IWMY", "Image setting failed", e);
-            }
-        }
+    protected ImageView getImageView(int imageViewId) {
+        return  ((ImageView) containerView.findViewById(imageViewId));
     }
 
     protected void showToast(String message) {

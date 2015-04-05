@@ -10,6 +10,7 @@ import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.Account;
+import com.oleksiykovtun.iwmy.speeddating.android.ImageManager;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.SettingsFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Couple;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
@@ -44,7 +45,7 @@ public class UserProfileCoupleFragment extends CoolFragment {
         User coupleUser;
         if (!response.isEmpty() && response.size() > 0) {
             coupleUser = (User) response.get(0);
-            setImageFromBase64String(R.id.image_user_pic, coupleUser.getPhotoBase64());
+            ImageManager.setUserPic(getImageView(R.id.image_user_pic), coupleUser);
             setText(R.id.label_couple, coupleUser.getNameAndSurname());
             setText(R.id.label_name_and_surname, R.string.label_name_and_surname,
                     coupleUser.getNameAndSurname());

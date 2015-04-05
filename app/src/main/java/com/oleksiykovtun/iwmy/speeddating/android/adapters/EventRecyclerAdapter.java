@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.oleksiykovtun.android.cooltools.CoolRecyclerAdapter;
 import com.oleksiykovtun.iwmy.speeddating.R;
+import com.oleksiykovtun.iwmy.speeddating.android.ImageManager;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 
 import java.util.List;
@@ -47,7 +48,7 @@ public class EventRecyclerAdapter extends CoolRecyclerAdapter {
         Event event = (Event) (dataSet.get(position));
         ((ViewHolder) holder).placeTextView.setText(event.getStreetAddress());
         ((ViewHolder) holder).timeTextView.setText(event.getTime());
-        setImageFromBase64String(((ViewHolder) holder).photoImageView, event.getPhotoBase64());
+        ImageManager.setEventPic(((ViewHolder) holder).photoImageView, event);
     }
 
 }

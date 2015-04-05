@@ -54,7 +54,7 @@
 
             <ImageView
                 android:id="@+id/image_user_pic"
-                android:src="@drawable/no_photo"
+                android:src="@drawable/no_photo_man"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
                 android:layout_width="match_parent"

@@ -12,7 +12,7 @@
 
         <ImageView
             android:id="@+id/image_user_pic_1"
-            android:src="@drawable/no_photo"
+            android:src="@drawable/no_photo_man"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             android:layout_width="@dimen/image_preview_size"
@@ -50,7 +50,7 @@
 
         <ImageView
             android:id="@+id/image_user_pic_2"
-            android:src="@drawable/no_photo"
+            android:src="@drawable/no_photo_woman"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             android:layout_width="@dimen/image_preview_size"

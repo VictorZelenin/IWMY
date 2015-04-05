@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.R;
+import com.oleksiykovtun.iwmy.speeddating.android.ImageManager;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.SettingsFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 
@@ -29,7 +30,7 @@ public class EventFragment extends CoolFragment {
 
         event = (Event) getAttachment();
 
-        setImageFromBase64String(R.id.image_event_pic, event.getPhotoBase64());
+        ImageManager.setEventPic(getImageView(R.id.image_event_pic), event);
         setText(R.id.label_organizer, event.getStreetAddress());
         setText(R.id.label_event_address,
                 R.string.label_event_address, event.getStreetAddress());
