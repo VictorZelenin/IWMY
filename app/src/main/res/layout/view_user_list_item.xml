@@ -11,8 +11,8 @@
         android:src="@drawable/no_photo"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        android:layout_width="@dimen/event_pic_preview_size"
-        android:layout_height="@dimen/event_pic_preview_size" />
+        android:layout_width="@dimen/image_preview_size"
+        android:layout_height="@dimen/image_preview_size" />
 
     <LinearLayout
         android:orientation="horizontal"

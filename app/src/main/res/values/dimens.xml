@@ -2,7 +2,8 @@
     <dimen name="margin">10dp</dimen>
     <dimen name="label_margin">10dp</dimen>
 
-    <dimen name="event_pic_preview_size">50dp</dimen>
+    <dimen name="image_preview_size">50dp</dimen>
+    <dimen name="toolbar_height">60dp</dimen>
 
     <dimen name="start_title_text_size">50sp</dimen>
     <dimen name="toolbar_text_size">25sp</dimen>

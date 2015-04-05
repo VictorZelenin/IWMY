@@ -42,7 +42,7 @@ public class CoupleRestService extends GeneralRestService {
                 Rating rating2 = ratingsSelected.get(j);
                 if (rating2.getThisUserEmail().equals(rating1.getOtherUserEmail())
                         && rating2.getOtherUserEmail().equals(rating1.getThisUserEmail())) {
-                    // making a couple object from the current rating
+                    // making a couple object from the mutual ratings
                     String email1 = rating1.getThisUserEmail();
                     String email2 = rating2.getThisUserEmail();
                     User user1 = (User) UserRestService.get(Arrays.asList(new User(email1))).get(0);
