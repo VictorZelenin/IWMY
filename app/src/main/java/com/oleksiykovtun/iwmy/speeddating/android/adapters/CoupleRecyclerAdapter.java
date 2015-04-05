@@ -51,14 +51,10 @@ public class CoupleRecyclerAdapter extends CoolRecyclerAdapter {
         Couple couple = (Couple) (dataSet.get(position));
         ((ViewHolder) holder).nameTextView1.setText(couple.getName1());
         ((ViewHolder) holder).nameTextView2.setText(couple.getName2());
-        try {
-            ((ViewHolder) holder).ageTextView1.setText(TimeConverter.getYearsFromDate(couple
-                    .getBirthDate1()));
-            ((ViewHolder) holder).ageTextView2.setText(TimeConverter.getYearsFromDate(couple
-                    .getBirthDate2()));
-        } catch (ParseException e) {
-            Log.e("IWMY", "Time conversion error", e);
-        }
+        ((ViewHolder) holder).ageTextView1.setText(TimeConverter.getYearsFromDate(couple
+                .getBirthDate1()));
+        ((ViewHolder) holder).ageTextView2.setText(TimeConverter.getYearsFromDate(couple
+                .getBirthDate2()));
     }
 
 }

@@ -53,12 +53,8 @@ public class UserRecyclerAdapter extends CoolRecyclerAdapter {
     public void onBindViewHolder(CoolRecyclerAdapter.ViewHolder holder, int position) {
         User user = (User) (dataSet.get(position));
         ((ViewHolder) holder).nameTextView.setText(user.getNameAndSurname() + ", ");
-        try {
-            ((ViewHolder) holder).ageTextView.setText(TimeConverter.getYearsFromDate(user
+        ((ViewHolder) holder).ageTextView.setText(TimeConverter.getYearsFromDate(user
                     .getBirthDate()));
-        } catch (ParseException e) {
-            Log.e("IWMY", "Time conversion error", e);
-        }
         ((ViewHolder) holder).locationTextView.setText(", " + user.getLocation());
         ImageManager.setUserPic(((ViewHolder) holder).photoImageView, user);
     }

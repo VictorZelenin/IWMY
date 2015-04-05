@@ -111,11 +111,7 @@ public class CoupleRestService extends GeneralRestService {
 
     private String getCoupleMessageForUser(String name, String birthDate) {
         String message = "Name: " + name;
-        try {
-            message += "\nAge: " + TimeConverter.getYearsFromDate(birthDate);
-        } catch (ParseException e) {
-            // todo process wrong birth date case
-        }
+        message += "\nAge: " + TimeConverter.getYearsFromDate(birthDate);
         message += "\n";
         return message;
     }
