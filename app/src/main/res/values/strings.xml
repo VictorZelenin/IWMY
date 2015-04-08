@@ -45,6 +45,7 @@
     <string name="label_comment">Comment</string>
     <string name="label_wait_for_result">Please wait for results</string>
     <string name="label_calculating">Calculating</string>
+    <string name="label_finishing">Finishing</string>
     <string name="label_progress">0/0</string>
     <string name="label_questionnaires">Questionnaires</string>
     <string name="label_orientation">Orientation: </string>

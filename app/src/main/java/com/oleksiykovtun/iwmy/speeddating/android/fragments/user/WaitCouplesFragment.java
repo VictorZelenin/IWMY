@@ -18,9 +18,9 @@ import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import java.util.List;
 
 /**
- * Created by alx on 2015-02-12.
+ * The 2nd stage of user waiting: waiting for organizer to confirm couples
  */
-public class WaitFragment extends CoolFragment {
+public class WaitCouplesFragment extends CoolFragment {
 
     private Event event = null;
     private static CountDownTimer timer;
@@ -28,7 +28,7 @@ public class WaitFragment extends CoolFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_user_wait, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_wait_couples, container, false);
         registerContainerView(view);
 
         event = (Event) getAttachment();
@@ -53,7 +53,7 @@ public class WaitFragment extends CoolFragment {
             public void onTick(long millisUntilFinished) {
                 // checking until for this attendant couples are put
                 post(Api.COUPLES + Api.GET_FOR_ATTENDANCE, Couple[].class,
-                        new Attendance(Account.getUser(WaitFragment.this), event));
+                        new Attendance(Account.getUser(WaitCouplesFragment.this), event));
             }
 
             @Override

@@ -56,6 +56,24 @@ public class AttendanceRestService extends GeneralRestService {
         return attendances;
     }
 
+    @Path(Api.GET_FOR_EVENT_ACTIVE_CHECK_VOTED) @POST @Consumes(JSON) @Produces(JSON)
+    public static List<Attendance> getForEventActiveVoted(List<Event> wildcardEvents) {
+        Set<Attendance> attendances = new TreeSet<>();
+        for (Event wildcardEvent : wildcardEvents) {
+            attendances.addAll(ObjectifyService.ofy().load().type(Attendance.class)
+                    .filter("eventOrganizerEmail", wildcardEvent.getOrganizerEmail())
+                    .filter("eventTime", wildcardEvent.getTime())
+                    .filter("active", "true").list());
+        }
+        // making "fake" attendances of not yet voted users false
+        for (Attendance attendance : attendances) {
+            if (RatingRestService.getForAttendance(Arrays.asList(attendance)).isEmpty()) {
+                attendance.setActive("false");
+            }
+        }
+        return new ArrayList<>(attendances);
+    }
+
     /**
      * Checking until all active attendants put ratings.
      * @param wildcardEvents events for active attendants

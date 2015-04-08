@@ -56,8 +56,6 @@ public class CoupleRestService extends GeneralRestService {
                 }
             }
         }
-        // user active attendances cleanup - after the couple selection process
-        UserRestService.getForEventActiveReset(wildcardEvents);
         return couples;
     }
 
@@ -68,6 +66,12 @@ public class CoupleRestService extends GeneralRestService {
      */
     @Path(Api.PUT) @POST @Consumes(JSON) @Produces(JSON)
     public List put(List<Couple> couples) {
+        // user active attendances, current ratings and couples cleanup before writing new couples
+        if (! couples.isEmpty()) {
+            Event wildcardEvent = new Event(couples.get(0).getEventOrganizerEmail(),
+                    couples.get(0).getEventTime(), "", "", "", "", "", "");
+            UserRestService.getForEventActiveReset(Arrays.asList(wildcardEvent));
+        }
         // writing couples
         ObjectifyService.ofy().save().entities(couples).now();
         // sending emails

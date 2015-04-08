@@ -26,6 +26,7 @@ public class Api {
     public static final String ATTENDANCES = "/attendances/";
     public static final String TOGGLE = "toggle";
     public static final String CHECK_FOR_EVENT_ACTIVE_ALL = "check/for/event/active/all";
+    public static final String GET_FOR_EVENT_ACTIVE_CHECK_VOTED = "get/for/event/active/voted";
 
     public static final String RATINGS = "/ratings/";
     public static final String PUT = "put";
