@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -36,6 +37,10 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
 
     protected boolean isRadioButtonChecked(int radioButtonId) {
         return ((RadioButton) containerView.findViewById(radioButtonId)).isChecked();
+    }
+
+    protected View getViewInRecyclerView(int recyclerViewId, int position) {
+        return ((ViewGroup)containerView.findViewById(recyclerViewId)).getChildAt(position);
     }
 
     protected String getEditText(int editTextId) {

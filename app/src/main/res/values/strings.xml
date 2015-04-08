@@ -14,6 +14,7 @@
     <string name="toolbar_name_and_surname">Name, surname</string>
     <string name="toolbar_questionnaires">Questionnaires, 0/0</string>
     <string name="toolbar_questionnaires_empty">Questionnaires, </string>
+    <string name="toolbar_calculating">Calculating</string>
     <string name="toolbar_questionnaire">Questionnaire</string>
     <string name="toolbar_couple_list">Couples list</string>
     <string name="toolbar_name_and_age">Name, age</string>

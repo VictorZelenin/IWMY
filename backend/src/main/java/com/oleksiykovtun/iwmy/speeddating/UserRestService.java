@@ -67,6 +67,21 @@ public class UserRestService extends GeneralRestService {
         return getForEventByAttendance(wildcardAttendances);
     }
 
+    @Path(Api.GET_FOR_EVENT_ACTIVE) @POST @Consumes(JSON) @Produces(JSON)
+    public List getForEventActive(List<Event> wildcardEvents) {
+        Set<User> users = new TreeSet<>();
+        // listing event-related attendances
+        List<Attendance> eventAttendances = AttendanceRestService.getForEvent(wildcardEvents);
+        for (Attendance eventAttendance : eventAttendances) {
+            // and adding users - from each active of them
+            if (eventAttendance.getActive().equals("true")) {
+                users.addAll(ObjectifyService.ofy().load().type(User.class)
+                        .filter("email", eventAttendance.getUserEmail()).list());
+            }
+        }
+        return Arrays.asList(users.toArray());
+    }
+
     @Path(Api.GET_FOR_EVENT) @POST @Consumes(JSON) @Produces(JSON)
     public List getForEvent(List<Event> wildcardEvents) {
         Set<User> users = new TreeSet<>();
