@@ -130,6 +130,17 @@ public class CoupleRestService extends GeneralRestService {
         return Arrays.asList(couples.toArray());
     }
 
+    @Path(Api.GET_FOR_EVENT) @POST @Consumes(JSON) @Produces(JSON)
+    public static List getForEvent(List<Event> wildcardEvents) {
+        Set<Couple> couples = new TreeSet<>();
+        for (Event wildcardEvent : wildcardEvents) {
+            couples.addAll(ObjectifyService.ofy().load().type(Couple.class)
+                    .filter("eventOrganizerEmail", wildcardEvent.getOrganizerEmail())
+                    .filter("eventTime", wildcardEvent.getTime()).list());
+        }
+        return Arrays.asList(couples.toArray());
+    }
+
     public static List deleteForEvent(List<Event> wildcardEvents) {
         for (Event wildcardEvent : wildcardEvents) {
             ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(Couple.class)

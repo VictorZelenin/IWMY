@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * Created by alx on 2015-02-12.
  */
-public class CoupleListFragment extends CoolFragment {
+public class CoupleListConfirmFragment extends CoolFragment {
 
     private List<Couple> coupleList = new ArrayList<Couple>();
     private Event event = null;
@@ -33,8 +33,10 @@ public class CoupleListFragment extends CoolFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_organizer_couple_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_organizer_couple_list_confirm, container,
+                false);
         registerContainerView(view);
+        registerClickListener(R.id.button_send_results);
         registerClickListener(R.id.button_settings);
 
         event = (Event) getAttachment();
@@ -44,21 +46,38 @@ public class CoupleListFragment extends CoolFragment {
         registerItemClickListener(coupleRecyclerAdapter);
         coupleRecyclerView.setAdapter(coupleRecyclerAdapter);
 
-        post(Api.COUPLES + Api.GET_FOR_EVENT, Couple[].class, event);
+        post(Api.COUPLES + Api.GENERATE_FOR_EVENT, Couple[].class, event);
 
         return view;
     }
 
     @Override
-    public void onReceiveWebData(List response) {
-        coupleList.clear();
-        coupleList.addAll(response);
-        coupleRecyclerAdapter.notifyDataSetChanged();
+    public void onReceiveWebData(String postTag, List response) {
+        switch (postTag) {
+            case Api.COUPLES + Api.GENERATE_FOR_EVENT:
+                coupleList.clear();
+                coupleList.addAll(response);
+                coupleRecyclerAdapter.notifyDataSetChanged();
+                break;
+            case Api.USERS + Api.GET_FOR_EVENT_ACTIVE_RESET:
+                post(Api.COUPLES + Api.PUT, Couple[].class, coupleList.toArray());
+                break;
+            case Api.COUPLES + Api.PUT:
+                post(Api.EVENTS + Api.SET_UNACTUAL, Event[].class, event);
+                break;
+            case Api.EVENTS + Api.SET_UNACTUAL:
+                showToast(R.string.message_couples_sent);
+                CoolFragmentManager.show(new CoupleListFragment(), event);
+                break;
+        }
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.button_send_results:
+                post(Api.USERS + Api.GET_FOR_EVENT_ACTIVE_RESET, User[].class, event);
+                break;
             case R.id.button_settings:
                 CoolFragmentManager.showAtTop(new SettingsFragment());
                 break;

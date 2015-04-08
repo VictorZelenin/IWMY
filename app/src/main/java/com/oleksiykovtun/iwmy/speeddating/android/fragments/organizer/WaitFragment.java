@@ -37,7 +37,7 @@ public class WaitFragment extends CoolFragment {
     @Override
     public void onReceiveWebData(List response) {
         if (response.size() > 0) {
-            CoolFragmentManager.show(new CoupleListFragment(), event);
+            CoolFragmentManager.show(new CoupleListConfirmFragment(), event);
         }
     }
 

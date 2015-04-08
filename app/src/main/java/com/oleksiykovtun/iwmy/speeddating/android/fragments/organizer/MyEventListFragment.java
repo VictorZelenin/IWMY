@@ -102,7 +102,11 @@ public class MyEventListFragment extends CoolFragment {
 
     @Override
     public void onClick(Serializable objectAtClicked) {
-        CoolFragmentManager.showAtTop(new EventFragment(), objectAtClicked);
+        if (((Event)objectAtClicked).getActual().equals("false")) {
+            CoolFragmentManager.showAtTop(new CoupleListFragment(), objectAtClicked);
+        } else {
+            CoolFragmentManager.showAtTop(new EventFragment(), objectAtClicked);
+        }
     }
 
     @Override
