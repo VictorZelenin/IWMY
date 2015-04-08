@@ -30,11 +30,11 @@ import java.util.List;
  */
 public class MyEventListFragment extends CoolFragment {
 
-    private List<Event> currentEventList = new ArrayList<Event>();
+    private List<Event> actualEventList = new ArrayList<Event>();
     private List<Event> pastEventList = new ArrayList<Event>();
 
-    private EventRecyclerAdapter currentEventRecyclerAdapter
-            = new EventRecyclerAdapter(currentEventList);
+    private EventRecyclerAdapter actualEventRecyclerAdapter
+            = new EventRecyclerAdapter(actualEventList);
     private EventRecyclerAdapter pastEventRecyclerAdapter
             = new EventRecyclerAdapter(pastEventList);
 
@@ -54,11 +54,11 @@ public class MyEventListFragment extends CoolFragment {
         registerClickListener(R.id.button_add_event);
         registerClickListener(R.id.button_settings);
 
-        RecyclerView currentEventRecyclerView = (RecyclerView) view
+        RecyclerView actualEventRecyclerView = (RecyclerView) view
                 .findViewById(R.id.event_list_holder_current);
-        currentEventRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        registerItemClickListener(currentEventRecyclerAdapter);
-        currentEventRecyclerView.setAdapter(currentEventRecyclerAdapter);
+        actualEventRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        registerItemClickListener(actualEventRecyclerAdapter);
+        actualEventRecyclerView.setAdapter(actualEventRecyclerAdapter);
 
         RecyclerView pastEventRecyclerView = (RecyclerView) view
                 .findViewById(R.id.event_list_holder_past);
@@ -75,16 +75,16 @@ public class MyEventListFragment extends CoolFragment {
 
     @Override
     public void onReceiveWebData(List response) {
-        currentEventList.clear();
+        actualEventList.clear();
         pastEventList.clear();
         for (Event event : (List<Event>) response) {
-            if (CoolFormatter.isDateTimeFuture(event.getTime())) {
-                currentEventList.add(event);
+            if (! event.getActual().equals("false")) {
+                actualEventList.add(event);
             } else {
                 pastEventList.add(event);
             }
         }
-        currentEventRecyclerAdapter.notifyDataSetChanged();
+        actualEventRecyclerAdapter.notifyDataSetChanged();
         pastEventRecyclerAdapter.notifyDataSetChanged();
     }
 

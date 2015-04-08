@@ -27,6 +27,7 @@ import java.util.List;
  */
 class CoolWebAsyncTask extends AsyncTask<String, Void, Void> {
 
+    private String tag;
     protected List parsedResponse = new ArrayList();
     protected CoolWebAsyncResponse delegate = null;
     private Object[] uploadData;
@@ -36,9 +37,9 @@ class CoolWebAsyncTask extends AsyncTask<String, Void, Void> {
     private static int timeoutMillis = 15000;
     private String errorString = null;
 
-    public CoolWebAsyncTask(CoolWebAsyncResponse delegate, Class responseClass,
+    public CoolWebAsyncTask(String tag, CoolWebAsyncResponse delegate, Class responseClass,
                             Object... uploadData) {
-
+        this.tag = tag;
         this.delegate = delegate;
         this.responseClass = responseClass;
         this.uploadData = (uploadData != null) ? uploadData : new Object[]{};
@@ -46,6 +47,8 @@ class CoolWebAsyncTask extends AsyncTask<String, Void, Void> {
 
     public interface CoolWebAsyncResponse {
         void onReceiveWebData(List webDataString);
+
+        void onReceiveWebData(String tag, List webDataString);
 
         void onFailReceivingWebData(String webDataErrorString);
     }
@@ -101,6 +104,7 @@ class CoolWebAsyncTask extends AsyncTask<String, Void, Void> {
                 cancel();
             } else {
                 delegate.onReceiveWebData(parsedResponse);
+                delegate.onReceiveWebData(tag, parsedResponse);
             }
         }
     }

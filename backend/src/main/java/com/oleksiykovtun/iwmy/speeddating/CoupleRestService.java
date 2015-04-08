@@ -60,18 +60,12 @@ public class CoupleRestService extends GeneralRestService {
     }
 
     /**
-     * Adds couples to database and sends emails to them and organizer
+     * Adds couples to database and sends emails to them and to organizer
      * @param couples couples to add to database
      * @return couples added
      */
     @Path(Api.PUT) @POST @Consumes(JSON) @Produces(JSON)
     public List put(List<Couple> couples) {
-        // user active attendances, current ratings and couples cleanup before writing new couples
-        if (! couples.isEmpty()) {
-            Event wildcardEvent = new Event(couples.get(0).getEventOrganizerEmail(),
-                    couples.get(0).getEventTime(), "", "", "", "", "", "");
-            UserRestService.getForEventActiveReset(Arrays.asList(wildcardEvent));
-        }
         // writing couples
         ObjectifyService.ofy().save().entities(couples).now();
         // sending emails

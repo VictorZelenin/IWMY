@@ -22,6 +22,7 @@ public class Event implements Serializable, Comparable<Event> {
     private String time; // format "2099-12-31 23:59"
     private String place;
     private String streetAddress;
+    private String actual;
 
     private String photoBase64; // todo url
     private String freePlaces;
@@ -37,6 +38,7 @@ public class Event implements Serializable, Comparable<Event> {
         this.place = place;
         this.streetAddress = streetAddress;
         this.time = time;
+        this.actual = "true";
         this.photoBase64 = photoBase64;
         this.freePlaces = freePlaces;
         this.cost = cost;
@@ -78,6 +80,14 @@ public class Event implements Serializable, Comparable<Event> {
 
     public void setStreetAddress(String streetAddress) {
         this.streetAddress = streetAddress;
+    }
+
+    public String getActual() {
+        return "" + actual;
+    }
+
+    public void setActual(String actual) {
+        this.actual = actual;
     }
 
     public String getPhotoBase64() {

@@ -54,10 +54,17 @@ public class QuestionnaireFragment extends CoolFragment {
     }
 
     @Override
-    public void onReceiveWebData(List response) {
-        ratingList.clear();
-        ratingList.addAll(response);
-        ratingRecyclerAdapter.notifyDataSetChanged();
+    public void onReceiveWebData(String postTag, List response) {
+        switch (postTag) {
+            case Api.RATINGS + Api.GENERATE_FOR_ATTENDANCE_ACTIVE:
+                ratingList.clear();
+                ratingList.addAll(response);
+                ratingRecyclerAdapter.notifyDataSetChanged();
+                break;
+            case Api.RATINGS + Api.PUT:
+                CoolFragmentManager.show(new WaitRatingsFragment(), event);
+                break;
+        }
     }
 
     @Override
@@ -65,9 +72,8 @@ public class QuestionnaireFragment extends CoolFragment {
         switch (view.getId()) {
             case R.id.button_send:
                 if (!ratingList.isEmpty()) {
-                    postForNoResult(Api.RATINGS + Api.PUT, ratingList.toArray());
+                    post(Api.RATINGS + Api.PUT, Rating[].class, ratingList.toArray());
                 }
-                CoolFragmentManager.show(new WaitRatingsFragment(), event);
                 break;
             case R.id.button_settings:
                 CoolFragmentManager.showAtTop(new SettingsFragment());

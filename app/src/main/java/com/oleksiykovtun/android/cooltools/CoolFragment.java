@@ -124,13 +124,9 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
         urlPrefix = urlPrefixNew;
     }
 
-    protected void postForNoResult(String url, Object... postData) {
-        new CoolWebAsyncTask(this, null, postData).execute(urlPrefix + url);
-    }
-
     protected void post(String url, Class responseClass, Object... postData) {
         cancelPost();
-        task = new CoolWebAsyncTask(this, responseClass, postData).execute(urlPrefix + url);
+        task = new CoolWebAsyncTask(url, this, responseClass, postData).execute(urlPrefix + url);
     }
 
     protected void cancelPost() {
@@ -141,6 +137,10 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onReceiveWebData(List webDataErrorString) {
+    }
+
+    @Override
+    public void onReceiveWebData(String tag, List webDataErrorString) {
     }
 
     @Override

@@ -15,6 +15,7 @@ import com.oleksiykovtun.iwmy.speeddating.android.adapters.CoupleRecyclerAdapter
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.SettingsFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Couple;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
+import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,19 +51,31 @@ public class CoupleListFragment extends CoolFragment {
     }
 
     @Override
-    public void onReceiveWebData(List response) {
-        coupleList.clear();
-        coupleList.addAll(response);
-        coupleRecyclerAdapter.notifyDataSetChanged();
+    public void onReceiveWebData(String postTag, List response) {
+        switch (postTag) {
+            case Api.COUPLES + Api.GENERATE_FOR_EVENT:
+                coupleList.clear();
+                coupleList.addAll(response);
+                coupleRecyclerAdapter.notifyDataSetChanged();
+                break;
+            case Api.USERS + Api.GET_FOR_EVENT_ACTIVE_RESET:
+                post(Api.COUPLES + Api.PUT, Couple[].class, coupleList.toArray());
+                break;
+            case Api.COUPLES + Api.PUT:
+                post(Api.EVENTS + Api.SET_UNACTUAL, Event[].class, event);
+                break;
+            case Api.EVENTS + Api.SET_UNACTUAL:
+                showToast(R.string.message_couples_sent);
+                CoolFragmentManager.showAtBottom(new MyEventListFragment());
+                break;
+        }
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_send_results:
-                postForNoResult(Api.COUPLES + Api.PUT, coupleList.toArray());
-                showToast(R.string.message_couples_sent);
-                CoolFragmentManager.showAtBottom(new MyEventListFragment());
+                post(Api.USERS + Api.GET_FOR_EVENT_ACTIVE_RESET, User[].class, event);
                 break;
             case R.id.button_settings:
                 CoolFragmentManager.showAtTop(new SettingsFragment());

@@ -22,6 +22,7 @@ import java.util.List;
  */
 public class NewParticipantFragment extends CoolFragment {
 
+    private User user = null;
     private Event event = null;
 
     @Override
@@ -65,12 +66,11 @@ public class NewParticipantFragment extends CoolFragment {
                 String organization = "";
                 String website = "";
 
-                User user = new User(email, password, username, group, nameAndSurname,
+                user = new User(email, password, username, group, nameAndSurname,
                         photoBase64, phone, birthDate, gender, orientation, goal, affair, height,
                         weight, attitudeToSmoking, attitudeToAlcohol, location, organization,
                         website);
                 if (checkUser(user)) {
-                    postForNoResult(Api.ATTENDANCES + Api.ADD, new Attendance(user, event));
                     post(Api.USERS + Api.ADD, User[].class, user);
                 } else {
                     showToast(R.string.message_inputs_error);
@@ -91,10 +91,17 @@ public class NewParticipantFragment extends CoolFragment {
     }
 
     @Override
-    public void onReceiveWebData(List response) {
-        if (!response.isEmpty()) {
-            showToast(R.string.message_participant_added);
-            CoolFragmentManager.showPrevious();
+    public void onReceiveWebData(String postTag, List response) {
+        switch (postTag) {
+            case Api.USERS + Api.ADD:
+                post(Api.ATTENDANCES + Api.ADD, Attendance[].class, new Attendance(user, event));
+                break;
+            case Api.ATTENDANCES + Api.ADD:
+                if (!response.isEmpty()) {
+                    showToast(R.string.message_participant_added);
+                    CoolFragmentManager.showPrevious();
+                }
+                break;
         }
     }
 

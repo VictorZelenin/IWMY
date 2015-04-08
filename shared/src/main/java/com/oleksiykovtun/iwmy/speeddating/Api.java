@@ -21,6 +21,7 @@ public class Api {
 
     public static final String EVENTS = "/events/";
     public static final String GET_ALL = "get/all";
+    public static final String SET_UNACTUAL = "set/unactual";
     public static final String DELETE = "delete";
 
     public static final String ATTENDANCES = "/attendances/";
