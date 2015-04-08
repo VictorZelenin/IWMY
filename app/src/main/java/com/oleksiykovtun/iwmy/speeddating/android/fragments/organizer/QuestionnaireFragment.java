@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.oleksiykovtun.android.cooltools.CoolFragment;
+import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.adapters.RatingRecyclerAdapter;
@@ -16,39 +17,31 @@ import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import com.oleksiykovtun.iwmy.speeddating.data.Rating;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by alx on 2015-02-12.
  */
-public class QuestionnaireOfflineFragment extends CoolFragment {
+public class QuestionnaireFragment extends CoolFragment {
 
     private List<Rating> ratingList = new ArrayList<Rating>();
-    private Event event = null;
+    private Attendance attendance = null;
 
     private RatingRecyclerAdapter ratingRecyclerAdapter = new RatingRecyclerAdapter(ratingList);
 
     @Override
-    public void onStart() {
-        super.onStart();
-
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_organizer_questionnaire_offline, container,
+        View view = inflater.inflate(R.layout.fragment_organizer_questionnaire, container,
                 false);
         registerContainerView(view);
         registerClickListener(R.id.button_send);
 
-        event = (Event) getAttachment();
+        attendance = (Attendance) getAttachment();
 
-        // generate ratings for all active attendants of this event using a dummy user
-        post(Api.RATINGS + Api.GENERATE_FOR_ATTENDANCE_ACTIVE, Rating[].class, new Attendance(
-                "user@mail.com", User.FEMALE, event.getTime(), event.getOrganizerEmail(), "false"));
+        // generate ratings for all active attendants of this event
+        post(Api.RATINGS + Api.GENERATE_FOR_ATTENDANCE_ACTIVE, Rating[].class, attendance);
 
         RecyclerView ratingRecyclerView = (RecyclerView) view.findViewById(R.id.rating_list_holder);
         ratingRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -59,17 +52,26 @@ public class QuestionnaireOfflineFragment extends CoolFragment {
     }
 
     @Override
-    public void onReceiveWebData(List response) {
-        ratingList.clear();
-        ratingList.addAll(response);
-        ratingRecyclerAdapter.notifyDataSetChanged();
+    public void onReceiveWebData(String postTag, List response) {
+        switch (postTag) {
+            case Api.RATINGS + Api.GENERATE_FOR_ATTENDANCE_ACTIVE:
+                ratingList.clear();
+                ratingList.addAll(response);
+                ratingRecyclerAdapter.notifyDataSetChanged();
+                break;
+            case Api.RATINGS + Api.PUT:
+                CoolFragmentManager.showPrevious();
+                break;
+        }
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_send:
-                //todo send questionnaires by email, add this email address to temp
+                if (!ratingList.isEmpty()) {
+                    post(Api.RATINGS + Api.PUT, Rating[].class, ratingList.toArray());
+                }
                 break;
         }
     }

@@ -67,7 +67,7 @@ public class CoupleListConfirmFragment extends CoolFragment {
                 break;
             case Api.EVENTS + Api.SET_UNACTUAL:
                 showToast(R.string.message_couples_sent);
-                CoolFragmentManager.show(new CoupleListFragment(), event);
+                CoolFragmentManager.showAtBottom(new CoupleListFragment(), event);
                 break;
         }
     }

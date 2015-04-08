@@ -46,7 +46,6 @@ public class QuestionnaireListFragment extends CoolFragment {
         View view = inflater.inflate(R.layout.fragment_organizer_questionnaire_list, container,
                 false);
         registerContainerView(view);
-        registerClickListener(R.id.button_add_questionnaire);
         registerClickListener(R.id.button_send_questionnaires);
 
         event = (Event) getAttachment();
@@ -69,35 +68,59 @@ public class QuestionnaireListFragment extends CoolFragment {
 
         selectedCountMale = 0;
         selectedCountFemale = 0;
-        post(Api.USERS + Api.GET_FOR_EVENT_ACTIVE_RESET, User[].class, event);
+        post(Api.USERS + Api.GET_FOR_EVENT, User[].class, event);
 
         return view;
     }
 
     @Override
-    public void onReceiveWebData(List response) {
-        if (response.size() > 0) {
-            userListGuys.clear();
-            userListLadies.clear();
-            for (User user : (List<User>) response) {
-                if (user.getGender().equals(User.MALE)) {
-                    userListGuys.add(user);
-                } else {
-                    userListLadies.add(user);
+    public void onReceiveWebData(String postTag, List response) {
+        switch (postTag) {
+            case Api.USERS + Api.GET_FOR_EVENT:
+                userListGuys.clear();
+                userListLadies.clear();
+                for (User user : (List<User>) response) {
+                    if (user.getGender().equals(User.MALE)) {
+                        userListGuys.add(user);
+                    } else {
+                        userListLadies.add(user);
+                    }
                 }
+                userRecyclerAdapterGuys.notifyDataSetChanged();
+                userRecyclerAdapterLadies.notifyDataSetChanged();
+                post(Api.USERS + Api.GET_FOR_EVENT_ACTIVE, User[].class, event);
+                break;
+            case Api.USERS + Api.GET_FOR_EVENT_ACTIVE:
+                for (User activeUser : (List<User>)response) {
+                    highlightActiveUser(activeUser);
+                }
+                updateToolbarTitle();
+                break;
+        }
+    }
+
+    private void highlightActiveUser(User activeUser) {
+        for (int i = 0; i < userListGuys.size(); ++i) {
+            User user = userListGuys.get(i);
+            if (user.getEmail().equals(activeUser.getEmail())) {
+                getViewInRecyclerView(R.id.user_list_holder_guys, i)
+                        .setBackgroundColor(Color.GREEN);
+                selectedCountMale++;
             }
-            userRecyclerAdapterGuys.notifyDataSetChanged();
-            userRecyclerAdapterLadies.notifyDataSetChanged();
-            updateToolbarTitle();
+        }
+        for (int i = 0; i < userListLadies.size(); ++i) {
+            User user = userListLadies.get(i);
+            if (user.getEmail().equals(activeUser.getEmail())) {
+                getViewInRecyclerView(R.id.user_list_holder_ladies, i)
+                        .setBackgroundColor(Color.GREEN);
+                selectedCountFemale++;
+            }
         }
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.button_add_questionnaire:
-                CoolFragmentManager.showAtTop(new QuestionnaireOfflineFragment(), event);
-                break;
             case R.id.button_send_questionnaires:
                 if (selectedCountMale > 0 && selectedCountMale == selectedCountFemale) {
                     showToast(R.string.message_questionnaires_sent);

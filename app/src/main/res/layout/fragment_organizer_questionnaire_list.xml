@@ -23,12 +23,6 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <Button
-        android:id="@+id/button_add_questionnaire"
-        android:text="@string/button_add_questionnaire"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="fill_parent">

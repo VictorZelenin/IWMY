@@ -20,6 +20,7 @@ import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,6 +68,17 @@ public class WaitFragment extends CoolFragment {
         post(Api.USERS + Api.GET_FOR_EVENT_ACTIVE, User[].class, event);
 
         return view;
+    }
+
+    @Override
+    public void onClick(Serializable objectAtClicked, View view) {
+        User user = (User) objectAtClicked;
+        // organizer can vote for a user created by him
+        if (user.getPassword().isEmpty()) {
+            CoolFragmentManager.showAtTop(new QuestionnaireFragment(), new Attendance(user, event));
+        } else {
+            showToastLong(R.string.message_you_cannot_add_ratings);
+        }
     }
 
     @Override

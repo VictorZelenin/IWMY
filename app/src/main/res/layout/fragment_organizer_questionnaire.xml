@@ -69,13 +69,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/input_email"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_enter_participant_email"
-                android:inputType="textEmailAddress" />
-
             <Button
                 android:id="@+id/button_send"
                 android:text="@string/button_send"

@@ -20,6 +20,7 @@ import com.oleksiykovtun.iwmy.speeddating.android.Account;
 import com.oleksiykovtun.iwmy.speeddating.android.adapters.EventRecyclerAdapter;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.SettingsFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
+import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -32,6 +33,8 @@ public class MyEventListFragment extends CoolFragment {
 
     private List<Event> actualEventList = new ArrayList<Event>();
     private List<Event> pastEventList = new ArrayList<Event>();
+
+    private Event selectedEvent = null;
 
     private EventRecyclerAdapter actualEventRecyclerAdapter
             = new EventRecyclerAdapter(actualEventList);
@@ -74,18 +77,25 @@ public class MyEventListFragment extends CoolFragment {
     }
 
     @Override
-    public void onReceiveWebData(List response) {
-        actualEventList.clear();
-        pastEventList.clear();
-        for (Event event : (List<Event>) response) {
-            if (! event.getActual().equals("false")) {
-                actualEventList.add(event);
-            } else {
-                pastEventList.add(event);
-            }
+    public void onReceiveWebData(String postTag, List response) {
+        switch (postTag) {
+            case Api.EVENTS + Api.GET:
+                actualEventList.clear();
+                pastEventList.clear();
+                for (Event event : (List<Event>) response) {
+                    if (! event.getActual().equals("false")) {
+                        actualEventList.add(event);
+                    } else {
+                        pastEventList.add(event);
+                    }
+                }
+                actualEventRecyclerAdapter.notifyDataSetChanged();
+                pastEventRecyclerAdapter.notifyDataSetChanged();
+                break;
+            case Api.USERS + Api.GET_FOR_EVENT_ACTIVE_RESET:
+                CoolFragmentManager.showAtTop(new EventFragment(), selectedEvent);
+                break;
         }
-        actualEventRecyclerAdapter.notifyDataSetChanged();
-        pastEventRecyclerAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -102,10 +112,11 @@ public class MyEventListFragment extends CoolFragment {
 
     @Override
     public void onClick(Serializable objectAtClicked) {
-        if (((Event)objectAtClicked).getActual().equals("false")) {
-            CoolFragmentManager.showAtTop(new CoupleListFragment(), objectAtClicked);
+        selectedEvent = (Event)objectAtClicked;
+        if (selectedEvent.getActual().equals("false")) {
+            CoolFragmentManager.showAtTop(new CoupleListFragment(), selectedEvent);
         } else {
-            CoolFragmentManager.showAtTop(new EventFragment(), objectAtClicked);
+            post(Api.USERS + Api.GET_FOR_EVENT_ACTIVE_RESET, User[].class, selectedEvent);
         }
     }
 
