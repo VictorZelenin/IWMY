@@ -64,6 +64,7 @@
     <string name="label_out_of">/</string>
     <string name="label_delete">Delete</string>
     <string name="label_delete_this_event">Delete this event?\n</string>
+    <string name="label_delete_this_event_from_yours">Delete this event from your events?\n</string>
     <string name="label_remove_this_user_from_event">Remove this user from event?\n</string>
     <string name="label_select_date">Select date</string>
     <string name="label_select_time">Select time</string>
@@ -117,6 +118,8 @@
     <string name="hint_enter_organization">Enter your organization name</string>
     <string name="hint_enter_website">Enter your website address</string>
     <string name="hint_enter_participant_email">Enter participant email</string>
+
+    <string name="menu_my_events">My events</string>
 
     <color name="blue">#0098FF</color>
     <color name="light_blue">#A0D9FF</color>

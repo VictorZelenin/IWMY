@@ -97,6 +97,17 @@ public class AttendanceRestService extends GeneralRestService {
         return items;
     }
 
+    @Path(Api.DELETE) @POST @Consumes(JSON) @Produces(JSON)
+    public List delete(List<Attendance> wildcardAttendances) {
+        for (Attendance wildcardAttendance : wildcardAttendances) {
+            ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(Attendance.class)
+                    .filter("eventOrganizerEmail", wildcardAttendance.getEventOrganizerEmail())
+                    .filter("eventTime", wildcardAttendance.getEventTime())
+                    .keys()).now();
+        }
+        return get(wildcardAttendances);
+    }
+
     public static List<Attendance> getForEventActive(List<Event> wildcardEvents) {
         Set<Attendance> attendances = new TreeSet<>();
         for (Event wildcardEvent : wildcardEvents) {

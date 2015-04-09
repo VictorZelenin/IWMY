@@ -15,6 +15,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -37,6 +38,11 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
 
     protected boolean isRadioButtonChecked(int radioButtonId) {
         return ((RadioButton) containerView.findViewById(radioButtonId)).isChecked();
+    }
+
+    protected void openMenu(View view) {
+        registerForContextMenu(view);
+        getActivity().openContextMenu(view);
     }
 
     protected View getViewInRecyclerView(int recyclerViewId, int position) {

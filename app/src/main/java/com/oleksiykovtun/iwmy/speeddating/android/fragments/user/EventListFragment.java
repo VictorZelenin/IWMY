@@ -3,7 +3,9 @@ package com.oleksiykovtun.iwmy.speeddating.android.fragments.user;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -32,6 +34,7 @@ public class EventListFragment extends CoolFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_event_list, container, false);
         registerContainerView(view);
+        registerClickListener(R.id.button_options);
         registerClickListener(R.id.button_settings);
 
         post(Api.EVENTS + Api.GET_ALL, Event[].class);
@@ -55,17 +58,32 @@ public class EventListFragment extends CoolFragment {
 
     @Override
     public void onClick(Serializable objectAtClicked) {
-        CoolFragmentManager.showAtTop(new EventAttendFragment(), (Event) objectAtClicked);
+        CoolFragmentManager.showAtTop(new EventAttendFragment(), objectAtClicked);
     }
-
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.button_options:
+                openMenu(view);
+                break;
             case R.id.button_settings:
                 CoolFragmentManager.showAtTop(new SettingsFragment());
                 break;
         }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        CoolFragmentManager.showAtTop(new MyEventListFragment());
+        return true;
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getActivity().getMenuInflater().inflate(R.menu.user, menu);
     }
 
 }

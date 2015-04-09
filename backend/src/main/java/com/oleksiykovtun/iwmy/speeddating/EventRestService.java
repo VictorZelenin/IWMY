@@ -1,11 +1,15 @@
 package com.oleksiykovtun.iwmy.speeddating;
 
 import com.googlecode.objectify.ObjectifyService;
+import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
+import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -19,6 +23,11 @@ import javax.ws.rs.Produces;
 @Path(Api.EVENTS)
 public class EventRestService extends GeneralRestService {
 
+    /**
+     * Gets events filtered only by organizer
+     * @param wildcardEvents events to get organizer
+     * @return list of fully specified events
+     */
     @Path(Api.GET) @POST @Consumes(JSON) @Produces(JSON)
     public static List<Event> get(List<Event> wildcardEvents) {
         List<Event> events = new ArrayList<>();
@@ -27,6 +36,32 @@ public class EventRestService extends GeneralRestService {
                     .filter("organizerEmail", wildcardEvent.getOrganizerEmail()).list());
         }
         return events;
+    }
+
+    /**
+     * Gets strict events filtered by both organizer and time
+     * @param wildcardEvents events to get organizer and time
+     * @return list of fully specified events
+     */
+    public static List<Event> getForTime(List<Event> wildcardEvents) {
+        List<Event> events = new ArrayList<>();
+        for (Event wildcardEvent : wildcardEvents) {
+            events.addAll(ObjectifyService.ofy().load().type(Event.class)
+                    .filter("organizerEmail", wildcardEvent.getOrganizerEmail())
+                    .filter("time", wildcardEvent.getTime()).list());
+        }
+        return events;
+    }
+
+    @Path(Api.GET_FOR_USER) @POST @Consumes(JSON) @Produces(JSON)
+    public static List getForUser(List<User> wildcardUsers) {
+        List<Attendance> userAttendances = AttendanceRestService.getForUser(wildcardUsers);
+        List<Event> wildcardUserEvents = new ArrayList<>();
+        for (Attendance userAttendance : userAttendances) {
+            wildcardUserEvents.add(new Event(userAttendance.getEventOrganizerEmail(),
+                    userAttendance.getEventTime(), "", "", "", "", "", ""));
+        }
+        return EventRestService.getForTime(wildcardUserEvents);
     }
 
     @Path(Api.GET_ALL) @POST @Consumes(JSON) @Produces(JSON)
