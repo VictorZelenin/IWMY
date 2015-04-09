@@ -43,6 +43,7 @@ public class EventRestService extends GeneralRestService {
      * @param wildcardEvents events to get organizer and time
      * @return list of fully specified events
      */
+    @Path(Api.GET_FOR_TIME) @POST @Consumes(JSON) @Produces(JSON)
     public static List<Event> getForTime(List<Event> wildcardEvents) {
         List<Event> events = new ArrayList<>();
         for (Event wildcardEvent : wildcardEvents) {
@@ -69,10 +70,23 @@ public class EventRestService extends GeneralRestService {
         return new ArrayList<>(ObjectifyService.ofy().load().type(Event.class).list());
     }
 
-    @Path(Api.ADD) @POST @Consumes(JSON) @Produces(JSON)
-    public List add(List<Event> items) {
+    @Path(Api.PUT) @POST @Consumes(JSON) @Produces(JSON)
+    public static List put(List<Event> items) {
         ObjectifyService.ofy().save().entities(items).now();
         return items;
+    }
+
+    /**
+     * Sets max ratings per user 0 for corresponding full events
+     * @param wildcardEvents wildcard events for getting full events
+     * @return resulting full events
+     */
+    public static List lock(List<Event> wildcardEvents) {
+        List<Event> fullUnlockedEvents = EventRestService.getForTime(wildcardEvents);
+        for (Event fullUnlockedEvent : fullUnlockedEvents) {
+            fullUnlockedEvent.setMaxRatingsPerUser("0");
+        }
+        return EventRestService.put(fullUnlockedEvents);
     }
 
     /**

@@ -1,16 +1,20 @@
 package com.oleksiykovtun.iwmy.speeddating.android.fragments.user;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
+import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.ImageManager;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.SettingsFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
+
+import java.util.List;
 
 /**
  * Created by alx on 2015-02-12.
@@ -18,6 +22,7 @@ import com.oleksiykovtun.iwmy.speeddating.data.Event;
 public class EventStartFragment extends CoolFragment {
 
     private Event event = null;
+    private static CountDownTimer timer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,7 +50,57 @@ public class EventStartFragment extends CoolFragment {
         setText(R.id.label_event_places,
                 R.string.label_event_places, event.getFreePlaces());
 
+        setText(R.id.button_start, "" + getText(R.string.label_waiting_for_organizer));
+        setButtonEnabled(R.id.button_start, false);
+
         return view;
+    }
+
+    @Override
+    public void onReceiveWebData(String postTag, List response) {
+        switch (postTag) {
+            case Api.EVENTS + Api.GET_FOR_TIME:
+                if (! response.isEmpty()) {
+                    Event pendingEvent = ((List<Event>) response).get(0);
+                    String pendingEventMaxRatings = pendingEvent.getMaxRatingsPerUser();
+                    if (! pendingEventMaxRatings.equals("0")
+                            && ! pendingEventMaxRatings.equals("null")) {
+                        post(Api.EVENTS + Api.PUT, Event[].class, pendingEvent);
+                    }
+                }
+                break;
+            case Api.EVENTS + Api.PUT:
+                setText(R.id.button_start, "" + getText(R.string.button_start));
+                setButtonEnabled(R.id.button_start, true);
+                break;
+        }
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        timer = new CountDownTimer(3600000, 6000) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                // checking until this event is started by organizer
+                post(Api.EVENTS + Api.GET_FOR_TIME, Event[].class, event);
+            }
+
+            @Override
+            public void onFinish() {
+            }
+
+        }.start();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (timer != null) {
+            timer.cancel();
+        }
     }
 
     @Override

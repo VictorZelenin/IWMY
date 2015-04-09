@@ -96,6 +96,10 @@ public class QuestionnaireListFragment extends CoolFragment {
                 }
                 updateToolbarTitle();
                 break;
+            case Api.EVENTS + Api.PUT:
+                showToast(R.string.message_questionnaires_sent);
+                CoolFragmentManager.showAtTop(new WaitFragment(), event);
+                break;
         }
     }
 
@@ -123,8 +127,8 @@ public class QuestionnaireListFragment extends CoolFragment {
         switch (view.getId()) {
             case R.id.button_send_questionnaires:
                 if (selectedCountMale > 0 && selectedCountMale == selectedCountFemale) {
-                    showToast(R.string.message_questionnaires_sent);
-                    CoolFragmentManager.showAtTop(new WaitFragment(), event);
+                    event.setMaxRatingsPerUser("1"); // todo get from settings
+                    post(Api.EVENTS + Api.PUT, Event[].class, event); // "unlocking" the event
                 } else {
                     showToastLong(R.string.message_select_equal);
                 }

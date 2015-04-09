@@ -39,7 +39,7 @@ public class WaitCouplesFragment extends CoolFragment {
     @Override
     public void onReceiveWebData(List response) {
         if (response.size() > 0) {
-            CoolFragmentManager.show(new UserProfileCoupleFragment(),
+            CoolFragmentManager.showAtBottom(new UserProfileCoupleFragment(),
                     (Couple) response.get(0));
         }
     }

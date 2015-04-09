@@ -23,6 +23,7 @@ public class Event implements Serializable, Comparable<Event> {
     private String place;
     private String streetAddress;
     private String actual;
+    private String maxRatingsPerUser;
 
     private String photoBase64; // todo url
     private String freePlaces;
@@ -39,6 +40,7 @@ public class Event implements Serializable, Comparable<Event> {
         this.streetAddress = streetAddress;
         this.time = time;
         this.actual = "true";
+        this.maxRatingsPerUser = "0";
         this.photoBase64 = photoBase64;
         this.freePlaces = freePlaces;
         this.cost = cost;
@@ -88,6 +90,14 @@ public class Event implements Serializable, Comparable<Event> {
 
     public void setActual(String actual) {
         this.actual = actual;
+    }
+
+    public String getMaxRatingsPerUser() {
+        return "" + maxRatingsPerUser;
+    }
+
+    public void setMaxRatingsPerUser(String maxRatingsPerUser) {
+        this.maxRatingsPerUser = maxRatingsPerUser;
     }
 
     public String getPhotoBase64() {

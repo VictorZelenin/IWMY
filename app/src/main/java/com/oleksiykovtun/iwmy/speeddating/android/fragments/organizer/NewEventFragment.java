@@ -53,7 +53,7 @@ public class NewEventFragment extends CoolFragment {
                 Event event = new Event(Account.getUser(this).getEmail(), time, place,
                         streetAddress, photoBase64, freePlaces, cost, description);
                 if (checkEvent(event)) {
-                    post(Api.EVENTS + Api.ADD, Event[].class, event);
+                    post(Api.EVENTS + Api.PUT, Event[].class, event);
                 } else {
                     showToast(R.string.message_inputs_error);
                 }

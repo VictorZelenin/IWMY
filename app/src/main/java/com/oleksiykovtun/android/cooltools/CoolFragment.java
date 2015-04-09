@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -47,6 +48,10 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
 
     protected View getViewInRecyclerView(int recyclerViewId, int position) {
         return ((ViewGroup)containerView.findViewById(recyclerViewId)).getChildAt(position);
+    }
+
+    protected void setButtonEnabled(int buttonId, boolean isEnabled) {
+        ((Button) containerView.findViewById(buttonId)).setEnabled(isEnabled);
     }
 
     protected String getEditText(int editTextId) {

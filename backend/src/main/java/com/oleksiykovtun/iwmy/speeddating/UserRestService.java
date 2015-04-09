@@ -25,7 +25,7 @@ import javax.ws.rs.Produces;
 public class UserRestService extends GeneralRestService {
 
     /**
-     * Set active=false for event participants and delete associated ratings
+     * Set active=false for event participants and delete associated ratings and couples
      * @param wildcardEvents
      * @return
      */
@@ -34,6 +34,8 @@ public class UserRestService extends GeneralRestService {
         // current ratings and previous couples cleanup - before the couple selection process
         RatingRestService.deleteForEvent(wildcardEvents);
         CoupleRestService.deleteForEvent(wildcardEvents);
+        // "locking" events from users
+        EventRestService.lock(wildcardEvents);
         // listing event-related attendances
         Set<User> users = new TreeSet<>();
         List<Attendance> eventAttendances = AttendanceRestService.getForEvent(wildcardEvents);
