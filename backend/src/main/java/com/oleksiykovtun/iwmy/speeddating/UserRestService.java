@@ -99,13 +99,12 @@ public class UserRestService extends GeneralRestService {
 
     @Path(Api.GET) @POST @Consumes(JSON) @Produces(JSON)
     public static List get(List<User> wildcardUsers) {
-        List<User> users = new ArrayList<>();
-        if (wildcardUsers.size() == 1) {
-            User wildcardUser = wildcardUsers.get(0);
+        Set<User> users = new TreeSet<>();
+        for (User wildcardUser : wildcardUsers) {
             users.addAll(ObjectifyService.ofy().load().type(User.class)
                     .filter("email", wildcardUser.getEmail()).list());
         }
-        return users;
+        return Arrays.asList(users.toArray());
     }
 
     @Path(Api.GET_LOGIN) @POST @Consumes(JSON) @Produces(JSON)
