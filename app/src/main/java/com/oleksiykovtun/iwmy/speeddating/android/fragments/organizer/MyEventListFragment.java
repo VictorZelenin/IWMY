@@ -18,7 +18,7 @@ import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.Account;
 import com.oleksiykovtun.iwmy.speeddating.android.adapters.EventRecyclerAdapter;
-import com.oleksiykovtun.iwmy.speeddating.android.fragments.SettingsFragment;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.organizer.SettingsFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
@@ -94,6 +94,9 @@ public class MyEventListFragment extends CoolFragment {
                 break;
             case Api.USERS + Api.GET_FOR_EVENT_ACTIVE_RESET:
                 CoolFragmentManager.showAtTop(new EventFragment(), selectedEvent);
+                break;
+            case Api.EVENTS + Api.DELETE:
+                onStart();
                 break;
         }
     }

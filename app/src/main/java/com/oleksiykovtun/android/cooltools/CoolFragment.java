@@ -38,7 +38,7 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
     }
 
     protected boolean isRadioButtonChecked(int radioButtonId) {
-        return ((RadioButton) containerView.findViewById(radioButtonId)).isChecked();
+        return ((RadioButton) getViewById(radioButtonId)).isChecked();
     }
 
     protected void openMenu(View view) {
@@ -47,19 +47,23 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
     }
 
     protected View getViewInRecyclerView(int recyclerViewId, int position) {
-        return ((ViewGroup)containerView.findViewById(recyclerViewId)).getChildAt(position);
+        return ((ViewGroup)getViewById(recyclerViewId)).getChildAt(position);
+    }
+
+    protected View getViewById(int viewId) {
+        return containerView.findViewById(viewId);
     }
 
     protected void setButtonEnabled(int buttonId, boolean isEnabled) {
-        ((Button) containerView.findViewById(buttonId)).setEnabled(isEnabled);
+        ((Button) getViewById(buttonId)).setEnabled(isEnabled);
     }
 
     protected String getEditText(int editTextId) {
-        return "" + ((EditText) containerView.findViewById(editTextId)).getText();
+        return "" + ((EditText) getViewById(editTextId)).getText();
     }
 
     protected String getLabelText(int textViewId) {
-        return "" + ((TextView) containerView.findViewById(textViewId)).getText();
+        return "" + ((TextView) getViewById(textViewId)).getText();
     }
 
     protected void openDatePicker() {
@@ -75,7 +79,7 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
     }
 
     protected long getDateMillis(int datePickerId) {
-        DatePicker datePicker = (DatePicker) containerView.findViewById(datePickerId);
+        DatePicker datePicker = (DatePicker) getViewById(datePickerId);
         Calendar calendar = Calendar.getInstance();
         calendar.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(),
                 0, 0, 0);
@@ -83,7 +87,7 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
     }
 
     protected long getTimeMillis(int timePickerId) {
-        TimePicker timePicker = (TimePicker) containerView.findViewById(timePickerId);
+        TimePicker timePicker = (TimePicker) getViewById(timePickerId);
         return (timePicker.getCurrentHour() * 60 + timePicker.getCurrentMinute()) * 60 * 1000;
     }
 
@@ -93,7 +97,7 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
     }
 
     protected void registerClickListener(int clickableId) {
-        (containerView.findViewById(clickableId)).setOnClickListener(this);
+        (getViewById(clickableId)).setOnClickListener(this);
     }
 
     protected void registerItemClickListener(CoolRecyclerAdapter recyclerAdapter) {
@@ -101,7 +105,7 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
     }
 
     protected ImageView getImageView(int imageViewId) {
-        return  ((ImageView) containerView.findViewById(imageViewId));
+        return  ((ImageView) getViewById(imageViewId));
     }
 
     protected void showToast(String message) {
@@ -126,7 +130,7 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
 
     protected void setText(int textViewId, String text) {
         try {
-            ((TextView) containerView.findViewById(textViewId)).setText(text);
+            ((TextView) getViewById(textViewId)).setText(text);
         } catch (Throwable e) {
             Log.e("IWMY", "No view found for text: " + text, e);
         }

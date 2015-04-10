@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.oleksiykovtun.android.cooltools.CoolApplication;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 /**
@@ -21,9 +22,7 @@ public class Account {
 
     public static void saveUser(Fragment fragment, Object object) {
         try {
-            fragment.getActivity().getApplicationContext()
-                    .getSharedPreferences("", Context.MODE_PRIVATE).edit()
-                    .putString(USER, new Gson().toJson(object, User.class)).commit();
+            CoolApplication.writePreferences(USER, new Gson().toJson(object, User.class));
         } catch (Throwable e) {
             Log.e("IWMY", "User saving to settings failed.", e);
         }
@@ -33,9 +32,7 @@ public class Account {
     public static User getUser(Fragment fragment) {
         User user = new User();
         try {
-            String userJsonString = fragment.getActivity().getApplicationContext()
-                    .getSharedPreferences("", Context.MODE_PRIVATE).getString(USER, "");
-            user = new Gson().fromJson(userJsonString, User.class);
+            user = new Gson().fromJson(CoolApplication.readPreferences(USER, ""), User.class);
         } catch (Throwable e) {
             Log.e("IWMY", "User getting from settings failed.", e);
         }

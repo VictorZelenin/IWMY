@@ -1,4 +1,4 @@
-package com.oleksiykovtun.iwmy.speeddating.android.fragments;
+package com.oleksiykovtun.iwmy.speeddating.android.fragments.user;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.Account;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.StartFragment;
 
 
 /**
@@ -19,7 +20,7 @@ public class SettingsFragment extends CoolFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_settings, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_settings, container, false);
         registerContainerView(view);
         registerClickListener(R.id.button_logout);
         return view;

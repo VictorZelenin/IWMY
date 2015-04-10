@@ -3,6 +3,7 @@ package com.oleksiykovtun.iwmy.speeddating.android.fragments.organizer;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.oleksiykovtun.android.cooltools.CoolApplication;
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.android.cooltools.CoolPagerAdapter;
@@ -127,7 +129,8 @@ public class QuestionnaireListFragment extends CoolFragment {
         switch (view.getId()) {
             case R.id.button_send_questionnaires:
                 if (selectedCountMale > 0 && selectedCountMale == selectedCountFemale) {
-                    event.setMaxRatingsPerUser("1"); // todo get from settings
+                    event.setMaxRatingsPerUser(""
+                            + CoolApplication.readPreferences(SettingsFragment.MAX_RATINGS, 1));
                     post(Api.EVENTS + Api.PUT, Event[].class, event); // "unlocking" the event
                 } else {
                     showToastLong(R.string.message_select_equal);

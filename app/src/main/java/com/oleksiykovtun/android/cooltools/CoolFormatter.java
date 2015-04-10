@@ -30,7 +30,11 @@ public class CoolFormatter {
     }
 
     public static int parseInt(String string) {
-        int result = 0;
+        return parseInt(string, 0);
+    }
+
+    public static int parseInt(String string, int defaultValue) {
+        int result = defaultValue;
         try {
             result =  Integer.parseInt(string);
         } catch (Exception e) {

@@ -16,7 +16,7 @@ import com.oleksiykovtun.android.cooltools.CoolPagerAdapter;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.adapters.UserRecyclerAdapter;
-import com.oleksiykovtun.iwmy.speeddating.android.fragments.SettingsFragment;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.organizer.SettingsFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import com.oleksiykovtun.iwmy.speeddating.data.User;

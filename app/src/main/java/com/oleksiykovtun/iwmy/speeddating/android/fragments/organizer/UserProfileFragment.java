@@ -10,7 +10,7 @@ import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.TimeConverter;
 import com.oleksiykovtun.iwmy.speeddating.android.ImageManager;
-import com.oleksiykovtun.iwmy.speeddating.android.fragments.SettingsFragment;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.organizer.SettingsFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 /**

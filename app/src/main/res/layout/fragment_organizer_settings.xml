@@ -1,0 +1,44 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/light_blue"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:background="@color/blue"
+        android:layout_height="@dimen/toolbar_height"
+        android:layout_width="match_parent">
+
+        <include layout="@layout/image_view_toolbar_logo"/>
+
+        <TextView
+            android:text="@string/toolbar_settings"
+            android:textSize="@dimen/toolbar_text_size"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <Button
+        android:id="@+id/button_logout"
+        android:text="@string/button_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/label_max_ratings"
+        android:text="@string/label_name_and_surname"
+        android:textSize="@dimen/label_text_size"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <SeekBar
+        android:id="@+id/seekbar_max_ratings"
+        android:max="19"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"  />
+
+</LinearLayout>

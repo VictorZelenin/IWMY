@@ -11,7 +11,6 @@ import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.ImageManager;
-import com.oleksiykovtun.iwmy.speeddating.android.fragments.SettingsFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 
 import java.util.List;
@@ -62,6 +61,7 @@ public class EventStartFragment extends CoolFragment {
             case Api.EVENTS + Api.GET_FOR_TIME:
                 if (! response.isEmpty()) {
                     Event pendingEvent = ((List<Event>) response).get(0);
+                    event = pendingEvent; // new event has "unlocked" voting
                     String pendingEventMaxRatings = pendingEvent.getMaxRatingsPerUser();
                     if (! pendingEventMaxRatings.equals("0")
                             && ! pendingEventMaxRatings.equals("null")) {

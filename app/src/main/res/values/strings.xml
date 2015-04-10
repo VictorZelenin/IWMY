@@ -69,6 +69,7 @@
     <string name="label_select_date">Select date</string>
     <string name="label_select_time">Select time</string>
     <string name="label_waiting_for_organizer">Waiting for organizer</string>
+    <string name="label_max_ratings">Max ratings per user:</string>
     <string name="label_empty">-</string>
 
     <string name="button_login">Login</string>
