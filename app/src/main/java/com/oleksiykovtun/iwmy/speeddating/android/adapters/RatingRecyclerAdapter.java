@@ -49,6 +49,7 @@ public class RatingRecyclerAdapter extends CoolRecyclerAdapter {
                         try {
                             int position = Integer.parseInt("" + viewHolder.selectionTextView.getTag());
                             ((Rating) dataSet.get(position)).setSelection(isChecked ? "selected" : "");
+                            itemClickListener.onClick(dataSet.get(position));
                         } catch (Throwable e) {
                             Log.d("IWMY", "Checkbox toggling failed");
                         }

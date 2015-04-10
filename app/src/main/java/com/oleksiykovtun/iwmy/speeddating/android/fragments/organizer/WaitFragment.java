@@ -77,7 +77,7 @@ public class WaitFragment extends CoolFragment {
         if (user.getPassword().isEmpty()) {
             CoolFragmentManager.showAtTop(new QuestionnaireFragment(), new Attendance(user, event));
         } else {
-            showToastLong(R.string.message_you_cannot_add_ratings);
+            showToastLong(R.string.message_you_cannot_add_ratings_user);
         }
     }
 

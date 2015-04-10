@@ -29,6 +29,16 @@ public class CoolFormatter {
         return result;
     }
 
+    public static int parseInt(String string) {
+        int result = 0;
+        try {
+            result =  Integer.parseInt(string);
+        } catch (Exception e) {
+            Log.d("IWMY", "Parsing error");
+        }
+        return result;
+    }
+
     private static boolean isDateOrTimeValid(String dateString, String formatString) {
         boolean value = true;
         try {

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.oleksiykovtun.android.cooltools.CoolFormatter;
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.Api;
@@ -18,6 +19,7 @@ import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import com.oleksiykovtun.iwmy.speeddating.data.Rating;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +53,21 @@ public class QuestionnaireFragment extends CoolFragment {
         ratingRecyclerView.setAdapter(ratingRecyclerAdapter);
 
         return view;
+    }
+
+    @Override
+    public void onClick(Serializable objectAtClicked) {
+        int selectedRatingsCount = 0;
+        for (Rating rating : ratingList) {
+            if (! rating.getSelection().isEmpty()) {
+                ++selectedRatingsCount;
+            }
+        }
+        if (selectedRatingsCount > CoolFormatter.parseInt(event.getMaxRatingsPerUser())) {
+            ((Rating)objectAtClicked).setSelection("");
+            ratingRecyclerAdapter.notifyDataSetChanged();
+            showToast(R.string.message_you_cannot_add_more_ratings);
+        }
     }
 
     @Override

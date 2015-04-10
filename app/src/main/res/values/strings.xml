@@ -107,7 +107,8 @@
     <string name="message_select_equal">Please select equal number of guys and ladies.</string>
     <string name="message_couples_sent">Couples sent</string>
     <string name="message_no_user_wrong_password">No such user or incorrect password</string>
-    <string name="message_you_cannot_add_ratings">You cannot add ratings for this user</string>
+    <string name="message_you_cannot_add_more_ratings">You cannot add more ratings</string>
+    <string name="message_you_cannot_add_ratings_user">You cannot add ratings for this user</string>
 
     <string name="hint_email_or_username">Email or username</string>
     <string name="hint_password">Password</string>

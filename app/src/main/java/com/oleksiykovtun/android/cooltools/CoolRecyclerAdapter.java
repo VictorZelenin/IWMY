@@ -14,7 +14,7 @@ import java.util.List;
 public abstract class CoolRecyclerAdapter extends RecyclerView
         .Adapter<CoolRecyclerAdapter.ViewHolder> {
 
-    private CoolClickListener itemClickListener;
+    protected CoolClickListener itemClickListener;
 
     protected List<Serializable> dataSet;
 
