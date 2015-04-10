@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">IWMY Speed Dating</string>
-    <string name="app_title">Speed Dating</string>
+    <string name="app_name" translatable="false">IWMY Speed Dating</string>
+    <string name="app_title" translatable="false">Speed Dating</string>
 
     <string name="toolbar_authorization">Authorization</string>
     <string name="toolbar_registering">Registering</string>
@@ -44,12 +44,12 @@
     <string name="label_user_age">Age, </string>
     <string name="label_user_location">Location</string>
     <string name="label_number">Number</string>
-    <string name="label_selection">+/-</string>
+    <string name="label_selection" translatable="false">+/-</string>
     <string name="label_comment">Comment</string>
     <string name="label_wait_for_result">Please wait for results</string>
     <string name="label_calculating">Calculating</string>
     <string name="label_finishing">Finishing</string>
-    <string name="label_progress">0/0</string>
+    <string name="label_progress" translatable="false">0/0</string>
     <string name="label_questionnaires">Questionnaires</string>
     <string name="label_orientation">Orientation: </string>
     <string name="label_appearance">Appearance: </string>
@@ -62,7 +62,7 @@
     <string name="label_attitude_to_alcohol">Attitude to alcohol: </string>
     <string name="label_event_place">Place: </string>
     <string name="label_event_date">Date: </string>
-    <string name="label_out_of">/</string>
+    <string name="label_out_of" translatable="false">/</string>
     <string name="label_delete">Delete</string>
     <string name="label_delete_this_event">Delete this event?\n</string>
     <string name="label_delete_this_event_from_yours">Delete this event from your events?\n</string>
@@ -71,7 +71,7 @@
     <string name="label_select_time">Select time</string>
     <string name="label_waiting_for_organizer">Waiting for organizer</string>
     <string name="label_max_ratings">Max ratings per user:</string>
-    <string name="label_empty">-</string>
+    <string name="label_empty" translatable="false">-</string>
 
     <string name="button_login">Login</string>
     <string name="button_register">Register</string>
