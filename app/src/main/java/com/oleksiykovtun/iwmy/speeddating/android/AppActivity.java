@@ -23,10 +23,12 @@ public class AppActivity extends FragmentActivity {
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity);
 
-        CoolFragment.setUrlPrefix(Api.BACKEND_URL);
         CoolFragmentManager.setup(this, R.id.fragment_holder);
 
-        CoolFragmentManager.showAtBottom(new StartFragment()); // show the first fragment
+        if (! CoolFragmentManager.isNotEmpty()) {
+            CoolFragment.setUrlPrefix(Api.BACKEND_URL);
+            CoolFragmentManager.showAtBottom(new StartFragment()); // show the first fragment
+        }
     }
 
     @Override
