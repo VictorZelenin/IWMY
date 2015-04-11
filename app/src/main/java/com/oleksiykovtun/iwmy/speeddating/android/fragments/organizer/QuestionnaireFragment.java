@@ -7,16 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.oleksiykovtun.android.cooltools.CoolApplication;
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.adapters.RatingRecyclerAdapter;
 import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
-import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import com.oleksiykovtun.iwmy.speeddating.data.Rating;
-import com.oleksiykovtun.iwmy.speeddating.data.User;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +62,21 @@ public class QuestionnaireFragment extends CoolFragment {
             case Api.RATINGS + Api.PUT:
                 CoolFragmentManager.showPrevious();
                 break;
+        }
+    }
+
+    @Override
+    public void onClick(Serializable objectAtClicked) {
+        int selectedRatingsCount = 0;
+        for (Rating rating : ratingList) {
+            if (! rating.getSelection().isEmpty()) {
+                ++selectedRatingsCount;
+            }
+        }
+        if (selectedRatingsCount > CoolApplication.readPreferences(SettingsFragment.MAX_RATINGS, 1)) {
+            ((Rating)objectAtClicked).setSelection("");
+            ratingRecyclerAdapter.notifyDataSetChanged();
+            showToast(R.string.message_you_cannot_add_more_ratings);
         }
     }
 
