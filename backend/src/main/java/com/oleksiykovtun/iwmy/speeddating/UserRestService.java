@@ -107,6 +107,21 @@ public class UserRestService extends GeneralRestService {
         return Arrays.asList(users.toArray());
     }
 
+    @Path(Api.GET_UNIQUE) @POST @Consumes(JSON) @Produces(JSON)
+    public static List getUnique(List<User> wildcardUsers) {
+        List<User> users = new ArrayList<>();
+        if (wildcardUsers.size() == 1) {
+            User wildcardUser = wildcardUsers.get(0);
+            users.addAll(ObjectifyService.ofy().load().type(User.class)
+                    .filter("username", wildcardUser.getUsername()).list());
+            if (users.size() == 0) {
+                users.addAll(ObjectifyService.ofy().load().type(User.class)
+                        .filter("email", wildcardUser.getEmail()).list());
+            }
+        }
+        return users;
+    }
+
     @Path(Api.GET_LOGIN) @POST @Consumes(JSON) @Produces(JSON)
     public List getLogin(List<User> wildcardUsers) {
         List<User> users = new ArrayList<>();
@@ -126,8 +141,12 @@ public class UserRestService extends GeneralRestService {
 
     @Path(Api.ADD) @POST @Consumes(JSON) @Produces(JSON)
     public List add(List<User> items) {
-        ObjectifyService.ofy().save().entities(items).now();
-        return items;
+        if (UserRestService.getUnique(items).isEmpty()) {
+            ObjectifyService.ofy().save().entities(items).now();
+            return items;
+        } else {
+            return new ArrayList();
+        }
     }
 
     public static List getAll() {
@@ -167,6 +186,15 @@ public class UserRestService extends GeneralRestService {
     @Path(Api.DEBUG_GET + "/email={email}") @GET @Produces(JSON)
     public static List debugGet(@PathParam("email") String email) {
         return get(Arrays.asList(new User(email)));
+    }
+
+    @Path(Api.DEBUG_DELETE + "/email={email}") @GET @Produces(JSON)
+    public String debugDelete(@PathParam("email") String email) {
+        List usersToDelete = get(Arrays.asList(new User(email)));
+        ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(User.class)
+                .filter("email", email)
+                .keys()).now();
+        return "" + usersToDelete.size() + " user(s) deleted";
     }
 
     @Path(Api.DEBUG_CREATE) @GET @Produces(JSON)

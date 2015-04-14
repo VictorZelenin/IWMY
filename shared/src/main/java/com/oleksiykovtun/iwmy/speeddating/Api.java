@@ -14,6 +14,8 @@ public class Api {
     public static final String DEBUG_ADD_ORGANIZER = "debug/add/organizer";
     public static final String GET = "get";
     public static final String DEBUG_GET = "debug/get";
+    public static final String DEBUG_DELETE = "debug/delete";
+    public static final String GET_UNIQUE = "get/unique";
     public static final String GET_LOGIN = "get/login";
     public static final String GET_FOR_EVENT = "get/for/event";
     public static final String GET_FOR_EVENT_ACTIVE = "get/for/event/active";

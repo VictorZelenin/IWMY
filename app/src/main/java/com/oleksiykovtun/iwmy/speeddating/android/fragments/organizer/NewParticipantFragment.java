@@ -93,7 +93,11 @@ public class NewParticipantFragment extends CoolFragment {
     public void onReceiveWebData(String postTag, List response) {
         switch (postTag) {
             case Api.USERS + Api.ADD:
-                post(Api.ATTENDANCES + Api.ADD, Attendance[].class, new Attendance(user, event));
+                if (!response.isEmpty()) {
+                    post(Api.ATTENDANCES + Api.ADD, Attendance[].class, new Attendance(user, event));
+                } else {
+                    showToastLong(R.string.message_user_exists);
+                }
                 break;
             case Api.ATTENDANCES + Api.ADD:
                 if (!response.isEmpty()) {

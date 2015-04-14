@@ -20,6 +20,8 @@ import java.util.List;
  */
 public class RegisteringFragment extends CoolFragment {
 
+    private User impliedUser = null;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,12 +55,12 @@ public class RegisteringFragment extends CoolFragment {
                 String organization = getEditText(R.id.input_organization);
                 String website = getEditText(R.id.input_website);
 
-                User user = new User(email, password, username, group, nameAndSurname,
+                impliedUser = new User(email, password, username, group, nameAndSurname,
                         photoBase64, phone, birthDate, gender, orientation, goal, affair, height,
                         weight, attitudeToSmoking, attitudeToAlcohol, location, organization,
                         website);
-                if (checkUser(user)) {
-                    post(Api.MAIL + Api.SEND, Email[].class, getOrganizerRequestEmail(user));
+                if (checkUser(impliedUser)) {
+                    post(Api.USERS + Api.GET_UNIQUE, User[].class, impliedUser);
                 } else {
                     showToast(R.string.message_inputs_error);
                 }
@@ -67,11 +69,22 @@ public class RegisteringFragment extends CoolFragment {
     }
 
     @Override
-    public void onReceiveWebData(List unsentEmails) {
-        if (unsentEmails.isEmpty()) {
-            CoolFragmentManager.showAtBottom(new AppliedFragment());
-        } else {
-            showToastLong(R.string.message_connection_error);
+    public void onReceiveWebData(String postTag, List response) {
+        switch (postTag) {
+            case Api.USERS + Api.GET_UNIQUE: // proceed only if no such user exists
+                if (response.isEmpty()) {
+                    post(Api.MAIL + Api.SEND, Email[].class, getOrganizerRequestEmail(impliedUser));
+                } else {
+                    showToastLong(R.string.message_user_exists);
+                }
+                break;
+            case Api.MAIL + Api.SEND:
+                if (response.isEmpty()) {
+                    CoolFragmentManager.showAtBottom(new AppliedFragment());
+                } else {
+                    showToastLong(R.string.message_connection_error);
+                }
+                break;
         }
     }
 

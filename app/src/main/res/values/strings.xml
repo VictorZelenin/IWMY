@@ -102,6 +102,7 @@
     <string name="message_connection_error">
         Connection error! Please check your internet connection and try again.
     </string>
+    <string name="message_user_exists">User already exists. Please enter other email or username</string>
     <string name="message_participant_added">Participant added</string>
     <string name="message_event_added">Event added</string>
     <string name="message_inputs_error">Please check your inputs and try again.</string>

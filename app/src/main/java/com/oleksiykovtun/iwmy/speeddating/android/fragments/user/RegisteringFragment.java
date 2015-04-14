@@ -85,7 +85,7 @@ public class RegisteringFragment extends CoolFragment {
             showToast(R.string.message_registered);
             CoolFragmentManager.showAtBottom(new EventListFragment());
         } else {
-            showToastLong(R.string.message_connection_error);
+            showToastLong(R.string.message_user_exists);
         }
     }
 
