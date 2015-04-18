@@ -119,7 +119,7 @@ public class RegisteringFragment extends CoolFragment {
         message += "&website=" + CoolFormatter.escapeUrl(organizerUser.getWebsite());
 
         return new Email(Api.APP_EMAIL, "" + getText(R.string.app_name), Api.APP_EMAIL,
-                "" + getText(R.string.app_name), "" + getText(R.string.mail_organizer_registering), message);
+                "" + getText(R.string.app_name), "" + getText(R.string.mail_subject_organizer_registering), message);
     }
 
 }

@@ -94,6 +94,12 @@ public class User implements Serializable, Comparable<User> {
         return this.get_userId().compareTo(other.get_userId());
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return (other instanceof User)
+                && this.get_userId().equals(((User)other).get_userId());
+    }
+
     public String get_userId() {
         return "" + _userId;
     }

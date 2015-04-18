@@ -74,7 +74,7 @@
     <string name="label_waiting_for_organizer">Очікування на організатора</string>
     <string name="label_weight">Вага:</string>
     <string name="label_you_will_be_contacted">Дякуємо. Незабаром ми з Вами зв\'яжемося</string>
-    <string name="mail_organizer_registering">Запит на реєстрацію організатора</string>
+    <string name="mail_subject_organizer_registering">Запит на реєстрацію організатора</string>
     <string name="menu_my_events">Мої заходи</string>
     <string name="message_connection_error">Помилка з\'єднання! Будь ласка, перевірте інтернет-з\'єднання</string>
     <string name="message_couples_sent">Пари надіслано</string>
@@ -110,4 +110,36 @@
     <string name="toolbar_settings">Налаштування</string>
     <string name="toolbar_your_couple_list">Ваші пари</string>
     <string name="message_user_exists">Користувач уже є. Будь ласка, введіть інші email або ім\'я користувача</string>
+    <string name="label_new_couple_list_one">У нас є переможець! Вітаємо пару!</string>
+    <string name="label_new_couple_list_many">Відмінний результат зустрічі! У нас є одразу кілька щасливих пар!</string>
+    <string name="label_new_couple_list_empty">Пар не опинилося, але час провели чудово!</string>
+    <string name="label_old_couple_list_one">Вони знайшли одне одного! Вітаємо пару!</string>
+    <string name="label_old_couple_list_many">Неймовірна зустріч! Одразу кілька пар утворили учасники!</string>
+    <string name="label_old_couple_list_empty">Дякуємо за участь! Будемо раді бачити Вас знову!</string>
+    <string name="mail_subject_organizer_event_successful">Зустріч пройшла успішно!</string>
+    <string name="mail_subject_user_you_found">Ви знайшли одне одного!</string>
+    <string name="mail_subject_user_thank_you">Дякуємо за участь у спід-дейтингу!</string>
+    <string name="mail_text_organizer_event_successful">
+Зустріч пройшла успішно. Кількість утворених пар – COUPLE_COUNT. Контакти утворених пар: \n\nCONTACTS_COUPLE_LIST\n\n
+Дякуємо, що скористалися нашою програмою! Наші контакти: info@want2meetu.com
+    </string>
+    <string name="mail_text_user_one_couple">
+На зустрічі спід-дейтингу Ви разом з одним з учасників утворили пару! Це означає, що зараз саме час налагодити контакти! Наші вітання! Контакти для зв\'язку: \n\nCONTACTS_ONE_COUPLE\n\n
+Дякуємо за участь!\n\n
+Контакти закладу-організатора: \nCONTACTS_ORGANIZER\n\n
+Наші контакти: \nCONTACTS_SPEED_DATING
+    </string>
+    <string name="mail_text_user_many_couples">
+На зустрічі спід-дейтингу Ви отримали симпатію одразу у COUPLE_COUNT учасників! Це означає, що зараз саме час налагодити контакти! Наші вітання! Контакти для зв\'язку: \n\nCONTACTS_MANY_COUPLES\n\n
+Дякуємо за участь!\n\n
+Контакти закладу-організатора: \nCONTACTS_ORGANIZER\n\n
+Наші контакти: \nCONTACTS_SPEED_DATING
+    </string>
+    <string name="mail_text_user_no_couples">
+Ми вдячні Вам за те, що відвідали наш захід, і сподіваємося, що у Вас залишилися приємні враження! На жаль, цього разу не вийшло досягти взаємності, але це яж ніяк не означає, що «все пропало».\n\n
+Ми будемо раді бачити Вас на наступній зустрічі! Приходьте, і Вам пощастить!\n\n
+Контакти закладу-організатора: \nCONTACTS_ORGANIZER\n\n
+Наші контакти: \nCONTACTS_SPEED_DATING
+    </string>
+    <string name="label_couple">Пара:</string>
 </resources>

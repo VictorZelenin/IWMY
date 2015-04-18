@@ -48,6 +48,12 @@ public class Couple implements Serializable, Comparable<Couple> {
         return this.get_coupleId().compareTo(other.get_coupleId());
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return (other instanceof Couple)
+                && this.get_coupleId().equals(((Couple)other).get_coupleId());
+    }
+
     public String get_coupleId() {
         return "" + _coupleId;
     }

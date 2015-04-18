@@ -52,6 +52,12 @@ public class Attendance implements Serializable, Comparable<Attendance> {
         return this.get_attendanceId().compareTo(other.get_attendanceId());
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return (other instanceof Attendance)
+                && this.get_attendanceId().equals(((Attendance)other).get_attendanceId());
+    }
+
     public String get_attendanceId() {
         return "" + _attendanceId;
     }

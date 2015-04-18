@@ -49,6 +49,12 @@ public class Rating implements Serializable, Comparable<Rating> {
         return this.get_ratingId().compareTo(other.get_ratingId());
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return (other instanceof Rating)
+                && this.get_ratingId().equals(((Rating)other).get_ratingId());
+    }
+
     public String get_ratingId() {
         return "" + _ratingId;
     }

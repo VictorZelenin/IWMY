@@ -52,6 +52,12 @@ public class Event implements Serializable, Comparable<Event> {
         return this.get_eventId().compareTo(other.get_eventId());
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return (other instanceof Event)
+                && this.get_eventId().equals(((Event)other).get_eventId());
+    }
+
     public String get_eventId() {
         return "" + _eventId;
     }

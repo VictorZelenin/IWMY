@@ -71,6 +71,13 @@
     <string name="label_select_time">Select time</string>
     <string name="label_waiting_for_organizer">Waiting for organizer</string>
     <string name="label_max_ratings">Max ratings per user:</string>
+    <string name="label_new_couple_list_one">We have a winner! Congratulations to the couple!</string>
+    <string name="label_new_couple_list_many">Excellent results! We have several happy couples!</string>
+    <string name="label_new_couple_list_empty">There are no matching couples, but there was a good time!</string>
+    <string name="label_old_couple_list_one">They found each other! Congratulations to the couple!</string>
+    <string name="label_old_couple_list_many">An incredible dating! There are several couples!</string>
+    <string name="label_old_couple_list_empty">Thank you for participation! We are glad to see you again soon!</string>
+    <string name="label_couple">Couple:</string>
     <string name="label_empty" translatable="false">-</string>
 
     <string name="button_login">Login</string>
@@ -131,6 +138,31 @@
     <color name="white">#FFFFFF</color>
     <color name="gray">#CCCCCC</color>
 
-    <string name="mail_organizer_registering">Organizer registering request</string>
+    <string name="mail_subject_organizer_registering">Organizer registering request</string>
+    <string name="mail_subject_organizer_event_successful">The dating was successful</string>
+    <string name="mail_subject_user_you_found">You found each other!</string>
+    <string name="mail_subject_user_thank_you">Thank you for participating in the speed dating!</string>
+    <string name="mail_text_organizer_event_successful">
+The dating was successful. The number of matching couples: COUPLE_COUNT. Contacts of matching couples: \n\nCONTACTS_COUPLE_LIST\n\n
+Thank you for using our application! Our contact info: info@want2meetu.com
+    </string>
+    <string name="mail_text_user_one_couple">
+At the speed dating you and one of the participants made a couple! It\'s time to know each other better! Congratulations! Their contact info: \n\nCONTACTS_ONE_COUPLE\n\n
+Thank you for participation!\n\n
+Organizer\'s contact info: \nCONTACTS_ORGANIZER\n\n
+Our contact info: \nCONTACTS_SPEED_DATING
+    </string>
+    <string name="mail_text_user_many_couples">
+At the speed dating COUPLE_COUNT people liked you! It\'s time to know each other better! Our congratulations! Their contact info: \n\nCONTACTS_MANY_COUPLES\n\n
+Thank you for participation!\n\n
+Organizer\'s contact info: \nCONTACTS_ORGANIZER\n\n
+Our contact info: \nCONTACTS_SPEED_DATING
+    </string>
+    <string name="mail_text_user_no_couples">
+Thank you for attending our event. We hope you had good time there! Unfortunately, this time reciprocity wasn\'t achieved, but it will be all right.\n\n
+We are gladly waiting for you at the next dating! Luck will be with you!\n\n
+Organizer\'s contact info: \nCONTACTS_ORGANIZER\n\n
+Our contact info: \nCONTACTS_SPEED_DATING
+    </string>
 
 </resources>

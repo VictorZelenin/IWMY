@@ -66,52 +66,8 @@ public class CoupleRestService extends GeneralRestService {
      */
     @Path(Api.PUT) @POST @Consumes(JSON) @Produces(JSON)
     public List put(List<Couple> couples) {
-        // writing couples
         ObjectifyService.ofy().save().entities(couples).now();
-        // sending emails
-        if (! couples.isEmpty()) {
-            List<Email> emails = new ArrayList<>();
-            emails.add(getEmailForOrganizer(couples));
-            for (Couple couple : couples) {
-                emails.add(getEmailForCoupleUser1(couple));
-                emails.add(getEmailForCoupleUser2(couple));
-            }
-            EmailRestService.send(emails);
-        }
         return couples;
-    }
-
-    private Email getEmailForOrganizer(List<Couple> couples) {
-        String message = Api.SUBJECT_COUPLES + ":\n";
-        for (Couple couple : couples) {
-            message += "\nCouple:\n";
-            message += getCoupleMessageForUser(couple.getName1(), couple.getBirthDate1());
-            message += getCoupleMessageForUser(couple.getName2(), couple.getBirthDate2());
-        }
-        return new Email(Api.APP_EMAIL, Api.APP_NAME,
-                couples.get(0).getEventOrganizerEmail(), "Organizer",
-                Api.SUBJECT_COUPLES + " - " + Api.APP_NAME, message);
-    }
-
-    private Email getEmailForCoupleUser1(Couple couple) {
-        return new Email(Api.APP_EMAIL, Api.APP_NAME,
-                couple.getUserEmail1(), couple.getName1(),
-                Api.SUBJECT_COUPLE + " - " + Api.APP_NAME, Api.SUBJECT_COUPLE + ":\n"
-                    + getCoupleMessageForUser(couple.getName2(), couple.getBirthDate2()));
-    }
-
-    private Email getEmailForCoupleUser2(Couple couple) {
-        return new Email(Api.APP_EMAIL, Api.APP_NAME,
-                couple.getUserEmail2(), couple.getName2(),
-                Api.SUBJECT_COUPLE + " - " + Api.APP_NAME, Api.SUBJECT_COUPLE + ":\n"
-                    + getCoupleMessageForUser(couple.getName1(), couple.getBirthDate1()));
-    }
-
-    private String getCoupleMessageForUser(String name, String birthDate) {
-        String message = "Name: " + name;
-        message += "\nAge: " + TimeConverter.getYearsFromDate(birthDate);
-        message += "\n";
-        return message;
     }
 
     @Path(Api.GET_FOR_ATTENDANCE) @POST @Consumes(JSON) @Produces(JSON)
