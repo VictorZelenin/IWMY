@@ -52,8 +52,8 @@
     <string name="label_event_time">Час:</string>
     <string name="label_finishing">Завершення</string>
     <string name="label_gender">Стать:</string>
-    <string name="label_gender_female">Дівчина</string>
-    <string name="label_gender_male">Хлопець</string>
+    <string name="label_gender_female">Жіноча</string>
+    <string name="label_gender_male">Чоловіча</string>
     <string name="label_goal">Мета:</string>
     <string name="label_height">Зріст:</string>
     <string name="label_max_ratings">Максимально голосів від учасника:</string>
