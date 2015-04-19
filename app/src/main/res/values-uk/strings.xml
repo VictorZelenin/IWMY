@@ -41,14 +41,14 @@
     <string name="label_delete_this_event">Видалити цей захід?\n</string>
     <string name="label_delete_this_event_from_yours">Видалити цей захід з ваших заходів?\n</string>
     <string name="label_email">Email:</string>
-    <string name="label_event_address">Поштова адреса:</string>
+    <string name="label_event_address">Адреса заходу:</string>
     <string name="label_event_cost">Вартість:</string>
     <string name="label_event_date">Дата:</string>
     <string name="label_event_description">Опис:</string>
     <string name="label_event_organizer">Організатор:</string>
     <string name="label_event_organizer_and_place">Організатор і місце:</string>
     <string name="label_event_place">Місце:</string>
-    <string name="label_event_places">Вільних місць:</string>
+    <string name="label_event_places">Кількість учасників:</string>
     <string name="label_event_time">Час:</string>
     <string name="label_finishing">Завершення</string>
     <string name="label_gender">Стать:</string>

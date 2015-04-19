@@ -35,7 +35,7 @@
     <string name="label_event_organizer_and_place">Organizer and place: </string>
     <string name="label_event_address">Street address: </string>
     <string name="label_event_time">Time: </string>
-    <string name="label_event_places">Places available: </string>
+    <string name="label_event_places">Number of attenders: </string>
     <string name="label_event_cost">Cost: </string>
     <string name="label_event_description">Description: </string>
     <string name="label_you_will_be_contacted">Thank you. You will be contacted soon</string>
