@@ -28,20 +28,9 @@ public class Attendance implements Serializable, Comparable<Attendance> {
 
     public Attendance() { }
 
-    public Attendance(String userEmail, String username, String userGender,
-                      String eventOrganizerEmail, String eventTime, String active) {
-        this._attendanceId = System.currentTimeMillis() + "_" + userEmail + "_"
-                + eventOrganizerEmail + "_" + eventTime; // comparable by time of creation
-        this.userEmail = userEmail;
-        this.username = username;
-        this.userGender = userGender;
-        this.eventOrganizerEmail = eventOrganizerEmail;
-        this.eventTime = eventTime;
-        this.active = active;
-    }
-
     public Attendance(User user, Event event) {
-        this._attendanceId = user.getEmail() + "_" + event.getOrganizerEmail() + "_" + event.getTime();
+        this._attendanceId = System.currentTimeMillis() + "_" + user.get_userId()
+                + "_" + event.get_eventId(); // will be comparable by creation date
         this.userEmail = user.getEmail();
         this.username = user.getUsername();
         this.userGender = user.getGender();
