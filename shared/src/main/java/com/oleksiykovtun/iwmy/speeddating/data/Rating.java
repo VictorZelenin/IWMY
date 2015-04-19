@@ -25,6 +25,7 @@ public class Rating implements Serializable, Comparable<Rating> {
     private String otherUserEmail;
 
     private String number;
+    private String username;
     private String selection;
     private String comment;
 
@@ -34,7 +35,7 @@ public class Rating implements Serializable, Comparable<Rating> {
 
     public Rating(String eventOrganizerEmail, String eventTime,
                   String thisUserEmail, String otherUserEmail,
-                  String number, String selection, String comment) {
+                  String number, String username, String selection, String comment) {
         this._ratingId = number + "_" + eventOrganizerEmail + "_" + eventTime + "_"
                 + thisUserEmail + "_" + otherUserEmail;
         this.eventOrganizerEmail = eventOrganizerEmail;
@@ -42,6 +43,7 @@ public class Rating implements Serializable, Comparable<Rating> {
         this.thisUserEmail = thisUserEmail;
         this.otherUserEmail = otherUserEmail;
         this.number = number;
+        this.username = username;
         this.selection = selection;
         this.comment = comment;
         this.actual = "false";
@@ -96,6 +98,14 @@ public class Rating implements Serializable, Comparable<Rating> {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public String getUsername() {
+        return "" + username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getSelection() {

@@ -9,7 +9,8 @@
     <dimen name="toolbar_text_size">25sp</dimen>
     <dimen name="label_text_size">20sp</dimen>
 
-    <integer name="label_number_relative_width">2</integer>
+    <integer name="label_number_relative_width">1</integer>
+    <integer name="label_username_relative_width">4</integer>
     <integer name="label_selection_relative_width">1</integer>
     <integer name="label_comment_relative_width">4</integer>
 

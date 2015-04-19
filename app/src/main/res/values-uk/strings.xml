@@ -58,7 +58,7 @@
     <string name="label_height">Зріст:</string>
     <string name="label_max_ratings">Максимально голосів від учасника:</string>
     <string name="label_name_and_surname">Ім\'я, прізвище:</string>
-    <string name="label_number">Номер</string>
+    <string name="label_number">№</string>
     <string name="label_orientation">Орієнтація:</string>
     <string name="label_password">Пароль:</string>
     <string name="label_phone">Номер телефону:</string>
@@ -142,4 +142,5 @@
 Наші контакти: \nCONTACTS_SPEED_DATING
     </string>
     <string name="label_couple">Пара:</string>
+    <string name="label_rating_username">Нік</string>
 </resources>

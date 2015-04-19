@@ -56,6 +56,13 @@
             android:layout_height="wrap_content" />
 
         <TextView
+            android:text="@string/label_rating_username"
+            android:layout_weight="@integer/label_username_relative_width"
+            android:textSize="@dimen/label_text_size"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
             android:text="@string/label_selection"
             android:layout_weight="@integer/label_selection_relative_width"
             android:textSize="@dimen/label_text_size"

@@ -43,9 +43,10 @@
     <string name="label_user_name">Name, </string>
     <string name="label_user_age">Age, </string>
     <string name="label_user_location">Location</string>
-    <string name="label_number">Number</string>
+    <string name="label_number">#</string>
     <string name="label_selection" translatable="false">+/-</string>
     <string name="label_comment">Comment</string>
+    <string name="label_rating_username">Username</string>
     <string name="label_wait_for_result">Please wait for results</string>
     <string name="label_calculating">Calculating</string>
     <string name="label_finishing">Finishing</string>

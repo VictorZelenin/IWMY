@@ -19,6 +19,7 @@ public class Attendance implements Serializable, Comparable<Attendance> {
     @Id
     private String _attendanceId;
     private String userEmail;
+    private String username;
     private String userGender;
     private String eventOrganizerEmail;
     private String eventTime; // format "2099-12-31 23:59"
@@ -27,11 +28,12 @@ public class Attendance implements Serializable, Comparable<Attendance> {
 
     public Attendance() { }
 
-    public Attendance(String userEmail, String userGender, String eventOrganizerEmail,
-                      String eventTime, String active) {
+    public Attendance(String userEmail, String username, String userGender,
+                      String eventOrganizerEmail, String eventTime, String active) {
         this._attendanceId = System.currentTimeMillis() + "_" + userEmail + "_"
                 + eventOrganizerEmail + "_" + eventTime; // comparable by time of creation
         this.userEmail = userEmail;
+        this.username = username;
         this.userGender = userGender;
         this.eventOrganizerEmail = eventOrganizerEmail;
         this.eventTime = eventTime;
@@ -41,6 +43,7 @@ public class Attendance implements Serializable, Comparable<Attendance> {
     public Attendance(User user, Event event) {
         this._attendanceId = user.getEmail() + "_" + event.getOrganizerEmail() + "_" + event.getTime();
         this.userEmail = user.getEmail();
+        this.username = user.getUsername();
         this.userGender = user.getGender();
         this.eventOrganizerEmail = event.getOrganizerEmail();
         this.eventTime = event.getTime();
@@ -106,4 +109,11 @@ public class Attendance implements Serializable, Comparable<Attendance> {
         this.active = active;
     }
 
+    public String getUsername() {
+        return "" + username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

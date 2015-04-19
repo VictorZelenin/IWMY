@@ -27,12 +27,14 @@ public class RatingRecyclerAdapter extends CoolRecyclerAdapter {
 
     public class ViewHolder extends CoolRecyclerAdapter.ViewHolder {
         public TextView numberTextView;
+        public TextView usernameTextView;
         public CheckBox selectionCheckBox;
         public EditText commentEditText;
 
         public ViewHolder(View view) {
             super(view);
             numberTextView = (TextView) view.findViewById(R.id.label_number);
+            usernameTextView = (TextView) view.findViewById(R.id.label_rating_username);
             selectionCheckBox = (CheckBox) view.findViewById(R.id.checkbox_selection);
             commentEditText = (EditText) view.findViewById(R.id.input_comment);
         }
@@ -82,6 +84,7 @@ public class RatingRecyclerAdapter extends CoolRecyclerAdapter {
     public void onBindViewHolder(CoolRecyclerAdapter.ViewHolder holder, int position) {
         Rating rating = (Rating) (dataSet.get(position));
         ((ViewHolder) holder).numberTextView.setText(rating.getNumber());
+        ((ViewHolder) holder).usernameTextView.setText(rating.getUsername());
         ((ViewHolder) holder).selectionCheckBox.setChecked(!rating.getSelection().isEmpty());
         ((ViewHolder) holder).selectionCheckBox.setTag(position);
         ((ViewHolder) holder).commentEditText.setText(rating.getComment());

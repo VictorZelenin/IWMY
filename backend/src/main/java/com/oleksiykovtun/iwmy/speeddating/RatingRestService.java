@@ -61,7 +61,8 @@ public class RatingRestService extends GeneralRestService {
                         .getUserGender())) {
                     ratingSet.add(new Rating(wildcardAttendance.getEventOrganizerEmail(),
                             wildcardAttendance.getEventTime(), wildcardAttendance.getUserEmail(),
-                            activeAttendance.getUserEmail(), "" + ratingNumber, "", ""));
+                            activeAttendance.getUserEmail(), "" + ratingNumber,
+                            activeAttendance.getUsername(), "", ""));
                     ++ratingNumber;
                 }
             }
