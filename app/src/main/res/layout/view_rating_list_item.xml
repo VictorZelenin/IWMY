@@ -22,12 +22,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/label_comment"
-        android:text="@string/label_comment"
+    <EditText
+        android:id="@+id/input_comment"
         android:layout_weight="@integer/label_comment_relative_width"
         android:gravity="center_vertical"
         android:textSize="@dimen/label_text_size"
+        android:inputType="text"
         android:layout_width="0dp"
         android:layout_height="wrap_content" />
 

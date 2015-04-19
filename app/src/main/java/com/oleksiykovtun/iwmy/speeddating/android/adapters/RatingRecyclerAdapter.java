@@ -1,11 +1,13 @@
 package com.oleksiykovtun.iwmy.speeddating.android.adapters;
 
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.oleksiykovtun.android.cooltools.CoolRecyclerAdapter;
@@ -25,14 +27,14 @@ public class RatingRecyclerAdapter extends CoolRecyclerAdapter {
 
     public class ViewHolder extends CoolRecyclerAdapter.ViewHolder {
         public TextView numberTextView;
-        public CheckBox selectionTextView;
-        public TextView commentTextView;
+        public CheckBox selectionCheckBox;
+        public EditText commentEditText;
 
         public ViewHolder(View view) {
             super(view);
             numberTextView = (TextView) view.findViewById(R.id.label_number);
-            selectionTextView = (CheckBox) view.findViewById(R.id.checkbox_selection);
-            commentTextView = (TextView) view.findViewById(R.id.label_comment);
+            selectionCheckBox = (CheckBox) view.findViewById(R.id.checkbox_selection);
+            commentEditText = (EditText) view.findViewById(R.id.input_comment);
         }
 
     }
@@ -42,29 +44,47 @@ public class RatingRecyclerAdapter extends CoolRecyclerAdapter {
         final ViewHolder viewHolder = new ViewHolder(
                 LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.view_rating_list_item, parent, false));
-        viewHolder.selectionTextView.setOnCheckedChangeListener(
+        viewHolder.selectionCheckBox.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         try {
-                            int position = Integer.parseInt("" + viewHolder.selectionTextView.getTag());
-                            ((Rating) dataSet.get(position)).setSelection(isChecked ? "selected" : "");
-                            itemClickListener.onClick(dataSet.get(position));
+                            ((Rating) dataSet.get(getPosition(viewHolder)))
+                                    .setSelection(isChecked ? "selected" : "");
+                            itemClickListener.onClick(dataSet.get(getPosition(viewHolder)));
                         } catch (Throwable e) {
-                            Log.d("IWMY", "Checkbox toggling failed");
+                            Log.e("IWMY", "Checkbox toggling failed");
                         }
                     }
                 });
+        viewHolder.commentEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    try {
+                        ((Rating) dataSet.get(getPosition(viewHolder)))
+                                .setComment("" + viewHolder.commentEditText.getText());
+                        itemClickListener.onClick(dataSet.get(getPosition(viewHolder)));
+                    } catch(Throwable e){
+                        Log.e("IWMY", "Comment editing failed");
+                    }
+                }
+            }
+        });
         return viewHolder;
+    }
+
+    private int getPosition(ViewHolder viewHolder) {
+        return Integer.parseInt("" + viewHolder.selectionCheckBox.getTag());
     }
 
     @Override
     public void onBindViewHolder(CoolRecyclerAdapter.ViewHolder holder, int position) {
         Rating rating = (Rating) (dataSet.get(position));
         ((ViewHolder) holder).numberTextView.setText(rating.getNumber());
-        ((ViewHolder) holder).selectionTextView.setChecked(!rating.getSelection().isEmpty());
-        ((ViewHolder) holder).selectionTextView.setTag(Integer.valueOf(position));
-        ((ViewHolder) holder).commentTextView.setText(rating.getComment());
+        ((ViewHolder) holder).selectionCheckBox.setChecked(!rating.getSelection().isEmpty());
+        ((ViewHolder) holder).selectionCheckBox.setTag(position);
+        ((ViewHolder) holder).commentEditText.setText(rating.getComment());
     }
 
 }
