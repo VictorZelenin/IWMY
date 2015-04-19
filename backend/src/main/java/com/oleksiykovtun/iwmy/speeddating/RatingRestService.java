@@ -69,6 +69,15 @@ public class RatingRestService extends GeneralRestService {
         return Arrays.asList(ratingSet.toArray());
     }
 
+    @Path(Api.PUT_ACTUAL) @POST @Consumes(JSON) @Produces(JSON)
+    public List putActual(List<Rating> items) {
+        for (Rating rating : items) {
+            rating.setActual("true");
+        }
+        ObjectifyService.ofy().save().entities(items).now();
+        return items;
+    }
+
     @Path(Api.PUT) @POST @Consumes(JSON) @Produces(JSON)
     public List put(List<Rating> items) {
         ObjectifyService.ofy().save().entities(items).now();

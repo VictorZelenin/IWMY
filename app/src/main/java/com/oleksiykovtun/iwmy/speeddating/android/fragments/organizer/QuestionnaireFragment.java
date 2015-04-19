@@ -59,7 +59,7 @@ public class QuestionnaireFragment extends CoolFragment {
                 ratingList.addAll(response);
                 ratingRecyclerAdapter.notifyDataSetChanged();
                 break;
-            case Api.RATINGS + Api.PUT:
+            case Api.RATINGS + Api.PUT_ACTUAL:
                 CoolFragmentManager.showPrevious();
                 break;
         }
@@ -77,6 +77,8 @@ public class QuestionnaireFragment extends CoolFragment {
             ((Rating)objectAtClicked).setSelection("");
             ratingRecyclerAdapter.notifyDataSetChanged();
             showToast(R.string.message_you_cannot_add_more_ratings);
+        } else {
+            post(Api.RATINGS + Api.PUT, Rating[].class, objectAtClicked);
         }
     }
 
@@ -85,10 +87,7 @@ public class QuestionnaireFragment extends CoolFragment {
         switch (view.getId()) {
             case R.id.button_send:
                 if (!ratingList.isEmpty()) {
-                    for (Rating rating : ratingList) {
-                        rating.setActual("true");
-                    }
-                    post(Api.RATINGS + Api.PUT, Rating[].class, ratingList.toArray());
+                    post(Api.RATINGS + Api.PUT_ACTUAL, Rating[].class, ratingList.toArray());
                 }
                 break;
         }

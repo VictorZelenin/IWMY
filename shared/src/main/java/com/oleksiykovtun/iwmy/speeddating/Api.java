@@ -33,6 +33,7 @@ public class Api {
 
     public static final String RATINGS = "/ratings/";
     public static final String PUT = "put";
+    public static final String PUT_ACTUAL = "put/actual";
     public static final String GET_FOR_ATTENDANCE_ACTIVE = "get/for/attendance/active";
 
     public static final String COUPLES = "/couples/";
