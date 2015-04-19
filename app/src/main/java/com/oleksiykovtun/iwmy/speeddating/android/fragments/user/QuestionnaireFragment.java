@@ -42,6 +42,8 @@ public class QuestionnaireFragment extends CoolFragment {
 
         event = (Event) getAttachment();
 
+        setText(R.id.label_organizer, event.getPlace());
+
         // generate ratings for this attendant
         post(Api.RATINGS + Api.GENERATE_FOR_ATTENDANCE_ACTIVE, Rating[].class,
                 new Attendance(Account.getUser(this), event));
