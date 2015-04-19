@@ -12,6 +12,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -43,7 +44,7 @@ public class EmailRestService extends GeneralRestService {
                 }
                 message.addRecipient(Message.RecipientType.TO,
                         new InternetAddress(email.getToAddress(), email.getToName()));
-                message.setSubject(email.getSubject());
+                message.setSubject(MimeUtility.encodeText(email.getSubject(), "utf-8", "B"));
                 message.setText(email.getMessage());
                 Transport.send(message);
             } catch (Throwable t) {
