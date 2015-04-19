@@ -179,8 +179,7 @@ public class UserRestService extends GeneralRestService {
                                     @PathParam("website") String website) {
         User user = new User(email, password, username, "organizer", nameAndSurname, "", phone,
                 "", "", "", "", "", "", "", "", "", "", organization, website);
-        ObjectifyService.ofy().save().entity(user).now();
-        return "Organizer added.";
+        return add(Arrays.asList(user)).size() > 0 ? "Organizer added." : "Already exists.";
     }
 
     @Path(Api.DEBUG_GET + "/email={email}") @GET @Produces(JSON)
