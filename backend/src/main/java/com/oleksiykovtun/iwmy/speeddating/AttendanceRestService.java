@@ -67,28 +67,11 @@ public class AttendanceRestService extends GeneralRestService {
         }
         // making "fake" attendances of not yet voted users false
         for (Attendance attendance : attendances) {
-            if (RatingRestService.getForAttendance(Arrays.asList(attendance)).isEmpty()) {
+            if (RatingRestService.getForAttendanceActual(Arrays.asList(attendance)).isEmpty()) {
                 attendance.setActive("false");
             }
         }
         return new ArrayList<>(attendances);
-    }
-
-    /**
-     * Checking until all active attendants put ratings.
-     * @param wildcardEvents events for active attendants
-     * @return ratings created by all active attendants or empty if not by all of them
-     */
-    @Path(Api.CHECK_FOR_EVENT_ACTIVE_ALL) @POST @Consumes(JSON) @Produces(JSON)
-    public static List checkForEventActiveAll(List<Event> wildcardEvents) {
-        List<Attendance> attendances = getForEventActive(wildcardEvents);
-        boolean allActive = true;
-        for (Attendance attendance : attendances) {
-            if (RatingRestService.getForAttendance(Arrays.asList(attendance)).isEmpty()) {
-                allActive = false;
-            }
-        }
-        return allActive ? attendances : new ArrayList();
     }
 
     @Path(Api.ADD) @POST @Consumes(JSON) @Produces(JSON)

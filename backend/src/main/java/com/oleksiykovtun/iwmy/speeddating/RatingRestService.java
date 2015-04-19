@@ -23,12 +23,26 @@ import javax.ws.rs.Produces;
 @Path(Api.RATINGS)
 public class RatingRestService extends GeneralRestService {
 
+    @Path(Api.GET_FOR_ATTENDANCE_ACTIVE) @POST @Consumes(JSON) @Produces(JSON)
+    public static List getForAttendanceActive(List<Attendance> attendanceList) {
+        Set<Rating> outputSet = new TreeSet<>();
+        for (Attendance userAttendance : attendanceList) {
+            outputSet.addAll(ObjectifyService.ofy().load().type(Rating.class)
+                    .filter("thisUserEmail", userAttendance.getUserEmail())
+                    .filter("eventOrganizerEmail", userAttendance.getEventOrganizerEmail())
+                    .filter("eventTime", userAttendance.getEventTime()).list());
+        }
+        if (outputSet.isEmpty()) {
+            return generateForAttendanceActive(attendanceList);
+        }
+        return Arrays.asList(outputSet.toArray());
+    }
+
     /**
      * Generates ratings for other active attendances.
      * @param wildcardAttendances attendances (the first one will be used)
      * @return ratings rating list
      */
-    @Path(Api.GENERATE_FOR_ATTENDANCE_ACTIVE) @POST @Consumes(JSON) @Produces(JSON)
     public static List generateForAttendanceActive(List<Attendance> wildcardAttendances) {
         Set<Rating> ratingSet = new TreeSet<>();
         if (wildcardAttendances.size() > 0) {
@@ -92,13 +106,14 @@ public class RatingRestService extends GeneralRestService {
         return Arrays.asList(outputSet.toArray());
     }
 
-    public static List getForAttendance(List<Attendance> attendanceList) {
+    public static List getForAttendanceActual(List<Attendance> attendanceList) {
         Set<Rating> outputSet = new TreeSet<>();
         for (Attendance userAttendance : attendanceList) {
             outputSet.addAll(ObjectifyService.ofy().load().type(Rating.class)
                     .filter("thisUserEmail", userAttendance.getUserEmail())
                     .filter("eventOrganizerEmail", userAttendance.getEventOrganizerEmail())
-                    .filter("eventTime", userAttendance.getEventTime()).list());
+                    .filter("eventTime", userAttendance.getEventTime())
+                    .filter("actual", "true").list());
         }
         return Arrays.asList(outputSet.toArray());
     }

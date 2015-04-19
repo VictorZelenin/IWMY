@@ -45,7 +45,7 @@ public class QuestionnaireFragment extends CoolFragment {
         setText(R.id.label_organizer, event.getPlace());
 
         // generate ratings for this attendant
-        post(Api.RATINGS + Api.GENERATE_FOR_ATTENDANCE_ACTIVE, Rating[].class,
+        post(Api.RATINGS + Api.GET_FOR_ATTENDANCE_ACTIVE, Rating[].class,
                 new Attendance(Account.getUser(this), event));
 
         RecyclerView ratingRecyclerView = (RecyclerView) view.findViewById(R.id.rating_list_holder);
@@ -74,7 +74,7 @@ public class QuestionnaireFragment extends CoolFragment {
     @Override
     public void onReceiveWebData(String postTag, List response) {
         switch (postTag) {
-            case Api.RATINGS + Api.GENERATE_FOR_ATTENDANCE_ACTIVE:
+            case Api.RATINGS + Api.GET_FOR_ATTENDANCE_ACTIVE:
                 ratingList.clear();
                 ratingList.addAll(response);
                 ratingRecyclerAdapter.notifyDataSetChanged();
@@ -90,6 +90,9 @@ public class QuestionnaireFragment extends CoolFragment {
         switch (view.getId()) {
             case R.id.button_send:
                 if (!ratingList.isEmpty()) {
+                    for (Rating rating : ratingList) {
+                        rating.setActual("true");
+                    }
                     post(Api.RATINGS + Api.PUT, Rating[].class, ratingList.toArray());
                 }
                 break;

@@ -28,6 +28,8 @@ public class Rating implements Serializable, Comparable<Rating> {
     private String selection;
     private String comment;
 
+    private String actual;
+
     public Rating() { }
 
     public Rating(String eventOrganizerEmail, String eventTime,
@@ -42,6 +44,7 @@ public class Rating implements Serializable, Comparable<Rating> {
         this.number = number;
         this.selection = selection;
         this.comment = comment;
+        this.actual = "false";
     }
 
     @Override
@@ -117,5 +120,13 @@ public class Rating implements Serializable, Comparable<Rating> {
 
     public void setEventTime(String eventTime) {
         this.eventTime = eventTime;
+    }
+
+    public String getActual() {
+        return "" + actual;
+    }
+
+    public void setActual(String actual) {
+        this.actual = actual;
     }
 }
