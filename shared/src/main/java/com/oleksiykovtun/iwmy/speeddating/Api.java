@@ -6,9 +6,6 @@ public class Api {
     public static final String APP_EMAIL = "iwmy.speed.dating@gmail.com";
     public static final String APP_NAME = "IWMY Speed Dating";
 
-    public static final String SUBJECT_COUPLES = "Couples found";
-    public static final String SUBJECT_COUPLE = "Couple found";
-
     public static final String USERS = "/users/";
     public static final String ADD = "add";
     public static final String DEBUG_ADD_ORGANIZER = "debug/add/organizer";
@@ -26,6 +23,7 @@ public class Api {
     public static final String GET_ALL = "get/all";
     public static final String GET_FOR_USER = "get/for/user";
     public static final String GET_FOR_TIME = "get/for/time";
+    public static final String SET_ACTUAL = "set/actual";
     public static final String SET_UNACTUAL = "set/unactual";
     public static final String DELETE = "delete";
 

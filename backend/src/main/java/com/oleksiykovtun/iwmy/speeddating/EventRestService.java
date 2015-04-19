@@ -106,6 +106,16 @@ public class EventRestService extends GeneralRestService {
         return get(wildcardEvents);
     }
 
+    @Path(Api.SET_ACTUAL) @POST @Consumes(JSON) @Produces(JSON)
+    public List setActual(List<Event> wildcardEvents) {
+        List<Event> events = EventRestService.get(wildcardEvents);
+        for (Event event : events) {
+            event.setActual("true");
+        }
+        ObjectifyService.ofy().save().entities(events).now();
+        return events;
+    }
+
     @Path(Api.SET_UNACTUAL) @POST @Consumes(JSON) @Produces(JSON)
     public List setUnactual(List<Event> wildcardEvents) {
         List<Event> events = EventRestService.get(wildcardEvents);

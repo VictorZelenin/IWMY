@@ -39,7 +39,10 @@ public class WaitCouplesFragment extends CoolFragment {
     @Override
     public void onReceiveWebData(List response) {
         if (response.size() > 0) {
-            CoolFragmentManager.showAtBottom(new CoupleUserListFragment(), event);
+            event = (Event) response.get(0);
+            if (event.getActual().equals("false")) {
+                CoolFragmentManager.showAtBottom(new CoupleUserListFragment(), event);
+            }
         }
     }
 
@@ -50,9 +53,8 @@ public class WaitCouplesFragment extends CoolFragment {
 
             @Override
             public void onTick(long millisUntilFinished) {
-                // checking until for this attendant couples are put
-                post(Api.COUPLES + Api.GET_FOR_ATTENDANCE, Couple[].class,
-                        new Attendance(Account.getUser(WaitCouplesFragment.this), event));
+                // checking until the event is already not actual (i.e. couples are obtained)
+                post(Api.EVENTS + Api.GET_FOR_TIME, Event[].class, event);
             }
 
             @Override
