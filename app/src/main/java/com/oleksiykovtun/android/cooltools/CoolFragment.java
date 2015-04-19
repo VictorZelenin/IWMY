@@ -136,6 +136,10 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
         }
     }
 
+    protected void setText(int textViewId, int textId) {
+        setText(textViewId, "" + getText(textId));
+    }
+
     protected void setText(int textViewId, int textId, String text) {
         setText(textViewId, getText(textId) + " " + text);
     }

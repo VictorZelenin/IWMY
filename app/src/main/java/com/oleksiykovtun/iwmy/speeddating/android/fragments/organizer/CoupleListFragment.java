@@ -54,6 +54,11 @@ public class CoupleListFragment extends CoolFragment {
         coupleList.clear();
         coupleList.addAll(response);
         coupleRecyclerAdapter.notifyDataSetChanged();
+        if (coupleList.size() == 1) {
+            setText(R.id.label_couple_list, R.string.label_old_couple_list_one);
+        } else if (coupleList.size() > 1) {
+            setText(R.id.label_couple_list, R.string.label_old_couple_list_many);
+        }
     }
 
     @Override

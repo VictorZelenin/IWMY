@@ -31,6 +31,13 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <TextView
+        android:id="@+id/label_couple_list"
+        android:text="@string/label_old_couple_list_empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/label_text_size" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/couple_list_holder"
         android:scrollbars="vertical"

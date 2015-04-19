@@ -61,6 +61,11 @@ public class CoupleListConfirmFragment extends CoolFragment {
                 coupleList.clear();
                 coupleList.addAll(response);
                 coupleRecyclerAdapter.notifyDataSetChanged();
+                if (coupleList.size() == 1) {
+                    setText(R.id.label_couple_list, R.string.label_new_couple_list_one);
+                } else if (coupleList.size() > 1) {
+                    setText(R.id.label_couple_list, R.string.label_new_couple_list_many);
+                }
                 break;
             case Api.USERS + Api.GET_FOR_EVENT_ACTIVE_RESET:
                 post(Api.COUPLES + Api.PUT, Couple[].class, coupleList.toArray());

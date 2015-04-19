@@ -79,6 +79,11 @@ public class CoupleUserListFragment extends CoolFragment {
                     coupleUserList.add(user);
                 }
                 coupleUserRecyclerAdapter.notifyDataSetChanged();
+                if (coupleUserList.size() == 1) {
+                    setText(R.id.label_couple_list, R.string.label_old_couple_list_one);
+                } else if (coupleUserList.size() > 1) {
+                    setText(R.id.label_couple_list, R.string.label_old_couple_list_many);
+                }
                 break;
         }
     }
