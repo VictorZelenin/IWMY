@@ -49,12 +49,7 @@ public class CoupleRestService extends GeneralRestService {
                             .asList(new User(rating2.getThisUserEmail()))).get(0);
                     User userMale = user1.getGender().equals(User.MALE) ? user1 : user2;
                     User userFemale = user2.getGender().equals(User.FEMALE) ? user2 : user1;
-                    couples.add(new Couple(event.getOrganizerEmail(), event.getTime(),
-                            userMale.getEmail(), userFemale.getEmail(),
-                            userMale.getNameAndSurname(), userMale.getUsername(),
-                            userMale.getBirthDate(), userMale.getPhone(),
-                            userFemale.getNameAndSurname(), userFemale.getUsername(),
-                            userFemale.getBirthDate(), userFemale.getPhone()));
+                    couples.add(new Couple(event, userMale, userFemale));
                 }
             }
         }

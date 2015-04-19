@@ -35,23 +35,20 @@ public class Couple implements Serializable, Comparable<Couple> {
 
     public Couple() { }
 
-    public Couple(String eventOrganizerEmail, String eventTime,
-                  String userEmail1, String userEmail2,
-                  String name1, String username1, String birthDate1, String phone1,
-                  String name2, String username2, String birthDate2, String phone2) {
-        this._coupleId = eventOrganizerEmail + "_" + eventTime + "_" + userEmail1 + "_" + userEmail2;
-        this.eventOrganizerEmail = eventOrganizerEmail;
-        this.eventTime = eventTime;
-        this.userEmail1 = userEmail1;
-        this.userEmail2 = userEmail2;
-        this.username1 = username1;
-        this.username2 = username2;
-        this.name1 = name1;
-        this.name2 = name2;
-        this.phone1 = phone1;
-        this.phone2 = phone2;
-        this.birthDate1 = birthDate1;
-        this.birthDate2 = birthDate2;
+    public Couple(Event event, User user1, User user2) {
+        this._coupleId = event.get_eventId() + "_" + user1.get_userId() + "_" + user2.get_userId();
+        this.eventOrganizerEmail = event.getOrganizerEmail();
+        this.eventTime = event.getTime();
+        this.userEmail1 = user1.getEmail();
+        this.userEmail2 = user2.getEmail();
+        this.username1 = user1.getUsername();
+        this.username2 = user2.getUsername();
+        this.name1 = user1.getNameAndSurname();
+        this.name2 = user2.getNameAndSurname();
+        this.phone1 = user1.getPhone();
+        this.phone2 = user2.getPhone();
+        this.birthDate1 = user1.getBirthDate();
+        this.birthDate2 = user2.getBirthDate();
     }
 
     @Override
