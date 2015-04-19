@@ -133,7 +133,7 @@ public class CoupleListConfirmFragment extends CoolFragment {
     }
 
     private String getUserContactInfo(User user) {
-        return user.getNameAndSurname() + "\n" + user.getEmail(); // todo phone number
+        return user.getNameAndSurname() + "\n" + user.getEmail() + "\n" + user.getPhone();
     }
 
     private String getUsersContactInfo(User[] users) {
@@ -150,15 +150,25 @@ public class CoupleListConfirmFragment extends CoolFragment {
         return contactInfo;
     }
 
+    private User getUser1FromCouple(Couple couple) {
+        return new User(couple.getUserEmail1(), "", couple.getUsername1(), "",
+                couple.getName1(), "", couple.getPhone1(), couple.getBirthDate1(), "",
+                "", "", "", "", "", "", "", "", "", "");
+    }
+
+    private User getUser2FromCouple(Couple couple) {
+        return new User(couple.getUserEmail2(), "", couple.getUsername2(), "",
+                couple.getName2(), "", couple.getPhone2(), couple.getBirthDate2(), "",
+                "", "", "", "", "", "", "", "", "", "");
+    }
+
     private User[] getCoupleUsersForUser(User user) {
         Set<User> coupleUsers = new TreeSet<>();
         for (Couple couple : coupleList) {
             if (couple.getUserEmail2().equals(user.getEmail())) {
-                coupleUsers.add(new User(couple.getUserEmail1(), "", "", "", couple.getName1(),
-                        "", "", couple.getBirthDate1(), "", "", "", "", "", "", "", "", "", "", ""));
+                coupleUsers.add(getUser1FromCouple(couple));
             } else if (couple.getUserEmail1().equals(user.getEmail())) {
-                coupleUsers.add(new User(couple.getUserEmail2(), "", "", "", couple.getName2(),
-                        "", "", couple.getBirthDate2(), "", "", "", "", "", "", "", "", "", "", ""));
+                coupleUsers.add(getUser2FromCouple(couple));
             }
         }
         return coupleUsers.toArray(new User[coupleUsers.size()]);
@@ -167,10 +177,8 @@ public class CoupleListConfirmFragment extends CoolFragment {
     private User[] getUniqueUsersFromCouples() {
         Set<User> uniqueUsers = new TreeSet<>();
         for (Couple couple : coupleList) {
-            uniqueUsers.add(new User(couple.getUserEmail1(), "", "", "", couple.getName1(),
-                    "", "", couple.getBirthDate1(), "", "", "", "", "", "", "", "", "", "", ""));
-            uniqueUsers.add(new User(couple.getUserEmail2(), "", "", "", couple.getName2(),
-                    "", "", couple.getBirthDate2(), "", "", "", "", "", "", "", "", "", "", ""));
+            uniqueUsers.add(getUser1FromCouple(couple));
+            uniqueUsers.add(getUser2FromCouple(couple));
         }
         return uniqueUsers.toArray(new User[uniqueUsers.size()]);
     }
@@ -187,8 +195,9 @@ public class CoupleListConfirmFragment extends CoolFragment {
 
     private String getCoupleContactInfo(Couple couple) {
         return "" + getText(R.string.label_couple) + "\n\n"
-                + couple.getName1() + "\n" + couple.getUserEmail1() + "\n\n"
-                + couple.getName2() + "\n" + couple.getUserEmail2(); // todo phone number
+                + couple.getName1() + "\n" + couple.getUserEmail1() + "\n" + couple.getPhone1()
+                + "\n\n"
+                + couple.getName2() + "\n" + couple.getUserEmail2() + "\n" + couple.getPhone2() ;
     }
 
     private String getCouplesContactInfo() {
