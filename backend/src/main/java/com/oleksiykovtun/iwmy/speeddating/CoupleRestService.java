@@ -51,8 +51,10 @@ public class CoupleRestService extends GeneralRestService {
                     User userFemale = user2.getGender().equals(User.FEMALE) ? user2 : user1;
                     couples.add(new Couple(event.getOrganizerEmail(), event.getTime(),
                             userMale.getEmail(), userFemale.getEmail(),
-                            userMale.getNameAndSurname(), userMale.getBirthDate(),
-                            userFemale.getNameAndSurname(), userFemale.getBirthDate()));
+                            userMale.getNameAndSurname(), userMale.getUsername(),
+                            userMale.getBirthDate(), userMale.getPhone(),
+                            userFemale.getNameAndSurname(), userFemale.getUsername(),
+                            userFemale.getBirthDate(), userFemale.getPhone()));
                 }
             }
         }
@@ -108,31 +110,6 @@ public class CoupleRestService extends GeneralRestService {
 
     public static List getAll() {
         return new ArrayList<>(ObjectifyService.ofy().load().type(Couple.class).list());
-    }
-
-    @Path(Api.DEBUG_CREATE) @GET @Produces(JSON)
-    public static List debugCreate() {
-        List list = Arrays.asList(
-                new Couple("Rei@email.com", "2015-02-28 21:00", "Joe@email.com", "Mih@email.com",
-                        "Joe", "1988-12-23", "Mih", "1992-03-18"),
-                new Couple("Rei@email.com", "2015-03-28 23:00", "Mih@email.com", "Rei@email.com",
-                        "Mih", "1992-03-18", "Rei", "1991-07-11"),
-                new Couple("Rei@email.com", "2015-03-28 23:00", "Joe@email.com", "Rei@email.com",
-                        "Joe", "1988-12-23", "Rei", "1991-07-11"));
-        ObjectifyService.ofy().save().entities(list).now();
-        return list;
-    }
-
-    @Path(Api.DEBUG_DELETE_ALL) @GET @Produces(JSON)
-    public static String debugDeleteAll() {
-        ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(Couple.class).keys());
-        return "Deleted.";
-    }
-
-    @Path(Api.DEBUG_RESET) @GET @Produces(JSON)
-    public static List debugReset() {
-        debugDeleteAll();
-        return debugCreate();
     }
 
     @Path(Api.DEBUG_GET_ALL) @GET @Produces(JSON)

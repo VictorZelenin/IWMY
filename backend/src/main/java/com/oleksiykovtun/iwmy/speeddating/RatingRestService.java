@@ -107,39 +107,6 @@ public class RatingRestService extends GeneralRestService {
         return new ArrayList<>(ObjectifyService.ofy().load().type(Rating.class).list());
     }
 
-    @Path(Api.DEBUG_CREATE) @GET @Produces(JSON)
-    public static List debugCreate() {
-        List list = Arrays.asList(
-                new Rating("John@email.com", "2015-02-28 20:00",
-                        "Joe@email.com", "Mih@email.com", "1", "", ""),
-                new Rating("Annika@email.com", "2015-03-28 22:00",
-                        "Rei@email.com", "Joe@email.com", "2", "selected", "quite ok"),
-                new Rating("Rei@email.com", "2015-03-28 23:00",
-                        "Mih@email.com", "Joe@email.com", "3", "selected", ""),
-                new Rating("Rei@email.com", "2015-03-28 23:00",
-                        "Joe@email.com", "Rei@email.com", "4", "", "not really"),
-                new Rating("Rei@email.com", "2015-02-28 21:00",
-                        "Mih@email.com", "Joe@email.com", "5", "selected", "quite ok"),
-                new Rating("Rei@email.com", "2015-02-28 21:00",
-                        "Joe@email.com", "Mih@email.com", "6", "selected", ""),
-                new Rating("Rei@email.com", "2015-02-28 21:00",
-                        "Joe@email.com", "Rei@email.com", "7", "", "not really"));
-        ObjectifyService.ofy().save().entities(list).now();
-        return list;
-    }
-
-    @Path(Api.DEBUG_DELETE_ALL) @GET @Produces(JSON)
-    public static String debugDeleteAll() {
-        ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(Rating.class).keys());
-        return "Deleted.";
-    }
-
-    @Path(Api.DEBUG_RESET) @GET @Produces(JSON)
-    public static List debugReset() {
-        debugDeleteAll();
-        return debugCreate();
-    }
-
     @Path(Api.DEBUG_GET_ALL) @GET @Produces(JSON)
     public static List debugGetAll() {
         return getAll();

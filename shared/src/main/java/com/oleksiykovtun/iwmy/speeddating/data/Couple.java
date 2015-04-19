@@ -24,22 +24,33 @@ public class Couple implements Serializable, Comparable<Couple> {
     private String userEmail2;
 
     private String name1;
+    private String username1;
     private String birthDate1;
+    private String phone1;
+
     private String name2;
+    private String username2;
     private String birthDate2;
+    private String phone2;
 
     public Couple() { }
 
-    public Couple(String eventOrganizerEmail, String eventTime, String userEmail1, String userEmail2,
-                  String name1, String birthDate1, String name2, String birthDate2) {
+    public Couple(String eventOrganizerEmail, String eventTime,
+                  String userEmail1, String userEmail2,
+                  String name1, String username1, String birthDate1, String phone1,
+                  String name2, String username2, String birthDate2, String phone2) {
         this._coupleId = eventOrganizerEmail + "_" + eventTime + "_" + userEmail1 + "_" + userEmail2;
         this.eventOrganizerEmail = eventOrganizerEmail;
         this.eventTime = eventTime;
         this.userEmail1 = userEmail1;
         this.userEmail2 = userEmail2;
+        this.username1 = username1;
+        this.username2 = username2;
         this.name1 = name1;
-        this.birthDate1 = birthDate1;
         this.name2 = name2;
+        this.phone1 = phone1;
+        this.phone2 = phone2;
+        this.birthDate1 = birthDate1;
         this.birthDate2 = birthDate2;
     }
 
@@ -124,5 +135,37 @@ public class Couple implements Serializable, Comparable<Couple> {
 
     public void setBirthDate2(String birthDate2) {
         this.birthDate2 = birthDate2;
+    }
+
+    public String getUsername1() {
+        return "" + username1;
+    }
+
+    public void setUsername1(String username1) {
+        this.username1 = username1;
+    }
+
+    public String getPhone1() {
+        return "" + phone1;
+    }
+
+    public void setPhone1(String phone1) {
+        this.phone1 = phone1;
+    }
+
+    public String getUsername2() {
+        return "" + username2;
+    }
+
+    public void setUsername2(String username2) {
+        this.username2 = username2;
+    }
+
+    public String getPhone2() {
+        return "" + phone2;
+    }
+
+    public void setPhone2(String phone2) {
+        this.phone2 = phone2;
     }
 }

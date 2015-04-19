@@ -142,43 +142,6 @@ public class AttendanceRestService extends GeneralRestService {
         return new ArrayList<>(ObjectifyService.ofy().load().type(Attendance.class).list());
     }
 
-    @Path(Api.DEBUG_CREATE) @GET @Produces(JSON)
-    public static List debugCreate() {
-        List list = Arrays.asList(
-                new Attendance("Joe@email.com", "male", "John@email.com", "2015-02-28 20:00",
-                        "false"),
-                new Attendance("Mih@email.com", "female", "John@email.com", "2015-02-28 20:00",
-                        "false"),
-                new Attendance("Joe@email.com", "male", "Annika@email.com", "2015-03-28 22:00",
-                        "false"),
-                new Attendance("Mih@email.com", "female", "Annika@email.com", "2015-03-28 22:00",
-                        "false"),
-                new Attendance("Rei@email.com", "female", "Annika@email.com", "2015-03-28 22:00",
-                        "false"),
-                new Attendance("Joe@email.com", "male", "Rei@email.com", "2015-03-28 23:00",
-                        "false"),
-                new Attendance("Mih@email.com", "female", "Rei@email.com", "2015-03-28 23:00",
-                        "false"),
-                new Attendance("Joe@email.com", "male", "Rei@email.com", "2015-02-28 21:00",
-                        "false"),
-                new Attendance("Mih@email.com", "female", "Rei@email.com", "2015-02-28 21:00",
-                        "false"));
-        ObjectifyService.ofy().save().entities(list).now();
-        return list;
-    }
-
-    @Path(Api.DEBUG_DELETE_ALL) @GET @Produces(JSON)
-    public static String debugDeleteAll() {
-        ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(Attendance.class).keys());
-        return "Deleted.";
-    }
-
-    @Path(Api.DEBUG_RESET) @GET @Produces(JSON)
-    public static List debugReset() {
-        debugDeleteAll();
-        return debugCreate();
-    }
-
     @Path(Api.DEBUG_GET_ALL) @GET @Produces(JSON)
     public static List debugGetAll() {
         return getAll();
