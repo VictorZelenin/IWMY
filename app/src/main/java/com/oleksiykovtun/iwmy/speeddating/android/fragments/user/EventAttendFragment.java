@@ -75,7 +75,11 @@ public class EventAttendFragment extends CoolFragment {
     @Override
     public void onReceiveWebData(List response) {
         if (!response.isEmpty()) {
-            CoolFragmentManager.show(new EventStartFragment(), event);
+            if (event.getActual().equals("false")) {
+                CoolFragmentManager.show(new CoupleUserListFragment(), event);
+            } else {
+                CoolFragmentManager.show(new EventStartFragment(), event);
+            }
         }
     }
 
