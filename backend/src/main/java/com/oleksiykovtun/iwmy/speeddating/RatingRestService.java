@@ -4,6 +4,7 @@ import com.googlecode.objectify.ObjectifyService;
 import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import com.oleksiykovtun.iwmy.speeddating.data.Rating;
+import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -80,7 +81,7 @@ public class RatingRestService extends GeneralRestService {
     }
 
     @Path(Api.PUT) @POST @Consumes(JSON) @Produces(JSON)
-    public List put(List<Rating> items) {
+    public static List put(List<Rating> items) {
         ObjectifyService.ofy().save().entities(items).now();
         return items;
     }
@@ -126,6 +127,40 @@ public class RatingRestService extends GeneralRestService {
                     .filter("actual", "true").list());
         }
         return Arrays.asList(outputSet.toArray());
+    }
+
+    private static List<Rating> getForUser(List<User> wildcardUsers) {
+        Set<Rating> ratings = new TreeSet<>();
+        for (User wildcardUser : wildcardUsers) {
+            ratings.addAll(ObjectifyService.ofy().load().type(Rating.class)
+                    .filter("thisUserEmail", wildcardUser.getEmail()).list());
+            ratings.addAll(ObjectifyService.ofy().load().type(Rating.class)
+                    .filter("otherUserEmail", wildcardUser.getEmail()).list());
+        }
+        return Arrays.asList(ratings.toArray(new Rating[ratings.size()]));
+    }
+
+    public static List replaceForUser(List<User> users) {
+        List<User> oldUsers = users.subList(0, 1);
+        List<Rating> userRelatedItems = getForUser(oldUsers);
+        // deleting for old user
+        ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(Rating.class)
+                .filter("thisUserEmail", oldUsers.get(0).getEmail()).keys()).now();
+        ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(Rating.class)
+                .filter("otherUserEmail", oldUsers.get(0).getEmail()).keys()).now();
+        // replacing user email
+        List<User> newUsers = users.subList(1, 2);
+        for (Rating relatedItem : userRelatedItems) {
+            if (relatedItem.getThisUserEmail().equals(oldUsers.get(0).getEmail())) {
+                relatedItem.setThisUserEmail(newUsers.get(0).getEmail());
+            }
+            if (relatedItem.getOtherUserEmail().equals(oldUsers.get(0).getEmail())) {
+                relatedItem.setOtherUserEmail(newUsers.get(0).getEmail());
+                relatedItem.setUsername(newUsers.get(0).getUsername());
+            }
+        }
+        // adding for new users
+        return put(userRelatedItems);
     }
 
     public static List getAll() {

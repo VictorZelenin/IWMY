@@ -121,6 +121,21 @@ public class AttendanceRestService extends GeneralRestService {
         return attendances;
     }
 
+    public static List replaceForUser(List<User> users) {
+        List<User> oldUsers = users.subList(0, 1);
+        List<Attendance> userRelatedItems = getForUser(oldUsers);
+        // deleting for old user
+        ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(Attendance.class)
+                .filter("userEmail", oldUsers.get(0).getEmail()).keys()).now();
+        // replacing user email
+        List<User> newUsers = users.subList(1, 2);
+        for (Attendance relatedItem : userRelatedItems) {
+            relatedItem.setUser(newUsers.get(0));
+        }
+        // adding for new users
+        return add(userRelatedItems);
+    }
+
     public static List getAll() {
         return new ArrayList<>(ObjectifyService.ofy().load().type(Attendance.class).list());
     }

@@ -45,6 +45,11 @@ public class Event implements Serializable, Comparable<Event> {
         this.freePlaces = freePlaces;
         this.cost = cost;
         this.description = description;
+        generateId();
+    }
+
+    private void generateId() {
+        this._eventId = getTime() + "_" + getOrganizerEmail();
     }
 
     @Override
@@ -72,6 +77,7 @@ public class Event implements Serializable, Comparable<Event> {
 
     public void setOrganizerEmail(String organizerEmail) {
         this.organizerEmail = organizerEmail;
+        generateId();
     }
 
     public String getPlace() {
@@ -120,6 +126,7 @@ public class Event implements Serializable, Comparable<Event> {
 
     public void setTime(String time) {
         this.time = time;
+        generateId();
     }
 
     public String getFreePlaces() {

@@ -36,8 +36,6 @@ public class Rating implements Serializable, Comparable<Rating> {
     public Rating(String eventOrganizerEmail, String eventTime,
                   String thisUserEmail, String otherUserEmail,
                   String number, String username, String selection, String comment) {
-        this._ratingId = number + "_" + eventOrganizerEmail + "_" + eventTime + "_"
-                + thisUserEmail + "_" + otherUserEmail;
         this.eventOrganizerEmail = eventOrganizerEmail;
         this.eventTime = eventTime;
         this.thisUserEmail = thisUserEmail;
@@ -47,6 +45,12 @@ public class Rating implements Serializable, Comparable<Rating> {
         this.selection = selection;
         this.comment = comment;
         this.actual = "false";
+        generateId();
+    }
+
+    private void generateId() {
+        this._ratingId = getNumber() + "_" + getEventOrganizerEmail() + "_" + getEventTime()
+                + "_" + getThisUserEmail() + "_" + getOtherUserEmail();
     }
 
     @Override
@@ -74,6 +78,7 @@ public class Rating implements Serializable, Comparable<Rating> {
 
     public void setEventOrganizerEmail(String eventOrganizerEmail) {
         this.eventOrganizerEmail = eventOrganizerEmail;
+        generateId();
     }
 
     public String getThisUserEmail() {
@@ -82,6 +87,7 @@ public class Rating implements Serializable, Comparable<Rating> {
 
     public void setThisUserEmail(String thisUserEmail) {
         this.thisUserEmail = thisUserEmail;
+        generateId();
     }
 
     public String getOtherUserEmail() {
@@ -90,6 +96,7 @@ public class Rating implements Serializable, Comparable<Rating> {
 
     public void setOtherUserEmail(String otherUserEmail) {
         this.otherUserEmail = otherUserEmail;
+        generateId();
     }
 
     public String getNumber() {
@@ -98,6 +105,7 @@ public class Rating implements Serializable, Comparable<Rating> {
 
     public void setNumber(String number) {
         this.number = number;
+        generateId();
     }
 
     public String getUsername() {
@@ -130,6 +138,7 @@ public class Rating implements Serializable, Comparable<Rating> {
 
     public void setEventTime(String eventTime) {
         this.eventTime = eventTime;
+        generateId();
     }
 
     public String getActual() {

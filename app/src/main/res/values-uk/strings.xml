@@ -143,4 +143,6 @@
     </string>
     <string name="label_couple">Пара:</string>
     <string name="label_rating_username">Нік</string>
+    <string name="menu_edit">Змінити</string>
+    <string name="toolbar_editing">Зміна профілю</string>
 </resources>

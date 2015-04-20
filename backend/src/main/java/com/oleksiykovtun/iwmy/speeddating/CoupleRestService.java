@@ -62,7 +62,7 @@ public class CoupleRestService extends GeneralRestService {
      * @return couples added
      */
     @Path(Api.PUT) @POST @Consumes(JSON) @Produces(JSON)
-    public List put(List<Couple> couples) {
+    public static List put(List<Couple> couples) {
         ObjectifyService.ofy().save().entities(couples).now();
         return couples;
     }
@@ -101,6 +101,39 @@ public class CoupleRestService extends GeneralRestService {
                     .filter("eventTime", wildcardEvent.getTime()).keys()).now();
         }
         return new ArrayList();
+    }
+
+    private static List<Couple> getForUser(List<User> wildcardUsers) {
+        Set<Couple> couples = new TreeSet<>();
+        for (User wildcardUser : wildcardUsers) {
+            couples.addAll(ObjectifyService.ofy().load().type(Couple.class)
+                    .filter("userEmail1", wildcardUser.getEmail()).list());
+            couples.addAll(ObjectifyService.ofy().load().type(Couple.class)
+                    .filter("userEmail2", wildcardUser.getEmail()).list());
+        }
+        return Arrays.asList(couples.toArray(new Couple[couples.size()]));
+    }
+
+    public static List replaceForUser(List<User> users) {
+        List<User> oldUsers = users.subList(0, 1);
+        List<Couple> userRelatedItems = getForUser(oldUsers);
+        // deleting for old user
+        ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(Couple.class)
+                .filter("userEmail1", oldUsers.get(0).getEmail()).keys()).now();
+        ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(Couple.class)
+                .filter("userEmail2", oldUsers.get(0).getEmail()).keys()).now();
+        // replacing user email
+        List<User> newUsers = users.subList(1, 2);
+        for (Couple relatedItem : userRelatedItems) {
+            if (relatedItem.getUserEmail1().equals(oldUsers.get(0).getEmail())) {
+                relatedItem.setUser1(newUsers.get(0));
+            }
+            if (relatedItem.getUserEmail2().equals(oldUsers.get(0).getEmail())) {
+                relatedItem.setUser2(newUsers.get(0));
+            }
+        }
+        // adding for new users
+        return put(userRelatedItems);
     }
 
     public static List getAll() {

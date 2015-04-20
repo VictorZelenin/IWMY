@@ -44,8 +44,7 @@ public class NewParticipantFragment extends ProfileEditFragment {
                 openDatePicker();
                 break;
             case R.id.button_register:
-                user = fillWithoutPassword(new User());
-                user.generateId();
+                user = makeUserWithoutPassword();
                 if (checkWithoutPassword(user)) {
                     post(Api.USERS + Api.ADD, User[].class, user);
                 } else {

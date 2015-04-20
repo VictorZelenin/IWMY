@@ -8,6 +8,7 @@ public class Api {
 
     public static final String USERS = "/users/";
     public static final String ADD = "add";
+    public static final String REPLACE = "replace";
     public static final String DEBUG_ADD_ORGANIZER = "debug/add/organizer";
     public static final String GET = "get";
     public static final String DEBUG_GET = "debug/get";

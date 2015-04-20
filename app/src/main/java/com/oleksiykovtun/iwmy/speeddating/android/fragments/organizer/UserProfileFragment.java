@@ -1,9 +1,12 @@
 package com.oleksiykovtun.iwmy.speeddating.android.fragments.organizer;
 
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewManager;
 
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
@@ -11,12 +14,15 @@ import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.TimeConverter;
 import com.oleksiykovtun.iwmy.speeddating.android.ImageManager;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.organizer.SettingsFragment;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.user.*;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 /**
  * Created by alx on 2015-02-12.
  */
 public class UserProfileFragment extends CoolFragment {
+
+    User user = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -25,7 +31,15 @@ public class UserProfileFragment extends CoolFragment {
         registerContainerView(view);
         registerClickListener(R.id.button_settings);
 
-        User user = (User) getAttachment();
+        user = (User) getAttachment();
+
+        // only users added by organizer are editable
+        if (user.getPassword().isEmpty()) {
+            registerClickListener(R.id.button_options);
+        } else {
+            ((ViewManager)getViewById(R.id.button_options).getParent())
+                    .removeView(getViewById(R.id.button_options));
+        }
 
         ImageManager.setUserPic(getImageView(R.id.image_user_pic), user);
             setText(R.id.label_name_and_age, user.getNameAndSurname() + ", "
@@ -43,10 +57,26 @@ public class UserProfileFragment extends CoolFragment {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.button_options:
+                openMenu(view);
+                break;
             case R.id.button_settings:
                 CoolFragmentManager.showAtTop(new SettingsFragment());
                 break;
         }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        CoolFragmentManager.show(new UserProfileEditFragment(), user);
+        return true;
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getActivity().getMenuInflater().inflate(R.menu.user_profile, menu);
     }
 
 }

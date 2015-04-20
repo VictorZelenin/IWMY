@@ -108,18 +108,15 @@ public class UserRestService extends GeneralRestService {
     }
 
     @Path(Api.GET_UNIQUE) @POST @Consumes(JSON) @Produces(JSON)
-    public static List getUnique(List<User> wildcardUsers) {
-        List<User> users = new ArrayList<>();
-        if (wildcardUsers.size() == 1) {
-            User wildcardUser = wildcardUsers.get(0);
+    public static List<User> getUnique(List<User> wildcardUsers) {
+        Set<User> users = new TreeSet<>();
+        for (User wildcardUser : wildcardUsers) {
             users.addAll(ObjectifyService.ofy().load().type(User.class)
                     .filter("username", wildcardUser.getUsername()).list());
-            if (users.size() == 0) {
-                users.addAll(ObjectifyService.ofy().load().type(User.class)
-                        .filter("email", wildcardUser.getEmail()).list());
-            }
+            users.addAll(ObjectifyService.ofy().load().type(User.class)
+                    .filter("email", wildcardUser.getEmail()).list());
         }
-        return users;
+        return Arrays.asList(users.toArray(new User[users.size()]));
     }
 
     @Path(Api.GET_LOGIN) @POST @Consumes(JSON) @Produces(JSON)
@@ -142,11 +139,46 @@ public class UserRestService extends GeneralRestService {
     @Path(Api.ADD) @POST @Consumes(JSON) @Produces(JSON)
     public List add(List<User> items) {
         if (UserRestService.getUnique(items).isEmpty()) {
-            ObjectifyService.ofy().save().entities(items).now();
-            return items;
+            return put(items);
         } else {
             return new ArrayList();
         }
+    }
+
+    private List put(List<User> items) {
+        ObjectifyService.ofy().save().entities(items).now();
+        return items;
+    }
+
+    @Path(Api.REPLACE) @POST @Consumes(JSON) @Produces(JSON)
+    public List replace(List<User> users) {
+        if (users.size() == 2) {
+            User oldUser = users.get(0);
+            List<User> usersMatchingOldOrNewUser = UserRestService.getUnique(users);
+            // replace if the new user matches no one or the old same one
+            if (usersMatchingOldOrNewUser.isEmpty()
+                || usersMatchingOldOrNewUser.size() == 1
+                && usersMatchingOldOrNewUser.get(0).getEmail().equals(oldUser.getEmail())
+                && usersMatchingOldOrNewUser.get(0).getUsername().equals(oldUser.getUsername())) {
+                return replaceForUser(users);
+            }
+        }
+        return new ArrayList();
+    }
+
+    private List replaceForUser(List<User> users) {
+        List<User> oldUsers = users.subList(0, 1);
+        // deleting old user
+        ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(User.class)
+                .filter("email", oldUsers.get(0).getEmail()).keys()).now();
+        // putting new user
+        List<User> newUsers = users.subList(1, 2);
+        put(newUsers);
+        // linking related data to the new user
+        AttendanceRestService.replaceForUser(users);
+        CoupleRestService.replaceForUser(users);
+        RatingRestService.replaceForUser(users);
+        return users;
     }
 
     public static List getAll() {

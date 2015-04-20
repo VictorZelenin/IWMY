@@ -36,19 +36,34 @@ public class Couple implements Serializable, Comparable<Couple> {
     public Couple() { }
 
     public Couple(Event event, User user1, User user2) {
-        this._coupleId = event.get_eventId() + "_" + user1.get_userId() + "_" + user2.get_userId();
         this.eventOrganizerEmail = event.getOrganizerEmail();
         this.eventTime = event.getTime();
+        setUser1(user1);
+        setUser2(user2);
+        generateId();
+    }
+
+    public void setUser1(User user1) {
         this.userEmail1 = user1.getEmail();
-        this.userEmail2 = user2.getEmail();
         this.username1 = user1.getUsername();
-        this.username2 = user2.getUsername();
         this.name1 = user1.getNameAndSurname();
-        this.name2 = user2.getNameAndSurname();
         this.phone1 = user1.getPhone();
-        this.phone2 = user2.getPhone();
         this.birthDate1 = user1.getBirthDate();
+        generateId();
+    }
+
+    public void setUser2(User user2) {
+        this.userEmail2 = user2.getEmail();
+        this.username2 = user2.getUsername();
+        this.name2 = user2.getNameAndSurname();
+        this.phone2 = user2.getPhone();
         this.birthDate2 = user2.getBirthDate();
+        generateId();
+    }
+
+    private void generateId() {
+        this._coupleId = getEventOrganizerEmail() + "_" + getEventTime()
+                + "_" + getUserEmail1() + "_" + getUserEmail2();
     }
 
     @Override
@@ -76,6 +91,7 @@ public class Couple implements Serializable, Comparable<Couple> {
 
     public void setEventOrganizerEmail(String eventOrganizerEmail) {
         this.eventOrganizerEmail = eventOrganizerEmail;
+        generateId();
     }
 
     public String getEventTime() {
@@ -84,6 +100,7 @@ public class Couple implements Serializable, Comparable<Couple> {
 
     public void setEventTime(String eventTime) {
         this.eventTime = eventTime;
+        generateId();
     }
 
     public String getUserEmail1() {
@@ -92,6 +109,7 @@ public class Couple implements Serializable, Comparable<Couple> {
 
     public void setUserEmail1(String userEmail1) {
         this.userEmail1 = userEmail1;
+        generateId();
     }
 
     public String getUserEmail2() {
@@ -100,6 +118,7 @@ public class Couple implements Serializable, Comparable<Couple> {
 
     public void setUserEmail2(String userEmail2) {
         this.userEmail2 = userEmail2;
+        generateId();
     }
 
     public String getName1() {

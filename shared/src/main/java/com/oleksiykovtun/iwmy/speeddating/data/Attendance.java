@@ -25,18 +25,29 @@ public class Attendance implements Serializable, Comparable<Attendance> {
     private String eventTime; // format "2099-12-31 23:59"
 
     private String active; // "true" when user is selected to give ratings
+    private String creationTime; // long millis
 
     public Attendance() { }
 
     public Attendance(User user, Event event) {
-        this._attendanceId = System.currentTimeMillis() + "_" + user.get_userId()
-                + "_" + event.get_eventId(); // will be comparable by creation date
+        this.eventOrganizerEmail = event.getOrganizerEmail();
+        this.eventTime = event.getTime();
+        setUser(user);
+        this.active = "false";
+        this.creationTime = "" + System.currentTimeMillis();
+        generateId();
+    }
+
+    public void setUser(User user) {
         this.userEmail = user.getEmail();
         this.username = user.getUsername();
         this.userGender = user.getGender();
-        this.eventOrganizerEmail = event.getOrganizerEmail();
-        this.eventTime = event.getTime();
-        this.active = "false";
+        generateId();
+    }
+
+    private void generateId() {
+        this._attendanceId = getCreationTime() + "_" + getEventOrganizerEmail() + "_"
+                + getEventTime() + "_" + getUserEmail();
     }
 
     @Override
@@ -58,12 +69,22 @@ public class Attendance implements Serializable, Comparable<Attendance> {
         this._attendanceId = _attendanceId;
     }
 
+    public String getCreationTime() {
+        return "" + creationTime;
+    }
+
+    public void setCreationTime(String creationTime) {
+        this.creationTime = creationTime;
+        generateId();
+    }
+
     public String getUserEmail() {
         return "" + userEmail;
     }
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
+        generateId();
     }
 
     public String getUserGender() {
@@ -80,6 +101,7 @@ public class Attendance implements Serializable, Comparable<Attendance> {
 
     public void setEventOrganizerEmail(String eventOrganizerEmail) {
         this.eventOrganizerEmail = eventOrganizerEmail;
+        generateId();
     }
 
     public String getEventTime() {
@@ -88,6 +110,7 @@ public class Attendance implements Serializable, Comparable<Attendance> {
 
     public void setEventTime(String eventTime) {
         this.eventTime = eventTime;
+        generateId();
     }
 
     public String getActive() {

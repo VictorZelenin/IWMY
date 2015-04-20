@@ -89,11 +89,8 @@ public class User implements Serializable, Comparable<User> {
         generateId();
     }
 
-    /**
-     * A permanent, unique ID based on the original mane, email and creation time
-     */
-    public void generateId(){
-        this._userId = "" + nameAndSurname + "_" + email + "_" + System.currentTimeMillis();
+    private void generateId() {
+        this._userId = getNameAndSurname() + "_" + getEmail();
     }
 
     @Override
@@ -129,6 +126,7 @@ public class User implements Serializable, Comparable<User> {
 
     public void setUsername(String username) {
         this.username = username;
+        generateId();
     }
 
     public String getEmail() {
@@ -137,6 +135,7 @@ public class User implements Serializable, Comparable<User> {
 
     public void setEmail(String email) {
         this.email = email;
+        generateId();
     }
 
     public String getPassword() {

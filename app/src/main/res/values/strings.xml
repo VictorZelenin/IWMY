@@ -11,6 +11,7 @@
     <string name="toolbar_organizer">Organizer</string>
     <string name="toolbar_participant_list">Participant list</string>
     <string name="toolbar_new_participant">New participant</string>
+    <string name="toolbar_editing">Editing</string>
     <string name="toolbar_name_and_surname">Name, surname</string>
     <string name="toolbar_questionnaires">Questionnaires, 0/0</string>
     <string name="toolbar_questionnaires_empty">Questionnaires, </string>
@@ -133,6 +134,7 @@
     <string name="hint_enter_participant_email">Enter participant email</string>
 
     <string name="menu_my_events">My events</string>
+    <string name="menu_edit">Edit</string>
 
     <color name="blue">#0098FF</color>
     <color name="light_blue">#A0D9FF</color>

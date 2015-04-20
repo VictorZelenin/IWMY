@@ -11,7 +11,7 @@
         android:layout_height="@dimen/toolbar_height"
         android:layout_width="match_parent">
 
-        <!-- todo include layout="@layout/image_button_toolbar_options"/-->
+        <include layout="@layout/image_button_toolbar_options"/>
 
         <TextView
             android:id="@+id/label_name_and_age"
