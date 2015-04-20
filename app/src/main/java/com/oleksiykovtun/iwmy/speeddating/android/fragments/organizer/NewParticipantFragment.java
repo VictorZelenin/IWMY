@@ -5,12 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.oleksiykovtun.android.cooltools.CoolFormatter;
-import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
-import com.oleksiykovtun.iwmy.speeddating.android.fragments.organizer.SettingsFragment;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.common.ProfileEditFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
@@ -20,7 +18,7 @@ import java.util.List;
 /**
  * Created by alx on 2015-02-12.
  */
-public class NewParticipantFragment extends CoolFragment {
+public class NewParticipantFragment extends ProfileEditFragment {
 
     private User user = null;
     private Event event = null;
@@ -46,31 +44,9 @@ public class NewParticipantFragment extends CoolFragment {
                 openDatePicker();
                 break;
             case R.id.button_register:
-                String email = getEditText(R.id.input_email);
-                String password = "";
-                String username = getEditText(R.id.input_username);
-                String group = User.USER;
-                String nameAndSurname = getEditText(R.id.input_name_and_surname);
-                String photoBase64 = "";
-                String phone = getEditText(R.id.input_phone);
-                String birthDate = getLabelText(R.id.label_birth_date);
-                String gender = isRadioButtonChecked(R.id.gender_male) ? User.MALE : User.FEMALE;
-                String orientation = "";
-                String goal = "";
-                String affair = "";
-                String height = "";
-                String weight = "";
-                String attitudeToSmoking = "";
-                String attitudeToAlcohol = "";
-                String location = "";
-                String organization = "";
-                String website = "";
-
-                user = new User(email, password, username, group, nameAndSurname,
-                        photoBase64, phone, birthDate, gender, orientation, goal, affair, height,
-                        weight, attitudeToSmoking, attitudeToAlcohol, location, organization,
-                        website);
-                if (checkUser(user)) {
+                user = fillWithoutPassword(new User());
+                user.generateId();
+                if (checkWithoutPassword(user)) {
                     post(Api.USERS + Api.ADD, User[].class, user);
                 } else {
                     showToast(R.string.message_inputs_error);
@@ -80,13 +56,6 @@ public class NewParticipantFragment extends CoolFragment {
                 CoolFragmentManager.showAtTop(new SettingsFragment());
                 break;
         }
-    }
-
-    private boolean checkUser(User user) {
-        return user.getEmail().contains("@")
-                && !user.getNameAndSurname().isEmpty()
-                && !user.getUsername().isEmpty()
-                && CoolFormatter.isDateValid(user.getBirthDate());
     }
 
     @Override
@@ -106,11 +75,6 @@ public class NewParticipantFragment extends CoolFragment {
                 }
                 break;
         }
-    }
-
-    @Override
-    public void onDateSet(String dateString) {
-        setText(R.id.label_birth_date, dateString);
     }
 
 }

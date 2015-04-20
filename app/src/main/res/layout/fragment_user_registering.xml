@@ -31,31 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/label_email"
-                android:textSize="@dimen/label_text_size" />
-
-            <EditText
-                android:id="@+id/input_email"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_enter_email"
-                android:inputType="textEmailAddress" />
-
-            <TextView
-                android:text="@string/label_username"
-                android:textSize="@dimen/label_text_size"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
-
-            <EditText
-                android:id="@+id/input_username"
-                android:hint="@string/hint_enter_username"
-                android:inputType="text"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
+            <include layout="@layout/linear_layout_user_edit_before_password"/>
 
             <TextView
                 android:text="@string/label_password"
@@ -70,76 +46,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
 
-            <TextView
-                android:text="@string/label_name_and_surname"
-                android:textSize="@dimen/label_text_size"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
-
-            <EditText
-                android:id="@+id/input_name_and_surname"
-                android:hint="@string/hint_enter_name_and_surname"
-                android:inputType="text"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:text="@string/label_phone"
-                android:textSize="@dimen/label_text_size"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
-
-            <EditText
-                android:id="@+id/input_phone"
-                android:hint="@string/hint_enter_phone"
-                android:inputType="phone"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:text="@string/label_birth_date"
-                android:textSize="@dimen/label_text_size"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
-
-            <Button
-                android:id="@+id/button_select_date"
-                android:text="@string/label_select_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/label_birth_date"
-                android:text="@string/label_empty"
-                android:textSize="@dimen/label_text_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:text="@string/label_gender"
-                android:textSize="@dimen/label_text_size"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
-
-            <RadioGroup
-                android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-
-                <RadioButton
-                    android:id="@+id/gender_male"
-                    android:text="@string/label_gender_male"
-                    android:checked="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <RadioButton
-                    android:id="@+id/gender_female"
-                    android:text="@string/label_gender_female"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </RadioGroup>
+            <include layout="@layout/linear_layout_user_edit_after_password"/>
 
             <Button
                 android:id="@+id/button_register"

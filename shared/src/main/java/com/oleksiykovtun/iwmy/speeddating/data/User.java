@@ -67,7 +67,6 @@ public class User implements Serializable, Comparable<User> {
                 String gender, String orientation, String goal, String affair,
                 String height, String weight, String attitudeToSmoking, String attitudeToAlcohol,
                 String location, String organization, String website) {
-        this._userId = "" + nameAndSurname + "_" + email;
         this.group = group;
         this.username = username;
         this.email = email;
@@ -87,6 +86,14 @@ public class User implements Serializable, Comparable<User> {
         this.location = location;
         this.organization = organization;
         this.website = website;
+        generateId();
+    }
+
+    /**
+     * A permanent, unique ID based on the original mane, email and creation time
+     */
+    public void generateId(){
+        this._userId = "" + nameAndSurname + "_" + email + "_" + System.currentTimeMillis();
     }
 
     @Override

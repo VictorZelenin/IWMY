@@ -11,6 +11,7 @@ import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.Account;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.common.ProfileEditFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
 /**
  * Created by alx on 2015-02-12.
  */
-public class RegisteringFragment extends CoolFragment {
+public class RegisteringFragment extends ProfileEditFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,45 +38,15 @@ public class RegisteringFragment extends CoolFragment {
                 openDatePicker();
                 break;
             case R.id.button_register:
-                String email = getEditText(R.id.input_email);
-                String password = getEditText(R.id.input_password);
-                String username = getEditText(R.id.input_username);
-                String group = User.USER;
-                String nameAndSurname = getEditText(R.id.input_name_and_surname);
-                String photoBase64 = "";
-                String phone = getEditText(R.id.input_phone);
-                String birthDate = getLabelText(R.id.label_birth_date);
-                String gender = isRadioButtonChecked(R.id.gender_male) ? User.MALE : User.FEMALE;
-                String orientation = "";
-                String goal = "";
-                String affair = "";
-                String height = "";
-                String weight = "";
-                String attitudeToSmoking = "";
-                String attitudeToAlcohol = "";
-                String location = "";
-                String organization = "";
-                String website = "";
-
-                User user = new User(email, password, username, group, nameAndSurname,
-                        photoBase64, phone, birthDate, gender, orientation, goal, affair, height,
-                        weight, attitudeToSmoking, attitudeToAlcohol, location, organization,
-                        website);
-                if (checkUser(user)) {
+                User user = fill(new User());
+                user.generateId();
+                if (check(user)) {
                     post(Api.USERS + Api.ADD, User[].class, user);
                 } else {
                     showToast(R.string.message_inputs_error);
                 }
                 break;
         }
-    }
-
-    private boolean checkUser(User user) {
-        return user.getEmail().contains("@")
-                && !user.getNameAndSurname().isEmpty()
-                && !user.getPassword().isEmpty()
-                && !user.getUsername().isEmpty()
-                && CoolFormatter.isDateValid(user.getBirthDate());
     }
 
     @Override
@@ -87,11 +58,6 @@ public class RegisteringFragment extends CoolFragment {
         } else {
             showToastLong(R.string.message_user_exists);
         }
-    }
-
-    @Override
-    public void onDateSet(String dateString) {
-        setText(R.id.label_birth_date, dateString);
     }
 
 }
