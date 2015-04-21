@@ -145,4 +145,5 @@
     <string name="label_rating_username">Нік</string>
     <string name="menu_edit">Змінити</string>
     <string name="toolbar_editing">Зміна профілю</string>
+    <string name="button_edit_my_profile">Змінити мій профіль</string>
 </resources>

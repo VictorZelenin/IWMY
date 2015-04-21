@@ -1,0 +1,70 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/light_blue"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:background="@color/blue"
+        android:layout_height="@dimen/toolbar_height"
+        android:layout_width="match_parent">
+
+        <!-- todo include layout="@layout/image_button_toolbar_options"/-->
+
+        <TextView
+            android:id="@+id/label_editing"
+            android:text="@string/toolbar_editing"
+            android:textSize="@dimen/toolbar_text_size"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent">
+
+            <include layout="@layout/image_button_toolbar_settings"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/linear_layout_user_edit_before_password"/>
+
+            <TextView
+                android:text="@string/label_password"
+                android:textSize="@dimen/label_text_size"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/input_password"
+                android:hint="@string/hint_enter_password"
+                android:inputType="textPassword"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <include layout="@layout/linear_layout_user_edit_after_password"/>
+
+            <Button
+                android:id="@+id/button_ok"
+                android:text="@string/button_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

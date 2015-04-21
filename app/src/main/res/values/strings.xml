@@ -101,6 +101,7 @@
     <string name="button_logout">Logout</string>
     <string name="button_cancel">Cancel</string>
     <string name="button_delete">Delete</string>
+    <string name="button_edit_my_profile">Edit my profile</string>
 
     <string name="tab_events_current">Current</string>
     <string name="tab_events_past">Past</string>

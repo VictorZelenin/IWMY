@@ -15,8 +15,6 @@ import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.Account;
 import com.oleksiykovtun.iwmy.speeddating.android.adapters.UserRecyclerAdapter;
-import com.oleksiykovtun.iwmy.speeddating.android.fragments.organizer.SettingsFragment;
-import com.oleksiykovtun.iwmy.speeddating.android.fragments.organizer.UserProfileFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
 import com.oleksiykovtun.iwmy.speeddating.data.Couple;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;

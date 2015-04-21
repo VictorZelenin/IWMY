@@ -23,6 +23,7 @@ public class SettingsFragment extends CoolFragment {
         View view = inflater.inflate(R.layout.fragment_user_settings, container, false);
         registerContainerView(view);
         registerClickListener(R.id.button_logout);
+        registerClickListener(R.id.button_edit_my_profile);
         return view;
     }
 
@@ -32,6 +33,10 @@ public class SettingsFragment extends CoolFragment {
             case R.id.button_logout:
                 Account.removeUser(this);
                 CoolFragmentManager.showAtBottom(new StartFragment());
+                break;
+            case R.id.button_edit_my_profile:
+                CoolFragmentManager.show(new ProfileEditFragment(), Account.getUser(this));
+                break;
         }
     }
 

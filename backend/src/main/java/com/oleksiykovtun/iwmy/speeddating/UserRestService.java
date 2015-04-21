@@ -178,7 +178,7 @@ public class UserRestService extends GeneralRestService {
         AttendanceRestService.replaceForUser(users);
         CoupleRestService.replaceForUser(users);
         RatingRestService.replaceForUser(users);
-        return users;
+        return newUsers;
     }
 
     public static List getAll() {
