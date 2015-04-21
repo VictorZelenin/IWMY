@@ -1,5 +1,6 @@
 package com.oleksiykovtun.iwmy.speeddating;
 
+import com.googlecode.objectify.ObjectifyService;
 import com.oleksiykovtun.iwmy.speeddating.data.Email;
 
 import java.util.ArrayList;
@@ -51,7 +52,17 @@ public class EmailRestService extends GeneralRestService {
                 unsentEmailList.add(email);
             }
         }
+        put(emailList);
         return unsentEmailList;
+    }
+
+    public static List getAll() {
+        return new ArrayList<>(ObjectifyService.ofy().load().type(Email.class).list());
+    }
+
+    public static List put(List<Email> items) {
+        ObjectifyService.ofy().save().entities(items).now();
+        return items;
     }
 
     /**
@@ -73,6 +84,11 @@ public class EmailRestService extends GeneralRestService {
             return "Email was not sent";
         }
         return "Email sent.";
+    }
+
+    @Path(Api.DEBUG_GET_ALL) @GET @Produces(JSON)
+    public static List debugGetAll() {
+        return getAll();
     }
 
 }

@@ -3,6 +3,7 @@ package com.oleksiykovtun.iwmy.speeddating;
 import com.googlecode.objectify.ObjectifyService;
 import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
 import com.oleksiykovtun.iwmy.speeddating.data.Couple;
+import com.oleksiykovtun.iwmy.speeddating.data.Email;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import com.oleksiykovtun.iwmy.speeddating.data.Rating;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
@@ -24,6 +25,7 @@ public class GeneralRestService {
     static {
         ObjectifyService.register(Attendance.class);
         ObjectifyService.register(Couple.class);
+        ObjectifyService.register(Email.class);
         ObjectifyService.register(Event.class);
         ObjectifyService.register(Rating.class);
         ObjectifyService.register(User.class);
