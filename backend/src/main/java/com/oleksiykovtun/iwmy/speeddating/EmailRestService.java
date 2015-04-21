@@ -37,7 +37,7 @@ public class EmailRestService extends GeneralRestService {
         List<Email> unsentEmailList = new ArrayList<>();
         for (Email email : emailList) {
             try {
-                Message message
+                MimeMessage message
                         = new MimeMessage(Session.getDefaultInstance(new Properties(), null));
                 message.setFrom(new InternetAddress(email.getFromAddress(), email.getFromName()));
                 if (! email.getToAddress().matches(Email.VALIDATION_REGEX)) {
@@ -45,8 +45,8 @@ public class EmailRestService extends GeneralRestService {
                 }
                 message.addRecipient(Message.RecipientType.TO,
                         new InternetAddress(email.getToAddress(), email.getToName()));
-                message.setSubject(MimeUtility.encodeText(email.getSubject(), "utf-8", "B"));
-                message.setText(email.getMessage());
+                message.setSubject(email.getSubject(), "utf-8");
+                message.setText(email.getMessage(), "utf-8");
                 Transport.send(message);
             } catch (Throwable t) {
                 unsentEmailList.add(email);
