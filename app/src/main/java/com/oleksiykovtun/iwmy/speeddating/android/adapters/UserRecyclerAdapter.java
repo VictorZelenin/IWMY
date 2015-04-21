@@ -1,7 +1,6 @@
 package com.oleksiykovtun.iwmy.speeddating.android.adapters;
 
-import android.content.res.Resources;
-import android.util.Log;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +21,15 @@ import java.util.List;
  */
 public class UserRecyclerAdapter extends CoolRecyclerAdapter {
 
+    private int highlightColor = Color.TRANSPARENT;
+
     public UserRecyclerAdapter(List dataSet) {
         super(dataSet);
+    }
+
+    public UserRecyclerAdapter(List dataSet, int highlightColor) {
+        super(dataSet);
+        this.highlightColor = highlightColor;
     }
 
     public class ViewHolder extends CoolRecyclerAdapter.ViewHolder {
@@ -53,6 +59,8 @@ public class UserRecyclerAdapter extends CoolRecyclerAdapter {
     public void onBindViewHolder(CoolRecyclerAdapter.ViewHolder holder, int position) {
         User user = (User) (dataSet.get(position));
         ((ViewHolder) holder).nameTextView.setText(user.getNameAndSurname() + ", ");
+        ((View)(((ViewHolder) holder).nameTextView.getParent().getParent())).setBackgroundColor(
+                user.getIsChecked().equals("true") ? highlightColor : Color.TRANSPARENT);
         ((ViewHolder) holder).ageTextView.setText(TimeConverter.getYearsFromDate(user
                     .getBirthDate()));
         ((ViewHolder) holder).locationTextView.setText(", " + user.getLocation());

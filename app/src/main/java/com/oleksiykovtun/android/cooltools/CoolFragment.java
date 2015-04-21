@@ -1,12 +1,10 @@
 package com.oleksiykovtun.android.cooltools;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -16,7 +14,6 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-import android.support.v7.widget.Toolbar;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -45,10 +42,6 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
     protected void openMenu(View view) {
         registerForContextMenu(view);
         getActivity().openContextMenu(view);
-    }
-
-    protected View getViewInRecyclerView(int recyclerViewId, int position) {
-        return ((ViewGroup)getViewById(recyclerViewId)).getChildAt(position);
     }
 
     protected View getViewById(int viewId) {

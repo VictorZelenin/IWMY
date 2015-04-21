@@ -37,9 +37,9 @@ public class WaitFragment extends CoolFragment {
     private boolean usersReceived = false;
 
     private UserRecyclerAdapter userRecyclerAdapterGuys
-            = new UserRecyclerAdapter(userListGuys);
+            = new UserRecyclerAdapter(userListGuys, Color.BLUE);
     private UserRecyclerAdapter userRecyclerAdapterLadies
-            = new UserRecyclerAdapter(userListLadies);
+            = new UserRecyclerAdapter(userListLadies, Color.BLUE);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -121,17 +121,17 @@ public class WaitFragment extends CoolFragment {
         for (int i = 0; i < userListGuys.size(); ++i) {
             User user = userListGuys.get(i);
             if (user.getEmail().equals(attendance.getUserEmail())) {
-                getViewInRecyclerView(R.id.user_list_holder_guys, i)
-                        .setBackgroundColor(Color.BLUE);
+                user.setIsChecked("true");
             }
         }
         for (int i = 0; i < userListLadies.size(); ++i) {
             User user = userListLadies.get(i);
             if (user.getEmail().equals(attendance.getUserEmail())) {
-                getViewInRecyclerView(R.id.user_list_holder_ladies, i)
-                        .setBackgroundColor(Color.BLUE);
+                user.setIsChecked("true");
             }
         }
+        userRecyclerAdapterGuys.notifyDataSetChanged();
+        userRecyclerAdapterLadies.notifyDataSetChanged();
     }
 
     private void startTimer() {

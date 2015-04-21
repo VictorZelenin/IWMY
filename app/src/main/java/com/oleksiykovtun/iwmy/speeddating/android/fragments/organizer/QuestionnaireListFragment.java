@@ -38,9 +38,9 @@ public class QuestionnaireListFragment extends CoolFragment {
     private int selectedCountFemale = 0;
 
     private UserRecyclerAdapter userRecyclerAdapterGuys
-            = new UserRecyclerAdapter(userListGuys);
+            = new UserRecyclerAdapter(userListGuys, Color.GREEN);
     private UserRecyclerAdapter userRecyclerAdapterLadies
-            = new UserRecyclerAdapter(userListLadies);
+            = new UserRecyclerAdapter(userListLadies, Color.GREEN);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -119,38 +119,38 @@ public class QuestionnaireListFragment extends CoolFragment {
         for (int i = 0; i < userListGuys.size(); ++i) {
             User user = userListGuys.get(i);
             if (user.getEmail().equals(activeUserEmail)) {
-                getViewInRecyclerView(R.id.user_list_holder_guys, i)
-                        .setBackgroundColor(Color.GREEN);
+                user.setIsChecked("true");
                 selectedCountMale++;
             }
         }
         for (int i = 0; i < userListLadies.size(); ++i) {
             User user = userListLadies.get(i);
             if (user.getEmail().equals(activeUserEmail)) {
-                getViewInRecyclerView(R.id.user_list_holder_ladies, i)
-                        .setBackgroundColor(Color.GREEN);
+                user.setIsChecked("true");
                 selectedCountFemale++;
             }
         }
+        userRecyclerAdapterGuys.notifyDataSetChanged();
+        userRecyclerAdapterLadies.notifyDataSetChanged();
     }
 
     private void highlightInactiveUser(String inactiveUserEmail) {
         for (int i = 0; i < userListGuys.size(); ++i) {
             User user = userListGuys.get(i);
             if (user.getEmail().equals(inactiveUserEmail)) {
-                getViewInRecyclerView(R.id.user_list_holder_guys, i)
-                        .setBackgroundColor(Color.TRANSPARENT);
+                user.setIsChecked("false");
                 selectedCountMale--;
             }
         }
         for (int i = 0; i < userListLadies.size(); ++i) {
             User user = userListLadies.get(i);
             if (user.getEmail().equals(inactiveUserEmail)) {
-                getViewInRecyclerView(R.id.user_list_holder_ladies, i)
-                        .setBackgroundColor(Color.TRANSPARENT);
+                user.setIsChecked("false");
                 selectedCountFemale--;
             }
         }
+        userRecyclerAdapterGuys.notifyDataSetChanged();
+        userRecyclerAdapterLadies.notifyDataSetChanged();
     }
 
 

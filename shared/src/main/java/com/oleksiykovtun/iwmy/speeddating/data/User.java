@@ -54,6 +54,7 @@ public class User implements Serializable, Comparable<User> {
     private String location;
     private String organization;
     private String website;
+    private String isChecked;
 
     public User() { }
 
@@ -86,6 +87,7 @@ public class User implements Serializable, Comparable<User> {
         this.location = location;
         this.organization = organization;
         this.website = website;
+        this.isChecked = "";
         generateId();
     }
 
@@ -268,5 +270,13 @@ public class User implements Serializable, Comparable<User> {
 
     public void setWebsite(String website) {
         this.website = website;
+    }
+
+    public String getIsChecked() {
+        return "" + isChecked;
+    }
+
+    public void setIsChecked(String isChecked) {
+        this.isChecked = isChecked;
     }
 }
