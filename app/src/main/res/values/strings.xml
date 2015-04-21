@@ -17,8 +17,8 @@
     <string name="toolbar_questionnaires_empty">Questionnaires, </string>
     <string name="toolbar_calculating">Calculating</string>
     <string name="toolbar_questionnaire">Questionnaire</string>
+    <string name="toolbar_user">User</string>
     <string name="toolbar_couple_list">Couples list</string>
-    <string name="toolbar_name_and_age">Name, age</string>
     <string name="toolbar_couple">Couple</string>
     <string name="toolbar_settings">Settings</string>
     <string name="toolbar_new_event">New event</string>

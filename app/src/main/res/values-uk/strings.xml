@@ -97,7 +97,6 @@
     <string name="toolbar_couple_list">Пари</string>
     <string name="toolbar_events">Заходи</string>
     <string name="toolbar_my_events">Мої заходи</string>
-    <string name="toolbar_name_and_age">Ім\'я, вік</string>
     <string name="toolbar_name_and_surname">Ім\'я, прізвище</string>
     <string name="toolbar_new_event">Новий захід</string>
     <string name="toolbar_new_participant">Новий учасник</string>
@@ -146,4 +145,5 @@
     <string name="menu_edit">Змінити</string>
     <string name="toolbar_editing">Зміна профілю</string>
     <string name="button_edit_my_profile">Змінити мій профіль</string>
+    <string name="toolbar_user">Анкета</string>
 </resources>

@@ -42,8 +42,7 @@ public class UserProfileFragment extends CoolFragment {
         }
 
         ImageManager.setUserPic(getImageView(R.id.image_user_pic), user);
-            setText(R.id.label_name_and_age, user.getNameAndSurname() + ", "
-                    + TimeConverter.getYearsFromDate(user.getBirthDate()));
+        setText(R.id.label_user, R.string.toolbar_user, "- " + user.getUsername());
         setText(R.id.label_name_and_surname,
                 R.string.label_name_and_surname, user.getNameAndSurname());
         setText(R.id.label_birth_date, R.string.label_birth_date, user.getBirthDate());

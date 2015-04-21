@@ -14,8 +14,8 @@
         <include layout="@layout/image_button_toolbar_options"/>
 
         <TextView
-            android:id="@+id/label_name_and_age"
-            android:text="@string/toolbar_name_and_age"
+            android:id="@+id/label_user"
+            android:text="@string/toolbar_user"
             android:textSize="@dimen/toolbar_text_size"
             android:textColor="@color/white"
             android:layout_width="wrap_content"
