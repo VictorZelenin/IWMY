@@ -46,19 +46,16 @@ public class RatingRecyclerAdapter extends CoolRecyclerAdapter {
         final ViewHolder viewHolder = new ViewHolder(
                 LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.view_rating_list_item, parent, false));
-        viewHolder.selectionCheckBox.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        try {
-                            ((Rating) dataSet.get(getPosition(viewHolder)))
-                                    .setSelection(isChecked ? "selected" : "");
-                            itemClickListener.onClick(dataSet.get(getPosition(viewHolder)));
-                        } catch (Throwable e) {
-                            Log.e("IWMY", "Checkbox toggling failed");
-                        }
-                    }
-                });
+        viewHolder.selectionCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    itemClickListener.onClick(dataSet.get(getPosition(viewHolder)), v);
+                } catch (Throwable e) {
+                    Log.e("IWMY", "Checkbox toggling failed", e);
+                }
+            }
+        });
         viewHolder.commentEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -68,7 +65,7 @@ public class RatingRecyclerAdapter extends CoolRecyclerAdapter {
                                 .setComment("" + viewHolder.commentEditText.getText());
                         itemClickListener.onClick(dataSet.get(getPosition(viewHolder)));
                     } catch(Throwable e){
-                        Log.e("IWMY", "Comment editing failed");
+                        Log.e("IWMY", "Comment editing failed", e);
                     }
                 }
             }
@@ -86,6 +83,7 @@ public class RatingRecyclerAdapter extends CoolRecyclerAdapter {
         ((ViewHolder) holder).numberTextView.setText(rating.getNumber());
         ((ViewHolder) holder).usernameTextView.setText(rating.getUsername());
         ((ViewHolder) holder).selectionCheckBox.setChecked(!rating.getSelection().isEmpty());
+        ((ViewHolder) holder).selectionCheckBox.setAlpha(1f);
         ((ViewHolder) holder).selectionCheckBox.setTag(position);
         ((ViewHolder) holder).commentEditText.setText(rating.getComment());
     }

@@ -158,12 +158,14 @@ public class QuestionnaireListFragment extends CoolFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_send_questionnaires:
-                if (selectedCountMale > 0 && selectedCountMale == selectedCountFemale) {
-                    event.setMaxRatingsPerUser(""
-                            + CoolApplication.readPreferences(SettingsFragment.MAX_RATINGS, 1));
-                    post(Api.EVENTS + Api.PUT, Event[].class, event); // "unlocking" the event
-                } else {
-                    showToastLong(R.string.message_select_equal);
+                if (! isPostRequestRunningNow()) {
+                    if (selectedCountMale > 0 && selectedCountMale == selectedCountFemale) {
+                        event.setMaxRatingsPerUser(""
+                                + CoolApplication.readPreferences(SettingsFragment.MAX_RATINGS, 1));
+                        post(Api.EVENTS + Api.PUT, Event[].class, event); // "unlocking" the event
+                    } else {
+                        showToastLong(R.string.message_select_equal);
+                    }
                 }
                 break;
         }

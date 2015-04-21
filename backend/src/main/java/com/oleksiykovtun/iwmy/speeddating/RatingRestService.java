@@ -27,16 +27,16 @@ public class RatingRestService extends GeneralRestService {
     @Path(Api.GET_FOR_ATTENDANCE_ACTIVE) @POST @Consumes(JSON) @Produces(JSON)
     public static List getForAttendanceActive(List<Attendance> attendanceList) {
         Set<Rating> outputSet = new TreeSet<>();
+        // first, filling ratings with existing ones
         for (Attendance userAttendance : attendanceList) {
             outputSet.addAll(ObjectifyService.ofy().load().type(Rating.class)
                     .filter("thisUserEmail", userAttendance.getUserEmail())
                     .filter("eventOrganizerEmail", userAttendance.getEventOrganizerEmail())
                     .filter("eventTime", userAttendance.getEventTime()).list());
         }
-        if (outputSet.isEmpty()) {
-            return generateForAttendanceActive(attendanceList);
-        }
-        return Arrays.asList(outputSet.toArray());
+        // then generating the rest of ratings (the Set will not allow overwriting)
+        outputSet.addAll(generateForAttendanceActive(attendanceList));
+        return new ArrayList<>(outputSet);
     }
 
     /**
@@ -44,7 +44,7 @@ public class RatingRestService extends GeneralRestService {
      * @param wildcardAttendances attendances (the first one will be used)
      * @return ratings rating list
      */
-    public static List generateForAttendanceActive(List<Attendance> wildcardAttendances) {
+    public static List<Rating> generateForAttendanceActive(List<Attendance> wildcardAttendances) {
         Set<Rating> ratingSet = new TreeSet<>();
         if (wildcardAttendances.size() > 0) {
             Attendance wildcardAttendance = wildcardAttendances.get(0);
@@ -68,7 +68,7 @@ public class RatingRestService extends GeneralRestService {
                 }
             }
         }
-        return Arrays.asList(ratingSet.toArray());
+        return new ArrayList<>(ratingSet);
     }
 
     @Path(Api.PUT_ACTUAL) @POST @Consumes(JSON) @Produces(JSON)
@@ -76,7 +76,7 @@ public class RatingRestService extends GeneralRestService {
         for (Rating rating : items) {
             rating.setActual("true");
         }
-        ObjectifyService.ofy().save().entities(items).now();
+        put(items);
         return items;
     }
 
