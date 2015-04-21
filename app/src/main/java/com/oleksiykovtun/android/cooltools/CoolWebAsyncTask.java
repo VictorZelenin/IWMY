@@ -53,6 +53,10 @@ class CoolWebAsyncTask extends AsyncTask<String, Void, Void> {
         void onFailReceivingWebData(String webDataErrorString);
     }
 
+    public boolean isRunningNow() {
+        return (getStatus() == Status.RUNNING) && (!isCancelled());
+    }
+
     @Override
     protected Void doInBackground(String... urls) {
         int status = -1;

@@ -31,7 +31,8 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
         CoolDatePickerFragment.DateSetListener, CoolTimePickerFragment.TimeSetListener {
 
     private View containerView;
-    private AsyncTask task = null;
+    private CoolWebAsyncTask task = null;
+    private Toast toast = null;
     private static String urlPrefix = "";
 
     public CoolFragment() {
@@ -108,8 +109,16 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
         return  ((ImageView) getViewById(imageViewId));
     }
 
+    private void showToast(String message, int length) {
+        if (toast != null) {
+            toast.cancel();
+        }
+        toast = Toast.makeText(getActivity().getApplicationContext(), message, length);
+        toast.show();
+    }
+
     protected void showToast(String message) {
-        Toast.makeText(getActivity().getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+        showToast(message, Toast.LENGTH_SHORT);
     }
 
     protected void showToast(int messageResourceId) {
@@ -117,7 +126,7 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
     }
 
     protected void showToastLong(String message) {
-        Toast.makeText(getActivity().getApplicationContext(), message, Toast.LENGTH_LONG).show();
+        showToast(message, Toast.LENGTH_LONG);
     }
 
     protected void showToastLong(int messageResourceId) {
@@ -150,7 +159,12 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
 
     protected void post(String url, Class responseClass, Object... postData) {
         cancelPost();
-        task = new CoolWebAsyncTask(url, this, responseClass, postData).execute(urlPrefix + url);
+        task = new CoolWebAsyncTask(url, this, responseClass, postData);
+        task.execute(urlPrefix + url);
+    }
+
+    protected boolean isPostRequestRunningNow() {
+        return task != null && task.isRunningNow();
     }
 
     protected void cancelPost() {

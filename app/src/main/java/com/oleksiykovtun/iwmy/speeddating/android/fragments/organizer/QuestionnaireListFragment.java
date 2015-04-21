@@ -94,7 +94,7 @@ public class QuestionnaireListFragment extends CoolFragment {
                 break;
             case Api.USERS + Api.GET_FOR_EVENT_ACTIVE:
                 for (User activeUser : (List<User>)response) {
-                    highlightActiveUser(activeUser);
+                    highlightActiveUser(activeUser.getEmail());
                 }
                 updateToolbarTitle();
                 break;
@@ -102,13 +102,23 @@ public class QuestionnaireListFragment extends CoolFragment {
                 showToast(R.string.message_questionnaires_sent);
                 CoolFragmentManager.showAtTop(new WaitFragment(), event);
                 break;
+            case Api.ATTENDANCES + Api.TOGGLE:
+                for (Attendance attendance : (List<Attendance>)response) {
+                    if (attendance.getActive().equals("true")) {
+                        highlightActiveUser(attendance.getUserEmail());
+                    } else {
+                        highlightInactiveUser(attendance.getUserEmail());
+                    }
+                }
+                updateToolbarTitle();
+                break;
         }
     }
 
-    private void highlightActiveUser(User activeUser) {
+    private void highlightActiveUser(String activeUserEmail) {
         for (int i = 0; i < userListGuys.size(); ++i) {
             User user = userListGuys.get(i);
-            if (user.getEmail().equals(activeUser.getEmail())) {
+            if (user.getEmail().equals(activeUserEmail)) {
                 getViewInRecyclerView(R.id.user_list_holder_guys, i)
                         .setBackgroundColor(Color.GREEN);
                 selectedCountMale++;
@@ -116,13 +126,33 @@ public class QuestionnaireListFragment extends CoolFragment {
         }
         for (int i = 0; i < userListLadies.size(); ++i) {
             User user = userListLadies.get(i);
-            if (user.getEmail().equals(activeUser.getEmail())) {
+            if (user.getEmail().equals(activeUserEmail)) {
                 getViewInRecyclerView(R.id.user_list_holder_ladies, i)
                         .setBackgroundColor(Color.GREEN);
                 selectedCountFemale++;
             }
         }
     }
+
+    private void highlightInactiveUser(String inactiveUserEmail) {
+        for (int i = 0; i < userListGuys.size(); ++i) {
+            User user = userListGuys.get(i);
+            if (user.getEmail().equals(inactiveUserEmail)) {
+                getViewInRecyclerView(R.id.user_list_holder_guys, i)
+                        .setBackgroundColor(Color.TRANSPARENT);
+                selectedCountMale--;
+            }
+        }
+        for (int i = 0; i < userListLadies.size(); ++i) {
+            User user = userListLadies.get(i);
+            if (user.getEmail().equals(inactiveUserEmail)) {
+                getViewInRecyclerView(R.id.user_list_holder_ladies, i)
+                        .setBackgroundColor(Color.TRANSPARENT);
+                selectedCountFemale--;
+            }
+        }
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -141,39 +171,17 @@ public class QuestionnaireListFragment extends CoolFragment {
 
     @Override
     public void onClick(Serializable objectAtClicked, View view) {
-        toggleSelectionBackgroundColor((User) objectAtClicked, view);
-        // todo change to post selected after Send button pressed
-        post(Api.ATTENDANCES + Api.TOGGLE, Attendance[].class,
-                new Attendance((User) objectAtClicked, event));
-    }
-
-    private void toggleSelectionBackgroundColor(User selectedUser, View selectedView) {
-        if (isItemSelected(selectedView)) {
-            selectedView.setBackgroundColor(Color.TRANSPARENT);
-            if (selectedUser.getGender().equals(User.MALE)) {
-                selectedCountMale--;
-            } else {
-                selectedCountFemale--;
-            }
-        } else {
-            selectedView.setBackgroundColor(Color.GREEN);
-            if (selectedUser.getGender().equals(User.MALE)) {
-                selectedCountMale++;
-            } else {
-                selectedCountFemale++;
-            }
+        if (! isPostRequestRunningNow()) {
+            view.setBackgroundColor(getResources().getColor(R.color.gray));
+            post(Api.ATTENDANCES + Api.TOGGLE, Attendance[].class,
+                    new Attendance((User) objectAtClicked, event));
         }
-        updateToolbarTitle();
     }
 
     private void updateToolbarTitle() {
         setText(R.id.toolbar_questionnaires, R.string.toolbar_questionnaires_empty, ""
                 + (selectedCountMale + selectedCountFemale) + getText(R.string.label_out_of)
                 + (userListGuys.size() + userListLadies.size()));
-    }
-
-    private boolean isItemSelected(View view) {
-        return ((ColorDrawable) view.getBackground()).getColor() == Color.GREEN;
     }
 
 }

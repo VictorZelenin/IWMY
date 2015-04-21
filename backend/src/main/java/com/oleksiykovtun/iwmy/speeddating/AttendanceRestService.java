@@ -40,7 +40,7 @@ public class AttendanceRestService extends GeneralRestService {
             }
         }
         ObjectifyService.ofy().save().entities(attendanceSet).now();
-        return new ArrayList<>();
+        return new ArrayList<>(attendanceSet);
     }
 
     @Path(Api.GET) @POST @Consumes(JSON) @Produces(JSON)
