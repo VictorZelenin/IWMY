@@ -46,19 +46,20 @@ public class Attendance implements Serializable, Comparable<Attendance> {
     }
 
     private void generateId() {
-        this._attendanceId = getCreationTime() + "_" + getEventOrganizerEmail() + "_"
-                + getEventTime() + "_" + getUserEmail();
+        this._attendanceId = getEventOrganizerEmail() + "_" + getEventTime() + "_" + getUserEmail();
     }
 
     @Override
     public int compareTo(Attendance other) {
-        return this.get_attendanceId().compareTo(other.get_attendanceId());
+        return (this.getCreationTime() + this.get_attendanceId()).compareTo(
+                other.getCreationTime() + other.get_attendanceId());
     }
 
     @Override
     public boolean equals(Object other) {
         return (other instanceof Attendance)
-                && this.get_attendanceId().equals(((Attendance)other).get_attendanceId());
+                && (this.getCreationTime() + this.get_attendanceId()).equals(
+                ((Attendance)other).getCreationTime() + ((Attendance)other).get_attendanceId());
     }
 
     public String get_attendanceId() {

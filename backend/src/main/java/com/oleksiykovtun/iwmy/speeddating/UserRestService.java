@@ -37,7 +37,7 @@ public class UserRestService extends GeneralRestService {
         // "locking" events from users
         EventRestService.lock(wildcardEvents);
         // listing event-related attendances
-        Set<User> users = new TreeSet<>();
+        List<User> users = new ArrayList<>();
         List<Attendance> eventAttendances = AttendanceRestService.getForEvent(wildcardEvents);
         for (Attendance eventAttendance : eventAttendances) {
             // reset active state
@@ -48,7 +48,7 @@ public class UserRestService extends GeneralRestService {
         }
         // save attendances and return users
         AttendanceRestService.add(eventAttendances);
-        return Arrays.asList(users.toArray());
+        return users;
     }
 
     /**
@@ -71,7 +71,7 @@ public class UserRestService extends GeneralRestService {
 
     @Path(Api.GET_FOR_EVENT_ACTIVE) @POST @Consumes(JSON) @Produces(JSON)
     public List getForEventActive(List<Event> wildcardEvents) {
-        Set<User> users = new TreeSet<>();
+        List<User> users = new ArrayList<>();
         // listing event-related attendances
         List<Attendance> eventAttendances = AttendanceRestService.getForEvent(wildcardEvents);
         for (Attendance eventAttendance : eventAttendances) {
@@ -81,12 +81,12 @@ public class UserRestService extends GeneralRestService {
                         .filter("email", eventAttendance.getUserEmail()).list());
             }
         }
-        return Arrays.asList(users.toArray());
+        return users;
     }
 
     @Path(Api.GET_FOR_EVENT) @POST @Consumes(JSON) @Produces(JSON)
     public List getForEvent(List<Event> wildcardEvents) {
-        Set<User> users = new TreeSet<>();
+        List<User> users = new ArrayList<>();
         // listing event-related attendances
         List<Attendance> eventAttendances = AttendanceRestService.getForEvent(wildcardEvents);
         for (Attendance eventAttendance : eventAttendances) {
@@ -94,7 +94,7 @@ public class UserRestService extends GeneralRestService {
             users.addAll(ObjectifyService.ofy().load().type(User.class)
                     .filter("email", eventAttendance.getUserEmail()).list());
         }
-        return Arrays.asList(users.toArray());
+        return users;
     }
 
     @Path(Api.GET) @POST @Consumes(JSON) @Produces(JSON)
