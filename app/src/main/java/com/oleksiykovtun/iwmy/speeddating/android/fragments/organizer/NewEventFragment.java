@@ -45,7 +45,7 @@ public class NewEventFragment extends CoolFragment {
                         + getLabelText(R.id.label_event_time);
                 String place = getEditText(R.id.input_event_place);
                 String photoBase64 = "";
-                String streetAddress = getEditText(R.id.input_event_place);
+                String streetAddress = getEditText(R.id.input_event_address);
                 String freePlaces = getEditText(R.id.input_event_places);
                 String cost = getEditText(R.id.input_event_cost);
                 String description = getEditText(R.id.input_event_description);

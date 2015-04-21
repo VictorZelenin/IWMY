@@ -31,7 +31,7 @@ public class EventFragment extends CoolFragment {
         event = (Event) getAttachment();
 
         ImageManager.setEventPic(getImageView(R.id.image_event_pic), event);
-        setText(R.id.label_organizer, event.getStreetAddress());
+        setText(R.id.label_organizer, event.getPlace());
         setText(R.id.label_event_address,
                 R.string.label_event_address, event.getStreetAddress());
         setText(R.id.label_event_cost,

@@ -46,7 +46,7 @@ public class EventRecyclerAdapter extends CoolRecyclerAdapter {
     @Override
     public void onBindViewHolder(CoolRecyclerAdapter.ViewHolder holder, int position) {
         Event event = (Event) (dataSet.get(position));
-        ((ViewHolder) holder).placeTextView.setText(event.getStreetAddress());
+        ((ViewHolder) holder).placeTextView.setText(event.getPlace());
         ((ViewHolder) holder).timeTextView.setText(event.getTime());
         ImageManager.setEventPic(((ViewHolder) holder).photoImageView, event);
     }
