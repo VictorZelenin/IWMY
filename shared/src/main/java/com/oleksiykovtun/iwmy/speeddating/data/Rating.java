@@ -49,19 +49,25 @@ public class Rating implements Serializable, Comparable<Rating> {
     }
 
     private void generateId() {
-        this._ratingId = getNumber() + "_" + getEventOrganizerEmail() + "_" + getEventTime()
+        this._ratingId = getEventOrganizerEmail() + "_" + getEventTime()
                 + "_" + getThisUserEmail() + "_" + getOtherUserEmail();
     }
 
     @Override
     public int compareTo(Rating other) {
-        return this.get_ratingId().compareTo(other.get_ratingId());
+        return (this.getNumberWithLeadingZeros() + this.get_ratingId()).compareTo(
+                other.getNumberWithLeadingZeros() + other.get_ratingId());
     }
 
     @Override
     public boolean equals(Object other) {
         return (other instanceof Rating)
-                && this.get_ratingId().equals(((Rating)other).get_ratingId());
+                && (this.getNumberWithLeadingZeros() + this.get_ratingId()).equals(
+                ((Rating)other).getNumberWithLeadingZeros() + ((Rating)other).get_ratingId());
+    }
+
+    private String getNumberWithLeadingZeros() {
+        return ("000" + getNumber()).substring(getNumber().length());
     }
 
     public String get_ratingId() {
