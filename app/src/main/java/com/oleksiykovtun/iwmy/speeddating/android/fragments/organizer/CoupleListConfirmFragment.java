@@ -71,7 +71,7 @@ public class CoupleListConfirmFragment extends CoolFragment {
                 post(Api.COUPLES + Api.PUT, Couple[].class, coupleList.toArray());
                 break;
             case Api.COUPLES + Api.PUT:
-                post(Api.MAIL + Api.SEND, Email[].class, getCouplesConfirmationEmails());
+                post(Api.MAIL + Api.SEND, Email[].class, getCouplesConfirmationEmails().toArray());
                 break;
             case Api.MAIL + Api.SEND:
                 post(Api.EVENTS + Api.SET_UNACTUAL, Event[].class, event);
@@ -96,7 +96,7 @@ public class CoupleListConfirmFragment extends CoolFragment {
     }
 
 
-    private Email[] getCouplesConfirmationEmails() {
+    private List<Email> getCouplesConfirmationEmails() {
         List<Email> emails = new ArrayList<>();
         emails.add(getEmailForOrganizer());
         for (User user : getUniqueUsersFromCouples()) {
@@ -129,7 +129,7 @@ public class CoupleListConfirmFragment extends CoolFragment {
             userEmail.setMessage(message);
             emails.add(userEmail);
         }
-        return emails.toArray(new Email[emails.size()]);
+        return emails;
     }
 
     private String getUserContactInfo(User user) {

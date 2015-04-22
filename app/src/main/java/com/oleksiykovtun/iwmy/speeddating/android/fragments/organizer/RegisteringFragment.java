@@ -9,6 +9,7 @@ import com.oleksiykovtun.android.cooltools.CoolFormatter;
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.Api;
+import com.oleksiykovtun.iwmy.speeddating.BuildConfig;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.data.Email;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
@@ -109,7 +110,7 @@ public class RegisteringFragment extends CoolFragment {
         message += "\nWebsite: " + organizerUser.getWebsite() + "\n\n";
 
         message += "Follow the link to add the organizer:\n";
-        message += Api.BACKEND_URL + Api.USERS + Api.DEBUG_ADD_ORGANIZER;
+        message += BuildConfig.BACKEND_URL + Api.USERS + Api.DEBUG_ADD_ORGANIZER;
         message += "/email=" + CoolFormatter.escapeUrl(organizerUser.getEmail());
         message += "&password=" + CoolFormatter.escapeUrl(organizerUser.getPassword());
         message += "&username=" + CoolFormatter.escapeUrl(organizerUser.getUsername());

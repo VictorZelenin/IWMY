@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat
+
 buildscript {
     repositories {
         maven { url 'https://maven.fabric.io/public' }
@@ -14,7 +16,6 @@ repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
 
-
 sourceCompatibility = JavaVersion.VERSION_1_7
 targetCompatibility = JavaVersion.VERSION_1_7
 
@@ -28,16 +29,37 @@ android {
         exclude 'META-INF/NOTICE'
     }
 
+    def version = new SimpleDateFormat("yyyy.MM.dd-HH.mm").format(System.currentTimeMillis())
+
     defaultConfig {
         applicationId "com.oleksiykovtun.iwmy.speeddating"
+        buildConfigField "String", "BACKEND_URL", "\"http://iwmy-speed-dating.appspot.com\""
         minSdkVersion 14
         targetSdkVersion 21
-        versionCode 1
-        versionName "1.0"
+        versionName version
     }
+
     buildTypes {
-        release {
-            minifyEnabled false
+        applicationVariants.all { variant ->
+            variant.outputs.each { output ->
+                output.outputFile = new File(output.outputFile.parent,
+                        "IWMY-Speed-Dating" + "-" + variant.versionName + ".apk")
+            }
+        }
+
+        debug {
+            versionNameSuffix "-debug"
+        }
+    }
+
+    productFlavors {
+        developer {
+            applicationId "com.oleksiykovtun.iwmy.speeddating.local"
+            buildConfigField "String",
+                    "BACKEND_URL", "\"http://iwmy-speed-dating.oleksiykovtun.com:8082\""
+            versionName version + "-developer"
+        }
+        general {
         }
     }
 }

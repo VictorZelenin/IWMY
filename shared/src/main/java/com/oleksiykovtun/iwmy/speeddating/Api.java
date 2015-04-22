@@ -2,7 +2,6 @@ package com.oleksiykovtun.iwmy.speeddating;
 
 public class Api {
 
-    public static final String BACKEND_URL = "http://iwmy-speed-dating.appspot.com";
     public static final String APP_EMAIL = "iwmy.speed.dating@gmail.com";
     public static final String APP_NAME = "IWMY Speed Dating";
 
