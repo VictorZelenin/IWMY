@@ -8,6 +8,8 @@ import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import com.oleksiykovtun.iwmy.speeddating.data.Rating;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
+import java.util.Arrays;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -40,6 +42,29 @@ public class GeneralRestService {
     @Path(Api.EMPTY) @Produces(JSON)
     public String getDefaultMessage() {
         return DEFAULT_MESSAGE;
+    }
+
+    @GET
+    @Path(Api.PING) @Produces(JSON)
+    public String getPing() {
+        String timestamp = "" + System.currentTimeMillis();
+        // testing Datastore
+        Email testingEmail = new Email();
+        testingEmail.setCreationTime(timestamp);
+        testingEmail.setToAddress("");
+        ObjectifyService.ofy().save().entity(testingEmail).now();
+        Email responseEmail = ObjectifyService.ofy().load().type(Email.class)
+                .filter("creationTime", testingEmail.getCreationTime())
+                .filter("toAddress", testingEmail.getToAddress())
+                .list().get(0);
+        if (responseEmail.equals(testingEmail)) {
+            ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(User.class)
+                    .filter("creationTime", testingEmail.getCreationTime())
+                    .filter("toAddress", testingEmail.getToAddress())
+                    .keys()).now();
+            return Api.PING;
+        }
+        throw new RuntimeException();
     }
 
 }

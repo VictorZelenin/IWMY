@@ -47,9 +47,7 @@ public class Api {
 
     public static final String GENERAL = "/";
     public static final String EMPTY = "";
-    public static final String DEBUG_CREATE = "debug/create";
+    public static final String PING = "ping";
     public static final String DEBUG_GET_ALL = "debug/get/all";
-    public static final String DEBUG_RESET = "debug/reset";
-    public static final String DEBUG_DELETE_ALL = "debug/delete/all";
 
 }
