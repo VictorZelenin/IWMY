@@ -16,7 +16,6 @@ import com.oleksiykovtun.android.cooltools.CoolPagerAdapter;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.adapters.UserRecyclerAdapter;
-import com.oleksiykovtun.iwmy.speeddating.android.fragments.organizer.SettingsFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
@@ -51,7 +50,8 @@ public class ParticipantListFragment extends CoolFragment {
         View view = inflater.inflate(R.layout.fragment_organizer_participant_list, container,
                 false);
         registerContainerView(view);
-        registerClickListener(R.id.button_add_participant);
+        registerClickListener(R.id.button_add_new);
+        registerClickListener(R.id.button_add_existing);
         registerClickListener(R.id.button_settings);
 
         event = (Event) getAttachment();
@@ -93,8 +93,11 @@ public class ParticipantListFragment extends CoolFragment {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.button_add_participant:
+            case R.id.button_add_new:
                 CoolFragmentManager.showAtTop(new NewParticipantFragment(), event);
+                break;
+            case R.id.button_add_existing:
+                CoolFragmentManager.showAtTop(new SelectParticipantFragment(), event);
                 break;
             case R.id.button_settings:
                 CoolFragmentManager.showAtTop(new SettingsFragment());

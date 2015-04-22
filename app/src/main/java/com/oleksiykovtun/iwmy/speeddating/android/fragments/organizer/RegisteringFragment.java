@@ -55,11 +55,12 @@ public class RegisteringFragment extends CoolFragment {
                 String location = "";
                 String organization = getEditText(R.id.input_organization);
                 String website = getEditText(R.id.input_website);
+                String referralEmail = "";
 
                 impliedUser = new User(email, password, username, group, nameAndSurname,
                         photoBase64, phone, birthDate, gender, orientation, goal, affair, height,
                         weight, attitudeToSmoking, attitudeToAlcohol, location, organization,
-                        website);
+                        website, referralEmail);
                 if (checkUser(impliedUser)) {
                     post(Api.USERS + Api.GET_UNIQUE, User[].class, impliedUser);
                 } else {

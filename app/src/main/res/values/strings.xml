@@ -20,6 +20,7 @@
     <string name="toolbar_settings">Settings</string>
     <string name="toolbar_new_event">New event</string>
     <string name="toolbar_your_couple_list">Your couples list</string>
+    <string name="toolbar_select_user">Select user</string>
 
     <string name="label_email">Email: </string>
     <string name="label_username">Username: </string>
@@ -101,6 +102,8 @@
     <string name="button_delete">Delete</string>
     <string name="button_edit_my_profile">Edit my profile</string>
     <string name="button_allow_users_send_ratings">Allow users to send ratings</string>
+    <string name="button_add">Add</string>
+    <string name="button_add_existing">Add existing</string>
 
     <string name="tab_events_current">Current</string>
     <string name="tab_events_past">Past</string>
@@ -132,6 +135,7 @@
     <string name="hint_enter_organization">Enter your organization name</string>
     <string name="hint_enter_website">Enter your website address</string>
     <string name="hint_enter_participant_email">Enter participant email</string>
+    <string name="hint_search_email_name_username">Search email/name/username</string>
 
     <string name="menu_my_events">My events</string>
     <string name="menu_edit">Edit</string>

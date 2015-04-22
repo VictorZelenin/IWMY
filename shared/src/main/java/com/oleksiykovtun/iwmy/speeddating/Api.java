@@ -9,6 +9,7 @@ public class Api {
     public static final String REPLACE = "replace";
     public static final String DEBUG_ADD_ORGANIZER = "debug/add/organizer";
     public static final String GET = "get";
+    public static final String GET_OTHER_FOR_EVENT = "get/other/for/event";
     public static final String DEBUG_GET = "debug/get";
     public static final String DEBUG_DELETE = "debug/delete";
     public static final String GET_UNIQUE = "get/unique";

@@ -40,7 +40,7 @@ public class AuthorizationFragment extends CoolFragment {
                 if (!userId.isEmpty() && !password.isEmpty()) {
                     // to do security
                     User wildcardLoginUser = new User(userId, password, userId,
-                            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+                            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
                     post(Api.USERS + Api.GET_LOGIN, User[].class, wildcardLoginUser);
                 } else {
                     showToastLong(R.string.message_no_user_wrong_password);

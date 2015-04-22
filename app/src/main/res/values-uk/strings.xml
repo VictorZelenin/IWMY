@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="button_add_event">Додати захід</string>
-    <string name="button_add_participant">Додати учасника</string>
+    <string name="button_add_participant">Додати нового</string>
     <string name="button_add_questionnaire">Додати анкету</string>
     <string name="button_apply">Надіслати</string>
     <string name="button_attend">Відвідати</string>
@@ -148,4 +148,8 @@
     <string name="toolbar_user">Анкета</string>
     <string name="button_allow_users_send_ratings">Дозволити учасникам надсилати анкети</string>
     <string name="label_event_is_old">Цей захід уже відбувся</string>
+    <string name="button_add">Додати</string>
+    <string name="button_add_existing">Додати існуючого</string>
+    <string name="toolbar_select_user">Оберіть учасника</string>
+    <string name="hint_search_email_name_username">Пошук email/імені/ніку</string>
 </resources>

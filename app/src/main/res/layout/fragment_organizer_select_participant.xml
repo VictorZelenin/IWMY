@@ -1,0 +1,47 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/main_color"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:background="@color/accent_color"
+        android:layout_height="@dimen/toolbar_height"
+        android:layout_width="match_parent">
+
+        <include layout="@layout/image_view_toolbar_logo"/>
+
+        <TextView
+            android:id="@+id/toolbar_select_user"
+            android:text="@string/toolbar_select_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/toolbar_text_size"
+            android:textColor="@color/white" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent">
+
+            <include layout="@layout/image_button_toolbar_settings"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <EditText
+        android:id="@+id/input_search_email_name_username"
+        android:hint="@string/hint_search_email_name_username"
+        android:inputType="text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/user_list_holder"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent" />
+
+</LinearLayout>

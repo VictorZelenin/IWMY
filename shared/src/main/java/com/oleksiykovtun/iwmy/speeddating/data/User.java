@@ -55,6 +55,7 @@ public class User implements Serializable, Comparable<User> {
     private String organization;
     private String website;
     private String isChecked;
+    private String referralEmail;
 
     public User() { }
 
@@ -67,7 +68,7 @@ public class User implements Serializable, Comparable<User> {
                 String nameAndSurname, String photoBase64, String phone, String birthDate,
                 String gender, String orientation, String goal, String affair,
                 String height, String weight, String attitudeToSmoking, String attitudeToAlcohol,
-                String location, String organization, String website) {
+                String location, String organization, String website, String referralEmail) {
         this.group = group;
         this.username = username;
         this.email = email;
@@ -87,7 +88,8 @@ public class User implements Serializable, Comparable<User> {
         this.location = location;
         this.organization = organization;
         this.website = website;
-        this.isChecked = "";
+        this.isChecked = "false";
+        this.referralEmail = referralEmail;
         generateId();
     }
 
@@ -278,5 +280,13 @@ public class User implements Serializable, Comparable<User> {
 
     public void setIsChecked(String isChecked) {
         this.isChecked = isChecked;
+    }
+
+    public String getReferralEmail() {
+        return "" + referralEmail;
+    }
+
+    public void setReferralEmail(String referralEmail) {
+        this.referralEmail = referralEmail;
     }
 }

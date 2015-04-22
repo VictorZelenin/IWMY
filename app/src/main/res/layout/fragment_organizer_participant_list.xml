@@ -31,8 +31,14 @@
     </android.support.v7.widget.Toolbar>
 
     <Button
-        android:id="@+id/button_add_participant"
+        android:id="@+id/button_add_new"
         android:text="@string/button_add_participant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/button_add_existing"
+        android:text="@string/button_add_existing"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

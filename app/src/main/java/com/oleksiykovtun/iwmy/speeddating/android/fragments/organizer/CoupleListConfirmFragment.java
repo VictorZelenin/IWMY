@@ -153,13 +153,13 @@ public class CoupleListConfirmFragment extends CoolFragment {
     private User getUser1FromCouple(Couple couple) {
         return new User(couple.getUserEmail1(), "", couple.getUsername1(), "",
                 couple.getName1(), "", couple.getPhone1(), couple.getBirthDate1(), "",
-                "", "", "", "", "", "", "", "", "", "");
+                "", "", "", "", "", "", "", "", "", "", "");
     }
 
     private User getUser2FromCouple(Couple couple) {
         return new User(couple.getUserEmail2(), "", couple.getUsername2(), "",
                 couple.getName2(), "", couple.getPhone2(), couple.getBirthDate2(), "",
-                "", "", "", "", "", "", "", "", "", "");
+                "", "", "", "", "", "", "", "", "", "", "");
     }
 
     private User[] getCoupleUsersForUser(User user) {

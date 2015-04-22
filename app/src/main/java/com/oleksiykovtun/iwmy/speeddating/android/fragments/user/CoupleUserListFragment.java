@@ -67,7 +67,7 @@ public class CoupleUserListFragment extends CoolFragment {
                             = (Account.getUser(this).getEmail().equals(couple.getUserEmail2()))
                             ? couple.getUserEmail1() : couple.getUserEmail2();
                     coupleUserWildcards.add(new User(coupleUserEmail, "", "", "", "", "", "", "",
-                            "", "", "", "", "", "", "", "", "", "", ""));
+                            "", "", "", "", "", "", "", "", "", "", "", ""));
                 }
                 post(Api.USERS + Api.GET, User[].class, coupleUserWildcards.toArray());
                 break;

@@ -5,6 +5,7 @@ import android.widget.RadioButton;
 import com.oleksiykovtun.android.cooltools.CoolFormatter;
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.iwmy.speeddating.R;
+import com.oleksiykovtun.iwmy.speeddating.android.Account;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 /**
@@ -78,6 +79,8 @@ public abstract class ProfileEditFragment extends CoolFragment {
         user.setLocation("");
         user.setOrganization("");
         user.setWebsite("");
+        user.setIsChecked("false");
+        user.setReferralEmail(includingPassword ? "" : Account.getUser(this).getEmail());
         return user;
     }
 
