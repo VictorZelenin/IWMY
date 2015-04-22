@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name" translatable="false">IWMY Speed Dating</string>
-    <string name="app_title" translatable="false">Speed Dating</string>
-
     <string name="toolbar_authorization">Authorization</string>
     <string name="toolbar_registering">Registering</string>
     <string name="toolbar_events">Events</string>
@@ -137,8 +134,6 @@
     <string name="menu_my_events">My events</string>
     <string name="menu_edit">Edit</string>
 
-    <color name="blue">#0098FF</color>
-    <color name="light_blue">#A0D9FF</color>
     <color name="white">#FFFFFF</color>
     <color name="gray">#CCCCCC</color>
 

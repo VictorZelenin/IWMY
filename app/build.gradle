@@ -34,6 +34,10 @@ android {
     defaultConfig {
         applicationId "com.oleksiykovtun.iwmy.speeddating"
         buildConfigField "String", "BACKEND_URL", "\"http://iwmy-speed-dating.appspot.com\""
+        resValue "color", "accent_color", "#0098FF"
+        resValue "color", "main_color", "#A0D9FF"
+        resValue "string", "app_name", "IWMY Speed Dating"
+        resValue "string", "app_title", "Speed Dating"
         minSdkVersion 14
         targetSdkVersion 21
         versionName version
@@ -54,9 +58,13 @@ android {
 
     productFlavors {
         developer {
-            applicationId "com.oleksiykovtun.iwmy.speeddating.local"
+            applicationId "com.oleksiykovtun.iwmy.speeddating.developer"
             buildConfigField "String",
                     "BACKEND_URL", "\"http://iwmy-speed-dating.oleksiykovtun.com:8082\""
+            resValue "color", "accent_color", "#FF7755"
+            resValue "color", "main_color", "#FFCCAA"
+            resValue "string", "app_name", "IWMY Speed Dating Developer"
+            resValue "string", "app_title", "Speed Dating Developer"
             versionName version + "-developer"
         }
         general {

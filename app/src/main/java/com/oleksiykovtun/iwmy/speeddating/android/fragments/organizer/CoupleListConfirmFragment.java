@@ -100,7 +100,7 @@ public class CoupleListConfirmFragment extends CoolFragment {
         List<Email> emails = new ArrayList<>();
         emails.add(getEmailForOrganizer());
         for (User user : getUniqueUsersFromCouples()) {
-            Email userEmail = new Email(Api.APP_EMAIL, Api.APP_NAME,
+            Email userEmail = new Email(Api.APP_EMAIL, "" + getText(R.string.app_name),
                     user.getEmail(), user.getNameAndSurname(), "", "");
             String subject;
             String message;
@@ -187,7 +187,7 @@ public class CoupleListConfirmFragment extends CoolFragment {
         String message = "" + getText(R.string.mail_text_organizer_event_successful);
         message = message.replace("COUPLE_COUNT", "" + coupleList.size());
         message = message.replace("CONTACTS_COUPLE_LIST", getCouplesContactInfo());
-        return new Email(Api.APP_EMAIL, Api.APP_NAME,
+        return new Email(Api.APP_EMAIL, "" + getText(R.string.app_name),
                 event.getOrganizerEmail(), event.getPlace(),
                 "" + getText(R.string.mail_subject_organizer_event_successful),
                 message);

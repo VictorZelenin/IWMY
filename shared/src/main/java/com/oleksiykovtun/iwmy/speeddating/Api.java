@@ -3,7 +3,6 @@ package com.oleksiykovtun.iwmy.speeddating;
 public class Api {
 
     public static final String APP_EMAIL = "iwmy.speed.dating@gmail.com";
-    public static final String APP_NAME = "IWMY Speed Dating";
 
     public static final String USERS = "/users/";
     public static final String ADD = "add";
