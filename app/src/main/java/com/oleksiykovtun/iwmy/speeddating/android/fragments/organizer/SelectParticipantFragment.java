@@ -4,9 +4,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
@@ -28,10 +31,11 @@ import java.util.List;
 public class SelectParticipantFragment extends CoolFragment {
 
     private List<User> userList = new ArrayList<User>();
+    private List<User> filteredUserList = new ArrayList<User>();
 
     private Event event = null;
 
-    private UserRecyclerAdapter userRecyclerAdapter = new UserRecyclerAdapter(userList, Color.GREEN);
+    private UserRecyclerAdapter userRecyclerAdapter = new UserRecyclerAdapter(filteredUserList);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,9 +54,35 @@ public class SelectParticipantFragment extends CoolFragment {
         userRecyclerViewGuys.setAdapter(userRecyclerAdapter);
         registerItemClickListener(userRecyclerAdapter);
 
+        ((EditText) getViewById(R.id.input_search_email_name_username)).addTextChangedListener(
+                new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filterList("" + s);
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
         post(Api.USERS + Api.GET_OTHER_FOR_EVENT, User[].class, event);
 
         return view;
+    }
+
+    private void filterList(String matchingText) {
+        filteredUserList.clear();
+        for (User user : userList) {
+            if (matchingText.isEmpty() || user.getEmail().contains(matchingText)
+                    || user.getNameAndSurname().contains(matchingText)
+                    || user.getUsername().contains(matchingText)) {
+                filteredUserList.add(user);
+            }
+        }
+        userRecyclerAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -67,7 +97,7 @@ public class SelectParticipantFragment extends CoolFragment {
             case Api.USERS + Api.GET_OTHER_FOR_EVENT:
                 userList.clear();
                 userList.addAll(response);
-                userRecyclerAdapter.notifyDataSetChanged();
+                filterList(getEditText(R.id.input_search_email_name_username));
                 break;
             case Api.ATTENDANCES + Api.ADD:
                 if (!response.isEmpty()) {
