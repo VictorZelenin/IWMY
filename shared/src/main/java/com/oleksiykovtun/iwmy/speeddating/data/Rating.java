@@ -16,6 +16,9 @@ import java.io.Serializable;
 @JsonPropertyOrder(alphabetic=true)
 public class Rating implements Serializable, Comparable<Rating> {
 
+    public static final String SELECTED = "selected";
+    public static final String NOT_SELECTED = "";
+
     @Id
     private String _ratingId;
     private String eventOrganizerEmail;

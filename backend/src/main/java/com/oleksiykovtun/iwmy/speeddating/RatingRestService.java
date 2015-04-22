@@ -112,7 +112,7 @@ public class RatingRestService extends GeneralRestService {
             outputSet.addAll(ObjectifyService.ofy().load().type(Rating.class)
                     .filter("eventOrganizerEmail", userAttendance.getEventOrganizerEmail())
                     .filter("eventTime", userAttendance.getEventTime())
-                    .filter("selection", "selected").list());
+                    .filter("selection", Rating.SELECTED).list());
         }
         return new ArrayList<>(outputSet);
     }

@@ -61,7 +61,7 @@ public abstract class UserQuestionnaireFragment extends CoolFragment {
         toggleSelection((Rating) objectAtClicked); // checking the object
         int selectedRatingsCount = 0;
         for (Rating rating : ratingList) {
-            if (!rating.getSelection().isEmpty()) {
+            if (rating.getSelection().equals(Rating.SELECTED)) {
                 ++selectedRatingsCount;
             }
         }
@@ -80,7 +80,8 @@ public abstract class UserQuestionnaireFragment extends CoolFragment {
     }
 
     protected void toggleSelection(Rating rating) {
-        rating.setSelection(rating.getSelection().equals("") ? "selection" : "");
+        rating.setSelection(rating.getSelection().equals(Rating.SELECTED)
+                ? Rating.NOT_SELECTED : Rating.SELECTED);
     }
 
     protected void sendRating() {

@@ -82,7 +82,8 @@ public class RatingRecyclerAdapter extends CoolRecyclerAdapter {
         Rating rating = (Rating) (dataSet.get(position));
         ((ViewHolder) holder).numberTextView.setText(rating.getNumber());
         ((ViewHolder) holder).usernameTextView.setText(rating.getUsername());
-        ((ViewHolder) holder).selectionCheckBox.setChecked(!rating.getSelection().isEmpty());
+        ((ViewHolder) holder).selectionCheckBox.setChecked(rating.getSelection()
+                .equals(Rating.SELECTED));
         ((ViewHolder) holder).selectionCheckBox.setAlpha(1f);
         ((ViewHolder) holder).selectionCheckBox.setTag(position);
         ((ViewHolder) holder).commentEditText.setText(rating.getComment());
