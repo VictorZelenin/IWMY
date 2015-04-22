@@ -80,7 +80,7 @@ public abstract class CoolFragmentManager {
      * @param object   the object attached to the fragment
      */
     public static void show(Fragment fragment, Serializable object) {
-        pop();
+        pop().onPause();
         push(fragment);
         replaceWith(fragment, object);
     }

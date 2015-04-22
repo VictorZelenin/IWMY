@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewManager;
 
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
@@ -46,6 +47,7 @@ public class WaitFragment extends CoolFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_organizer_wait, container, false);
         registerContainerView(view);
+        registerClickListener(R.id.button_allow_users_send_ratings);
 
         event = (Event) getAttachment();
 
@@ -114,6 +116,10 @@ public class WaitFragment extends CoolFragment {
                     CoolFragmentManager.show(new CoupleListConfirmFragment(), event);
                 }
                 break;
+            case Api.EVENTS + Api.SET_USER_RATINGS_ALLOW:
+                ((ViewManager)getViewById(R.id.button_allow_users_send_ratings).getParent())
+                        .removeView(getViewById(R.id.button_allow_users_send_ratings));
+                break;
         }
     }
 
@@ -134,14 +140,19 @@ public class WaitFragment extends CoolFragment {
         userRecyclerAdapterLadies.notifyDataSetChanged();
     }
 
+    private void stopTimer() {
+        if (timer != null) {
+            timer.cancel();
+        }
+    }
+
     private void startTimer() {
+        stopTimer();
         timer = new CountDownTimer(3600000, 6000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
-                // checking until all active attendants put ratings
-                post(Api.ATTENDANCES + Api.GET_FOR_EVENT_ACTIVE_CHECK_VOTED, Attendance[].class,
-                        event);
+                onTimerTick();
             }
 
             @Override
@@ -149,6 +160,23 @@ public class WaitFragment extends CoolFragment {
             }
 
         }.start();
+    }
+
+    protected void onTimerTick() {
+        // checking until all active attendants put ratings
+        if (!isPostRequestRunningNow()) {
+            post(Api.ATTENDANCES + Api.GET_FOR_EVENT_ACTIVE_CHECK_VOTED, Attendance[].class,
+                    event);
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.button_allow_users_send_ratings:
+                post(Api.EVENTS + Api.SET_USER_RATINGS_ALLOW, User[].class, event);
+                break;
+        }
     }
 
     @Override
@@ -162,9 +190,7 @@ public class WaitFragment extends CoolFragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (timer != null) {
-            timer.cancel();
-        }
+        stopTimer();
     }
 
 }

@@ -23,6 +23,12 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <Button
+        android:id="@+id/button_allow_users_send_ratings"
+        android:text="@string/button_allow_users_send_ratings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <android.support.v4.view.ViewPager
         android:id="@+id/events_pager"
         android:layout_width="match_parent"

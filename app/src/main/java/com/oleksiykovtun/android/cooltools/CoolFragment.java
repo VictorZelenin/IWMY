@@ -186,10 +186,14 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
     }
 
     private void hideKeyboard() {
-        View view = getActivity().getCurrentFocus();
-        if (view != null) {
-            InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-            inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        if (getActivity()!= null) {
+            View view = getActivity().getCurrentFocus();
+            if (view != null) {
+                InputMethodManager inputManager = (InputMethodManager) getActivity()
+                        .getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(view.getWindowToken(),
+                        InputMethodManager.HIDE_NOT_ALWAYS);
+            }
         }
     }
 

@@ -22,8 +22,8 @@ public class Api {
     public static final String GET_ALL = "get/all";
     public static final String GET_FOR_USER = "get/for/user";
     public static final String GET_FOR_TIME = "get/for/time";
-    public static final String SET_ACTUAL = "set/actual";
     public static final String SET_UNACTUAL = "set/unactual";
+    public static final String SET_USER_RATINGS_ALLOW = "set/user/ratings/allow";
     public static final String DELETE = "delete";
 
     public static final String ATTENDANCES = "/attendances/";
