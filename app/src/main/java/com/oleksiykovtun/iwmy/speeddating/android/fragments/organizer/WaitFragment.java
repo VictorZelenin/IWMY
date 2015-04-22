@@ -2,7 +2,6 @@ package com.oleksiykovtun.iwmy.speeddating.android.fragments.organizer;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -34,7 +33,6 @@ public class WaitFragment extends CoolFragment {
     private List<User> userListLadies = new ArrayList<User>();
 
     private Event event = null;
-    private static CountDownTimer timer;
     private boolean usersReceived = false;
 
     private UserRecyclerAdapter userRecyclerAdapterGuys
@@ -140,28 +138,7 @@ public class WaitFragment extends CoolFragment {
         userRecyclerAdapterLadies.notifyDataSetChanged();
     }
 
-    private void stopTimer() {
-        if (timer != null) {
-            timer.cancel();
-        }
-    }
-
-    private void startTimer() {
-        stopTimer();
-        timer = new CountDownTimer(3600000, 6000) {
-
-            @Override
-            public void onTick(long millisUntilFinished) {
-                onTimerTick();
-            }
-
-            @Override
-            public void onFinish() {
-            }
-
-        }.start();
-    }
-
+    @Override
     protected void onTimerTick() {
         // checking until all active attendants put ratings
         if (!isPostRequestRunningNow()) {
@@ -185,12 +162,6 @@ public class WaitFragment extends CoolFragment {
         if (usersReceived) {
             startTimer();
         }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        stopTimer();
     }
 
 }

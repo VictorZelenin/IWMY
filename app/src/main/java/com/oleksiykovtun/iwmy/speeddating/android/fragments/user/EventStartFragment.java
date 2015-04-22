@@ -1,7 +1,6 @@
 package com.oleksiykovtun.iwmy.speeddating.android.fragments.user;
 
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,6 @@ import java.util.List;
 public class EventStartFragment extends CoolFragment {
 
     private Event event = null;
-    private static CountDownTimer timer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,29 +76,15 @@ public class EventStartFragment extends CoolFragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        timer = new CountDownTimer(3600000, 6000) {
-
-            @Override
-            public void onTick(long millisUntilFinished) {
-                // checking until this event is started by organizer
-                post(Api.EVENTS + Api.GET_FOR_TIME, Event[].class, event);
-            }
-
-            @Override
-            public void onFinish() {
-            }
-
-        }.start();
+    protected void onTimerTick() {
+        // checking until this event is started by organizer
+        post(Api.EVENTS + Api.GET_FOR_TIME, Event[].class, event);
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        if (timer != null) {
-            timer.cancel();
-        }
+    public void onStart() {
+        super.onStart();
+        startTimer();
     }
 
     @Override

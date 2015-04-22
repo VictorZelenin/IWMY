@@ -2,6 +2,7 @@ package com.oleksiykovtun.android.cooltools;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
@@ -30,6 +31,7 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
     private View containerView;
     private CoolWebAsyncTask task = null;
     private Toast toast = null;
+    private static CountDownTimer timer = null;
     private static String urlPrefix = "";
 
     public CoolFragment() {
@@ -166,6 +168,32 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
         }
     }
 
+    protected void stopTimer() {
+        if (timer != null) {
+            timer.cancel();
+        }
+    }
+
+    protected void startTimer() {
+        stopTimer();
+        timer = new CountDownTimer(3600000, 6000) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                onTimerTick();
+            }
+
+            @Override
+            public void onFinish() {
+            }
+
+        }.start();
+    }
+
+    protected void onTimerTick() {
+
+    }
+
     @Override
     public void onReceiveWebData(List webDataErrorString) {
     }
@@ -226,6 +254,7 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
     @Override
     public void onPause() {
         super.onPause();
+        stopTimer();
         cancelPost();
         hideKeyboard();
     }

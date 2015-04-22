@@ -1,7 +1,6 @@
 package com.oleksiykovtun.iwmy.speeddating.android.fragments.user;
 
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,6 @@ import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
-import com.oleksiykovtun.iwmy.speeddating.android.Account;
 import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 
@@ -22,7 +20,6 @@ import java.util.List;
 public class WaitRatingsFragment extends CoolFragment {
 
     private Event event = null;
-    private static CountDownTimer timer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,30 +48,15 @@ public class WaitRatingsFragment extends CoolFragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        timer = new CountDownTimer(3600000, 6000) {
-
-            @Override
-            public void onTick(long millisUntilFinished) {
-                // checking until for this attendant couples are put
-                post(Api.ATTENDANCES + Api.GET_FOR_EVENT_ACTIVE_CHECK_VOTED, Attendance[].class,
-                        event);
-            }
-
-            @Override
-            public void onFinish() {
-            }
-
-        }.start();
+    protected void onTimerTick() {
+        // checking until for this attendant couples are put
+        post(Api.ATTENDANCES + Api.GET_FOR_EVENT_ACTIVE_CHECK_VOTED, Attendance[].class, event);
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        if (timer != null) {
-            timer.cancel();
-        }
+    public void onStart() {
+        super.onStart();
+        startTimer();
     }
 
 }
