@@ -37,10 +37,14 @@ public class AuthorizationFragment extends CoolFragment {
             case R.id.button_enter:
                 String userId = getEditText(R.id.input_username);
                 String password = getEditText(R.id.input_password);
-                // to do security
-                User wildcardLoginUser = new User(userId, password, userId,
-                        "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
-                post(Api.USERS + Api.GET_LOGIN, User[].class, wildcardLoginUser);
+                if (!userId.isEmpty() && !password.isEmpty()) {
+                    // to do security
+                    User wildcardLoginUser = new User(userId, password, userId,
+                            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+                    post(Api.USERS + Api.GET_LOGIN, User[].class, wildcardLoginUser);
+                } else {
+                    showToastLong(R.string.message_no_user_wrong_password);
+                }
 
         }
     }
