@@ -103,7 +103,7 @@ public class RatingRestService extends GeneralRestService {
         return new ArrayList();
     }
 
-    public static List getForEventSelected(List<Event> wildcardEvents) {
+    public static List<Rating> getForEventSelected(List<Event> wildcardEvents) {
         Set<Rating> outputSet = new TreeSet<>();
         // listing event-related attendances
         List<Attendance> userAttendances = AttendanceRestService.getForEvent(wildcardEvents);
@@ -114,10 +114,10 @@ public class RatingRestService extends GeneralRestService {
                     .filter("eventTime", userAttendance.getEventTime())
                     .filter("selection", "selected").list());
         }
-        return Arrays.asList(outputSet.toArray());
+        return new ArrayList<>(outputSet);
     }
 
-    public static List getForAttendanceActual(List<Attendance> attendanceList) {
+    public static List<Rating> getForAttendanceActual(List<Attendance> attendanceList) {
         Set<Rating> outputSet = new TreeSet<>();
         for (Attendance userAttendance : attendanceList) {
             outputSet.addAll(ObjectifyService.ofy().load().type(Rating.class)
@@ -126,7 +126,7 @@ public class RatingRestService extends GeneralRestService {
                     .filter("eventTime", userAttendance.getEventTime())
                     .filter("actual", "true").list());
         }
-        return Arrays.asList(outputSet.toArray());
+        return new ArrayList<>(outputSet);
     }
 
     private static List<Rating> getForUser(List<User> wildcardUsers) {
@@ -137,7 +137,7 @@ public class RatingRestService extends GeneralRestService {
             ratings.addAll(ObjectifyService.ofy().load().type(Rating.class)
                     .filter("otherUserEmail", wildcardUser.getEmail()).list());
         }
-        return Arrays.asList(ratings.toArray(new Rating[ratings.size()]));
+        return new ArrayList<>(ratings);
     }
 
     public static List replaceForUser(List<User> users) {
