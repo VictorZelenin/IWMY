@@ -47,10 +47,10 @@ public abstract class UserQuestionnaireFragment extends CoolFragment {
                     for (Rating rating : ratingList) {
                         if (rating.getNumber().equals(responseRating.getNumber())) {
                             rating.setSelection(responseRating.getSelection());
-                            ratingRecyclerAdapter.notifyDataSetChanged();
                         }
                     }
                 }
+                ratingRecyclerAdapter.notifyDataSetChanged();
                 break;
         }
     }

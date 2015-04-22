@@ -16,6 +16,8 @@ import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import com.oleksiykovtun.iwmy.speeddating.data.Rating;
 
+import java.util.List;
+
 /**
  * Created by alx on 2015-02-12.
  */
@@ -31,6 +33,9 @@ public class QuestionnaireFragment extends UserQuestionnaireFragment {
         registerClickListener(R.id.button_send);
         registerClickListener(R.id.button_settings);
 
+        setText(R.id.button_send, "" + getText(R.string.label_waiting_for_organizer));
+        setButtonEnabled(R.id.button_send, false);
+
         event = (Event) getAttachment();
 
         setText(R.id.label_organizer, event.getPlace());
@@ -42,6 +47,26 @@ public class QuestionnaireFragment extends UserQuestionnaireFragment {
         setupRecyclerView((RecyclerView) view.findViewById(R.id.rating_list_holder));;
 
         return view;
+    }
+
+    @Override
+    public void onReceiveWebData(String postTag, List response) {
+        super.onReceiveWebData(postTag, response);
+        switch (postTag) {
+            case Api.RATINGS + Api.GET_FOR_ATTENDANCE_ACTIVE:
+                startTimer();
+                break;
+            case Api.EVENTS + Api.GET_FOR_TIME:
+                if (response.size() > 0) {
+                    event = (Event) response.get(0);
+                    if (event.getAllowSendingRatings().equals("true")) {
+                        setText(R.id.button_send, "" + getText(R.string.button_send));
+                        setButtonEnabled(R.id.button_send, true);
+                    }
+                }
+                ratingRecyclerAdapter.notifyDataSetChanged();
+                break;
+        }
     }
 
     @Override
@@ -63,6 +88,20 @@ public class QuestionnaireFragment extends UserQuestionnaireFragment {
             case R.id.button_settings:
                 CoolFragmentManager.showAtTop(new SettingsFragment());
                 break;
+        }
+    }
+
+    @Override
+    protected void onTimerTick() {
+        // checking until the event is already not actual (i.e. couples are obtained)
+        post(Api.EVENTS + Api.GET_FOR_TIME, Event[].class, event);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (!ratingList.isEmpty()) {
+            startTimer();
         }
     }
 

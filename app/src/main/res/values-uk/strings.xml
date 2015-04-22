@@ -147,4 +147,5 @@
     <string name="button_edit_my_profile">Змінити мій профіль</string>
     <string name="toolbar_user">Анкета</string>
     <string name="button_allow_users_send_ratings">Дозволити учасникам надсилати анкети</string>
+    <string name="label_event_is_old">Цей захід уже відбувся</string>
 </resources>

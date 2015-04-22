@@ -33,6 +33,11 @@ public class EventAttendFragment extends CoolFragment {
 
         event = (Event) getAttachment();
 
+        if (!event.getActual().equals("true")) {
+            setText(R.id.button_attend, "" + getText(R.string.label_event_is_old));
+            setButtonEnabled(R.id.button_attend, false);
+        }
+
         ImageManager.setEventPic(getImageView(R.id.image_event_pic), event);
         setText(R.id.label_organizer, event.getPlace());
         setText(R.id.label_event_address,
