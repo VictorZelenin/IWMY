@@ -1,5 +1,6 @@
 package com.oleksiykovtun.iwmy.speeddating.data;
 
+import com.googlecode.objectify.annotation.Cache;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
@@ -12,6 +13,7 @@ import java.io.Serializable;
  * Created by alx on 2015-02-17.
  */
 @Entity
+@Cache
 @Index
 @JsonPropertyOrder(alphabetic=true)
 public class Event implements Serializable, Comparable<Event> {
