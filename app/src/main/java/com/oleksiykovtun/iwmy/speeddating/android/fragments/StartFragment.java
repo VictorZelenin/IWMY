@@ -35,8 +35,8 @@ public class StartFragment extends CoolFragment implements View.OnClickListener 
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
         if (Account.hasUser(this)) {
             if (Account.getUser(this).getGroup().equals(User.ORGANIZER)) {
                 CoolFragmentManager.showAtBottom(new MyEventListFragment());

@@ -54,8 +54,8 @@ public class WaitRatingsFragment extends CoolFragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
         startTimer();
     }
 

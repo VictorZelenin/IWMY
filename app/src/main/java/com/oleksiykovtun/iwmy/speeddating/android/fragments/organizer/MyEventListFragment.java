@@ -42,11 +42,9 @@ public class MyEventListFragment extends CoolFragment {
             = new EventRecyclerAdapter(pastEventList);
 
     @Override
-    public void onStart() {
-        super.onStart();
-        Event eventWildcard = new Event(Account.getUser(this).getEmail(), "", "", "", "", "",
-                "", "");
-        post(Api.EVENTS + Api.GET, Event[].class, eventWildcard);
+    public void onResume() {
+        super.onResume();
+        requestEventList();
     }
 
     @Override
@@ -96,7 +94,7 @@ public class MyEventListFragment extends CoolFragment {
                 CoolFragmentManager.showAtTop(new EventFragment(), selectedEvent);
                 break;
             case Api.EVENTS + Api.DELETE:
-                onStart();
+                requestEventList();
                 break;
         }
     }
@@ -145,6 +143,12 @@ public class MyEventListFragment extends CoolFragment {
 
                 })
                 .create().show();
+    }
+
+    private void requestEventList() {
+        Event eventWildcard = new Event(Account.getUser(this).getEmail(), "", "", "", "", "",
+                "", "");
+        post(Api.EVENTS + Api.GET, Event[].class, eventWildcard);
     }
 
 }

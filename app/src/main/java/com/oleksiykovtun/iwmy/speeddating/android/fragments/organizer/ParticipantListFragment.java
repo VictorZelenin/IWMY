@@ -39,8 +39,8 @@ public class ParticipantListFragment extends CoolFragment {
             = new UserRecyclerAdapter(userListLadies);
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
         post(Api.USERS + Api.GET_FOR_EVENT, User[].class, event);
     }
 
