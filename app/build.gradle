@@ -23,7 +23,9 @@ sourceCompatibility = JavaVersion.VERSION_1_7
 targetCompatibility = JavaVersion.VERSION_1_7
 
 gradle.taskGraph.whenReady { taskGraph ->
-    if(taskGraph.hasTask(':app:assembleRelease')) {
+    if(taskGraph.hasTask(':app:assembleRelease')
+            || taskGraph.hasTask(':app:assembleDeveloperRelease')
+            || taskGraph.hasTask(':app:assembleGeneralRelease')) {
         def password = ''
         def hint = "Enter keystore/key password"
         if (System.console() != null) {
@@ -93,6 +95,8 @@ android {
         }
 
         release {
+            minifyEnabled true
+            proguardFile 'proguard-rules-release.pro'
             signingConfig signingConfigs.release
         }
     }
