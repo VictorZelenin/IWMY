@@ -107,15 +107,6 @@ public class UserRestService extends GeneralRestService {
         return new ArrayList<>(users);
     }
 
-    public static List<User> getForReferral(List<User> wildcardUsers) {
-        Set<User> users = new TreeSet<>();
-        for (User wildcardUser : wildcardUsers) {
-            users.addAll(ObjectifyService.ofy().load().type(User.class)
-                    .filter("referralEmail", wildcardUser.getEmail()).list());
-        }
-        return new ArrayList<>(users);
-    }
-
     @Path(Api.GET_UNIQUE) @POST @Consumes(JSON) @Produces(JSON)
     public static List<User> getUnique(List<User> wildcardUsers) {
         Set<User> users = new TreeSet<>();
@@ -196,15 +187,13 @@ public class UserRestService extends GeneralRestService {
 
     @Path(Api.GET_OTHER_FOR_EVENT) @POST @Consumes(JSON) @Produces(JSON)
     public List<User> getOtherForEvent(List<Event> events) {
-        Set<User> referredUsers = new TreeSet<>();
-        // first, get all users referred by this organizer
-        if (events.size() == 1) {
-            User wildcardOrganizer = new User(events.get(0).getOrganizerEmail());
-            referredUsers.addAll(UserRestService.getForReferral(Arrays.asList(wildcardOrganizer)));
-        }
-        // then, get all attending users
-        referredUsers.removeAll(UserRestService.getForEvent(events));
-        return new ArrayList<>(referredUsers);
+        Set<User> usersAddedByOrganizers = new TreeSet<>();
+        // first, get all users referred by organizers
+        usersAddedByOrganizers.addAll(ObjectifyService.ofy().load().type(User.class)
+                .filter("password", "").list());
+        // then, remove users who already attend this event
+        usersAddedByOrganizers.removeAll(UserRestService.getForEvent(events));
+        return new ArrayList<>(usersAddedByOrganizers);
     }
 
     public List getForEventByAttendance(List<Attendance> attendances) {

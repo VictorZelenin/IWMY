@@ -76,10 +76,20 @@ public class SelectParticipantFragment extends CoolFragment {
     private void filterList(String matchingText) {
         filteredUserList.clear();
         for (User user : userList) {
-            if (matchingText.isEmpty() || user.getEmail().contains(matchingText)
-                    || user.getNameAndSurname().contains(matchingText)
-                    || user.getUsername().contains(matchingText)) {
-                filteredUserList.add(user);
+            if (user.getReferralEmail().equals(Account.getUser(this).getEmail())) {
+                // adding filtered users added previously by this organizer
+                if (matchingText.isEmpty() || user.getEmail().contains(matchingText)
+                        || user.getNameAndSurname().contains(matchingText)
+                        || user.getUsername().contains(matchingText)) {
+                    filteredUserList.add(user);
+                }
+            } else {
+                // adding fully specified users added by other organizers
+                if (user.getEmail().equals(matchingText)
+                        || user.getNameAndSurname().equals(matchingText)
+                        || user.getUsername().equals(matchingText)) {
+                    filteredUserList.add(user);
+                }
             }
         }
         userRecyclerAdapter.notifyDataSetChanged();

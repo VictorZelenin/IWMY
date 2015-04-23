@@ -79,6 +79,7 @@
     <string name="label_old_couple_list_empty">Thank you for participation! We are glad to see you again soon!</string>
     <string name="label_couple">Couple:</string>
     <string name="label_event_is_old">This is an old event</string>
+    <string name="label_enter_completely">Enter email, name or username completely to see all results</string>
     <string name="label_empty" translatable="false">-</string>
 
     <string name="button_login">Login</string>
