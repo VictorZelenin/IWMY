@@ -71,7 +71,7 @@ android {
 
     defaultConfig {
         applicationId "com.oleksiykovtun.iwmy.speeddating"
-        buildConfigField "String", "BACKEND_URL", "\"http://iwmy-speed-dating.appspot.com\""
+        buildConfigField "String", "BACKEND_URL", "\"https://iwmy-speed-dating.appspot.com\""
         resValue "color", "accent_color", "#0098FF"
         resValue "color", "main_color", "#A0D9FF"
         resValue "string", "app_name", "IWMY Speed Dating"
