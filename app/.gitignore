@@ -1,4 +1,5 @@
 /build
 *.iml
+*.jks
 local.properties
 crashlytics.properties

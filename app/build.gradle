@@ -1,3 +1,5 @@
+import groovy.swing.SwingBuilder
+
 import java.text.SimpleDateFormat
 
 buildscript {
@@ -9,6 +11,7 @@ buildscript {
         classpath 'io.fabric.tools:gradle:1.+'
     }
 }
+
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
@@ -18,6 +21,32 @@ repositories {
 
 sourceCompatibility = JavaVersion.VERSION_1_7
 targetCompatibility = JavaVersion.VERSION_1_7
+
+gradle.taskGraph.whenReady { taskGraph ->
+    if(taskGraph.hasTask(':app:assembleRelease')) {
+        def password = ''
+        def hint = "Enter keystore/key password"
+        if (System.console() != null) {
+            password = new String(System.console().readPassword("\n\$ " + hint + ": "))
+        } else {
+            new SwingBuilder().edt {
+                dialog(modal: true, alwaysOnTop: true, locationRelativeTo: null, pack: true,
+                        show: true) {
+                    vbox {
+                        label(text: hint)
+                        input = passwordField()
+                        button(defaultButton: true, text: 'OK', actionPerformed: {
+                            password = new String("" + input.password)
+                            dispose()
+                        })
+                    }
+                }
+            }
+        }
+        android.signingConfigs.release.storePassword = password
+        android.signingConfigs.release.keyPassword = password
+    }
+}
 
 android {
     compileSdkVersion 21
@@ -31,6 +60,13 @@ android {
 
     def version = new SimpleDateFormat("yyyy.MM.dd-HH.mm").format(System.currentTimeMillis())
 
+    signingConfigs {
+        release {
+            storeFile file("IWMY-release.keystore.jks")
+            keyAlias "IWMY-release"
+        }
+    }
+
     defaultConfig {
         applicationId "com.oleksiykovtun.iwmy.speeddating"
         buildConfigField "String", "BACKEND_URL", "\"http://iwmy-speed-dating.appspot.com\""
@@ -40,6 +76,7 @@ android {
         resValue "string", "app_title", "Speed Dating"
         minSdkVersion 14
         targetSdkVersion 21
+        versionCode 1
         versionName version
     }
 
@@ -53,6 +90,10 @@ android {
 
         debug {
             versionNameSuffix "-debug"
+        }
+
+        release {
+            signingConfig signingConfigs.release
         }
     }
 
