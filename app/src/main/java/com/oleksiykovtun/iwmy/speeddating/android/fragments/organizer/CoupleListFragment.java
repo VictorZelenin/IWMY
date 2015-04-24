@@ -12,6 +12,7 @@ import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.adapters.CoupleRecyclerAdapter;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.organizer.SettingsFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Couple;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
@@ -23,7 +24,7 @@ import java.util.List;
 /**
  * Created by alx on 2015-02-12.
  */
-public class CoupleListFragment extends CoolFragment {
+public class CoupleListFragment extends AppFragment {
 
     private List<Couple> coupleList = new ArrayList<Couple>();
     private Event event = null;

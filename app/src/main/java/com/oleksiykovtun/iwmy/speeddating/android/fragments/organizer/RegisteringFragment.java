@@ -11,6 +11,7 @@ import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.BuildConfig;
 import com.oleksiykovtun.iwmy.speeddating.R;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Email;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
@@ -19,7 +20,7 @@ import java.util.List;
 /**
  * Created by alx on 2015-02-12.
  */
-public class RegisteringFragment extends CoolFragment {
+public class RegisteringFragment extends AppFragment {
 
     private User impliedUser = null;
 

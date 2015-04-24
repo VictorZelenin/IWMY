@@ -11,6 +11,7 @@ import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.Account;
 import com.oleksiykovtun.iwmy.speeddating.android.ImageManager;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 
@@ -19,7 +20,7 @@ import java.util.List;
 /**
  * Created by alx on 2015-02-12.
  */
-public class EventAttendFragment extends CoolFragment {
+public class EventAttendFragment extends AppFragment {
 
     private Event event = null;
 
@@ -61,7 +62,7 @@ public class EventAttendFragment extends CoolFragment {
     public void onResume() {
         super.onResume();
         post(Api.ATTENDANCES + Api.GET, Attendance[].class,
-                new Attendance(Account.getUser(this), event));
+                new Attendance(Account.getUser(), event));
     }
 
     @Override
@@ -69,7 +70,7 @@ public class EventAttendFragment extends CoolFragment {
         switch (view.getId()) {
             case R.id.button_attend:
                 post(Api.ATTENDANCES + Api.ADD, Attendance[].class,
-                        new Attendance(Account.getUser(this), event));
+                        new Attendance(Account.getUser(), event));
                 break;
             case R.id.button_settings:
                 CoolFragmentManager.showAtTop(new SettingsFragment());

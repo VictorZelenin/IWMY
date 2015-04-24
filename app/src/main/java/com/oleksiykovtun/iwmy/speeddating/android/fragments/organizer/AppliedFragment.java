@@ -8,12 +8,13 @@ import android.view.ViewGroup;
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.R;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.StartFragment;
 
 /**
  * Created by alx on 2015-02-12.
  */
-public class AppliedFragment extends CoolFragment {
+public class AppliedFragment extends AppFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

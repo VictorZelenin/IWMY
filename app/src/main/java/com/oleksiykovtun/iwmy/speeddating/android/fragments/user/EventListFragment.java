@@ -14,6 +14,7 @@ import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.adapters.EventRecyclerAdapter;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 
 import java.io.Serializable;
@@ -23,7 +24,7 @@ import java.util.List;
 /**
  * Created by alx on 2015-02-12.
  */
-public class EventListFragment extends CoolFragment {
+public class EventListFragment extends AppFragment {
 
     private List<Event> eventList = new ArrayList<Event>();
     private EventRecyclerAdapter eventRecyclerAdapter = new EventRecyclerAdapter(eventList);

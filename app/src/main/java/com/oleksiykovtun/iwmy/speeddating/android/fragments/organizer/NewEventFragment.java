@@ -11,6 +11,7 @@ import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.Account;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
 /**
  * Created by alx on 2015-02-12.
  */
-public class NewEventFragment extends CoolFragment {
+public class NewEventFragment extends AppFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,7 +51,7 @@ public class NewEventFragment extends CoolFragment {
                 String cost = getEditText(R.id.input_event_cost);
                 String description = getEditText(R.id.input_event_description);
 
-                Event event = new Event(Account.getUser(this).getEmail(), time, place,
+                Event event = new Event(Account.getUser().getEmail(), time, place,
                         streetAddress, photoBase64, freePlaces, cost, description);
                 if (checkEvent(event)) {
                     post(Api.EVENTS + Api.PUT, Event[].class, event);

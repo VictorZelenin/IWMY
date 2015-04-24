@@ -16,6 +16,7 @@ import com.oleksiykovtun.android.cooltools.CoolPagerAdapter;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.adapters.UserRecyclerAdapter;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
@@ -27,7 +28,7 @@ import java.util.List;
 /**
  * Created by alx on 2015-02-12.
  */
-public class WaitFragment extends CoolFragment {
+public class WaitFragment extends AppFragment {
 
     private List<User> userListGuys = new ArrayList<User>();
     private List<User> userListLadies = new ArrayList<User>();

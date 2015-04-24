@@ -9,6 +9,7 @@ import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
 /**
  * The 2nd stage of user waiting: waiting for organizer to confirm couples
  */
-public class WaitCouplesFragment extends CoolFragment {
+public class WaitCouplesFragment extends AppFragment {
 
     private Event event = null;
 

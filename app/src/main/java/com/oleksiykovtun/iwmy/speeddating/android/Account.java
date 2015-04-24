@@ -1,7 +1,5 @@
 package com.oleksiykovtun.iwmy.speeddating.android;
 
-import android.content.Context;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -15,12 +13,11 @@ public class Account {
 
     private static final String USER = "user";
 
-    public static boolean hasUser(Fragment fragment) {
-        return getUser(fragment).getEmail().contains("@")
-                && getUser(fragment).getPassword().length() > 0;
+    public static boolean hasUser() {
+        return getUser().getEmail().contains("@") && getUser().getPassword().length() > 0;
     }
 
-    public static void saveUser(Fragment fragment, Object object) {
+    public static void saveUser(Object object) {
         try {
             CoolApplication.writePreferences(USER, new Gson().toJson(object, User.class));
         } catch (Throwable e) {
@@ -29,7 +26,7 @@ public class Account {
         Log.d("IWMY", "User settings saved.");
     }
 
-    public static User getUser(Fragment fragment) {
+    public static User getUser() {
         User user = new User();
         try {
             user = new Gson().fromJson(CoolApplication.readPreferences(USER, ""), User.class);
@@ -42,8 +39,8 @@ public class Account {
         return user;
     }
 
-    public static void removeUser(Fragment fragment) {
-        saveUser(fragment, new User());
+    public static void removeUser() {
+        saveUser(new User());
     }
 
 }

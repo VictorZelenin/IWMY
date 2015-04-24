@@ -11,13 +11,14 @@ import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.Account;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.StartFragment;
 
 
 /**
  * Created by alx on 2015-02-04.
  */
-public class SettingsFragment extends CoolFragment {
+public class SettingsFragment extends AppFragment {
 
     public static final String MAX_RATINGS = "maxRatings";
 
@@ -59,7 +60,7 @@ public class SettingsFragment extends CoolFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_logout:
-                Account.removeUser(this);
+                Account.removeUser();
                 CoolFragmentManager.showAtBottom(new StartFragment());
         }
     }

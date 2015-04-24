@@ -1,6 +1,7 @@
 package com.oleksiykovtun.android.cooltools;
 
 import android.os.AsyncTask;
+import android.util.Base64;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -18,6 +19,7 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,6 +30,8 @@ import java.util.List;
 class CoolWebAsyncTask extends AsyncTask<String, Void, Void> {
 
     private String tag;
+    private String authorizationId;
+    private String password;
     protected List parsedResponse = new ArrayList();
     protected CoolWebAsyncResponse delegate = null;
     private Object[] uploadData;
@@ -37,9 +41,11 @@ class CoolWebAsyncTask extends AsyncTask<String, Void, Void> {
     private static int timeoutMillis = 15000;
     private String errorString = null;
 
-    public CoolWebAsyncTask(String tag, CoolWebAsyncResponse delegate, Class responseClass,
-                            Object... uploadData) {
+    public CoolWebAsyncTask(String tag, String authorizationId, String password,
+                            CoolWebAsyncResponse delegate, Class responseClass, Object... uploadData) {
         this.tag = tag;
+        this.authorizationId = authorizationId;
+        this.password = password;
         this.delegate = delegate;
         this.responseClass = responseClass;
         this.uploadData = (uploadData != null) ? uploadData : new Object[]{};
@@ -62,12 +68,14 @@ class CoolWebAsyncTask extends AsyncTask<String, Void, Void> {
         int status = -1;
         final String encoding = "UTF-8";
         try {
-            HttpPost httpPost = new HttpPost(urls[0]);
-            httpPost.addHeader(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+            HttpPost httpPost = new HttpPost(new URI(urls[0]));
+            httpPost.setHeader("Authorization", getAuthorizationHeader(authorizationId, password));
+            httpPost.setHeader(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
             String jsonStringUpload = getJsonString(uploadData);
             Log.d("IWMY", "Sending\n" + uploadData.length + " items TO " + urls[0]
                     + "\n" + jsonStringUpload + "\n");
             httpPost.setEntity(new StringEntity(jsonStringUpload, encoding));
+
             HttpParams httpParameters = new BasicHttpParams();
             HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutMillis);
             HttpConnectionParams.setSoTimeout(httpParameters, timeoutMillis);
@@ -120,6 +128,11 @@ class CoolWebAsyncTask extends AsyncTask<String, Void, Void> {
 
     private List getObjectList(String jsonString, Class objectClass) {
         return Arrays.asList((Object[]) new Gson().fromJson(jsonString, objectClass));
+    }
+
+    private String getAuthorizationHeader(String authorizationId, String password) {
+        return "Basic " + Base64.encodeToString((authorizationId + ":" + password).getBytes(),
+                Base64.URL_SAFE | Base64.NO_WRAP);
     }
 
 }

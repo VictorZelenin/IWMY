@@ -17,6 +17,7 @@ import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.Account;
 import com.oleksiykovtun.iwmy.speeddating.android.adapters.EventRecyclerAdapter;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
@@ -28,12 +29,10 @@ import java.util.List;
 /**
  * Created by alx on 2015-02-12.
  */
-public class MyEventListFragment extends CoolFragment {
+public class MyEventListFragment extends AppFragment {
 
     private List<Event> actualEventList = new ArrayList<Event>();
     private List<Event> pastEventList = new ArrayList<Event>();
-
-    private User thisUser = null;
 
     private EventRecyclerAdapter actualEventRecyclerAdapter
             = new EventRecyclerAdapter(actualEventList);
@@ -63,8 +62,7 @@ public class MyEventListFragment extends CoolFragment {
         pager.setAdapter(new CoolPagerAdapter(this,
                 R.id.page_events_current, R.id.page_events_past));
 
-        thisUser = Account.getUser(this);
-        post(Api.EVENTS + Api.GET_FOR_USER, Event[].class, thisUser);
+        post(Api.EVENTS + Api.GET_FOR_USER, Event[].class, Account.getUser());
 
         return view;
     }
@@ -86,7 +84,7 @@ public class MyEventListFragment extends CoolFragment {
                 pastEventRecyclerAdapter.notifyDataSetChanged();
                 break;
             case Api.ATTENDANCES + Api.DELETE:
-                post(Api.EVENTS + Api.GET_FOR_USER, Event[].class, thisUser);
+                post(Api.EVENTS + Api.GET_FOR_USER, Event[].class, Account.getUser());
                 break;
         }
     }
@@ -115,7 +113,7 @@ public class MyEventListFragment extends CoolFragment {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         post(Api.ATTENDANCES + Api.DELETE, Attendance[].class,
-                                new Attendance(thisUser, (Event)objectAtClicked));
+                                new Attendance(Account.getUser(), (Event)objectAtClicked));
                         dialog.dismiss();
                     }
 

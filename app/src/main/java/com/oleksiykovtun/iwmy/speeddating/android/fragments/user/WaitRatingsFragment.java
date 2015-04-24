@@ -9,6 +9,7 @@ import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 
@@ -17,7 +18,7 @@ import java.util.List;
 /**
  * The 1st stage of user waiting: waiting for all users to put ratings
  */
-public class WaitRatingsFragment extends CoolFragment {
+public class WaitRatingsFragment extends AppFragment {
 
     private Event event = null;
 

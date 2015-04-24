@@ -9,6 +9,7 @@ import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.adapters.RatingRecyclerAdapter;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Rating;
 
 import java.io.Serializable;
@@ -18,7 +19,7 @@ import java.util.List;
 /**
  * Created by alx on 2015-02-12.
  */
-public abstract class UserQuestionnaireFragment extends CoolFragment {
+public abstract class UserQuestionnaireFragment extends AppFragment {
 
     protected List<Rating> ratingList = new ArrayList<>();
 

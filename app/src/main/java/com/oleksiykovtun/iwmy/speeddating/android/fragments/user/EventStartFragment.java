@@ -10,6 +10,7 @@ import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.ImageManager;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.List;
 /**
  * Created by alx on 2015-02-12.
  */
-public class EventStartFragment extends CoolFragment {
+public class EventStartFragment extends AppFragment {
 
     private Event event = null;
 

@@ -13,6 +13,7 @@ import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.Account;
 import com.oleksiykovtun.iwmy.speeddating.android.adapters.CoupleRecyclerAdapter;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Couple;
 import com.oleksiykovtun.iwmy.speeddating.data.Email;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
@@ -26,7 +27,7 @@ import java.util.TreeSet;
 /**
  * Created by alx on 2015-02-12.
  */
-public class CoupleListConfirmFragment extends CoolFragment {
+public class CoupleListConfirmFragment extends AppFragment {
 
     private List<Couple> coupleList = new ArrayList<Couple>();
     private Event event = null;
@@ -123,7 +124,7 @@ public class CoupleListConfirmFragment extends CoolFragment {
             message = message.replace("CONTACTS_ONE_COUPLE", getUserContactInfo(coupleUsers[0]));
             message = message.replace("CONTACTS_MANY_COUPLES", getUsersContactInfo(coupleUsers));
             message = message.replace("CONTACTS_ORGANIZER", event.getOrganizerEmail() + "\n"
-                    + Account.getUser(this).getPhone() + "\n" + event.getStreetAddress());
+                    + Account.getUser().getPhone() + "\n" + event.getStreetAddress());
             message = message.replace("CONTACTS_SPEED_DATING", Api.APP_EMAIL);
             userEmail.setSubject(subject);
             userEmail.setMessage(message);

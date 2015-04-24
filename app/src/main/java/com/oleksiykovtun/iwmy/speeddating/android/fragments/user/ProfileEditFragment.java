@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
@@ -50,7 +51,7 @@ public class ProfileEditFragment extends com.oleksiykovtun.iwmy.speeddating.andr
                 }
                 break;
             case R.id.button_settings:
-                CoolFragmentManager.show(new SettingsFragment(), Account.getUser(this));
+                CoolFragmentManager.show(new SettingsFragment(), Account.getUser());
                 break;
         }
     }
@@ -58,7 +59,7 @@ public class ProfileEditFragment extends com.oleksiykovtun.iwmy.speeddating.andr
     @Override
     public void onReceiveWebData(List response) {
         if (!response.isEmpty()) {
-            Account.saveUser(this, response.get(0));
+            Account.saveUser(response.get(0));
             CoolFragmentManager.showAtBottom(new EventListFragment());
         } else {
             showToastLong(R.string.message_user_exists);

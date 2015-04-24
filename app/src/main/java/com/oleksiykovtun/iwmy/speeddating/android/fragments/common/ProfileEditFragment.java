@@ -6,12 +6,13 @@ import com.oleksiykovtun.android.cooltools.CoolFormatter;
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.Account;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 /**
  * Created by alx on 2015-02-12.
  */
-public abstract class ProfileEditFragment extends CoolFragment {
+public abstract class ProfileEditFragment extends AppFragment {
 
     @Override
     public void onDateSet(String dateString) {
@@ -80,7 +81,7 @@ public abstract class ProfileEditFragment extends CoolFragment {
         user.setOrganization("");
         user.setWebsite("");
         user.setIsChecked("false");
-        user.setReferralEmail(includingPassword ? "" : Account.getUser(this).getEmail());
+        user.setReferralEmail(includingPassword ? "" : Account.getUser().getEmail());
         return user;
     }
 

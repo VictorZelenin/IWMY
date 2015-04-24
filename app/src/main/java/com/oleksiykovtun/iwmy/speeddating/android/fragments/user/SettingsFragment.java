@@ -9,13 +9,14 @@ import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.Account;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.StartFragment;
 
 
 /**
  * Created by alx on 2015-02-04.
  */
-public class SettingsFragment extends CoolFragment {
+public class SettingsFragment extends AppFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,11 +32,11 @@ public class SettingsFragment extends CoolFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_logout:
-                Account.removeUser(this);
+                Account.removeUser();
                 CoolFragmentManager.showAtBottom(new StartFragment());
                 break;
             case R.id.button_edit_my_profile:
-                CoolFragmentManager.show(new ProfileEditFragment(), Account.getUser(this));
+                CoolFragmentManager.show(new ProfileEditFragment(), Account.getUser());
                 break;
         }
     }

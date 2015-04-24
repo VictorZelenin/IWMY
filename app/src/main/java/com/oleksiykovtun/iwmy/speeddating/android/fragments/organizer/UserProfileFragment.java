@@ -13,6 +13,7 @@ import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.TimeConverter;
 import com.oleksiykovtun.iwmy.speeddating.android.ImageManager;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.organizer.SettingsFragment;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.user.*;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
@@ -20,7 +21,7 @@ import com.oleksiykovtun.iwmy.speeddating.data.User;
 /**
  * Created by alx on 2015-02-12.
  */
-public class UserProfileFragment extends CoolFragment {
+public class UserProfileFragment extends AppFragment {
 
     User user = null;
 

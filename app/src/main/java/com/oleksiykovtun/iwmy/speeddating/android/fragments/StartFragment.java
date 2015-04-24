@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
+import com.oleksiykovtun.iwmy.speeddating.BuildConfig;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.Account;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.organizer.MyEventListFragment;
@@ -17,7 +18,7 @@ import com.oleksiykovtun.iwmy.speeddating.data.User;
 /**
  * Created by alx on 2015-02-04.
  */
-public class StartFragment extends CoolFragment implements View.OnClickListener {
+public class StartFragment extends AppFragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,8 +38,8 @@ public class StartFragment extends CoolFragment implements View.OnClickListener 
     @Override
     public void onResume() {
         super.onResume();
-        if (Account.hasUser(this)) {
-            if (Account.getUser(this).getGroup().equals(User.ORGANIZER)) {
+        if (Account.hasUser()) {
+            if (Account.getUser().getGroup().equals(User.ORGANIZER)) {
                 CoolFragmentManager.showAtBottom(new MyEventListFragment());
             } else {
                 CoolFragmentManager.showAtBottom(new EventListFragment());

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.Api;
+import com.oleksiykovtun.iwmy.speeddating.BuildConfig;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.Account;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.organizer.MyEventListFragment;
@@ -20,7 +21,7 @@ import java.util.List;
 /**
  * Created by alx on 2015-02-04.
  */
-public class AuthorizationFragment extends CoolFragment {
+public class AuthorizationFragment extends AppFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,8 +55,8 @@ public class AuthorizationFragment extends CoolFragment {
         if (response.size() != 1) {
             showToastLong(R.string.message_no_user_wrong_password);
         } else {
-            Account.saveUser(this, response.get(0));
-            if (Account.getUser(this).getGroup().equals(User.ORGANIZER)) {
+            Account.saveUser(response.get(0));
+            if (Account.getUser().getGroup().equals(User.ORGANIZER)) {
                 CoolFragmentManager.showAtBottom(new MyEventListFragment());
             } else {
                 CoolFragmentManager.showAtBottom(new EventListFragment());

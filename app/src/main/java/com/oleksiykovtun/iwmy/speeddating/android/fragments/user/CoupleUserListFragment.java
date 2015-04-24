@@ -15,6 +15,7 @@ import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.Account;
 import com.oleksiykovtun.iwmy.speeddating.android.adapters.UserRecyclerAdapter;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
 import com.oleksiykovtun.iwmy.speeddating.data.Couple;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
@@ -27,7 +28,7 @@ import java.util.List;
 /**
  * Created by alx on 2015-02-12.
  */
-public class CoupleUserListFragment extends CoolFragment {
+public class CoupleUserListFragment extends AppFragment {
 
     private List<User> coupleUserList = new ArrayList<User>();
     private Event event = null;
@@ -52,7 +53,7 @@ public class CoupleUserListFragment extends CoolFragment {
         coupleUserRecyclerView.setAdapter(coupleUserRecyclerAdapter);
 
         post(Api.COUPLES + Api.GET_FOR_ATTENDANCE, Couple[].class,
-                new Attendance(Account.getUser(this), event));
+                new Attendance(Account.getUser(), event));
 
         return view;
     }
@@ -64,7 +65,7 @@ public class CoupleUserListFragment extends CoolFragment {
                 List<User> coupleUserWildcards = new ArrayList<>();
                 for (Couple couple : (List<Couple>) response) {
                     String coupleUserEmail
-                            = (Account.getUser(this).getEmail().equals(couple.getUserEmail2()))
+                            = (Account.getUser().getEmail().equals(couple.getUserEmail2()))
                             ? couple.getUserEmail1() : couple.getUserEmail2();
                     coupleUserWildcards.add(new User(coupleUserEmail, "", "", "", "", "", "", "",
                             "", "", "", "", "", "", "", "", "", "", "", ""));

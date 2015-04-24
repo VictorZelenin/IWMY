@@ -8,13 +8,14 @@ import android.view.ViewGroup;
 import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.ImageManager;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 
 /**
  * Created by alx on 2015-02-12.
  */
-public class UserProfileCoupleFragment extends CoolFragment {
+public class UserProfileCoupleFragment extends AppFragment {
 
     private User coupleUser = null;
 

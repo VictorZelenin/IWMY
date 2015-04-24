@@ -42,7 +42,7 @@ public class QuestionnaireFragment extends UserQuestionnaireFragment {
 
         // generate ratings for this attendant
         post(Api.RATINGS + Api.GET_FOR_ATTENDANCE_ACTIVE, Rating[].class,
-                new Attendance(Account.getUser(this), event));
+                new Attendance(Account.getUser(), event));
 
         setupRecyclerView((RecyclerView) view.findViewById(R.id.rating_list_holder));;
 

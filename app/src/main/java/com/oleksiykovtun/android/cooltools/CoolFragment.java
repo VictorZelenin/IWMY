@@ -32,7 +32,6 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
     private CoolWebAsyncTask task = null;
     private Toast toast = null;
     private static CountDownTimer timer = null;
-    private static String urlPrefix = "";
 
     public CoolFragment() {
     }
@@ -148,14 +147,11 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
         setText(textViewId, getText(textId) + " " + text);
     }
 
-    public static void setUrlPrefix(String urlPrefixNew) {
-        urlPrefix = urlPrefixNew;
-    }
-
-    protected void post(String url, Class responseClass, Object... postData) {
+    protected void post(String host, String path, String authorizationId, String password,
+                        Class responseClass, Object... postData) {
         cancelPost();
-        task = new CoolWebAsyncTask(url, this, responseClass, postData);
-        task.execute(urlPrefix + url);
+        task = new CoolWebAsyncTask(path, authorizationId, password, this, responseClass, postData);
+        task.execute(host + path);
     }
 
     protected boolean isPostRequestRunningNow() {

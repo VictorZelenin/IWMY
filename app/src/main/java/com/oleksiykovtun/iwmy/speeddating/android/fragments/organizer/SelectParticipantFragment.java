@@ -17,6 +17,7 @@ import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.Account;
 import com.oleksiykovtun.iwmy.speeddating.android.adapters.UserRecyclerAdapter;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
@@ -28,7 +29,7 @@ import java.util.List;
 /**
  * Created by alx on 2015-02-12.
  */
-public class SelectParticipantFragment extends CoolFragment {
+public class SelectParticipantFragment extends AppFragment {
 
     private List<User> userList = new ArrayList<User>();
     private List<User> filteredUserList = new ArrayList<User>();
@@ -76,7 +77,7 @@ public class SelectParticipantFragment extends CoolFragment {
     private void filterList(String matchingText) {
         filteredUserList.clear();
         for (User user : userList) {
-            if (user.getReferralEmail().equals(Account.getUser(this).getEmail())) {
+            if (user.getReferralEmail().equals(Account.getUser().getEmail())) {
                 // adding filtered users added previously by this organizer
                 if (matchingText.isEmpty() || user.getEmail().contains(matchingText)
                         || user.getNameAndSurname().contains(matchingText)

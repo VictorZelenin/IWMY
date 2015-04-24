@@ -4,10 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
 import com.crashlytics.android.Crashlytics;
-import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
-import com.oleksiykovtun.iwmy.speeddating.Api;
-import com.oleksiykovtun.iwmy.speeddating.BuildConfig;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.StartFragment;
 
@@ -27,7 +24,6 @@ public class AppActivity extends FragmentActivity {
         CoolFragmentManager.setup(this, R.id.fragment_holder);
 
         if (! CoolFragmentManager.isNotEmpty()) {
-            CoolFragment.setUrlPrefix(BuildConfig.BACKEND_URL);
             CoolFragmentManager.showAtBottom(new StartFragment()); // show the first fragment
         }
     }

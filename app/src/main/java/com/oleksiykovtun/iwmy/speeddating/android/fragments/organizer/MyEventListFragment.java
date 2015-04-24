@@ -18,6 +18,7 @@ import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.Account;
 import com.oleksiykovtun.iwmy.speeddating.android.adapters.EventRecyclerAdapter;
+import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.organizer.SettingsFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
@@ -29,7 +30,7 @@ import java.util.List;
 /**
  * Created by alx on 2015-02-12.
  */
-public class MyEventListFragment extends CoolFragment {
+public class MyEventListFragment extends AppFragment {
 
     private List<Event> actualEventList = new ArrayList<Event>();
     private List<Event> pastEventList = new ArrayList<Event>();
@@ -146,7 +147,7 @@ public class MyEventListFragment extends CoolFragment {
     }
 
     private void requestEventList() {
-        Event eventWildcard = new Event(Account.getUser(this).getEmail(), "", "", "", "", "",
+        Event eventWildcard = new Event(Account.getUser().getEmail(), "", "", "", "", "",
                 "", "");
         post(Api.EVENTS + Api.GET, Event[].class, eventWildcard);
     }
