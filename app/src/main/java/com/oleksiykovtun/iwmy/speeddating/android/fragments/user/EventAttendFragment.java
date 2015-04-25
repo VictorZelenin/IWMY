@@ -79,7 +79,7 @@ public class EventAttendFragment extends AppFragment {
     }
 
     @Override
-    public void onReceiveWebData(List response) {
+    public void onPostReceive(List response) {
         if (!response.isEmpty()) {
             if (event.getActual().equals("false")) {
                 CoolFragmentManager.show(new CoupleUserListFragment(), event);

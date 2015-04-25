@@ -55,7 +55,7 @@ public class EventStartFragment extends AppFragment {
     }
 
     @Override
-    public void onReceiveWebData(String postTag, List response) {
+    public void onPostReceive(String postTag, List response) {
         switch (postTag) {
             case Api.EVENTS + Api.GET_FOR_TIME:
                 if (! response.isEmpty()) {

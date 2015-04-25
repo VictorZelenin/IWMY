@@ -148,9 +148,10 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
     }
 
     protected void post(String host, String path, String authorizationId, String password,
-                        Class responseClass, Object... postData) {
+                        String clientVersion, Class responseClass, Object... postData) {
         cancelPost();
-        task = new CoolWebAsyncTask(path, authorizationId, password, this, responseClass, postData);
+        task = new CoolWebAsyncTask(path, authorizationId, password, clientVersion, this,
+                responseClass, postData);
         task.execute(host + path);
     }
 
@@ -191,18 +192,31 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
     }
 
     @Override
-    public void onReceiveWebData(List webDataErrorString) {
+    public void onPostReceive(List responseObjectList) {
     }
 
     @Override
-    public void onReceiveWebData(String tag, List webDataErrorString) {
+    public void onPostReceive(String tag, List responseObjectList) {
     }
 
     @Override
-    public void onFailReceivingWebData(String webDataErrorString) {
-        String messageConnectionError =
-                "Connection error! Please check your internet connection and try again.";
-        showToastLong(messageConnectionError);
+    public void onPostConnectionError() {
+    }
+
+    @Override
+    public void onPostAuthorizationError() {
+    }
+
+    @Override
+    public void onPostAccessError() {
+    }
+
+    @Override
+    public void onPostVersionError() {
+    }
+
+    @Override
+    public void onPostError() {
     }
 
     @Override

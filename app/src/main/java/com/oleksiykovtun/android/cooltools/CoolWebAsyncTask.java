@@ -32,19 +32,27 @@ class CoolWebAsyncTask extends AsyncTask<String, Void, Void> {
     private String tag;
     private String authorizationId;
     private String password;
+    private String clientVersion;
     protected List parsedResponse = new ArrayList();
     protected CoolWebAsyncResponse delegate = null;
     private Object[] uploadData;
     private Class responseClass;
+    private int httpResponseStatusCode = NOT_CONNECTED;
 
+    private static final int NOT_CONNECTED = -1;
     private static final int HTTP_OK = 200;
+    private static final int HTTP_UNAUTHORIZED = 401;
+    private static final int HTTP_FORBIDDEN = 403;
+    private static final int HTTP_GONE = 410;
+
     private static int timeoutMillis = 15000;
-    private String errorString = null;
 
     public CoolWebAsyncTask(String tag, String authorizationId, String password,
-                            CoolWebAsyncResponse delegate, Class responseClass, Object... uploadData) {
+                            String clientVersion, CoolWebAsyncResponse delegate,
+                            Class responseClass, Object... uploadData) {
         this.tag = tag;
         this.authorizationId = authorizationId;
+        this.clientVersion = clientVersion;
         this.password = password;
         this.delegate = delegate;
         this.responseClass = responseClass;
@@ -52,11 +60,19 @@ class CoolWebAsyncTask extends AsyncTask<String, Void, Void> {
     }
 
     public interface CoolWebAsyncResponse {
-        void onReceiveWebData(List webDataString);
+        void onPostReceive(List responseObjectList); // success (HTTP 200)
 
-        void onReceiveWebData(String tag, List webDataString);
+        void onPostReceive(String tag, List responseObjectList); // success (HTTP 200)
 
-        void onFailReceivingWebData(String webDataErrorString);
+        void onPostConnectionError(); // unable to reach the server
+
+        void onPostAuthorizationError(); // client unauthorized (HTTP 401)
+
+        void onPostAccessError(); // client authorized, access forbidden (HTTP 403)
+
+        void onPostVersionError(); // client needs to update the app (HTTP 410)
+
+        void onPostError(); // server cannot process this request now (HTTP other code)
     }
 
     public boolean isRunningNow() {
@@ -65,12 +81,12 @@ class CoolWebAsyncTask extends AsyncTask<String, Void, Void> {
 
     @Override
     protected Void doInBackground(String... urls) {
-        int status = -1;
         final String encoding = "UTF-8";
         try {
             HttpPost httpPost = new HttpPost(new URI(urls[0]));
             httpPost.setHeader("Authorization", getAuthorizationHeader(authorizationId, password));
             httpPost.setHeader(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+            httpPost.setHeader("Content-Version", clientVersion);
             String jsonStringUpload = getJsonString(uploadData);
             Log.d("IWMY", "Sending\n" + uploadData.length + " items TO " + urls[0]
                     + "\n" + jsonStringUpload + "\n");
@@ -82,41 +98,50 @@ class CoolWebAsyncTask extends AsyncTask<String, Void, Void> {
 
             HttpClient httpClient = new DefaultHttpClient(httpParameters);
             HttpResponse response = httpClient.execute(httpPost);
-            status = response.getStatusLine().getStatusCode();
-            if (status == HTTP_OK) {
-                String jsonString = EntityUtils.toString(response.getEntity());
-                if (responseClass != null) {
-                    parsedResponse = getObjectList(jsonString, responseClass);
-                }
-                Log.d("IWMY", "Received\n" + parsedResponse.size() + " items FROM " + urls[0]
-                        + "\n" + jsonString + "\n");
-            } else {
-                throw new Throwable("HTTP status " + status);
+            httpResponseStatusCode = response.getStatusLine().getStatusCode();
+            if (httpResponseStatusCode != HTTP_OK) {
+                throw new Exception("Request failed. HTTP status code " + httpResponseStatusCode);
             }
+            String jsonString = EntityUtils.toString(response.getEntity());
+            if (responseClass != null) {
+                parsedResponse = getObjectList(jsonString, responseClass);
+            }
+            Log.d("IWMY", "Received\n" + parsedResponse.size() + " items FROM " + urls[0] + "\n"
+                    + jsonString + "\n");
         } catch (Throwable e) {
-            errorString = "HTTP " + status + "\nException:\n" + e.getMessage() + "\nStack trace:\n";
-            for (StackTraceElement stackTraceElement : Thread.currentThread().getStackTrace()) {
-                errorString += stackTraceElement + "\n";
-            }
-            Log.e("IWMY", errorString);
+            Log.e("IWMY", "Post request error:\n", e);
+            cancel(true);
         }
         return null;
     }
 
-    public void cancel() {
-        cancel(true);
-        delegate = null;
+    @Override
+    protected void onPostExecute(Void result) {
+        if (delegate != null) {
+            delegate.onPostReceive(parsedResponse);
+            delegate.onPostReceive(tag, parsedResponse);
+        }
     }
 
     @Override
-    protected void onPostExecute(Void result) {
-        if (delegate != null && !isCancelled()) {
-            if (errorString != null) {
-                delegate.onFailReceivingWebData(errorString);
-                cancel();
-            } else {
-                delegate.onReceiveWebData(parsedResponse);
-                delegate.onReceiveWebData(tag, parsedResponse);
+    protected void onCancelled(Void result) {
+        if (delegate != null) {
+            switch (httpResponseStatusCode) {
+                case NOT_CONNECTED:
+                    delegate.onPostConnectionError();
+                    break;
+                case HTTP_UNAUTHORIZED:
+                    delegate.onPostAuthorizationError();
+                    break;
+                case HTTP_FORBIDDEN:
+                    delegate.onPostAccessError();
+                    break;
+                case HTTP_GONE:
+                    delegate.onPostVersionError();
+                    break;
+                default:
+                    delegate.onPostError();
+                    break;
             }
         }
     }
@@ -131,8 +156,11 @@ class CoolWebAsyncTask extends AsyncTask<String, Void, Void> {
     }
 
     private String getAuthorizationHeader(String authorizationId, String password) {
-        return "Basic " + Base64.encodeToString((authorizationId + ":" + password).getBytes(),
-                Base64.URL_SAFE | Base64.NO_WRAP);
+        return "Basic " + encodeToBase64(authorizationId + ":" + password);
+    }
+
+    private String encodeToBase64(String text) {
+        return Base64.encodeToString(text.getBytes(), Base64.URL_SAFE | Base64.NO_WRAP);
     }
 
 }

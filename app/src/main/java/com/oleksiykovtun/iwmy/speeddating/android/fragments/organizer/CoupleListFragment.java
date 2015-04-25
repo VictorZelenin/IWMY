@@ -51,7 +51,7 @@ public class CoupleListFragment extends AppFragment {
     }
 
     @Override
-    public void onReceiveWebData(List response) {
+    public void onPostReceive(List response) {
         coupleList.clear();
         coupleList.addAll(response);
         coupleRecyclerAdapter.notifyDataSetChanged();

@@ -50,8 +50,8 @@ public class QuestionnaireFragment extends UserQuestionnaireFragment {
     }
 
     @Override
-    public void onReceiveWebData(String postTag, List response) {
-        super.onReceiveWebData(postTag, response);
+    public void onPostReceive(String postTag, List response) {
+        super.onPostReceive(postTag, response);
         switch (postTag) {
             case Api.RATINGS + Api.GET_FOR_ATTENDANCE_ACTIVE:
                 startTimer();

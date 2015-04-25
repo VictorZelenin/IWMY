@@ -50,7 +50,7 @@ public class EventListFragment extends AppFragment {
     }
 
     @Override
-    public void onReceiveWebData(List response) {
+    public void onPostReceive(List response) {
         eventList.clear();
         eventList.addAll(response);
         eventRecyclerAdapter.notifyDataSetChanged();

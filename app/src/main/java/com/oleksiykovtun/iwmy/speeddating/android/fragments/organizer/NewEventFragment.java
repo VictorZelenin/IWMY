@@ -68,7 +68,7 @@ public class NewEventFragment extends AppFragment {
     }
 
     @Override
-    public void onReceiveWebData(List response) {
+    public void onPostReceive(List response) {
         if (!response.isEmpty()) {
             showToast(R.string.message_event_added);
             CoolFragmentManager.showPrevious();

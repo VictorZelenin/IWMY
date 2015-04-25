@@ -32,7 +32,7 @@ public abstract class UserQuestionnaireFragment extends AppFragment {
     }
 
     @Override
-    public void onReceiveWebData(String postTag, List response) {
+    public void onPostReceive(String postTag, List response) {
         switch (postTag) {
             case Api.RATINGS + Api.GET_FOR_ATTENDANCE_ACTIVE:
                 ratingList.clear();

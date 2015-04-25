@@ -56,7 +56,7 @@ public class UserProfileEditFragment extends ProfileEditFragment {
     }
 
     @Override
-    public void onReceiveWebData(List response) {
+    public void onPostReceive(List response) {
         if (!response.isEmpty()) {
             CoolFragmentManager.showPrevious();
         } else {

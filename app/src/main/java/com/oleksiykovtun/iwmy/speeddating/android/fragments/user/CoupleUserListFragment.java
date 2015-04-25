@@ -59,7 +59,7 @@ public class CoupleUserListFragment extends AppFragment {
     }
 
     @Override
-    public void onReceiveWebData(String postTag, List response) {
+    public void onPostReceive(String postTag, List response) {
         switch (postTag) {
             case Api.COUPLES + Api.GET_FOR_ATTENDANCE:
                 List<User> coupleUserWildcards = new ArrayList<>();

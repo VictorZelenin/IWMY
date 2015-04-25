@@ -103,7 +103,7 @@ public class SelectParticipantFragment extends AppFragment {
     }
 
     @Override
-    public void onReceiveWebData(String postTag, List response) {
+    public void onPostReceive(String postTag, List response) {
         switch (postTag) {
             case Api.USERS + Api.GET_OTHER_FOR_EVENT:
                 userList.clear();

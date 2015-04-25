@@ -83,7 +83,7 @@ public class WaitFragment extends AppFragment {
     }
 
     @Override
-    public void onReceiveWebData(String postTag, List response) {
+    public void onPostReceive(String postTag, List response) {
         switch (postTag) {
             case Api.USERS + Api.GET_FOR_EVENT_ACTIVE:
                 if (response.size() > 0) {

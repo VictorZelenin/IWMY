@@ -58,7 +58,7 @@ public class NewParticipantFragment extends ProfileEditFragment {
     }
 
     @Override
-    public void onReceiveWebData(String postTag, List response) {
+    public void onPostReceive(String postTag, List response) {
         switch (postTag) {
             case Api.USERS + Api.ADD:
                 if (!response.isEmpty()) {

@@ -52,7 +52,7 @@ public abstract class ProfileEditFragment extends AppFragment {
     }
 
     private boolean check(User user, boolean includingPassword) {
-        return user.getEmail().contains("@")
+        return user.getEmail().contains("@") && !user.getEmail().contains(":")
                 && !user.getNameAndSurname().isEmpty()
                 && (!includingPassword || !user.getPassword().isEmpty())
                 && !user.getUsername().isEmpty()

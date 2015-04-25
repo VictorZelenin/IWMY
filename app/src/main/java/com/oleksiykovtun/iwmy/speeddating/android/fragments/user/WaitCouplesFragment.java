@@ -33,7 +33,7 @@ public class WaitCouplesFragment extends AppFragment {
     }
 
     @Override
-    public void onReceiveWebData(List response) {
+    public void onPostReceive(List response) {
         if (response.size() > 0) {
             event = (Event) response.get(0);
             if (event.getActual().equals("false")) {

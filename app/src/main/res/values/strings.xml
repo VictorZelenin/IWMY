@@ -115,6 +115,18 @@
     <string name="message_connection_error">
         Connection error! Please check your internet connection and try again.
     </string>
+    <string name="message_authorization_error">
+        You are not authorized. Please try to logout and login again.
+    </string>
+    <string name="message_access_error">
+        You do not have permission to proceed with this action.
+    </string>
+    <string name="message_version_error">
+        This action is no longer supported. Please update your application.
+    </string>
+    <string name="message_other_post_error">
+        This action resulted in an error. Please try again later.
+    </string>
     <string name="message_user_exists">User already exists. Please enter other email or username</string>
     <string name="message_participant_added">Participant added</string>
     <string name="message_event_added">Event added</string>

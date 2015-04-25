@@ -34,7 +34,7 @@ public class WaitRatingsFragment extends AppFragment {
     }
 
     @Override
-    public void onReceiveWebData(List response) {
+    public void onPostReceive(List response) {
         List<Attendance> attendances = (List<Attendance>) response;
         int votedCount = 0;
         for (Attendance attendance : attendances) {

@@ -76,7 +76,7 @@ public class MyEventListFragment extends AppFragment {
     }
 
     @Override
-    public void onReceiveWebData(String postTag, List response) {
+    public void onPostReceive(String postTag, List response) {
         switch (postTag) {
             case Api.EVENTS + Api.GET:
                 actualEventList.clear();

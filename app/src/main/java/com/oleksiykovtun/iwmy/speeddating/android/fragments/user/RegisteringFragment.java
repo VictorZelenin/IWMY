@@ -47,7 +47,7 @@ public class RegisteringFragment extends ProfileEditFragment {
     }
 
     @Override
-    public void onReceiveWebData(List response) {
+    public void onPostReceive(List response) {
         if (!response.isEmpty()) {
             Account.saveUser(response.get(0));
             showToast(R.string.message_registered);

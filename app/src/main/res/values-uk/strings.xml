@@ -153,4 +153,8 @@
     <string name="toolbar_select_user">Оберіть учасника</string>
     <string name="hint_search_email_name_username">Пошук email/імені/ніку</string>
     <string name="label_enter_completely">Вводьте email, нік або ім\'я повністю, щоб побачити всі результати</string>
+    <string name="message_access_error">Ви не маєте дозволу виконувати цю дію.</string>
+    <string name="message_authorization_error">Ви не авторизовані. Спробуйте вийти та зайти з паролем знову.</string>
+    <string name="message_other_post_error">Сталася помилка. Вибачте. Будь ласка, спробуйте пізніше.</string>
+    <string name="message_version_error">Ця дія застаріла. Будь ласка, поновіть програму.</string>
 </resources>

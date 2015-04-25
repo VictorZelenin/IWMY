@@ -56,7 +56,7 @@ public class CoupleListConfirmFragment extends AppFragment {
     }
 
     @Override
-    public void onReceiveWebData(String postTag, List response) {
+    public void onPostReceive(String postTag, List response) {
         switch (postTag) {
             case Api.COUPLES + Api.GENERATE_FOR_EVENT:
                 coupleList.clear();

@@ -77,7 +77,7 @@ public class ParticipantListFragment extends AppFragment {
     }
 
     @Override
-    public void onReceiveWebData(List response) {
+    public void onPostReceive(List response) {
         userListGuys.clear();
         userListLadies.clear();
         for (User user : (List<User>) response) {

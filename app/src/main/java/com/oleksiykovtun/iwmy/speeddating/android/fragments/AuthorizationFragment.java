@@ -51,7 +51,7 @@ public class AuthorizationFragment extends AppFragment {
     }
 
     @Override
-    public void onReceiveWebData(List response) {
+    public void onPostReceive(List response) {
         if (response.size() != 1) {
             showToastLong(R.string.message_no_user_wrong_password);
         } else {

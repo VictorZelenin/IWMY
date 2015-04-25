@@ -72,7 +72,7 @@ public class RegisteringFragment extends AppFragment {
     }
 
     @Override
-    public void onReceiveWebData(String postTag, List response) {
+    public void onPostReceive(String postTag, List response) {
         switch (postTag) {
             case Api.USERS + Api.GET_UNIQUE: // proceed only if no such user exists
                 if (response.isEmpty()) {
@@ -92,7 +92,7 @@ public class RegisteringFragment extends AppFragment {
     }
 
     private boolean checkUser(User user) {
-        return user.getEmail().contains("@")
+        return user.getEmail().contains("@") && !user.getEmail().contains(":")
                 && !user.getNameAndSurname().isEmpty()
                 && !user.getPassword().isEmpty()
                 && !user.getUsername().isEmpty()
