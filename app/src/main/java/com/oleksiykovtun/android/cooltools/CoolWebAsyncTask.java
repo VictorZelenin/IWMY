@@ -1,11 +1,11 @@
 package com.oleksiykovtun.android.cooltools;
 
 import android.os.AsyncTask;
-import android.util.Base64;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.oleksiykovtun.iwmy.speeddating.Base64Converter;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -156,11 +156,8 @@ class CoolWebAsyncTask extends AsyncTask<String, Void, Void> {
     }
 
     private String getAuthorizationHeader(String authorizationId, String password) {
-        return "Basic " + encodeToBase64(authorizationId + ":" + password);
-    }
-
-    private String encodeToBase64(String text) {
-        return Base64.encodeToString(text.getBytes(), Base64.URL_SAFE | Base64.NO_WRAP);
+        return "Basic "
+                + Base64Converter.getBase64StringFromString(authorizationId + ":" + password);
     }
 
 }

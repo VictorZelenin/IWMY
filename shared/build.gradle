@@ -18,4 +18,5 @@ compileJava {
 dependencies {
     compile 'com.googlecode.objectify:objectify:5.1.5'
     compile 'org.codehaus.jackson:jackson-jaxrs:1.9.13'
+    compile 'commons-codec:commons-codec:1.5'
 }

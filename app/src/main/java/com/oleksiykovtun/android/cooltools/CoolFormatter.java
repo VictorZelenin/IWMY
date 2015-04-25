@@ -2,15 +2,11 @@ package com.oleksiykovtun.android.cooltools;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Base64;
 import android.util.Log;
 
-import com.google.common.base.Charsets;
 import com.google.common.net.PercentEscaper;
+import com.oleksiykovtun.iwmy.speeddating.Base64Converter;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -24,9 +20,8 @@ public class CoolFormatter {
     }
 
     public static Bitmap getImageBitmap(String base64String) throws Throwable {
-        byte[] imageData = Base64.decode(base64String.getBytes(Charsets.UTF_8), Base64.DEFAULT);
-        Bitmap result = BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
-        return result;
+        byte[] imageData = Base64Converter.getBytesFromBase64String(base64String);
+        return BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
     }
 
     public static int parseInt(String string) {
