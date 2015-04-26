@@ -36,11 +36,11 @@ public class AuthorizationFragment extends AppFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_enter:
-                String userId = getEditText(R.id.input_username);
+                String usernameOrEmail = getEditText(R.id.input_username);
                 String password = getEditText(R.id.input_password);
-                if (!userId.isEmpty() && !password.isEmpty()) {
+                if (!usernameOrEmail.isEmpty() && !password.isEmpty()) {
                     // to do security
-                    User wildcardLoginUser = new User(userId, password, userId,
+                    User wildcardLoginUser = new User(usernameOrEmail, password, usernameOrEmail,
                             "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
                     post(Api.USERS + Api.GET_LOGIN, User[].class, wildcardLoginUser);
                 } else {
