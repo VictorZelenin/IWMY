@@ -14,6 +14,8 @@
     <integer name="label_selection_relative_width">1</integer>
     <integer name="label_comment_relative_width">4</integer>
 
+    <integer name="edit_text_max_length">64</integer>
+
     <integer name="seekbar_range_ratings">19</integer>
 
 </resources>

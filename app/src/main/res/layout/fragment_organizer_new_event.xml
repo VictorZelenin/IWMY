@@ -41,6 +41,7 @@
                 android:id="@+id/input_event_place"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="@integer/edit_text_max_length"
                 android:inputType="text" />
 
             <TextView
@@ -91,6 +92,7 @@
                 android:id="@+id/input_event_address"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="@integer/edit_text_max_length"
                 android:inputType="text" />
 
             <TextView
@@ -103,6 +105,7 @@
                 android:id="@+id/input_event_places"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="@integer/edit_text_max_length"
                 android:inputType="number" />
 
             <TextView
@@ -115,6 +118,7 @@
                 android:id="@+id/input_event_cost"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="@integer/edit_text_max_length"
                 android:inputType="number" />
 
             <TextView
@@ -127,6 +131,7 @@
                 android:id="@+id/input_event_description"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="@integer/edit_text_max_length"
                 android:inputType="text" />
 
             <Button

@@ -26,6 +26,7 @@
         android:id="@+id/input_username"
         android:hint="@string/hint_email_or_username"
         android:inputType="text"
+        android:maxLength="@integer/edit_text_max_length"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 
@@ -33,6 +34,7 @@
         android:id="@+id/input_password"
         android:hint="@string/hint_password"
         android:inputType="textPassword"
+        android:maxLength="@integer/edit_text_max_length"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 

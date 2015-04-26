@@ -42,6 +42,7 @@
             <EditText
                 android:id="@+id/input_password"
                 android:hint="@string/hint_enter_password"
+                android:maxLength="@integer/edit_text_max_length"
                 android:inputType="textPassword"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />

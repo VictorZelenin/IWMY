@@ -42,6 +42,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_enter_email"
+                android:maxLength="@integer/edit_text_max_length"
                 android:inputType="textEmailAddress" />
 
             <TextView
@@ -54,6 +55,7 @@
                 android:id="@+id/input_username"
                 android:hint="@string/hint_enter_username"
                 android:inputType="text"
+                android:maxLength="@integer/edit_text_max_length"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
 
@@ -67,6 +69,7 @@
                 android:id="@+id/input_password"
                 android:hint="@string/hint_enter_password"
                 android:inputType="textPassword"
+                android:maxLength="@integer/edit_text_max_length"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
 
@@ -80,6 +83,7 @@
                 android:id="@+id/input_name_and_surname"
                 android:hint="@string/hint_enter_name_and_surname"
                 android:inputType="text"
+                android:maxLength="@integer/edit_text_max_length"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
 
@@ -93,6 +97,7 @@
                 android:id="@+id/input_phone"
                 android:hint="@string/hint_enter_phone"
                 android:inputType="phone"
+                android:maxLength="@integer/edit_text_max_length"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
 
@@ -100,6 +105,7 @@
                 android:id="@+id/input_organization"
                 android:hint="@string/hint_enter_organization"
                 android:inputType="text"
+                android:maxLength="@integer/edit_text_max_length"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
 
@@ -107,6 +113,7 @@
                 android:id="@+id/input_website"
                 android:hint="@string/hint_enter_website"
                 android:inputType="text"
+                android:maxLength="@integer/edit_text_max_length"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
 

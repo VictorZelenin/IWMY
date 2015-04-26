@@ -35,6 +35,7 @@
         android:id="@+id/input_search_email_name_username"
         android:hint="@string/hint_search_email_name_username"
         android:inputType="text"
+        android:maxLength="@integer/edit_text_max_length"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 
