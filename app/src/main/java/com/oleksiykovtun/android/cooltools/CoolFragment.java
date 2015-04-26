@@ -160,7 +160,7 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
     }
 
     protected void cancelPost() {
-        if (task != null && !task.isCancelled()) {
+        if (task != null) {
             task.cancel();
         }
     }
@@ -188,15 +188,14 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
     }
 
     protected void onTimerTick() {
-
     }
 
-    @Override
     public void onPostReceive(List responseObjectList) {
     }
 
     @Override
     public void onPostReceive(String tag, List responseObjectList) {
+        onPostReceive(responseObjectList);
     }
 
     @Override

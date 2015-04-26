@@ -60,8 +60,6 @@ class CoolWebAsyncTask extends AsyncTask<String, Void, Void> {
     }
 
     public interface CoolWebAsyncResponse {
-        void onPostReceive(List responseObjectList); // success (HTTP 200)
-
         void onPostReceive(String tag, List responseObjectList); // success (HTTP 200)
 
         void onPostConnectionError(); // unable to reach the server
@@ -123,7 +121,6 @@ class CoolWebAsyncTask extends AsyncTask<String, Void, Void> {
     @Override
     protected void onPostExecute(Void result) {
         if (delegate != null) {
-            delegate.onPostReceive(parsedResponse);
             delegate.onPostReceive(tag, parsedResponse);
         }
     }
