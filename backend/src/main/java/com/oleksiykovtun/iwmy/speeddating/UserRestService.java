@@ -120,7 +120,7 @@ public class UserRestService extends GeneralRestService {
     }
 
     @Path(Api.GET_LOGIN) @POST @Consumes(JSON) @Produces(JSON)
-    public List getLogin(List<User> wildcardUsers) {
+    public static List<User> getLogin(List<User> wildcardUsers) {
         List<User> users = new ArrayList<>();
         if (wildcardUsers.size() == 1) {
             User wildcardUser = wildcardUsers.get(0);
@@ -143,6 +143,11 @@ public class UserRestService extends GeneralRestService {
         } else {
             return new ArrayList();
         }
+    }
+
+    @Path(Api.ADD_BY_ORGANIZER) @POST @Consumes(JSON) @Produces(JSON)
+    public List addByOrganizer(List<User> items) {
+        return add(items);
     }
 
     private List put(List<User> items) {

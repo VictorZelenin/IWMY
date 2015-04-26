@@ -46,7 +46,7 @@ public class NewParticipantFragment extends ProfileEditFragment {
             case R.id.button_register:
                 user = makeUserWithoutPassword();
                 if (checkWithoutPassword(user)) {
-                    post(Api.USERS + Api.ADD, User[].class, user);
+                    post(Api.USERS + Api.ADD_BY_ORGANIZER, User[].class, user);
                 } else {
                     showToast(R.string.message_inputs_error);
                 }
@@ -60,7 +60,7 @@ public class NewParticipantFragment extends ProfileEditFragment {
     @Override
     public void onPostReceive(String postTag, List response) {
         switch (postTag) {
-            case Api.USERS + Api.ADD:
+            case Api.USERS + Api.ADD_BY_ORGANIZER:
                 if (!response.isEmpty()) {
                     post(Api.ATTENDANCES + Api.ADD, Attendance[].class, new Attendance(user, event));
                 } else {

@@ -56,6 +56,11 @@ public class EmailRestService extends GeneralRestService {
         return unsentEmailList;
     }
 
+    @Path(Api.REQUEST_ORGANIZER) @POST @Consumes(JSON) @Produces(JSON)
+    public static List requestOrganizer(List<Email> emailList) {
+        return send(emailList);
+    }
+
     public static List getAll() {
         return new ArrayList<>(ObjectifyService.ofy().load().type(Email.class).list());
     }

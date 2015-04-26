@@ -76,17 +76,14 @@ public class RegisteringFragment extends AppFragment {
         switch (postTag) {
             case Api.USERS + Api.GET_UNIQUE: // proceed only if no such user exists
                 if (response.isEmpty()) {
-                    post(Api.MAIL + Api.SEND, Email[].class, getOrganizerRequestEmail(impliedUser));
+                    post(Api.MAIL + Api.REQUEST_ORGANIZER, Email[].class,
+                            getOrganizerRequestEmail(impliedUser));
                 } else {
                     showToastLong(R.string.message_user_exists);
                 }
                 break;
-            case Api.MAIL + Api.SEND:
-                if (response.isEmpty()) {
-                    CoolFragmentManager.showAtBottom(new AppliedFragment());
-                } else {
-                    showToastLong(R.string.message_connection_error);
-                }
+            case Api.MAIL + Api.REQUEST_ORGANIZER:
+                CoolFragmentManager.showAtBottom(new AppliedFragment());
                 break;
         }
     }

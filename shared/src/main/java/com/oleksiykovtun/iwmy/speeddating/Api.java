@@ -6,6 +6,7 @@ public class Api {
 
     public static final String USERS = "/users/";
     public static final String ADD = "add";
+    public static final String ADD_BY_ORGANIZER = "add/by/organizer";
     public static final String REPLACE = "replace";
     public static final String DEBUG_ADD_ORGANIZER = "debug/add/organizer";
     public static final String GET = "get";
@@ -42,6 +43,7 @@ public class Api {
 
     public static final String MAIL = "/mail/";
     public static final String SEND = "send";
+    public static final String REQUEST_ORGANIZER = "request/organizer";
     public static final String DEBUG_SEND = "debug/send";
 
     public static final String GENERAL = "/";

@@ -20,6 +20,10 @@
             <param-name>com.sun.jersey.config.property.packages</param-name>
             <param-value>com.oleksiykovtun.iwmy.speeddating;org.codehaus.jackson.jaxrs</param-value>
         </init-param>
+        <init-param>
+            <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
+            <param-value>com.sun.jersey.api.container.filter.LoggingFilter;com.oleksiykovtun.iwmy.speeddating.RequestAuthorizationFilter</param-value>
+        </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
