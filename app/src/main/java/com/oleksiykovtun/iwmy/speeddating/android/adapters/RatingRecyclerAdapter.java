@@ -63,7 +63,7 @@ public class RatingRecyclerAdapter extends CoolRecyclerAdapter {
                     try {
                         ((Rating) dataSet.get(getPosition(viewHolder)))
                                 .setComment("" + viewHolder.commentEditText.getText());
-                        itemClickListener.onClick(dataSet.get(getPosition(viewHolder)));
+                        itemClickListener.onClick(dataSet.get(getPosition(viewHolder)), v);
                     } catch(Throwable e){
                         Log.e("IWMY", "Comment editing failed", e);
                     }

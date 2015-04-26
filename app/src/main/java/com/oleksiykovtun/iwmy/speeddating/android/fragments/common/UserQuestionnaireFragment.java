@@ -58,25 +58,34 @@ public abstract class UserQuestionnaireFragment extends AppFragment {
 
     @Override
     public void onClick(Serializable objectAtClicked, View view) {
-        view.findViewById(R.id.checkbox_selection).setAlpha(0.5f); // intermediate state
-        toggleSelection((Rating) objectAtClicked); // checking the object
-        int selectedRatingsCount = 0;
-        for (Rating rating : ratingList) {
-            if (rating.getSelection().equals(Rating.SELECTED)) {
-                ++selectedRatingsCount;
-            }
-        }
-        if (selectedRatingsCount <= getMaxRatingsCount()) {
-            if (!isPostRequestRunningNow()) {
-                post(Api.RATINGS + Api.PUT, Rating[].class, objectAtClicked);
-            } else {
-                toggleSelection((Rating) objectAtClicked); // unchecking the object
-                ratingRecyclerAdapter.notifyDataSetChanged();
-            }
-        } else {
-            showToast(R.string.message_you_cannot_add_more_ratings);
-            toggleSelection((Rating) objectAtClicked); // unchecking the object
-            ratingRecyclerAdapter.notifyDataSetChanged();
+        switch (view.getId()) {
+            case R.id.checkbox_selection:
+                view.setAlpha(0.5f); // intermediate state
+                toggleSelection((Rating) objectAtClicked); // checking the object
+                int selectedRatingsCount = 0;
+                for (Rating rating : ratingList) {
+                    if (rating.getSelection().equals(Rating.SELECTED)) {
+                        ++selectedRatingsCount;
+                    }
+                }
+                if (selectedRatingsCount <= getMaxRatingsCount()) {
+                    if (!isPostRequestRunningNow()) {
+                        post(Api.RATINGS + Api.PUT, Rating[].class, objectAtClicked);
+                    } else {
+                        toggleSelection((Rating) objectAtClicked); // unchecking the object
+                        ratingRecyclerAdapter.notifyDataSetChanged();
+                    }
+                } else {
+                    showToast(R.string.message_you_cannot_add_more_ratings);
+                    toggleSelection((Rating) objectAtClicked); // unchecking the object
+                    ratingRecyclerAdapter.notifyDataSetChanged();
+                }
+                break;
+            case R.id.input_comment:
+                if (!isPostRequestRunningNow()) {
+                    post(Api.RATINGS + Api.PUT, Rating[].class, objectAtClicked);
+                }
+                break;
         }
     }
 
