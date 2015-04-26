@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.google.appengine:gradle-appengine-plugin:1.9.15'
+        classpath 'com.google.appengine:gradle-appengine-plugin:1.9.19'
     }
 }
 
@@ -21,9 +21,9 @@ compileJava {
 }
 
 dependencies {
-    appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.15'
-    compile 'com.google.appengine:appengine-endpoints:1.9.15'
-    compile 'com.google.appengine:appengine-endpoints-deps:1.9.15'
+    appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.19'
+    compile 'com.google.appengine:appengine-endpoints:1.9.19'
+    compile 'com.google.appengine:appengine-endpoints-deps:1.9.19'
     compile 'com.sun.jersey:jersey-servlet:1.19'
     compile 'com.sun.jersey:jersey-json:1.19'
     compile 'com.sun.jersey.contribs:jersey-multipart:1.19'
