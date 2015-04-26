@@ -2,11 +2,13 @@ package com.oleksiykovtun.iwmy.speeddating;
 
 import com.googlecode.objectify.ObjectifyService;
 import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
+import com.oleksiykovtun.iwmy.speeddating.data.Email;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.TreeSet;
 import java.util.List;
 import java.util.Set;
@@ -139,10 +141,50 @@ public class UserRestService extends GeneralRestService {
     @Path(Api.ADD) @POST @Consumes(JSON) @Produces(JSON)
     public List add(List<User> items) {
         if (UserRestService.getUnique(items).isEmpty()) {
+            // Forcing group
+            for (User user : items) {
+                user.setGroup(User.USER);
+            }
             return put(items);
         } else {
             return new ArrayList();
         }
+    }
+
+    @Path(Api.ADD_PENDING_ORGANIZER) @POST @Consumes(JSON) @Produces(JSON)
+    public List addPendingOrganizer(List<User> items) {
+        if (UserRestService.getUnique(items).isEmpty()) {
+            // Forcing group and invalidating password
+            for (User user : items) {
+                user.setGroup(User.PENDING_ORGANIZER);
+                String passwordLock = Math.abs(new Random(System.currentTimeMillis()).nextLong()) + "_";
+                user.setPassword(passwordLock + user.getPassword());
+            }
+            return put(items);
+        } else {
+            return new ArrayList();
+        }
+    }
+
+    @Path(Api.ACTIVATE_PENDING_ORGANIZER + "/{token}") @GET @Produces(JSON)
+    public String activatePendingOrganizer(@PathParam("token") String secretToken) {
+        List<User> pendingOrganizers = getPendingOrganizers();
+        int activationCount = 0;
+        for (User user : pendingOrganizers) {
+            // Re-enabling password
+            if (user.getPassword().startsWith(secretToken + "_")) {
+                user.setPassword(user.getPassword().substring(secretToken.length() + 1));
+                user.setGroup(User.ORGANIZER);
+                activationCount++;
+            }
+        }
+        put(pendingOrganizers);
+        return "Activated " + activationCount + " organizers of " + pendingOrganizers.size();
+    }
+
+    public static List<User> getPendingOrganizers() {
+        return ObjectifyService.ofy().load().type(User.class)
+                .filter("group", User.PENDING_ORGANIZER).list();
     }
 
     @Path(Api.ADD_BY_ORGANIZER) @POST @Consumes(JSON) @Produces(JSON)
@@ -186,7 +228,7 @@ public class UserRestService extends GeneralRestService {
         return newUsers;
     }
 
-    public static List getAll() {
+    public static List<User> getAll() {
         return new ArrayList<>(ObjectifyService.ofy().load().type(User.class).list());
     }
 
@@ -208,26 +250,6 @@ public class UserRestService extends GeneralRestService {
                     attendance.getEventTime(), "", "", "", "", "", ""));
         }
         return getForEvent(wildcardEvents);
-    }
-
-    /**
-     * Example:
-     *      debug/add/organizer/email=org1@mail.com&password=123&username=org1&name=org1&phone=123&organization=org1&website=org1.com
-     * @return JSON object for User
-     */
-    @Path(Api.DEBUG_ADD_ORGANIZER + "/email={email}&password={password}&username={username}" +
-            "&name={nameAndSurname}&phone={phone}&organization={organization}&website={website}")
-    @GET @Produces(JSON)
-    public String debugAddOrganizer(@PathParam("email") String email,
-                                    @PathParam("password") String password,
-                                    @PathParam("username") String username,
-                                    @PathParam("nameAndSurname") String nameAndSurname,
-                                    @PathParam("phone") String phone,
-                                    @PathParam("organization") String organization,
-                                    @PathParam("website") String website) {
-        User user = new User(email, password, username, "organizer", nameAndSurname, "", phone,
-                "", "", "", "", "", "", "", "", "", "", organization, website, "");
-        return add(Arrays.asList(user)).size() > 0 ? "Organizer added." : "Already exists.";
     }
 
     @Path(Api.DEBUG_GET + "/email={email}") @GET @Produces(JSON)

@@ -28,6 +28,7 @@ public class User implements Serializable, Comparable<User> {
 
     public static final String USER = "user";
     public static final String ORGANIZER = "organizer";
+    public static final String PENDING_ORGANIZER = "pendingOrganizer";
     public static final String MALE = "male";
     public static final String FEMALE = "female";
 

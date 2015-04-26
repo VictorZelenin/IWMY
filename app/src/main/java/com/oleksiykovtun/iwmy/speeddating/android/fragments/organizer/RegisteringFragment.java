@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.oleksiykovtun.android.cooltools.CoolFormatter;
-import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.BuildConfig;
@@ -40,7 +39,7 @@ public class RegisteringFragment extends AppFragment {
                 String email = getEditText(R.id.input_email);
                 String password = getEditText(R.id.input_password);
                 String username = getEditText(R.id.input_username);
-                String group = User.ORGANIZER;
+                String group = User.PENDING_ORGANIZER;
                 String nameAndSurname = getEditText(R.id.input_name_and_surname);
                 String photoBase64 = "";
                 String phone = getEditText(R.id.input_phone);
@@ -63,7 +62,7 @@ public class RegisteringFragment extends AppFragment {
                         weight, attitudeToSmoking, attitudeToAlcohol, location, organization,
                         website, referralEmail);
                 if (checkUser(impliedUser)) {
-                    post(Api.USERS + Api.GET_UNIQUE, User[].class, impliedUser);
+                    post(Api.USERS + Api.ADD_PENDING_ORGANIZER, User[].class, impliedUser);
                 } else {
                     showToast(R.string.message_inputs_error);
                 }
@@ -74,8 +73,8 @@ public class RegisteringFragment extends AppFragment {
     @Override
     public void onPostReceive(String postTag, List response) {
         switch (postTag) {
-            case Api.USERS + Api.GET_UNIQUE: // proceed only if no such user exists
-                if (response.isEmpty()) {
+            case Api.USERS + Api.ADD_PENDING_ORGANIZER:
+                if (!response.isEmpty()) {
                     post(Api.MAIL + Api.REQUEST_ORGANIZER, Email[].class,
                             getOrganizerRequestEmail(impliedUser));
                 } else {
@@ -101,7 +100,6 @@ public class RegisteringFragment extends AppFragment {
     private Email getOrganizerRequestEmail(User organizerUser) {
         String message = "A new organizer wants to be registered:\n";
         message += "\nEmail: " + organizerUser.getEmail();
-        message += "\nPassword: " + organizerUser.getPassword();
         message += "\nUsername: " + organizerUser.getUsername();
         message += "\nNameAndSurname: " + organizerUser.getNameAndSurname();
         message += "\nPhone: " + organizerUser.getPhone();
@@ -109,14 +107,8 @@ public class RegisteringFragment extends AppFragment {
         message += "\nWebsite: " + organizerUser.getWebsite() + "\n\n";
 
         message += "Follow the link to add the organizer:\n";
-        message += BuildConfig.BACKEND_URL + Api.USERS + Api.DEBUG_ADD_ORGANIZER;
-        message += "/email=" + CoolFormatter.escapeUrl(organizerUser.getEmail());
-        message += "&password=" + CoolFormatter.escapeUrl(organizerUser.getPassword());
-        message += "&username=" + CoolFormatter.escapeUrl(organizerUser.getUsername());
-        message += "&name=" + CoolFormatter.escapeUrl(organizerUser.getNameAndSurname());
-        message += "&phone=" + CoolFormatter.escapeUrl(organizerUser.getPhone());
-        message += "&organization=" + CoolFormatter.escapeUrl(organizerUser.getOrganization());
-        message += "&website=" + CoolFormatter.escapeUrl(organizerUser.getWebsite());
+        message += BuildConfig.BACKEND_URL + Api.USERS + Api.ACTIVATE_PENDING_ORGANIZER;
+        message += "/:" + organizerUser.getEmail();
 
         return new Email(Api.APP_EMAIL, "" + getText(R.string.app_name), Api.APP_EMAIL,
                 "" + getText(R.string.app_name), "" + getText(R.string.mail_subject_organizer_registering), message);

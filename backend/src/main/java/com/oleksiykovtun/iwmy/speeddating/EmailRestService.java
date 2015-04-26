@@ -2,6 +2,7 @@ package com.oleksiykovtun.iwmy.speeddating;
 
 import com.googlecode.objectify.ObjectifyService;
 import com.oleksiykovtun.iwmy.speeddating.data.Email;
+import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +14,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeUtility;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -58,6 +58,22 @@ public class EmailRestService extends GeneralRestService {
 
     @Path(Api.REQUEST_ORGANIZER) @POST @Consumes(JSON) @Produces(JSON)
     public static List requestOrganizer(List<Email> emailList) {
+        if (emailList.size() == 1) {
+            // Forcing email to admin
+            Email email = emailList.get(0);
+            email.setToAddress(Api.APP_EMAIL);
+            // Finding which pending organizer activation to request
+            int emailDelimiterPosition = email.getMessage().lastIndexOf(":");
+            String pendingOrganizerEmail = email.getMessage().substring(emailDelimiterPosition + 1);
+            List<User> pendingOrganizers = UserRestService.getPendingOrganizers();
+            for (User user : pendingOrganizers) {
+                if (user.getEmail().equals(pendingOrganizerEmail)) {
+                    // Setting activation id to the password-locking secret
+                    email.setMessage(email.getMessage().substring(0, emailDelimiterPosition)
+                            + user.getPassword().substring(0, user.getPassword().indexOf("_")));
+                }
+            }
+        }
         return send(emailList);
     }
 

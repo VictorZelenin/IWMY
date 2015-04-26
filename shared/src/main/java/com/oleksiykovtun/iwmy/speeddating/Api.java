@@ -6,9 +6,10 @@ public class Api {
 
     public static final String USERS = "/users/";
     public static final String ADD = "add";
+    public static final String ADD_PENDING_ORGANIZER = "add/pending/organizer";
+    public static final String ACTIVATE_PENDING_ORGANIZER = "activate/pending/organizer";
     public static final String ADD_BY_ORGANIZER = "add/by/organizer";
     public static final String REPLACE = "replace";
-    public static final String DEBUG_ADD_ORGANIZER = "debug/add/organizer";
     public static final String GET = "get";
     public static final String GET_OTHER_FOR_EVENT = "get/other/for/event";
     public static final String DEBUG_GET = "debug/get";
