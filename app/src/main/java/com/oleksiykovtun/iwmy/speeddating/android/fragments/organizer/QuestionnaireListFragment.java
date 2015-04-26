@@ -1,9 +1,7 @@
 package com.oleksiykovtun.iwmy.speeddating.android.fragments.organizer;
 
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.oleksiykovtun.android.cooltools.CoolApplication;
-import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.android.cooltools.CoolPagerAdapter;
 import com.oleksiykovtun.iwmy.speeddating.Api;
@@ -103,7 +100,7 @@ public class QuestionnaireListFragment extends AppFragment {
                 showToast(R.string.message_questionnaires_sent);
                 CoolFragmentManager.showAtTop(new WaitFragment(), event);
                 break;
-            case Api.ATTENDANCES + Api.TOGGLE:
+            case Api.ATTENDANCES + Api.TOGGLE_ACTIVE:
                 for (Attendance attendance : (List<Attendance>)response) {
                     if (attendance.getActive().equals("true")) {
                         highlightActiveUser(attendance.getUserEmail());
@@ -176,7 +173,7 @@ public class QuestionnaireListFragment extends AppFragment {
     public void onClick(Serializable objectAtClicked, View view) {
         if (! isPostRequestRunningNow()) {
             view.setBackgroundColor(getResources().getColor(R.color.gray));
-            post(Api.ATTENDANCES + Api.TOGGLE, Attendance[].class,
+            post(Api.ATTENDANCES + Api.TOGGLE_ACTIVE, Attendance[].class,
                     new Attendance((User) objectAtClicked, event));
         }
     }

@@ -98,7 +98,7 @@ public class SelectParticipantFragment extends AppFragment {
 
     @Override
     public void onClick(Serializable objectAtClicked, View view) {
-        post(Api.ATTENDANCES + Api.ADD, Attendance[].class,
+        post(Api.ATTENDANCES + Api.PUT, Attendance[].class,
                 new Attendance((User) objectAtClicked, event));
     }
 
@@ -110,7 +110,7 @@ public class SelectParticipantFragment extends AppFragment {
                 userList.addAll(response);
                 filterList(getEditText(R.id.input_search_email_name_username));
                 break;
-            case Api.ATTENDANCES + Api.ADD:
+            case Api.ATTENDANCES + Api.PUT:
                 if (!response.isEmpty()) {
                     showToast(R.string.message_participant_added);
                     CoolFragmentManager.showPrevious();

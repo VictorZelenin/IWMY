@@ -69,7 +69,7 @@ public class EventAttendFragment extends AppFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_attend:
-                post(Api.ATTENDANCES + Api.ADD, Attendance[].class,
+                post(Api.ATTENDANCES + Api.PUT, Attendance[].class,
                         new Attendance(Account.getUser(), event));
                 break;
             case R.id.button_settings:

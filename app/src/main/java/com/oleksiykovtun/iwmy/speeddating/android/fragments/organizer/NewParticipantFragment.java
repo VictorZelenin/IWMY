@@ -62,12 +62,12 @@ public class NewParticipantFragment extends ProfileEditFragment {
         switch (postTag) {
             case Api.USERS + Api.ADD_BY_ORGANIZER:
                 if (!response.isEmpty()) {
-                    post(Api.ATTENDANCES + Api.ADD, Attendance[].class, new Attendance(user, event));
+                    post(Api.ATTENDANCES + Api.PUT, Attendance[].class, new Attendance(user, event));
                 } else {
                     showToastLong(R.string.message_user_exists);
                 }
                 break;
-            case Api.ATTENDANCES + Api.ADD:
+            case Api.ATTENDANCES + Api.PUT:
                 if (!response.isEmpty()) {
                     showToast(R.string.message_participant_added);
                     CoolFragmentManager.showPrevious();

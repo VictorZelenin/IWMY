@@ -14,7 +14,6 @@ public class Api {
     public static final String GET_OTHER_FOR_EVENT = "get/other/for/event";
     public static final String DEBUG_GET = "debug/get";
     public static final String DEBUG_DELETE = "debug/delete";
-    public static final String GET_UNIQUE = "get/unique";
     public static final String GET_LOGIN = "get/login";
     public static final String GET_FOR_EVENT = "get/for/event";
     public static final String GET_FOR_EVENT_ACTIVE = "get/for/event/active";
@@ -30,8 +29,8 @@ public class Api {
     public static final String DELETE = "delete";
 
     public static final String ATTENDANCES = "/attendances/";
-    public static final String TOGGLE = "toggle";
-    public static final String GET_FOR_EVENT_ACTIVE_CHECK_VOTED = "get/for/event/active/voted";
+    public static final String TOGGLE_ACTIVE = "toggle/active";
+    public static final String GET_FOR_EVENT_ACTIVE_CHECK_VOTED = "get/for/event/active/check/voted";
 
     public static final String RATINGS = "/ratings/";
     public static final String PUT = "put";
@@ -39,7 +38,7 @@ public class Api {
     public static final String GET_FOR_ATTENDANCE_ACTIVE = "get/for/attendance/active";
 
     public static final String COUPLES = "/couples/";
-    public static final String GENERATE_FOR_EVENT = "create/for/event";
+    public static final String GENERATE_FOR_EVENT = "generate/for/event";
     public static final String GET_FOR_ATTENDANCE = "get/for/attendance";
 
     public static final String MAIL = "/mail/";

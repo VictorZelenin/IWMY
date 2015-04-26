@@ -109,7 +109,6 @@ public class UserRestService extends GeneralRestService {
         return new ArrayList<>(users);
     }
 
-    @Path(Api.GET_UNIQUE) @POST @Consumes(JSON) @Produces(JSON)
     public static List<User> getUnique(List<User> wildcardUsers) {
         Set<User> users = new TreeSet<>();
         for (User wildcardUser : wildcardUsers) {

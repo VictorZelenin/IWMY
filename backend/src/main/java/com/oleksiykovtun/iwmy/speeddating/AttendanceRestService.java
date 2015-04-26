@@ -23,8 +23,8 @@ import javax.ws.rs.Produces;
 @Path(Api.ATTENDANCES)
 public class AttendanceRestService extends GeneralRestService {
 
-    @Path(Api.TOGGLE) @POST @Consumes(JSON) @Produces(JSON)
-    public List toggle(List<Attendance> wildcardAttendances) {
+    @Path(Api.TOGGLE_ACTIVE) @POST @Consumes(JSON) @Produces(JSON)
+    public List toggleActive(List<Attendance> wildcardAttendances) {
         Set<Attendance> attendanceSet = new TreeSet<>();
         for (Attendance wildcardAttendance : wildcardAttendances) {
             attendanceSet.addAll(ObjectifyService.ofy().load().type(Attendance.class)
@@ -57,7 +57,7 @@ public class AttendanceRestService extends GeneralRestService {
     }
 
     @Path(Api.GET_FOR_EVENT_ACTIVE_CHECK_VOTED) @POST @Consumes(JSON) @Produces(JSON)
-    public static List<Attendance> getForEventActiveVoted(List<Event> wildcardEvents) {
+    public static List<Attendance> getForEventActiveCheckVoted(List<Event> wildcardEvents) {
         Set<Attendance> attendances = new TreeSet<>();
         for (Event wildcardEvent : wildcardEvents) {
             attendances.addAll(ObjectifyService.ofy().load().type(Attendance.class)
@@ -74,7 +74,7 @@ public class AttendanceRestService extends GeneralRestService {
         return new ArrayList<>(attendances);
     }
 
-    @Path(Api.ADD) @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.PUT) @POST @Consumes(JSON) @Produces(JSON)
     public static List add(List<Attendance> items) {
         ObjectifyService.ofy().save().entities(items).now();
         return items;
