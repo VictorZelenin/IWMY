@@ -3,7 +3,6 @@ package com.oleksiykovtun.iwmy.speeddating.android.fragments.common;
 import android.widget.RadioButton;
 
 import com.oleksiykovtun.android.cooltools.CoolFormatter;
-import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.Account;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
@@ -66,7 +65,7 @@ public abstract class ProfileEditFragment extends AppFragment {
         user.setUsername(getEditText(R.id.input_username));
         user.setGroup(User.USER);
         user.setNameAndSurname(getEditText(R.id.input_name_and_surname));
-        user.setPhotoBase64("");
+        user.setPhoto("");
         user.setPhone(getEditText(R.id.input_phone));
         user.setBirthDate(getLabelText(R.id.label_birth_date));
         user.setGender(isRadioButtonChecked(R.id.gender_male) ? User.MALE : User.FEMALE);

@@ -28,7 +28,7 @@ public class Event implements Serializable, Comparable<Event> {
     private String allowSendingRatings;
     private String maxRatingsPerUser;
 
-    private String photoBase64; // todo url
+    private String photo; // url
     private String freePlaces;
     private String cost;
     private String description;
@@ -36,7 +36,7 @@ public class Event implements Serializable, Comparable<Event> {
     public Event() { }
 
     public Event(String organizerEmail, String time, String place, String streetAddress,
-                 String photoBase64, String freePlaces, String cost, String description) {
+                 String photo, String freePlaces, String cost, String description) {
         this._eventId = time + "_" + organizerEmail;
         this.organizerEmail = organizerEmail;
         this.place = place;
@@ -45,7 +45,7 @@ public class Event implements Serializable, Comparable<Event> {
         this.actual = "true";
         this.allowSendingRatings = "false";
         this.maxRatingsPerUser = "0";
-        this.photoBase64 = photoBase64;
+        this.photo = photo;
         this.freePlaces = freePlaces;
         this.cost = cost;
         this.description = description;
@@ -124,12 +124,12 @@ public class Event implements Serializable, Comparable<Event> {
         this.maxRatingsPerUser = maxRatingsPerUser;
     }
 
-    public String getPhotoBase64() {
-        return getNotNull(photoBase64);
+    public String getPhoto() {
+        return getNotNull(photo);
     }
 
-    public void setPhotoBase64(String photoBase64) {
-        this.photoBase64 = photoBase64;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public String getTime() {

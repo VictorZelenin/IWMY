@@ -6,16 +6,8 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 
 import org.codehaus.jackson.annotate.JsonPropertyOrder;
-import org.codehaus.jackson.annotate.JsonRawValue;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by alx on 2015-02-17.
@@ -40,7 +32,7 @@ public class User implements Serializable, Comparable<User> {
     private String group;
 
     private String nameAndSurname;
-    private String photoBase64; // todo url
+    private String photo; // url
     private String phone;
     private String birthDate; // format "2099-12-31"
 
@@ -68,7 +60,7 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public User(String email, String password, String username, String group,
-                String nameAndSurname, String photoBase64, String phone, String birthDate,
+                String nameAndSurname, String photo, String phone, String birthDate,
                 String gender, String orientation, String goal, String affair,
                 String height, String weight, String attitudeToSmoking, String attitudeToAlcohol,
                 String location, String organization, String website, String referralEmail) {
@@ -77,7 +69,7 @@ public class User implements Serializable, Comparable<User> {
         this.email = email;
         this.password = password;
         this.nameAndSurname = nameAndSurname;
-        this.photoBase64 = photoBase64;
+        this.photo = photo;
         this.phone = phone;
         this.birthDate = birthDate;
         this.gender = gender;
@@ -161,12 +153,12 @@ public class User implements Serializable, Comparable<User> {
         this.nameAndSurname = nameAndSurname;
     }
 
-    public String getPhotoBase64() {
-        return getNotNull(photoBase64);
+    public String getPhoto() {
+        return getNotNull(photo);
     }
 
-    public void setPhotoBase64(String photoBase64) {
-        this.photoBase64 = photoBase64;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public String getPhone() {

@@ -15,8 +15,8 @@ import com.oleksiykovtun.iwmy.speeddating.data.User;
 public class ImageManager {
 
     public static void setUserPic(ImageView userPicImageView, User user) {
-        if (! user.getPhotoBase64().isEmpty()) {
-            setImageFromBase64String(userPicImageView, user.getPhotoBase64());
+        if (! user.getPhoto().isEmpty()) {
+            setImageFromBase64String(userPicImageView, user.getPhoto());
         } else if (user.getGender().equals(User.MALE)) {
             userPicImageView.setImageDrawable(CoolApplication.getContext().getResources()
                     .getDrawable(R.drawable.no_photo_man));
@@ -27,8 +27,8 @@ public class ImageManager {
     }
 
     public static void setEventPic(ImageView eventPicImageView, Event event) {
-        if (! event.getPhotoBase64().isEmpty()) {
-            setImageFromBase64String(eventPicImageView, event.getPhotoBase64());
+        if (! event.getPhoto().isEmpty()) {
+            setImageFromBase64String(eventPicImageView, event.getPhoto());
         }
     }
 
