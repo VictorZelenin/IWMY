@@ -65,7 +65,7 @@ public class Attendance implements Serializable, Comparable<Attendance> {
     }
 
     public String get_attendanceId() {
-        return "" + _attendanceId;
+        return getNotNull(_attendanceId);
     }
 
     public void set_attendanceId(String _attendanceId) {
@@ -73,7 +73,7 @@ public class Attendance implements Serializable, Comparable<Attendance> {
     }
 
     public String getCreationTime() {
-        return "" + creationTime;
+        return getNotNull(creationTime);
     }
 
     public void setCreationTime(String creationTime) {
@@ -82,7 +82,7 @@ public class Attendance implements Serializable, Comparable<Attendance> {
     }
 
     public String getUserEmail() {
-        return "" + userEmail;
+        return getNotNull(userEmail);
     }
 
     public void setUserEmail(String userEmail) {
@@ -91,7 +91,7 @@ public class Attendance implements Serializable, Comparable<Attendance> {
     }
 
     public String getUserGender() {
-        return "" + userGender;
+        return getNotNull(userGender);
     }
 
     public void setUserGender(String userGender) {
@@ -99,7 +99,7 @@ public class Attendance implements Serializable, Comparable<Attendance> {
     }
 
     public String getEventOrganizerEmail() {
-        return "" + eventOrganizerEmail;
+        return getNotNull(eventOrganizerEmail);
     }
 
     public void setEventOrganizerEmail(String eventOrganizerEmail) {
@@ -108,7 +108,7 @@ public class Attendance implements Serializable, Comparable<Attendance> {
     }
 
     public String getEventTime() {
-        return "" + eventTime;
+        return getNotNull(eventTime);
     }
 
     public void setEventTime(String eventTime) {
@@ -117,7 +117,7 @@ public class Attendance implements Serializable, Comparable<Attendance> {
     }
 
     public String getActive() {
-        return "" + active;
+        return getNotNull(active);
     }
 
     public void setActive(String active) {
@@ -125,10 +125,14 @@ public class Attendance implements Serializable, Comparable<Attendance> {
     }
 
     public String getUsername() {
-        return "" + username;
+        return getNotNull(username);
     }
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    private String getNotNull(String possiblyNullValue) {
+        return (possiblyNullValue == null) ? "" : possiblyNullValue;
     }
 }

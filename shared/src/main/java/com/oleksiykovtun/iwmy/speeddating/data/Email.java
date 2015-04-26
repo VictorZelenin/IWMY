@@ -62,15 +62,15 @@ public class Email implements Serializable, Comparable<Email> {
     }
 
     public String get_emailId() {
-        return _emailId;
+        return getNotNull(_emailId);
     }
 
     public void set_emailId(String _emailId) {
-        this._emailId = "" + _emailId;
+        this._emailId = _emailId;
     }
 
     public String getCreationTime() {
-        return "" + creationTime;
+        return getNotNull(creationTime);
     }
 
     public void setCreationTime(String creationTime) {
@@ -79,7 +79,7 @@ public class Email implements Serializable, Comparable<Email> {
     }
 
     public String getFromAddress() {
-        return fromAddress;
+        return getNotNull(fromAddress);
     }
 
     public void setFromAddress(String fromAddress) {
@@ -87,7 +87,7 @@ public class Email implements Serializable, Comparable<Email> {
     }
 
     public String getFromName() {
-        return fromName;
+        return getNotNull(fromName);
     }
 
     public void setFromName(String fromName) {
@@ -95,7 +95,7 @@ public class Email implements Serializable, Comparable<Email> {
     }
 
     public String getToAddress() {
-        return toAddress;
+        return getNotNull(toAddress);
     }
 
     public void setToAddress(String toAddress) {
@@ -104,7 +104,7 @@ public class Email implements Serializable, Comparable<Email> {
     }
 
     public String getToName() {
-        return toName;
+        return getNotNull(toName);
     }
 
     public void setToName(String toName) {
@@ -112,7 +112,7 @@ public class Email implements Serializable, Comparable<Email> {
     }
 
     public String getSubject() {
-        return subject;
+        return getNotNull(subject);
     }
 
     public void setSubject(String subject) {
@@ -120,11 +120,14 @@ public class Email implements Serializable, Comparable<Email> {
     }
 
     public String getMessage() {
-        return message;
+        return getNotNull(message);
     }
 
     public void setMessage(String message) {
         this.message = message;
     }
 
+    private String getNotNull(String possiblyNullValue) {
+        return (possiblyNullValue == null) ? "" : possiblyNullValue;
+    }
 }

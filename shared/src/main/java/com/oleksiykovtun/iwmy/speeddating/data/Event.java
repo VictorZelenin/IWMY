@@ -68,7 +68,7 @@ public class Event implements Serializable, Comparable<Event> {
     }
 
     public String get_eventId() {
-        return "" + _eventId;
+        return getNotNull(_eventId);
     }
 
     public void set_eventId(String _eventId) {
@@ -76,7 +76,7 @@ public class Event implements Serializable, Comparable<Event> {
     }
 
     public String getOrganizerEmail() {
-        return "" + organizerEmail;
+        return getNotNull(organizerEmail);
     }
 
     public void setOrganizerEmail(String organizerEmail) {
@@ -85,7 +85,7 @@ public class Event implements Serializable, Comparable<Event> {
     }
 
     public String getPlace() {
-        return "" + place;
+        return getNotNull(place);
     }
 
     public void setPlace(String place) {
@@ -93,7 +93,7 @@ public class Event implements Serializable, Comparable<Event> {
     }
 
     public String getStreetAddress() {
-        return "" + streetAddress;
+        return getNotNull(streetAddress);
     }
 
     public void setStreetAddress(String streetAddress) {
@@ -101,7 +101,7 @@ public class Event implements Serializable, Comparable<Event> {
     }
 
     public String getActual() {
-        return "" + actual;
+        return getNotNull(actual);
     }
 
     public void setActual(String actual) {
@@ -109,7 +109,7 @@ public class Event implements Serializable, Comparable<Event> {
     }
 
     public String getAllowSendingRatings() {
-        return "" + allowSendingRatings;
+        return getNotNull(allowSendingRatings);
     }
 
     public void setAllowSendingRatings(String allowSendingRatings) {
@@ -117,7 +117,7 @@ public class Event implements Serializable, Comparable<Event> {
     }
 
     public String getMaxRatingsPerUser() {
-        return "" + maxRatingsPerUser;
+        return getNotNull(maxRatingsPerUser);
     }
 
     public void setMaxRatingsPerUser(String maxRatingsPerUser) {
@@ -125,7 +125,7 @@ public class Event implements Serializable, Comparable<Event> {
     }
 
     public String getPhotoBase64() {
-        return "" + photoBase64;
+        return getNotNull(photoBase64);
     }
 
     public void setPhotoBase64(String photoBase64) {
@@ -133,7 +133,7 @@ public class Event implements Serializable, Comparable<Event> {
     }
 
     public String getTime() {
-        return "" + time;
+        return getNotNull(time);
     }
 
     public void setTime(String time) {
@@ -142,7 +142,7 @@ public class Event implements Serializable, Comparable<Event> {
     }
 
     public String getFreePlaces() {
-        return "" + freePlaces;
+        return getNotNull(freePlaces);
     }
 
     public void setFreePlaces(String freePlaces) {
@@ -150,7 +150,7 @@ public class Event implements Serializable, Comparable<Event> {
     }
 
     public String getCost() {
-        return "" + cost;
+        return getNotNull(cost);
     }
 
     public void setCost(String cost) {
@@ -158,11 +158,14 @@ public class Event implements Serializable, Comparable<Event> {
     }
 
     public String getDescription() {
-        return "" + description;
+        return getNotNull(description);
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
+    private String getNotNull(String possiblyNullValue) {
+        return (possiblyNullValue == null) ? "" : possiblyNullValue;
+    }
 }

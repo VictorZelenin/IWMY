@@ -111,7 +111,7 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public String get_userId() {
-        return "" + _userId;
+        return getNotNull(_userId);
     }
 
     public void set_userId(String _userId) {
@@ -119,7 +119,7 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public String group() {
-        return "" + group;
+        return getNotNull(group);
     }
 
     public void setGroup(String group) {
@@ -127,7 +127,7 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public String getUsername() {
-        return "" + username;
+        return getNotNull(username);
     }
 
     public void setUsername(String username) {
@@ -136,7 +136,7 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public String getEmail() {
-        return "" + email;
+        return getNotNull(email);
     }
 
     public void setEmail(String email) {
@@ -145,7 +145,7 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public String getPassword() {
-        return "" + password;
+        return getNotNull(password);
     }
 
     public void setPassword(String password) {
@@ -153,7 +153,7 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public String getNameAndSurname() {
-        return "" + nameAndSurname;
+        return getNotNull(nameAndSurname);
     }
 
     public void setNameAndSurname(String nameAndSurname) {
@@ -161,7 +161,7 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public String getPhotoBase64() {
-        return "" + photoBase64;
+        return getNotNull(photoBase64);
     }
 
     public void setPhotoBase64(String photoBase64) {
@@ -169,7 +169,7 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public String getPhone() {
-        return "" + phone;
+        return getNotNull(phone);
     }
 
     public void setPhone(String phone) {
@@ -177,7 +177,7 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public String getBirthDate() {
-        return "" + birthDate;
+        return getNotNull(birthDate);
     }
 
     public void setBirthDate(String birthDate) {
@@ -185,7 +185,7 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public String getGender() {
-        return "" + gender;
+        return getNotNull(gender);
     }
 
     public void setGender(String gender) {
@@ -193,7 +193,7 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public String getOrientation() {
-        return "" + orientation;
+        return getNotNull(orientation);
     }
 
     public void setOrientation(String orientation) {
@@ -201,7 +201,7 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public String getGoal() {
-        return "" + goal;
+        return getNotNull(goal);
     }
 
     public void setGoal(String goal) {
@@ -209,7 +209,7 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public String getAffair() {
-        return "" + affair;
+        return getNotNull(affair);
     }
 
     public void setAffair(String affair) {
@@ -217,7 +217,7 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public String getHeight() {
-        return "" + height;
+        return getNotNull(height);
     }
 
     public void setHeight(String height) {
@@ -225,7 +225,7 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public String getWeight() {
-        return "" + weight;
+        return getNotNull(weight);
     }
 
     public void setWeight(String weight) {
@@ -233,7 +233,7 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public String getAttitudeToSmoking() {
-        return "" + attitudeToSmoking;
+        return getNotNull(attitudeToSmoking);
     }
 
     public void setAttitudeToSmoking(String attitudeToSmoking) {
@@ -241,7 +241,7 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public String getAttitudeToAlcohol() {
-        return "" + attitudeToAlcohol;
+        return getNotNull(attitudeToAlcohol);
     }
 
     public void setAttitudeToAlcohol(String attitudeToAlcohol) {
@@ -249,11 +249,11 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public String getGroup() {
-        return "" + group;
+        return getNotNull(group);
     }
 
     public String getLocation() {
-        return "" + location;
+        return getNotNull(location);
     }
 
     public void setLocation(String location) {
@@ -261,7 +261,7 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public String getOrganization() {
-        return "" + organization;
+        return getNotNull(organization);
     }
 
     public void setOrganization(String organization) {
@@ -269,7 +269,7 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public String getWebsite() {
-        return "" + website;
+        return getNotNull(website);
     }
 
     public void setWebsite(String website) {
@@ -277,7 +277,7 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public String getIsChecked() {
-        return "" + isChecked;
+        return getNotNull(isChecked);
     }
 
     public void setIsChecked(String isChecked) {
@@ -285,10 +285,14 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public String getReferralEmail() {
-        return "" + referralEmail;
+        return getNotNull(referralEmail);
     }
 
     public void setReferralEmail(String referralEmail) {
         this.referralEmail = referralEmail;
+    }
+
+    private String getNotNull(String possiblyNullValue) {
+        return (possiblyNullValue == null) ? "" : possiblyNullValue;
     }
 }

@@ -76,7 +76,7 @@ public class Rating implements Serializable, Comparable<Rating> {
     }
 
     public String get_ratingId() {
-        return "" + _ratingId;
+        return getNotNull(_ratingId);
     }
 
     public void set_ratingId(String _ratingId) {
@@ -84,7 +84,7 @@ public class Rating implements Serializable, Comparable<Rating> {
     }
 
     public String getEventOrganizerEmail() {
-        return "" + eventOrganizerEmail;
+        return getNotNull(eventOrganizerEmail);
     }
 
     public void setEventOrganizerEmail(String eventOrganizerEmail) {
@@ -93,7 +93,7 @@ public class Rating implements Serializable, Comparable<Rating> {
     }
 
     public String getThisUserEmail() {
-        return "" + thisUserEmail;
+        return getNotNull(thisUserEmail);
     }
 
     public void setThisUserEmail(String thisUserEmail) {
@@ -102,7 +102,7 @@ public class Rating implements Serializable, Comparable<Rating> {
     }
 
     public String getOtherUserEmail() {
-        return "" + otherUserEmail;
+        return getNotNull(otherUserEmail);
     }
 
     public void setOtherUserEmail(String otherUserEmail) {
@@ -111,7 +111,7 @@ public class Rating implements Serializable, Comparable<Rating> {
     }
 
     public String getNumber() {
-        return "" + number;
+        return getNotNull(number);
     }
 
     public void setNumber(String number) {
@@ -120,7 +120,7 @@ public class Rating implements Serializable, Comparable<Rating> {
     }
 
     public String getUsername() {
-        return "" + username;
+        return getNotNull(username);
     }
 
     public void setUsername(String username) {
@@ -128,7 +128,7 @@ public class Rating implements Serializable, Comparable<Rating> {
     }
 
     public String getSelection() {
-        return "" + selection;
+        return getNotNull(selection);
     }
 
     public void setSelection(String selection) {
@@ -136,7 +136,7 @@ public class Rating implements Serializable, Comparable<Rating> {
     }
 
     public String getComment() {
-        return "" + comment;
+        return getNotNull(comment);
     }
 
     public void setComment(String comment) {
@@ -144,7 +144,7 @@ public class Rating implements Serializable, Comparable<Rating> {
     }
 
     public String getEventTime() {
-        return "" + eventTime;
+        return getNotNull(eventTime);
     }
 
     public void setEventTime(String eventTime) {
@@ -153,10 +153,14 @@ public class Rating implements Serializable, Comparable<Rating> {
     }
 
     public String getActual() {
-        return "" + actual;
+        return getNotNull(actual);
     }
 
     public void setActual(String actual) {
         this.actual = actual;
+    }
+
+    private String getNotNull(String possiblyNullValue) {
+        return (possiblyNullValue == null) ? "" : possiblyNullValue;
     }
 }
