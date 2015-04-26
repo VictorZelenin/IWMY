@@ -81,10 +81,8 @@ public class QuestionnaireFragment extends UserQuestionnaireFragment {
 
     @Override
     public void onClick(View view) {
+        super.onClick(view);
         switch (view.getId()) {
-            case R.id.button_send:
-                sendRating();
-                break;
             case R.id.button_settings:
                 CoolFragmentManager.showAtTop(new SettingsFragment());
                 break;

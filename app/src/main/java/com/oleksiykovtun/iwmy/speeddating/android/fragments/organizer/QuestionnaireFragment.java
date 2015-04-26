@@ -49,13 +49,4 @@ public class QuestionnaireFragment extends UserQuestionnaireFragment {
         return CoolApplication.readPreferences(SettingsFragment.MAX_RATINGS, 1);
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.button_send:
-                sendRating();
-                break;
-        }
-    }
-
 }

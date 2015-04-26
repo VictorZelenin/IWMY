@@ -80,6 +80,15 @@ public abstract class UserQuestionnaireFragment extends AppFragment {
         }
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.button_send:
+                sendRating();
+                break;
+        }
+    }
+
     protected void toggleSelection(Rating rating) {
         rating.setSelection(rating.getSelection().equals(Rating.SELECTED)
                 ? Rating.NOT_SELECTED : Rating.SELECTED);
