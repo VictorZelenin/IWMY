@@ -161,7 +161,7 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
 
     protected void cancelPost() {
         if (task != null && !task.isCancelled()) {
-            task.cancel(true);
+            task.cancel();
         }
     }
 

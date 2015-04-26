@@ -115,6 +115,11 @@ class CoolWebAsyncTask extends AsyncTask<String, Void, Void> {
         return null;
     }
 
+    public void cancel() {
+        delegate = null;
+        cancel(true);
+    }
+
     @Override
     protected void onPostExecute(Void result) {
         if (delegate != null) {
