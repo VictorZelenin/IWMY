@@ -54,7 +54,7 @@ public class NewEventFragment extends AppFragment {
                 Event event = new Event(Account.getUser().getEmail(), time, place,
                         streetAddress, photoBase64, freePlaces, cost, description);
                 if (checkEvent(event)) {
-                    post(Api.EVENTS + Api.PUT, Event[].class, event);
+                    post(Api.EVENTS + Api.ADD, Event[].class, event);
                 } else {
                     showToast(R.string.message_inputs_error);
                 }
@@ -73,7 +73,7 @@ public class NewEventFragment extends AppFragment {
             showToast(R.string.message_event_added);
             CoolFragmentManager.showPrevious();
         } else {
-            showToast(R.string.message_connection_error);
+            showToastLong(R.string.message_event_exists);
         }
     }
 

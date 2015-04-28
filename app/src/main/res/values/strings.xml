@@ -128,6 +128,7 @@
         This action resulted in an error. Please try again later.
     </string>
     <string name="message_user_exists">User already exists. Please enter other email or username</string>
+    <string name="message_event_exists">You already created an event at this place or time. Please enter other place or time, or edit/delete the older event.</string>
     <string name="message_participant_added">Participant added</string>
     <string name="message_event_added">Event added</string>
     <string name="message_inputs_error">Please check your inputs and try again.</string>

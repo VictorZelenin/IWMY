@@ -6,7 +6,6 @@ import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -68,6 +67,28 @@ public class EventRestService extends GeneralRestService {
     @Path(Api.GET_ALL) @POST @Consumes(JSON) @Produces(JSON)
     public static List getAll() {
         return new ArrayList<>(ObjectifyService.ofy().load().type(Event.class).list());
+    }
+
+    public static List<Event> getUniqueForOrganizer(List<Event> wildcardEvents) {
+        Set<Event> users = new TreeSet<>();
+        for (Event wildcardEvent : wildcardEvents) {
+            users.addAll(ObjectifyService.ofy().load().type(Event.class)
+                    .filter("organizerEmail", wildcardEvent.getOrganizerEmail())
+                    .filter("place", wildcardEvent.getPlace()).list());
+            users.addAll(ObjectifyService.ofy().load().type(Event.class)
+                    .filter("organizerEmail", wildcardEvent.getOrganizerEmail())
+                    .filter("time", wildcardEvent.getTime()).list());
+        }
+        return new ArrayList<>(users);
+    }
+
+    @Path(Api.ADD) @POST @Consumes(JSON) @Produces(JSON)
+    public List add(List<Event> items) {
+        if (EventRestService.getUniqueForOrganizer(items).isEmpty()) {
+            return put(items);
+        } else {
+            return new ArrayList();
+        }
     }
 
     @Path(Api.PUT) @POST @Consumes(JSON) @Produces(JSON)
