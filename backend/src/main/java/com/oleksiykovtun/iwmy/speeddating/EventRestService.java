@@ -74,6 +74,7 @@ public class EventRestService extends GeneralRestService {
         for (Event wildcardEvent : wildcardEvents) {
             users.addAll(ObjectifyService.ofy().load().type(Event.class)
                     .filter("organizerEmail", wildcardEvent.getOrganizerEmail())
+                    .filter("actual", "true")
                     .filter("place", wildcardEvent.getPlace()).list());
             users.addAll(ObjectifyService.ofy().load().type(Event.class)
                     .filter("organizerEmail", wildcardEvent.getOrganizerEmail())
@@ -129,7 +130,7 @@ public class EventRestService extends GeneralRestService {
 
     @Path(Api.SET_UNACTUAL) @POST @Consumes(JSON) @Produces(JSON)
     public List setUnactual(List<Event> wildcardEvents) {
-        List<Event> events = EventRestService.get(wildcardEvents);
+        List<Event> events = EventRestService.getForTime(wildcardEvents);
         for (Event event : events) {
             event.setActual("false");
         }
