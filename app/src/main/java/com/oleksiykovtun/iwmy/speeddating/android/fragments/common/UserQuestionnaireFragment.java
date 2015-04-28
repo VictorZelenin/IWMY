@@ -3,9 +3,7 @@ package com.oleksiykovtun.iwmy.speeddating.android.fragments.common;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.CheckBox;
 
-import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.adapters.RatingRecyclerAdapter;

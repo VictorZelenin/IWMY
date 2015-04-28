@@ -36,7 +36,10 @@
         android:layout_weight="@integer/label_comment_relative_width"
         android:gravity="center_vertical"
         android:textSize="@dimen/label_text_size"
-        android:inputType="text"
+        android:inputType="textMultiLine"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:maxLength="@integer/edit_text_max_length"
         android:layout_width="0dp"
         android:layout_height="wrap_content" />

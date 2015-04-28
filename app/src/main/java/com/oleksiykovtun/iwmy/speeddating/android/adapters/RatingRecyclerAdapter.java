@@ -1,12 +1,14 @@
 package com.oleksiykovtun.iwmy.speeddating.android.adapters;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
+import android.text.InputFilter;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -56,18 +58,33 @@ public class RatingRecyclerAdapter extends CoolRecyclerAdapter {
                 }
             }
         });
-        viewHolder.commentEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        viewHolder.commentEditText.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    try {
-                        ((Rating) dataSet.get(getPosition(viewHolder)))
-                                .setComment("" + viewHolder.commentEditText.getText());
-                        itemClickListener.onClick(dataSet.get(getPosition(viewHolder)), v);
-                    } catch(Throwable e){
-                        Log.e("IWMY", "Comment editing failed", e);
-                    }
-                }
+            public void onClick(final View v) {
+                final Rating rating = (Rating) dataSet.get(getPosition(viewHolder));
+                final EditText commentEditTextPopup = new EditText(v.getContext());
+                commentEditTextPopup.setFilters(new InputFilter
+                        .LengthFilter[]{new InputFilter.LengthFilter(64)});
+                commentEditTextPopup.append(rating.getComment());
+                AlertDialog commentEditDialog = new AlertDialog.Builder(v.getContext())
+                        .setTitle(R.string.label_comment)
+                        .setView(commentEditTextPopup)
+                        .setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                rating.setComment("" + commentEditTextPopup.getText());
+                                itemClickListener.onClick(rating, v);
+                                dialog.dismiss();
+                            }
+                        })
+                        .setNegativeButton(R.string.button_cancel, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                dialog.cancel();
+                            }
+                        })
+                        .create();
+                commentEditDialog.getWindow()
+                        .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+                commentEditDialog.show();
             }
         });
         return viewHolder;
