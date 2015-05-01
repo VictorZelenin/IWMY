@@ -2,7 +2,6 @@ package com.oleksiykovtun.iwmy.speeddating;
 
 import com.googlecode.objectify.ObjectifyService;
 import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
-import com.oleksiykovtun.iwmy.speeddating.data.Email;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
@@ -192,6 +191,11 @@ public class UserRestService extends GeneralRestService {
     }
 
     private List put(List<User> items) {
+        // saving images separately and replacing them with links
+        for (User user : items) {
+            user.setPhoto(ImageRestService.put(user.getPhoto()));
+            user.setThumbnail(ImageRestService.putThumbnail(user.getThumbnail()));
+        }
         ObjectifyService.ofy().save().entities(items).now();
         return items;
     }

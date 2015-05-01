@@ -13,7 +13,6 @@ import com.oleksiykovtun.iwmy.speeddating.TimeConverter;
 import com.oleksiykovtun.iwmy.speeddating.android.ImageManager;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
-import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -64,7 +63,7 @@ public class UserRecyclerAdapter extends CoolRecyclerAdapter {
         ((ViewHolder) holder).ageTextView.setText(TimeConverter.getYearsFromDate(user
                     .getBirthDate()));
         ((ViewHolder) holder).locationTextView.setText(", " + user.getLocation());
-        ImageManager.setUserPic(((ViewHolder) holder).photoImageView, user);
+        ImageManager.setUserThumbnail(((ViewHolder) holder).photoImageView, user);
     }
 
 }

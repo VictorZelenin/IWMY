@@ -41,6 +41,9 @@ public class Api {
     public static final String GENERATE_FOR_EVENT = "generate/for/event";
     public static final String GET_FOR_ATTENDANCE = "get/for/attendance";
 
+    public static final String IMAGES = "/images/";
+    public static final String GET_THUMBNAIL = "get/thumbnail";
+
     public static final String MAIL = "/mail/";
     public static final String SEND = "send";
     public static final String REQUEST_ORGANIZER = "request/organizer";

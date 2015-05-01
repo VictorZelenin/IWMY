@@ -7,10 +7,13 @@ import android.widget.ImageView;
 
 import com.oleksiykovtun.android.cooltools.CoolApplication;
 import com.oleksiykovtun.android.cooltools.CoolFormatter;
+import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.Base64Converter;
+import com.oleksiykovtun.iwmy.speeddating.BuildConfig;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 
@@ -19,10 +22,26 @@ import java.io.ByteArrayOutputStream;
  */
 public class ImageManager {
 
-    public static void setUserPic(ImageView userPicImageView, User user) {
+    public static void setUserPhoto(ImageView userPicImageView, User user) {
         if (! user.getPhoto().isEmpty()) {
-            setImageFromBase64String(userPicImageView, user.getPhoto());
-        } else if (user.getGender().equals(User.MALE)) {
+            Picasso.with(CoolApplication.getContext()).load(BuildConfig.BACKEND_URL + Api.IMAGES
+                    + Api.GET + "/" + user.getPhoto()).into(userPicImageView);
+        } else {
+            setUserDefaultImage(userPicImageView, user);
+        }
+    }
+
+    public static void setUserThumbnail(ImageView userPicImageView, User user) {
+        if (! user.getThumbnail().isEmpty()) {
+            Picasso.with(CoolApplication.getContext()).load(BuildConfig.BACKEND_URL + Api.IMAGES
+                    + Api.GET_THUMBNAIL + "/" + user.getThumbnail()).into(userPicImageView);
+        } else {
+            setUserDefaultImage(userPicImageView, user);
+        }
+    }
+
+    private static void setUserDefaultImage(ImageView userPicImageView, User user) {
+        if (user.getGender().equals(User.MALE)) {
             userPicImageView.setImageDrawable(CoolApplication.getContext().getResources()
                     .getDrawable(R.drawable.no_photo_man));
         } else if (user.getGender().equals(User.FEMALE)) {

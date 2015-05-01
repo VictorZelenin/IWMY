@@ -5,7 +5,9 @@ import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
 import com.oleksiykovtun.iwmy.speeddating.data.Couple;
 import com.oleksiykovtun.iwmy.speeddating.data.Email;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
+import com.oleksiykovtun.iwmy.speeddating.data.Image;
 import com.oleksiykovtun.iwmy.speeddating.data.Rating;
+import com.oleksiykovtun.iwmy.speeddating.data.Thumbnail;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 import java.util.Arrays;
@@ -31,6 +33,8 @@ public class GeneralRestService {
         ObjectifyService.register(Event.class);
         ObjectifyService.register(Rating.class);
         ObjectifyService.register(User.class);
+        ObjectifyService.register(Thumbnail.class);
+        ObjectifyService.register(Image.class);
     }
 
     private static final String DEFAULT_MESSAGE = "IWMY Speed Dating\n\n"

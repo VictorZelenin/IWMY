@@ -41,7 +41,7 @@ public class AuthorizationFragment extends AppFragment {
                 if (!usernameOrEmail.isEmpty() && !password.isEmpty()) {
                     // to do security
                     User wildcardLoginUser = new User(usernameOrEmail, password, usernameOrEmail,
-                            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+                            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
                     post(Api.USERS + Api.GET_LOGIN, User[].class, wildcardLoginUser);
                 } else {
                     showToastLong(R.string.message_no_user_wrong_password);

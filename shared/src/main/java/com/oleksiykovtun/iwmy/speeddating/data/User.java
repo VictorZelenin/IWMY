@@ -33,6 +33,7 @@ public class User implements Serializable, Comparable<User> {
 
     private String nameAndSurname;
     private String photo; // url
+    private String thumbnail; // url
     private String phone;
     private String birthDate; // format "2099-12-31"
 
@@ -60,7 +61,7 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public User(String email, String password, String username, String group,
-                String nameAndSurname, String photo, String phone, String birthDate,
+                String nameAndSurname, String photo, String thumbnail, String phone, String birthDate,
                 String gender, String orientation, String goal, String affair,
                 String height, String weight, String attitudeToSmoking, String attitudeToAlcohol,
                 String location, String organization, String website, String referralEmail) {
@@ -70,6 +71,7 @@ public class User implements Serializable, Comparable<User> {
         this.password = password;
         this.nameAndSurname = nameAndSurname;
         this.photo = photo;
+        this.thumbnail = thumbnail;
         this.phone = phone;
         this.birthDate = birthDate;
         this.gender = gender;
@@ -159,6 +161,14 @@ public class User implements Serializable, Comparable<User> {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public String getThumbnail() {
+        return getNotNull(thumbnail);
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 
     public String getPhone() {

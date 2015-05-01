@@ -93,7 +93,7 @@ public abstract class ProfileEditFragment extends AppFragment {
                 user.getGender().equals(User.FEMALE));
 
         if (! user.getPhoto().isEmpty()) {
-            ImageManager.setImageFromBase64String(getImageView(R.id.image_user_pic), user.getPhoto());
+            ImageManager.setUserPhoto(getImageView(R.id.image_user_pic), user);
             ((Button) getViewById(R.id.button_photo)).setText(R.string.button_remove_photo);
         }
     }
@@ -113,7 +113,8 @@ public abstract class ProfileEditFragment extends AppFragment {
         user.setUsername(getEditText(R.id.input_username));
         user.setGroup(User.USER);
         user.setNameAndSurname(getEditText(R.id.input_name_and_surname));
-        user.setPhoto(ImageManager.getBase64StringFromImage(getImageView(R.id.image_user_pic)));
+        user.setPhoto(ImageManager.getBase64StringFromImage(getImageView(R.id.image_user_pic))); // todo separate
+        user.setThumbnail(ImageManager.getBase64StringFromImage(getImageView(R.id.image_user_pic))); // todo separate
         user.setPhone(getEditText(R.id.input_phone));
         user.setBirthDate(getLabelText(R.id.label_birth_date));
         user.setGender(isRadioButtonChecked(R.id.gender_male) ? User.MALE : User.FEMALE);

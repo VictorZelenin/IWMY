@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.ImageManager;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
@@ -28,7 +27,7 @@ public class UserProfileCoupleFragment extends AppFragment {
 
         coupleUser = (User) getAttachment();
 
-        ImageManager.setUserPic(getImageView(R.id.image_user_pic), coupleUser);
+        ImageManager.setUserPhoto(getImageView(R.id.image_user_pic), coupleUser);
         setText(R.id.label_couple, coupleUser.getNameAndSurname());
         setText(R.id.label_name_and_surname, R.string.label_name_and_surname,
                 coupleUser.getNameAndSurname());

@@ -8,14 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewManager;
 
-import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.R;
-import com.oleksiykovtun.iwmy.speeddating.TimeConverter;
 import com.oleksiykovtun.iwmy.speeddating.android.ImageManager;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
-import com.oleksiykovtun.iwmy.speeddating.android.fragments.organizer.SettingsFragment;
-import com.oleksiykovtun.iwmy.speeddating.android.fragments.user.*;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 /**
@@ -42,7 +38,7 @@ public class UserProfileFragment extends AppFragment {
                     .removeView(getViewById(R.id.button_options));
         }
 
-        ImageManager.setUserPic(getImageView(R.id.image_user_pic), user);
+        ImageManager.setUserPhoto(getImageView(R.id.image_user_pic), user);
         setText(R.id.label_user, R.string.toolbar_user, "- " + user.getUsername());
         setText(R.id.label_name_and_surname,
                 R.string.label_name_and_surname, user.getNameAndSurname());
