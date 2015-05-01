@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
@@ -28,6 +27,7 @@ public class ProfileEditFragment extends com.oleksiykovtun.iwmy.speeddating.andr
         registerContainerView(view);
         registerClickListener(R.id.button_ok);
         registerClickListener(R.id.button_select_date);
+        registerClickListener(R.id.button_photo);
         registerClickListener(R.id.button_settings);
 
         user = (User) getAttachment();
@@ -38,10 +38,8 @@ public class ProfileEditFragment extends com.oleksiykovtun.iwmy.speeddating.andr
 
     @Override
     public void onClick(View view) {
+        super.onClick(view);
         switch (view.getId()) {
-            case R.id.button_select_date:
-                openDatePicker();
-                break;
             case R.id.button_ok:
                 User newUser = makeUser();
                 if (check(newUser)) {

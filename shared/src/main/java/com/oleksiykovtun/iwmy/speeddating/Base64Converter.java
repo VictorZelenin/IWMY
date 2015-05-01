@@ -16,8 +16,12 @@ public class Base64Converter {
         return StringUtils.newStringUtf8(getBytesFromBase64String(base64String));
     }
 
+    public static String getBase64StringFromBytes(byte[] bytes) {
+        return StringUtils.newStringUtf8(Base64.encodeBase64(bytes));
+    }
+
     public static String getBase64StringFromString(String text) {
-        return StringUtils.newStringUtf8(Base64.encodeBase64(StringUtils.getBytesUtf8(text)));
+        return getBase64StringFromBytes(StringUtils.getBytesUtf8(text));
     }
 
 }

@@ -26,15 +26,14 @@ public class RegisteringFragment extends ProfileEditFragment {
         registerContainerView(view);
         registerClickListener(R.id.button_register);
         registerClickListener(R.id.button_select_date);
+        registerClickListener(R.id.button_photo);
         return view;
     }
 
     @Override
     public void onClick(View view) {
+        super.onClick(view);
         switch (view.getId()) {
-            case R.id.button_select_date:
-                openDatePicker();
-                break;
             case R.id.button_register:
                 User user = makeUser();
                 if (check(user)) {

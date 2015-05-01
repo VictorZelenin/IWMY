@@ -158,4 +158,8 @@
     <string name="message_other_post_error">Сталася помилка. Вибачте. Будь ласка, спробуйте пізніше.</string>
     <string name="message_version_error">Ця дія застаріла. Будь ласка, поновіть програму.</string>
     <string name="message_event_exists">Ви вже створили захід у цьому місці або у цей час. Будь ласка, змініть місце/час або змініть/видаліть старий захід.</string>
+    <string name="button_choose_photo">Оберіть фото</string>
+    <string name="button_remove_photo">Вилучити це фото</string>
+    <string name="label_photo">Фото</string>
+    <string name="message_camera_error">Помилка. Не вдалося отримати фото з камери.</string>
 </resources>

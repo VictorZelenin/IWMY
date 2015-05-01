@@ -27,6 +27,7 @@ public class UserProfileEditFragment extends ProfileEditFragment {
         registerContainerView(view);
         registerClickListener(R.id.button_ok);
         registerClickListener(R.id.button_select_date);
+        registerClickListener(R.id.button_photo);
         registerClickListener(R.id.button_settings);
 
         user = (User) getAttachment();
@@ -37,10 +38,8 @@ public class UserProfileEditFragment extends ProfileEditFragment {
 
     @Override
     public void onClick(View view) {
+        super.onClick(view);
         switch (view.getId()) {
-            case R.id.button_select_date:
-                openDatePicker();
-                break;
             case R.id.button_ok:
                 User newUser = makeUserWithoutPassword();
                 if (checkWithoutPassword(newUser)) {
