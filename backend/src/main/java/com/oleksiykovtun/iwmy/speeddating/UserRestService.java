@@ -143,7 +143,7 @@ public class UserRestService extends GeneralRestService {
             for (User user : items) {
                 user.setGroup(User.USER);
             }
-            return put(items);
+            return put(savePhotos(items));
         } else {
             return new ArrayList();
         }
@@ -191,13 +191,21 @@ public class UserRestService extends GeneralRestService {
     }
 
     private List put(List<User> items) {
-        // saving images separately and replacing them with links
-        for (User user : items) {
+        ObjectifyService.ofy().save().entities(items).now();
+        return items;
+    }
+
+    /**
+     * Saving images separately and replacing them with links
+     * @param users users with base64 image data
+     * @return users with image links
+     */
+    private static List<User> savePhotos(List<User> users) {
+        for (User user : users) {
             user.setPhoto(ImageRestService.put(user.getPhoto()));
             user.setThumbnail(ImageRestService.putThumbnail(user.getThumbnail()));
         }
-        ObjectifyService.ofy().save().entities(items).now();
-        return items;
+        return users;
     }
 
     @Path(Api.REPLACE) @POST @Consumes(JSON) @Produces(JSON)
@@ -223,7 +231,7 @@ public class UserRestService extends GeneralRestService {
                 .filter("email", oldUsers.get(0).getEmail()).keys()).now();
         // putting new user
         List<User> newUsers = users.subList(1, 2);
-        put(newUsers);
+        put(savePhotos(newUsers));
         // linking related data to the new user
         AttendanceRestService.replaceForUser(users);
         CoupleRestService.replaceForUser(users);

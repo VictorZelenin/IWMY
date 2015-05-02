@@ -86,7 +86,7 @@ public class EventRestService extends GeneralRestService {
     @Path(Api.ADD) @POST @Consumes(JSON) @Produces(JSON)
     public List add(List<Event> items) {
         if (EventRestService.getUniqueForOrganizer(items).isEmpty()) {
-            return put(items);
+            return put(savePhotos(items));
         } else {
             return new ArrayList();
         }
@@ -94,13 +94,21 @@ public class EventRestService extends GeneralRestService {
 
     @Path(Api.PUT) @POST @Consumes(JSON) @Produces(JSON)
     public static List put(List<Event> items) {
-        // saving images separately and replacing them with links
-        for (Event event : items) {
+        ObjectifyService.ofy().save().entities(items).now();
+        return items;
+    }
+
+    /**
+     * Saving images separately and replacing them with links
+     * @param events events with base64 image data
+     * @return events with image links
+     */
+    private static List<Event> savePhotos(List<Event> events) {
+        for (Event event : events) {
             event.setPhoto(ImageRestService.put(event.getPhoto()));
             event.setThumbnail(ImageRestService.putThumbnail(event.getThumbnail()));
         }
-        ObjectifyService.ofy().save().entities(items).now();
-        return items;
+        return events;
     }
 
     /**
@@ -180,7 +188,7 @@ public class EventRestService extends GeneralRestService {
                 .filter("time", oldEvents.get(0).getTime()).keys()).now();
         // putting new event
         List<Event> newEvents = events.subList(1, 2);
-        put(newEvents);
+        put(savePhotos(newEvents));
         // linking related data to the new event
         AttendanceRestService.replaceForEvent(events);
         CoupleRestService.replaceForEvent(events);
