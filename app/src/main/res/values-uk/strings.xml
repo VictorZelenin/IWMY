@@ -143,7 +143,7 @@
     <string name="label_couple">Пара:</string>
     <string name="label_rating_username">Нік</string>
     <string name="menu_edit">Змінити</string>
-    <string name="toolbar_editing">Зміна профілю</string>
+    <string name="toolbar_editing_user">Зміна профілю</string>
     <string name="button_edit_my_profile">Змінити мій профіль</string>
     <string name="toolbar_user">Анкета</string>
     <string name="button_allow_users_send_ratings">Дозволити учасникам надсилати анкети</string>
@@ -164,4 +164,5 @@
     <string name="message_photo_getting_error">Помилка. Не вдалося отримати фото.</string>
     <string name="menu_from_camera">З камери</string>
     <string name="menu_from_gallery">З галереї</string>
+    <string name="toolbar_editing_event">Зміна заходу</string>
 </resources>

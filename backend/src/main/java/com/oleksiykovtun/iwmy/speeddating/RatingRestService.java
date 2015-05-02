@@ -103,6 +103,16 @@ public class RatingRestService extends GeneralRestService {
         return new ArrayList();
     }
 
+    public static List<Rating> getForEvent(List<Event> wildcardEvents) {
+        Set<Rating> ratings = new TreeSet<>();
+        for (Event wildcardEvent : wildcardEvents) {
+            ratings.addAll(ObjectifyService.ofy().load().type(Rating.class)
+                    .filter("eventOrganizerEmail", wildcardEvent.getOrganizerEmail())
+                    .filter("eventTime", wildcardEvent.getTime()).list());
+        }
+        return new ArrayList<>(ratings);
+    }
+
     public static List<Rating> getForEventSelected(List<Event> wildcardEvents) {
         Set<Rating> outputSet = new TreeSet<>();
         // listing event-related attendances
@@ -158,6 +168,21 @@ public class RatingRestService extends GeneralRestService {
                 relatedItem.setOtherUserEmail(newUsers.get(0).getEmail());
                 relatedItem.setUsername(newUsers.get(0).getUsername());
             }
+        }
+        // adding for new users
+        return put(userRelatedItems);
+    }
+
+    public static List replaceForEvent(List<Event> events) {
+        List<Event> oldEvents = events.subList(0, 1);
+        List<Rating> userRelatedItems = getForEvent(oldEvents);
+        // deleting for old event
+        deleteForEvent(oldEvents);
+        // replacing organizer email and time
+        List<Event> newEvents = events.subList(1, 2);
+        for (Rating relatedItem : userRelatedItems) {
+            relatedItem.setEventOrganizerEmail(newEvents.get(0).getOrganizerEmail());
+            relatedItem.setEventTime(newEvents.get(0).getTime());
         }
         // adding for new users
         return put(userRelatedItems);

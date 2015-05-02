@@ -84,14 +84,14 @@ public class CoupleRestService extends GeneralRestService {
     }
 
     @Path(Api.GET_FOR_EVENT) @POST @Consumes(JSON) @Produces(JSON)
-    public static List getForEvent(List<Event> wildcardEvents) {
+    public static List<Couple> getForEvent(List<Event> wildcardEvents) {
         Set<Couple> couples = new TreeSet<>();
         for (Event wildcardEvent : wildcardEvents) {
             couples.addAll(ObjectifyService.ofy().load().type(Couple.class)
                     .filter("eventOrganizerEmail", wildcardEvent.getOrganizerEmail())
                     .filter("eventTime", wildcardEvent.getTime()).list());
         }
-        return Arrays.asList(couples.toArray());
+        return new ArrayList<>(couples);
     }
 
     public static List deleteForEvent(List<Event> wildcardEvents) {
@@ -135,6 +135,21 @@ public class CoupleRestService extends GeneralRestService {
         // adding for new users
         return put(userRelatedItems);
     }
+
+    public static List replaceForEvent(List<Event> events) {
+        List<Event> oldEvents = events.subList(0, 1);
+        List<Couple> eventRelatedItems = getForEvent(oldEvents);
+        // deleting for old event
+        deleteForEvent(oldEvents);
+        // replacing organizer email and time
+        List<Event> newEvents = events.subList(1, 2);
+        for (Couple relatedItem : eventRelatedItems) {
+            relatedItem.setEvent(newEvents.get(0));
+        }
+        // adding for new events
+        return put(eventRelatedItems);
+    }
+
 
     public static List getAll() {
         return new ArrayList<>(ObjectifyService.ofy().load().type(Couple.class).list());

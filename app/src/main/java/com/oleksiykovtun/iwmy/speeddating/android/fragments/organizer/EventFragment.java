@@ -1,7 +1,9 @@
 package com.oleksiykovtun.iwmy.speeddating.android.fragments.organizer;
 
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -25,6 +27,7 @@ public class EventFragment extends AppFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_organizer_event, container, false);
         registerContainerView(view);
+        registerClickListener(R.id.button_options);
         registerClickListener(R.id.button_edit_start);
         registerClickListener(R.id.button_participants_list);
         registerClickListener(R.id.button_settings);
@@ -53,6 +56,9 @@ public class EventFragment extends AppFragment {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.button_options:
+                openMenu(view);
+                break;
             case R.id.button_edit_start:
                 CoolFragmentManager.showAtTop(new QuestionnaireListFragment(), event);
                 break;
@@ -63,6 +69,19 @@ public class EventFragment extends AppFragment {
                 CoolFragmentManager.showAtTop(new SettingsFragment());
                 break;
         }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        CoolFragmentManager.show(new EventEditFragment(), event);
+        return true;
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getActivity().getMenuInflater().inflate(R.menu.event, menu);
     }
 
 }

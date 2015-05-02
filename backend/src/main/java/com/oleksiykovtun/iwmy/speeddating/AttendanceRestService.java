@@ -136,6 +136,22 @@ public class AttendanceRestService extends GeneralRestService {
         return add(userRelatedItems);
     }
 
+    public static List replaceForEvent(List<Event> events) {
+        List<Event> oldEvents = events.subList(0, 1);
+        List<Attendance> eventRelatedItems = getForEvent(oldEvents);
+        // deleting for old event
+        ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(Attendance.class)
+                .filter("eventOrganizerEmail", oldEvents.get(0).getOrganizerEmail())
+                .filter("eventTime", oldEvents.get(0).getTime()).keys()).now();
+        // replacing organizer email and time
+        List<Event> newEvents = events.subList(1, 2);
+        for (Attendance relatedItem : eventRelatedItems) {
+            relatedItem.setEvent(newEvents.get(0));
+        }
+        // adding for new events
+        return add(eventRelatedItems);
+    }
+
     public static List getAll() {
         return new ArrayList<>(ObjectifyService.ofy().load().type(Attendance.class).list());
     }

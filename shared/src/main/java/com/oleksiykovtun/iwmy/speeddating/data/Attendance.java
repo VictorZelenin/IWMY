@@ -32,9 +32,8 @@ public class Attendance implements Serializable, Comparable<Attendance> {
     public Attendance() { }
 
     public Attendance(User user, Event event) {
-        this.eventOrganizerEmail = event.getOrganizerEmail();
-        this.eventTime = event.getTime();
         setUser(user);
+        setEvent(event);
         this.active = "false";
         this.creationTime = "" + System.currentTimeMillis();
         generateId();
@@ -44,6 +43,12 @@ public class Attendance implements Serializable, Comparable<Attendance> {
         this.userEmail = user.getEmail();
         this.username = user.getUsername();
         this.userGender = user.getGender();
+        generateId();
+    }
+
+    public void setEvent(Event event) {
+        this.eventOrganizerEmail = event.getOrganizerEmail();
+        this.eventTime = event.getTime();
         generateId();
     }
 

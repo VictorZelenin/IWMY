@@ -148,6 +148,41 @@ public class EventRestService extends GeneralRestService {
         return events;
     }
 
+    @Path(Api.REPLACE) @POST @Consumes(JSON) @Produces(JSON)
+    public List replace(List<Event> events) {
+        if (events.size() == 2) {
+            Event oldEvent = events.get(0);
+            List<Event> eventsMatchingOldOrNewEvent = EventRestService.getUniqueForOrganizer(events);
+            // replace if the new event matches no other event by this org. or the old same one
+            if (eventsMatchingOldOrNewEvent.isEmpty()
+                    || eventsMatchingOldOrNewEvent.size() == 1
+                    && eventsMatchingOldOrNewEvent.get(0).getOrganizerEmail().equals(oldEvent.getOrganizerEmail())
+                    && eventsMatchingOldOrNewEvent.get(0).getPlace().equals(oldEvent.getPlace())
+                    || eventsMatchingOldOrNewEvent.size() == 1
+                    && eventsMatchingOldOrNewEvent.get(0).getOrganizerEmail().equals(oldEvent.getOrganizerEmail())
+                    && eventsMatchingOldOrNewEvent.get(0).getTime().equals(oldEvent.getTime())) {
+                return replaceForEvent(events);
+            }
+        }
+        return new ArrayList();
+    }
+
+    private List replaceForEvent(List<Event> events) {
+        List<Event> oldEvents = events.subList(0, 1);
+        // deleting old event
+        ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(Event.class)
+                .filter("organizerEmail", oldEvents.get(0).getOrganizerEmail())
+                .filter("time", oldEvents.get(0).getTime()).keys()).now();
+        // putting new event
+        List<Event> newEvents = events.subList(1, 2);
+        put(newEvents);
+        // linking related data to the new event
+        AttendanceRestService.replaceForEvent(events);
+        CoupleRestService.replaceForEvent(events);
+        RatingRestService.replaceForEvent(events);
+        return newEvents;
+    }
+
     @Path(Api.DEBUG_GET_ALL) @GET @Produces(JSON)
     public static List debugGetAll() {
         return getAll();

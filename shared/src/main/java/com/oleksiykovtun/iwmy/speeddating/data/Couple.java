@@ -40,10 +40,15 @@ public class Couple implements Serializable, Comparable<Couple> {
     public Couple() { }
 
     public Couple(Event event, User user1, User user2) {
-        this.eventOrganizerEmail = event.getOrganizerEmail();
-        this.eventTime = event.getTime();
+        setEvent(event);
         setUser1(user1);
         setUser2(user2);
+        generateId();
+    }
+
+    public void setEvent(Event event) {
+        this.eventOrganizerEmail = event.getOrganizerEmail();
+        this.eventTime = event.getTime();
         generateId();
     }
 

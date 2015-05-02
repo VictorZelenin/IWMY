@@ -1,0 +1,116 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_event_place"
+        android:textSize="@dimen/label_text_size" />
+
+    <EditText
+        android:id="@+id/input_event_place"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:maxLength="@integer/edit_text_max_length"
+        android:inputType="text" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_event_date"
+        android:textSize="@dimen/label_text_size" />
+
+    <Button
+        android:id="@+id/button_select_date"
+        android:text="@string/label_select_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/label_event_date"
+        android:text="@string/label_empty"
+        android:textSize="@dimen/label_text_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_event_time"
+        android:textSize="@dimen/label_text_size" />
+
+    <Button
+        android:id="@+id/button_select_time"
+        android:text="@string/label_select_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/label_event_time"
+        android:text="@string/label_empty"
+        android:textSize="@dimen/label_text_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_event_address"
+        android:textSize="@dimen/label_text_size" />
+
+    <EditText
+        android:id="@+id/input_event_address"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:maxLength="@integer/edit_text_max_length"
+        android:inputType="text" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_event_places"
+        android:textSize="@dimen/label_text_size" />
+
+    <EditText
+        android:id="@+id/input_event_places"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:maxLength="@integer/edit_text_max_length"
+        android:inputType="number" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_event_cost"
+        android:textSize="@dimen/label_text_size" />
+
+    <EditText
+        android:id="@+id/input_event_cost"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:maxLength="@integer/edit_text_max_length"
+        android:inputType="number" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_event_description"
+        android:textSize="@dimen/label_text_size" />
+
+    <EditText
+        android:id="@+id/input_event_description"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:maxLength="@integer/edit_text_max_length"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/button_apply"
+        android:text="@string/button_apply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
