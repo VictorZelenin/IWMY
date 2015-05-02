@@ -150,7 +150,8 @@ public abstract class ProfileEditFragment extends AppFragment {
                 user.getGender().equals(User.FEMALE));
 
         if (! user.getPhoto().isEmpty()) {
-            ImageManager.setUserPhoto(getImageView(R.id.image_user_pic), user);
+            ImageManager.setUserPhoto(getImageView(R.id.image_user_pic), user.getGender(),
+                    user.getPhoto());
             ((Button) getViewById(R.id.button_photo)).setText(R.string.button_remove_photo);
         }
     }

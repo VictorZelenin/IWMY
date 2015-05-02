@@ -63,7 +63,8 @@ public class UserRecyclerAdapter extends CoolRecyclerAdapter {
         ((ViewHolder) holder).ageTextView.setText(TimeConverter.getYearsFromDate(user
                     .getBirthDate()));
         ((ViewHolder) holder).locationTextView.setText(", " + user.getLocation());
-        ImageManager.setUserThumbnail(((ViewHolder) holder).photoImageView, user);
+        ImageManager.setUserThumbnail(((ViewHolder) holder).photoImageView, user.getGender(),
+                user.getThumbnail());
     }
 
 }

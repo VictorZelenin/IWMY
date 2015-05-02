@@ -4,12 +4,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.oleksiykovtun.android.cooltools.CoolRecyclerAdapter;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.TimeConverter;
+import com.oleksiykovtun.iwmy.speeddating.android.ImageManager;
 import com.oleksiykovtun.iwmy.speeddating.data.Couple;
+import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 import java.text.ParseException;
 import java.util.List;
@@ -26,15 +29,19 @@ public class CoupleRecyclerAdapter extends CoolRecyclerAdapter {
     public class ViewHolder extends CoolRecyclerAdapter.ViewHolder {
         public TextView nameTextView1;
         public TextView ageTextView1;
+        public ImageView photoImageView1;
         public TextView nameTextView2;
         public TextView ageTextView2;
+        public ImageView photoImageView2;
 
         public ViewHolder(View view) {
             super(view);
             nameTextView1 = (TextView) view.findViewById(R.id.label_user_name_1);
             ageTextView1 = (TextView) view.findViewById(R.id.label_user_age_1);
+            photoImageView1 = (ImageView) view.findViewById(R.id.image_user_pic_1);
             nameTextView2 = (TextView) view.findViewById(R.id.label_user_name_2);
             ageTextView2 = (TextView) view.findViewById(R.id.label_user_age_2);
+            photoImageView2 = (ImageView) view.findViewById(R.id.image_user_pic_2);
         }
 
     }
@@ -55,6 +62,10 @@ public class CoupleRecyclerAdapter extends CoolRecyclerAdapter {
                 .getBirthDate1()));
         ((ViewHolder) holder).ageTextView2.setText(TimeConverter.getYearsFromDate(couple
                 .getBirthDate2()));
+        ImageManager.setUserThumbnail(((ViewHolder) holder).photoImageView1, User.MALE,
+                couple.getThumbnail1());
+        ImageManager.setUserThumbnail(((ViewHolder) holder).photoImageView2, User.FEMALE,
+                couple.getThumbnail2());
     }
 
 }

@@ -29,11 +29,13 @@ public class Couple implements Serializable, Comparable<Couple> {
     private String username1;
     private String birthDate1;
     private String phone1;
+    private String thumbnail1;
 
     private String name2;
     private String username2;
     private String birthDate2;
     private String phone2;
+    private String thumbnail2;
 
     public Couple() { }
 
@@ -51,6 +53,7 @@ public class Couple implements Serializable, Comparable<Couple> {
         this.name1 = user1.getNameAndSurname();
         this.phone1 = user1.getPhone();
         this.birthDate1 = user1.getBirthDate();
+        this.thumbnail1 = user1.getThumbnail();
         generateId();
     }
 
@@ -60,6 +63,7 @@ public class Couple implements Serializable, Comparable<Couple> {
         this.name2 = user2.getNameAndSurname();
         this.phone2 = user2.getPhone();
         this.birthDate2 = user2.getBirthDate();
+        this.thumbnail2 = user2.getThumbnail();
         generateId();
     }
 
@@ -185,6 +189,22 @@ public class Couple implements Serializable, Comparable<Couple> {
 
     public void setPhone2(String phone2) {
         this.phone2 = phone2;
+    }
+
+    public String getThumbnail1() {
+        return getNotNull(thumbnail1);
+    }
+
+    public void setThumbnail1(String thumbnail1) {
+        this.thumbnail1 = thumbnail1;
+    }
+
+    public String getThumbnail2() {
+        return getNotNull(thumbnail2);
+    }
+
+    public void setThumbnail2(String thumbnail2) {
+        this.thumbnail2 = thumbnail2;
     }
 
     private String getNotNull(String possiblyNullValue) {

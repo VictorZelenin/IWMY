@@ -42,29 +42,31 @@ public class ImageManager {
                 (int)(inputBitmap.getHeight() * scaleFactor), true);
     }
 
-    public static void setUserPhoto(ImageView userPicImageView, User user) {
-        if (! user.getPhoto().isEmpty()) {
+    public static void setUserPhoto(ImageView userPicImageView, String userGender,
+                                    String userPhoto) {
+        if (! userPhoto.isEmpty()) {
             Picasso.with(CoolApplication.getContext()).load(BuildConfig.BACKEND_URL + Api.IMAGES
-                    + Api.GET + "/" + user.getPhoto()).into(userPicImageView);
+                    + Api.GET + "/" + userPhoto).into(userPicImageView);
         } else {
-            setUserDefaultImage(userPicImageView, user);
+            setUserDefaultImage(userPicImageView, userGender);
         }
     }
 
-    public static void setUserThumbnail(ImageView userPicImageView, User user) {
-        if (! user.getThumbnail().isEmpty()) {
+    public static void setUserThumbnail(ImageView userPicImageView, String userGender,
+                                        String userThumbnail) {
+        if (! userThumbnail.isEmpty()) {
             Picasso.with(CoolApplication.getContext()).load(BuildConfig.BACKEND_URL + Api.IMAGES
-                    + Api.GET_THUMBNAIL + "/" + user.getThumbnail()).into(userPicImageView);
+                    + Api.GET_THUMBNAIL + "/" + userThumbnail).into(userPicImageView);
         } else {
-            setUserDefaultImage(userPicImageView, user);
+            setUserDefaultImage(userPicImageView, userGender);
         }
     }
 
-    private static void setUserDefaultImage(ImageView userPicImageView, User user) {
-        if (user.getGender().equals(User.MALE)) {
+    private static void setUserDefaultImage(ImageView userPicImageView, String userGender) {
+        if (userGender.equals(User.MALE)) {
             userPicImageView.setImageDrawable(CoolApplication.getContext().getResources()
                     .getDrawable(R.drawable.no_photo_man));
-        } else if (user.getGender().equals(User.FEMALE)) {
+        } else if (userGender.equals(User.FEMALE)) {
             userPicImageView.setImageDrawable(CoolApplication.getContext().getResources()
                     .getDrawable(R.drawable.no_photo_woman));
         }
