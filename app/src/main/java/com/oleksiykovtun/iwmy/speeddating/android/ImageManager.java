@@ -1,7 +1,7 @@
 package com.oleksiykovtun.iwmy.speeddating.android;
 
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.Matrix;
 import android.util.Log;
 import android.widget.ImageView;
 
@@ -11,7 +11,6 @@ import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.Base64Converter;
 import com.oleksiykovtun.iwmy.speeddating.BuildConfig;
 import com.oleksiykovtun.iwmy.speeddating.R;
-import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 import com.squareup.picasso.Picasso;
 
@@ -21,6 +20,13 @@ import java.io.ByteArrayOutputStream;
  * Created by alx on 2015-04-05.
  */
 public class ImageManager {
+
+    public static Bitmap rotateRight(Bitmap inputBitmap) {
+        Matrix rotationMatrix = new Matrix();
+        rotationMatrix.postRotate(90);
+        return Bitmap.createBitmap(inputBitmap, 0, 0, inputBitmap.getWidth(),
+                inputBitmap.getHeight(), rotationMatrix, true);
+    }
 
     public static Bitmap cropCenterSquare(Bitmap inputBitmap) {
         if (inputBitmap.getWidth() >= inputBitmap.getHeight()){

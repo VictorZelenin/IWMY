@@ -74,6 +74,15 @@ public abstract class ProfileEditFragment extends AppFragment {
                         .scaleBitmapToMinSideSize(rawBitmap, 80));
                 getImageView(R.id.image_user_pic).setImageBitmap(photoBitmap);
                 ((Button) getViewById(R.id.button_photo)).setText(R.string.button_remove_photo);
+                showToast(R.string.message_tap_rotate_photo);
+                getImageView(R.id.image_user_pic).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        photoBitmap = ImageManager.rotateRight(photoBitmap);
+                        thumbnailBitmap = ImageManager.rotateRight(thumbnailBitmap);
+                        getImageView(R.id.image_user_pic).setImageBitmap(photoBitmap);
+                    }
+                });
             } catch (Throwable e) {
                 showToast(R.string.message_photo_getting_error);
             }
