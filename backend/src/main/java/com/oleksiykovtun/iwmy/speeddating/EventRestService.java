@@ -94,6 +94,11 @@ public class EventRestService extends GeneralRestService {
 
     @Path(Api.PUT) @POST @Consumes(JSON) @Produces(JSON)
     public static List put(List<Event> items) {
+        // saving images separately and replacing them with links
+        for (Event event : items) {
+            event.setPhoto(ImageRestService.put(event.getPhoto()));
+            event.setThumbnail(ImageRestService.putThumbnail(event.getThumbnail()));
+        }
         ObjectifyService.ofy().save().entities(items).now();
         return items;
     }

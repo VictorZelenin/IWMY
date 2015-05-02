@@ -72,12 +72,28 @@ public class ImageManager {
         }
     }
 
-    public static void setEventPic(ImageView eventPicImageView, Event event) {
-        if (! event.getPhoto().isEmpty()) {
-            setImageFromBase64String(eventPicImageView, event.getPhoto());
+    public static void setEventPhoto(ImageView eventPicImageView, String eventPhoto) {
+        if (! eventPhoto.isEmpty()) {
+            Picasso.with(CoolApplication.getContext()).load(BuildConfig.BACKEND_URL + Api.IMAGES
+                    + Api.GET + "/" + eventPhoto).into(eventPicImageView);
+        } else {
+            setEventDefaultImage(eventPicImageView);
         }
     }
 
+    public static void setEventThumbnail(ImageView eventPicImageView, String eventThumbnail) {
+        if (! eventThumbnail.isEmpty()) {
+            Picasso.with(CoolApplication.getContext()).load(BuildConfig.BACKEND_URL + Api.IMAGES
+                    + Api.GET_THUMBNAIL + "/" + eventThumbnail).into(eventPicImageView);
+        } else {
+            setEventDefaultImage(eventPicImageView);
+        }
+    }
+
+    private static void setEventDefaultImage(ImageView eventPicImageView) {
+        eventPicImageView.setImageDrawable(CoolApplication.getContext().getResources()
+                .getDrawable(R.drawable.no_photo));
+    }
 
     public static void setImageFromBase64String(ImageView imageView, String base64String) {
         try {

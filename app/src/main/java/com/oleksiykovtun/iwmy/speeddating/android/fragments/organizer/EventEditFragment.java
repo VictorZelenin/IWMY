@@ -27,6 +27,7 @@ public class EventEditFragment
         registerContainerView(view);
         registerClickListener(R.id.button_select_date);
         registerClickListener(R.id.button_select_time);
+        registerClickListener(R.id.button_photo);
         registerClickListener(R.id.button_apply);
 
         event = (Event) getAttachment();

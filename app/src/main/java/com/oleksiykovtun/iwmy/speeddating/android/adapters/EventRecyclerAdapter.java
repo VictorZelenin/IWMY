@@ -48,7 +48,7 @@ public class EventRecyclerAdapter extends CoolRecyclerAdapter {
         Event event = (Event) (dataSet.get(position));
         ((ViewHolder) holder).placeTextView.setText(event.getPlace());
         ((ViewHolder) holder).timeTextView.setText(event.getTime());
-        ImageManager.setEventPic(((ViewHolder) holder).photoImageView, event);
+        ImageManager.setEventThumbnail(((ViewHolder) holder).photoImageView, event.getThumbnail());
     }
 
 }
