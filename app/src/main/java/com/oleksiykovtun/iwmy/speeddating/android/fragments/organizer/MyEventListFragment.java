@@ -147,7 +147,7 @@ public class MyEventListFragment extends AppFragment {
     }
 
     private void requestEventList() {
-        Event eventWildcard = new Event(Account.getUser().getEmail(), "", "", "", "", "",
+        Event eventWildcard = new Event(Account.getUser().getEmail(), "", "", "", "", "", "",
                 "", "");
         post(Api.EVENTS + Api.GET, Event[].class, eventWildcard);
     }

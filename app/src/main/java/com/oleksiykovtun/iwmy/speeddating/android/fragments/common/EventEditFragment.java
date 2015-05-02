@@ -76,14 +76,15 @@ public abstract class EventEditFragment extends AppFragment {
         String time = getLabelText(R.id.label_event_date) + " "
                 + getLabelText(R.id.label_event_time);
         String place = getEditText(R.id.input_event_place);
-        String photoBase64 = "";
+        String photo = "";
+        String thumbnail = "";
         String streetAddress = getEditText(R.id.input_event_address);
         String freePlaces = getEditText(R.id.input_event_places);
         String cost = getEditText(R.id.input_event_cost);
         String description = getEditText(R.id.input_event_description);
 
         return new Event(Account.getUser().getEmail(), time, place,
-                streetAddress, photoBase64, freePlaces, cost, description);
+                streetAddress, photo, thumbnail, freePlaces, cost, description);
     }
 
 }

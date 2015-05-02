@@ -250,7 +250,7 @@ public class UserRestService extends GeneralRestService {
         List<Event> wildcardEvents = new ArrayList<>();
         for (Attendance attendance : attendances) {
             wildcardEvents.add(new Event(attendance.getEventOrganizerEmail(),
-                    attendance.getEventTime(), "", "", "", "", "", ""));
+                    attendance.getEventTime(), "", "", "", "", "", "", ""));
         }
         return getForEvent(wildcardEvents);
     }
