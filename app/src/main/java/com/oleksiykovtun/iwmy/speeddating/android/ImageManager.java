@@ -22,6 +22,18 @@ import java.io.ByteArrayOutputStream;
  */
 public class ImageManager {
 
+    public static Bitmap cropCenterSquare(Bitmap inputBitmap) {
+        if (inputBitmap.getWidth() >= inputBitmap.getHeight()){
+            return Bitmap.createBitmap(inputBitmap,
+                    inputBitmap.getWidth() / 2 - inputBitmap.getHeight() / 2,
+                    0, inputBitmap.getHeight(), inputBitmap.getHeight());
+        } else {
+            return Bitmap.createBitmap(inputBitmap, 0,
+                    inputBitmap.getHeight() / 2 - inputBitmap.getWidth() / 2,
+                    inputBitmap.getWidth(), inputBitmap.getWidth());
+        }
+    }
+
     public static Bitmap scaleBitmapToMinSideSize(Bitmap inputBitmap, double minSideSize) {
         double scaleFactor = Math.min(1,
                 minSideSize / Math.min(inputBitmap.getWidth(), inputBitmap.getHeight()));
@@ -75,11 +87,11 @@ public class ImageManager {
         }
     }
 
-    public static String getBase64StringFromBitmap(Bitmap bitmap) {
+    public static String getBase64StringFromBitmap(Bitmap bitmap, int quality) {
         String base64image = "";
         if (bitmap != null && bitmap.getHeight() > 10) {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, stream);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, stream);
             base64image = Base64Converter.getBase64StringFromBytes(stream.toByteArray());
         }
         return base64image;

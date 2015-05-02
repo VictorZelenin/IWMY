@@ -17,7 +17,6 @@ import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 import java.io.File;
-import java.io.FileOutputStream;
 
 
 /**
@@ -75,7 +74,8 @@ public abstract class ProfileEditFragment extends AppFragment {
                 Bitmap rawBitmap = MediaStore.Images.Media.getBitmap(
                         getActivity().getContentResolver(), cameraPhotoUri);
                 photoBitmap = ImageManager.scaleBitmapToMinSideSize(rawBitmap, 640);
-                thumbnailBitmap = ImageManager.scaleBitmapToMinSideSize(rawBitmap, 64);
+                thumbnailBitmap = ImageManager.cropCenterSquare(ImageManager
+                        .scaleBitmapToMinSideSize(rawBitmap, 80));
                 getImageView(R.id.image_user_pic).setImageBitmap(photoBitmap);
                 ((Button) getViewById(R.id.button_photo)).setText(R.string.button_remove_photo);
             } catch (Throwable e) {
@@ -136,8 +136,8 @@ public abstract class ProfileEditFragment extends AppFragment {
         user.setUsername(getEditText(R.id.input_username));
         user.setGroup(User.USER);
         user.setNameAndSurname(getEditText(R.id.input_name_and_surname));
-        user.setPhoto(ImageManager.getBase64StringFromBitmap(photoBitmap));
-        user.setThumbnail(ImageManager.getBase64StringFromBitmap(thumbnailBitmap));
+        user.setPhoto(ImageManager.getBase64StringFromBitmap(photoBitmap, 90));
+        user.setThumbnail(ImageManager.getBase64StringFromBitmap(thumbnailBitmap, 85));
         user.setPhone(getEditText(R.id.input_phone));
         user.setBirthDate(getLabelText(R.id.label_birth_date));
         user.setGender(isRadioButtonChecked(R.id.gender_male) ? User.MALE : User.FEMALE);

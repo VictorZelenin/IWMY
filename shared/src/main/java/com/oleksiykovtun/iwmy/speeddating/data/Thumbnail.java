@@ -32,7 +32,7 @@ public class Thumbnail implements Serializable {
     }
 
     private void generateId() {
-        this._id = getPath();
+        this._id = System.currentTimeMillis() + "_" + getPath();
     }
 
     public String getPath() {
