@@ -3,6 +3,7 @@
     package="com.oleksiykovtun.iwmy.speeddating">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name="com.oleksiykovtun.android.cooltools.CoolApplication"
