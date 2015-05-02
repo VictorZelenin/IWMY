@@ -22,6 +22,14 @@ import java.io.ByteArrayOutputStream;
  */
 public class ImageManager {
 
+    public static Bitmap scaleBitmapToMinSideSize(Bitmap inputBitmap, double minSideSize) {
+        double scaleFactor = Math.min(1,
+                minSideSize / Math.min(inputBitmap.getWidth(), inputBitmap.getHeight()));
+        return Bitmap.createScaledBitmap(inputBitmap,
+                (int)(inputBitmap.getWidth() * scaleFactor),
+                (int)(inputBitmap.getHeight() * scaleFactor), true);
+    }
+
     public static void setUserPhoto(ImageView userPicImageView, User user) {
         if (! user.getPhoto().isEmpty()) {
             Picasso.with(CoolApplication.getContext()).load(BuildConfig.BACKEND_URL + Api.IMAGES
@@ -67,15 +75,14 @@ public class ImageManager {
         }
     }
 
-    public static String getBase64StringFromImage(ImageView imageView) {
-        String base64photo = "";
-        Bitmap photoBitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
-        if (photoBitmap != null && photoBitmap.getHeight() > 10) {
+    public static String getBase64StringFromBitmap(Bitmap bitmap) {
+        String base64image = "";
+        if (bitmap != null && bitmap.getHeight() > 10) {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            photoBitmap.compress(Bitmap.CompressFormat.JPEG, 85, stream);
-            base64photo = Base64Converter.getBase64StringFromBytes(stream.toByteArray());
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, stream);
+            base64image = Base64Converter.getBase64StringFromBytes(stream.toByteArray());
         }
-        return base64photo;
+        return base64image;
     }
 
 }

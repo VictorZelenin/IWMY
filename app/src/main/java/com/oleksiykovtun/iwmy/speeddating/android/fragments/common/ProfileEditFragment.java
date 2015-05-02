@@ -1,8 +1,9 @@
 package com.oleksiykovtun.iwmy.speeddating.android.fragments.common;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Bundle;
+import android.net.Uri;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,9 @@ import com.oleksiykovtun.iwmy.speeddating.android.ImageManager;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
+import java.io.File;
+import java.io.FileOutputStream;
+
 
 /**
  * Created by alx on 2015-02-12.
@@ -22,6 +26,9 @@ import com.oleksiykovtun.iwmy.speeddating.data.User;
 public abstract class ProfileEditFragment extends AppFragment {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    private Uri cameraPhotoUri;
+    private Bitmap photoBitmap = null;
+    private Bitmap thumbnailBitmap = null;
 
     @Override
     public void onDateSet(String dateString) {
@@ -34,15 +41,24 @@ public abstract class ProfileEditFragment extends AppFragment {
             case R.id.button_photo:
                 if (((Button)view).getText().equals(getText(R.string.button_choose_photo))) {
                     // setting photo
-                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    try {
+                        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        final String tempPhotoName = "temp_photo.jpg";
+                        new File(getActivity().getFilesDir(), tempPhotoName).delete();
+                        getActivity().openFileOutput(tempPhotoName, Context.MODE_WORLD_WRITEABLE)
+                                .close(); // todo replace
+                        cameraPhotoUri = Uri.fromFile(new File(getActivity().getFilesDir(),
+                                tempPhotoName));
+                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, cameraPhotoUri);
                         startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-                    } else {
+                    } catch (Throwable e) {
                         showToast(R.string.message_camera_error);
                     }
                 } else {
                     // removing photo
                     getImageView(R.id.image_user_pic).setImageResource(R.drawable.no_photo_invisible);
+                    photoBitmap = null;
+                    thumbnailBitmap = null;
                     ((Button) getViewById(R.id.button_photo)).setText(R.string.button_choose_photo);
                 }
                 break;
@@ -55,12 +71,19 @@ public abstract class ProfileEditFragment extends AppFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == getActivity().RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            getImageView(R.id.image_user_pic).setImageBitmap(imageBitmap); // todo full sized photo
-            ((Button) getViewById(R.id.button_photo)).setText(R.string.button_remove_photo);
+            try {
+                Bitmap rawBitmap = MediaStore.Images.Media.getBitmap(
+                        getActivity().getContentResolver(), cameraPhotoUri);
+                photoBitmap = ImageManager.scaleBitmapToMinSideSize(rawBitmap, 640);
+                thumbnailBitmap = ImageManager.scaleBitmapToMinSideSize(rawBitmap, 64);
+                getImageView(R.id.image_user_pic).setImageBitmap(photoBitmap);
+                ((Button) getViewById(R.id.button_photo)).setText(R.string.button_remove_photo);
+            } catch (Throwable e) {
+                showToast(R.string.message_camera_error);
+            }
         }
     }
+
 
     protected boolean check(User user) {
         return check(user, true);
@@ -113,8 +136,8 @@ public abstract class ProfileEditFragment extends AppFragment {
         user.setUsername(getEditText(R.id.input_username));
         user.setGroup(User.USER);
         user.setNameAndSurname(getEditText(R.id.input_name_and_surname));
-        user.setPhoto(ImageManager.getBase64StringFromImage(getImageView(R.id.image_user_pic))); // todo separate
-        user.setThumbnail(ImageManager.getBase64StringFromImage(getImageView(R.id.image_user_pic))); // todo separate
+        user.setPhoto(ImageManager.getBase64StringFromBitmap(photoBitmap));
+        user.setThumbnail(ImageManager.getBase64StringFromBitmap(thumbnailBitmap));
         user.setPhone(getEditText(R.id.input_phone));
         user.setBirthDate(getLabelText(R.id.label_birth_date));
         user.setGender(isRadioButtonChecked(R.id.gender_male) ? User.MALE : User.FEMALE);
