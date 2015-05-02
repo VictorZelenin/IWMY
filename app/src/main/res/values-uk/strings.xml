@@ -161,5 +161,7 @@
     <string name="button_choose_photo">Оберіть фото</string>
     <string name="button_remove_photo">Вилучити це фото</string>
     <string name="label_photo">Фото</string>
-    <string name="message_camera_error">Помилка. Не вдалося отримати фото з камери.</string>
+    <string name="message_photo_getting_error">Помилка. Не вдалося отримати фото.</string>
+    <string name="menu_from_camera">З камери</string>
+    <string name="menu_from_gallery">З галереї</string>
 </resources>
