@@ -68,7 +68,7 @@ public class QuestionnaireListFragment extends AppFragment {
 
         selectedCountMale = 0;
         selectedCountFemale = 0;
-        post(Api.USERS + Api.GET_FOR_EVENT, User[].class, event);
+        post(Api.USERS + Api.GET_FOR_EVENT_LOCK, User[].class, event);
 
         return view;
     }
@@ -76,7 +76,7 @@ public class QuestionnaireListFragment extends AppFragment {
     @Override
     public void onPostReceive(String postTag, List response) {
         switch (postTag) {
-            case Api.USERS + Api.GET_FOR_EVENT:
+            case Api.USERS + Api.GET_FOR_EVENT_LOCK:
                 userListGuys.clear();
                 userListLadies.clear();
                 for (User user : (List<User>) response) {

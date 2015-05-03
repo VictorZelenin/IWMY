@@ -98,6 +98,12 @@ public class UserRestService extends GeneralRestService {
         return users;
     }
 
+    @Path(Api.GET_FOR_EVENT_LOCK) @POST @Consumes(JSON) @Produces(JSON)
+    public static List<User> getForEventLock(List<Event> wildcardEvents) {
+        EventRestService.lock(wildcardEvents);
+        return getForEvent(wildcardEvents);
+    }
+
     @Path(Api.GET) @POST @Consumes(JSON) @Produces(JSON)
     public static List<User> get(List<User> wildcardUsers) {
         Set<User> users = new TreeSet<>();

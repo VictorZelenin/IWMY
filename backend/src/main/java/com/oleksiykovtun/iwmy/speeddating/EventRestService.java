@@ -145,6 +145,7 @@ public class EventRestService extends GeneralRestService {
         List<Event> fullUnlockedEvents = EventRestService.getForTime(wildcardEvents);
         for (Event fullUnlockedEvent : fullUnlockedEvents) {
             fullUnlockedEvent.setMaxRatingsPerUser("0");
+            fullUnlockedEvent.setAllowSendingRatings("false");
         }
         return EventRestService.put(fullUnlockedEvents);
     }

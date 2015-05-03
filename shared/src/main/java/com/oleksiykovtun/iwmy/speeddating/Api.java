@@ -16,6 +16,7 @@ public class Api {
     public static final String DEBUG_DELETE = "debug/delete";
     public static final String GET_LOGIN = "get/login";
     public static final String GET_FOR_EVENT = "get/for/event";
+    public static final String GET_FOR_EVENT_LOCK = "get/for/event/lock";
     public static final String GET_FOR_EVENT_ACTIVE = "get/for/event/active";
     public static final String GET_FOR_EVENT_ACTIVE_RESET = "get/for/event/active/reset";
     public static final String REMOVE_ATTENDANCE = "remove/attendance";
