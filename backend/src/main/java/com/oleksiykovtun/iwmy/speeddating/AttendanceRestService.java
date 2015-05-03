@@ -56,6 +56,19 @@ public class AttendanceRestService extends GeneralRestService {
         return attendances;
     }
 
+    public static List<Attendance> getActive(List<Attendance> wildcardAttendances) {
+        List<Attendance> attendances = new ArrayList<>();
+        if (wildcardAttendances.size() == 1) {
+            Attendance wildcardAttendance = wildcardAttendances.get(0);
+            attendances.addAll(ObjectifyService.ofy().load().type(Attendance.class)
+                    .filter("eventOrganizerEmail", wildcardAttendance.getEventOrganizerEmail())
+                    .filter("eventTime", wildcardAttendance.getEventTime())
+                    .filter("userEmail", wildcardAttendance.getUserEmail())
+                    .filter("active", "true").list());
+        }
+        return attendances;
+    }
+
     @Path(Api.GET_FOR_EVENT_ACTIVE_CHECK_VOTED) @POST @Consumes(JSON) @Produces(JSON)
     public static List<Attendance> getForEventActiveCheckVoted(List<Event> wildcardEvents) {
         Set<Attendance> attendances = new TreeSet<>();

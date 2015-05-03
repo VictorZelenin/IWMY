@@ -53,6 +53,27 @@ public class EventRestService extends GeneralRestService {
         return events;
     }
 
+    @Path(Api.GET_FOR_ATTENDANCE_ACTIVE) @POST @Consumes(JSON) @Produces(JSON)
+    public static List getForAttendanceActive(List<Attendance> wildcardAttendances) {
+        // getting active user attendance
+        List<Attendance> activeAttendances = AttendanceRestService.getActive(wildcardAttendances);
+        // then getting events for active attendances
+        List<Event> wildcardUserEvents = new ArrayList<>();
+        for (Attendance activeAttendance : activeAttendances) {
+            wildcardUserEvents.add(new Event(activeAttendance.getEventOrganizerEmail(),
+                    activeAttendance.getEventTime(), "", "", "", "", "", "", ""));
+        }
+        List<Event> activeEvents = EventRestService.getForTime(wildcardUserEvents);
+        // finally, getting only started events
+        List<Event> startedActiveEvents = new ArrayList<>();
+        for (Event event : activeEvents) {
+            if (! event.getMaxRatingsPerUser().equals("0")) {
+                startedActiveEvents.add(event);
+            }
+        }
+        return startedActiveEvents;
+    }
+
     @Path(Api.GET_FOR_USER) @POST @Consumes(JSON) @Produces(JSON)
     public static List getForUser(List<User> wildcardUsers) {
         List<Attendance> userAttendances = AttendanceRestService.getForUser(wildcardUsers);

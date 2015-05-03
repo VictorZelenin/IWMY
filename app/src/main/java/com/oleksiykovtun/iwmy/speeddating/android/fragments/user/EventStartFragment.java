@@ -8,8 +8,10 @@ import android.view.ViewGroup;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
+import com.oleksiykovtun.iwmy.speeddating.android.Account;
 import com.oleksiykovtun.iwmy.speeddating.android.ImageManager;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
+import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 
 import java.util.List;
@@ -56,29 +58,20 @@ public class EventStartFragment extends AppFragment {
     @Override
     public void onPostReceive(String postTag, List response) {
         switch (postTag) {
-            case Api.EVENTS + Api.GET_FOR_TIME:
+            case Api.EVENTS + Api.GET_FOR_ATTENDANCE_ACTIVE:
                 if (! response.isEmpty()) {
-                    Event pendingEvent = ((List<Event>) response).get(0);
-                    event = pendingEvent; // new event has "unlocked" voting
-                    String pendingEventMaxRatings = pendingEvent.getMaxRatingsPerUser();
-                    if (! pendingEventMaxRatings.equals("0")
-                            && ! pendingEventMaxRatings.equals("null")) {
-                        post(Api.EVENTS + Api.PUT, Event[].class, pendingEvent);
-                    }
+                    setText(R.id.button_start, "" + getText(R.string.button_start));
+                    setButtonEnabled(R.id.button_start, true);
                 }
                 break;
-            case Api.EVENTS + Api.PUT:
-                setText(R.id.button_start, "" + getText(R.string.button_start));
-                setButtonEnabled(R.id.button_start, true);
-                break;
         }
-
     }
 
     @Override
     protected void onTimerTick() {
         // checking until this event is started by organizer
-        post(Api.EVENTS + Api.GET_FOR_TIME, Event[].class, event);
+        post(Api.EVENTS + Api.GET_FOR_ATTENDANCE_ACTIVE, Event[].class,
+                new Attendance(Account.getUser(), event));
     }
 
     @Override
