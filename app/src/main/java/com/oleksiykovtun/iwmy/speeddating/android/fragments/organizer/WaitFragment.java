@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewManager;
 
-import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.android.cooltools.CoolPagerAdapter;
 import com.oleksiykovtun.iwmy.speeddating.Api;
@@ -66,7 +65,7 @@ public class WaitFragment extends AppFragment {
         pager.setAdapter(new CoolPagerAdapter(this,
                 R.id.page_users_guys, R.id.page_users_ladies));
 
-        post(Api.USERS + Api.GET_FOR_EVENT_ACTIVE, User[].class, event);
+        post(Api.EVENTS + Api.GET_FOR_TIME, Event[].class, event);
 
         return view;
     }
@@ -85,6 +84,13 @@ public class WaitFragment extends AppFragment {
     @Override
     public void onPostReceive(String postTag, List response) {
         switch (postTag) {
+            case Api.EVENTS + Api.GET_FOR_TIME:
+                if (response.size() > 0) {
+                    event = (Event) response.get(0);
+                    updateUserRatingsAllowButton();
+                    post(Api.USERS + Api.GET_FOR_EVENT_ACTIVE, User[].class, event);
+                }
+                break;
             case Api.USERS + Api.GET_FOR_EVENT_ACTIVE:
                 if (response.size() > 0) {
                     userListGuys.clear();
@@ -116,8 +122,10 @@ public class WaitFragment extends AppFragment {
                 }
                 break;
             case Api.EVENTS + Api.SET_USER_RATINGS_ALLOW:
-                ((ViewManager)getViewById(R.id.button_allow_users_send_ratings).getParent())
-                        .removeView(getViewById(R.id.button_allow_users_send_ratings));
+                if (response.size() == 1) {
+                    event = (Event) response.get(0); // already allows user ratings
+                    updateUserRatingsAllowButton();
+                }
                 break;
         }
     }
@@ -152,7 +160,7 @@ public class WaitFragment extends AppFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_allow_users_send_ratings:
-                post(Api.EVENTS + Api.SET_USER_RATINGS_ALLOW, User[].class, event);
+                post(Api.EVENTS + Api.SET_USER_RATINGS_ALLOW, Event[].class, event);
                 break;
         }
     }
@@ -162,6 +170,14 @@ public class WaitFragment extends AppFragment {
         super.onResume();
         if (usersReceived) {
             startTimer();
+        }
+    }
+
+    private void updateUserRatingsAllowButton() {
+        if (event.getAllowSendingRatings().equals("true")
+                && getViewById(R.id.button_allow_users_send_ratings) != null) {
+            ((ViewManager) getViewById(R.id.button_allow_users_send_ratings).getParent())
+                    .removeView(getViewById(R.id.button_allow_users_send_ratings));
         }
     }
 

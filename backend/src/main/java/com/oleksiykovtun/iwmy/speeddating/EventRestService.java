@@ -153,7 +153,7 @@ public class EventRestService extends GeneralRestService {
 
     @Path(Api.SET_USER_RATINGS_ALLOW) @POST @Consumes(JSON) @Produces(JSON)
     public List setUserRatingsAllow(List<Event> wildcardEvents) {
-        List<Event> events = EventRestService.get(wildcardEvents);
+        List<Event> events = EventRestService.getForTime(wildcardEvents);
         for (Event event : events) {
             event.setAllowSendingRatings("true");
         }

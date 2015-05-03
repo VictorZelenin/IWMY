@@ -160,6 +160,7 @@ public class QuestionnaireListFragment extends AppFragment {
                     if (selectedCountMale > 0 && selectedCountMale == selectedCountFemale) {
                         event.setMaxRatingsPerUser(""
                                 + CoolApplication.readPreferences(SettingsFragment.MAX_RATINGS, 1));
+                        event.setAllowSendingRatings("false");
                         post(Api.EVENTS + Api.PUT, Event[].class, event); // "unlocking" the event
                     } else {
                         showToastLong(R.string.message_select_equal);
