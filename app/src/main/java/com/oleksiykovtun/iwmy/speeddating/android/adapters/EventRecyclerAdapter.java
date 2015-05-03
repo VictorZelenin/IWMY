@@ -31,7 +31,7 @@ public class EventRecyclerAdapter extends CoolRecyclerAdapter {
             super(view);
             placeTextView = (TextView) view.findViewById(R.id.label_event_organizer_and_place);
             timeTextView = (TextView) view.findViewById(R.id.label_event_time);
-            photoImageView = (ImageView) view.findViewById(R.id.image_event_pic);
+            photoImageView = (ImageView) view.findViewById(R.id.photo);
         }
 
     }

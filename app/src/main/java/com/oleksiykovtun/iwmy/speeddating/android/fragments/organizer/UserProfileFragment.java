@@ -38,7 +38,7 @@ public class UserProfileFragment extends AppFragment {
                     .removeView(getViewById(R.id.button_options));
         }
 
-        ImageManager.setUserPhoto(getImageView(R.id.image_user_pic), user.getGender(),
+        ImageManager.setUserPhoto(getImageView(R.id.photo), user.getGender(),
                 user.getPhoto());
         setText(R.id.label_user, R.string.toolbar_user, "- " + user.getUsername());
         setText(R.id.label_name_and_surname,

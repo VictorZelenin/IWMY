@@ -27,7 +27,7 @@ public class UserProfileCoupleFragment extends AppFragment {
 
         coupleUser = (User) getAttachment();
 
-        ImageManager.setUserPhoto(getImageView(R.id.image_user_pic), coupleUser.getGender(),
+        ImageManager.setUserPhoto(getImageView(R.id.photo), coupleUser.getGender(),
                 coupleUser.getPhoto());
         setText(R.id.label_couple, coupleUser.getNameAndSurname());
         setText(R.id.label_name_and_surname, R.string.label_name_and_surname,

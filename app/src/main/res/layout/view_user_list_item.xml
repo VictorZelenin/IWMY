@@ -7,7 +7,7 @@
     android:longClickable="true">
 
     <ImageView
-        android:id="@+id/image_user_pic"
+        android:id="@+id/photo"
         android:src="@drawable/no_photo_man"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"

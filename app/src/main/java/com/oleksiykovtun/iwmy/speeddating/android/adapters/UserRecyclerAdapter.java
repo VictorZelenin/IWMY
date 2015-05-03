@@ -42,7 +42,7 @@ public class UserRecyclerAdapter extends CoolRecyclerAdapter {
             nameTextView = (TextView) view.findViewById(R.id.label_user_name);
             ageTextView = (TextView) view.findViewById(R.id.label_user_age);
             locationTextView = (TextView) view.findViewById(R.id.label_user_location);
-            photoImageView = (ImageView) view.findViewById(R.id.image_user_pic);
+            photoImageView = (ImageView) view.findViewById(R.id.photo);
         }
 
     }

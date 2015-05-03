@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
@@ -39,7 +38,7 @@ public class EventAttendFragment extends AppFragment {
             setButtonEnabled(R.id.button_attend, false);
         }
 
-        ImageManager.setEventPhoto(getImageView(R.id.image_event_pic), event.getPhoto());
+        ImageManager.setEventPhoto(getImageView(R.id.photo), event.getPhoto());
         setText(R.id.label_organizer, event.getPlace());
         setText(R.id.label_event_address,
                 R.string.label_event_address, event.getStreetAddress());
