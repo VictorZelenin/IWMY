@@ -53,6 +53,8 @@ public abstract class EventEditFragment extends EditFragment {
         if (! event.getPhoto().isEmpty()) {
             ImageManager.setEventPhoto(getImageView(R.id.photo), event.getPhoto());
             ((Button) getViewById(R.id.button_photo)).setText(R.string.button_remove_photo);
+            defaultPhotoLink = event.getPhoto();
+            defaultThumbnailLink = event.getThumbnail();
         }
     }
 
@@ -65,8 +67,10 @@ public abstract class EventEditFragment extends EditFragment {
         String time = getLabelText(R.id.label_event_date) + " "
                 + getLabelText(R.id.label_event_time);
         String place = getEditText(R.id.input_event_place);
-        String photo = ImageManager.getBase64StringFromBitmap(photoBitmap, 90);
-        String thumbnail = ImageManager.getBase64StringFromBitmap(thumbnailBitmap, 85);
+        String photo = photoChanged
+                ? ImageManager.getBase64StringFromBitmap(photoBitmap, 90) : defaultPhotoLink;
+        String thumbnail = photoChanged
+                ? ImageManager.getBase64StringFromBitmap(thumbnailBitmap, 85) : defaultThumbnailLink;
         String streetAddress = getEditText(R.id.input_event_address);
         String freePlaces = getEditText(R.id.input_event_places);
         String cost = getEditText(R.id.input_event_cost);

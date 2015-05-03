@@ -196,14 +196,18 @@ public class UserRestService extends GeneralRestService {
     }
 
     /**
-     * Saving images separately and replacing them with links
+     * Saving images separately and replacing them with links if they are not already links
      * @param users users with base64 image data
      * @return users with image links
      */
     private static List<User> savePhotos(List<User> users) {
         for (User user : users) {
-            user.setPhoto(ImageRestService.put(user.getPhoto()));
-            user.setThumbnail(ImageRestService.putThumbnail(user.getThumbnail()));
+            if (! user.getPhoto().startsWith("_")) {
+                user.setPhoto(ImageRestService.put(user.getPhoto()));
+            }
+            if (! user.getThumbnail().startsWith("_")) {
+                user.setThumbnail(ImageRestService.putThumbnail(user.getThumbnail()));
+            }
         }
         return users;
     }

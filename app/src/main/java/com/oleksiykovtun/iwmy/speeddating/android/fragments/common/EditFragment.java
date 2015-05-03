@@ -22,12 +22,15 @@ import java.io.File;
  */
 public abstract class EditFragment extends AppFragment {
 
-    protected final int REQUEST_IMAGE_CAPTURE = 1;
-    protected final int REQUEST_IMAGE_FROM_GALLERY = 2;
+    private final int REQUEST_IMAGE_CAPTURE = 1;
+    private final int REQUEST_IMAGE_FROM_GALLERY = 2;
+    private Uri photoUri;
 
-    protected Uri photoUri;
     protected Bitmap photoBitmap = null;
     protected Bitmap thumbnailBitmap = null;
+    protected boolean photoChanged = false;
+    protected String defaultPhotoLink = "";
+    protected String defaultThumbnailLink = "";
 
     @Override
     public void onClick(View view) {
@@ -41,6 +44,7 @@ public abstract class EditFragment extends AppFragment {
                     getImageView(R.id.photo).setImageResource(R.drawable.no_photo_invisible);
                     photoBitmap = null;
                     thumbnailBitmap = null;
+                    photoChanged = true;
                     ((Button) getViewById(R.id.button_photo)).setText(R.string.button_choose_photo);
                 }
                 break;
@@ -71,6 +75,7 @@ public abstract class EditFragment extends AppFragment {
                         getImageView(R.id.photo).setImageBitmap(photoBitmap);
                     }
                 });
+                photoChanged = true;
             } catch (Throwable e) {
                 showToast(R.string.message_photo_getting_error);
             }

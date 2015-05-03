@@ -28,7 +28,8 @@ public class ImageRestService extends GeneralRestService {
     public static String putThumbnail(String base64data) {
         String path = "";
         if (base64data.length() > 0) {
-            path += Math.abs(new Random(System.currentTimeMillis()).nextLong());
+            path = "_" + Math.abs(new Random(System.currentTimeMillis()).nextLong())
+                    + base64data.length();
             byte[] binaryData = Base64Converter.getBytesFromBase64String(base64data);
             Thumbnail thumbnail = new Thumbnail(path, binaryData);
             ObjectifyService.ofy().save().entity(thumbnail).now();
@@ -44,7 +45,7 @@ public class ImageRestService extends GeneralRestService {
     public static String put(String base64data) {
         String path = "";
         if (base64data.length() > 0) {
-            path = Math.abs(new Random(System.currentTimeMillis()).nextLong()) + ""
+            path = "_" + Math.abs(new Random(System.currentTimeMillis()).nextLong())
                     + base64data.length();
             byte[] binaryData = Base64Converter.getBytesFromBase64String(base64data);
             Image image = new Image(path, binaryData);

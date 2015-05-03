@@ -99,14 +99,18 @@ public class EventRestService extends GeneralRestService {
     }
 
     /**
-     * Saving images separately and replacing them with links
+     * Saving images separately and replacing them with links if they are not already links
      * @param events events with base64 image data
      * @return events with image links
      */
     private static List<Event> savePhotos(List<Event> events) {
         for (Event event : events) {
-            event.setPhoto(ImageRestService.put(event.getPhoto()));
-            event.setThumbnail(ImageRestService.putThumbnail(event.getThumbnail()));
+            if (! event.getPhoto().startsWith("_")) {
+                event.setPhoto(ImageRestService.put(event.getPhoto()));
+            }
+            if (! event.getThumbnail().startsWith("_")) {
+                event.setThumbnail(ImageRestService.putThumbnail(event.getThumbnail()));
+            }
         }
         return events;
     }

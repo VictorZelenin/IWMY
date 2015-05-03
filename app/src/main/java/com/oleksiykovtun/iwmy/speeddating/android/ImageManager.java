@@ -2,11 +2,9 @@ package com.oleksiykovtun.iwmy.speeddating.android;
 
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.oleksiykovtun.android.cooltools.CoolApplication;
-import com.oleksiykovtun.android.cooltools.CoolFormatter;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.Base64Converter;
 import com.oleksiykovtun.iwmy.speeddating.BuildConfig;
@@ -99,16 +97,6 @@ public class ImageManager {
     private static void setEventDefaultImage(ImageView eventPicImageView) {
         eventPicImageView.setImageDrawable(CoolApplication.getContext().getResources()
                 .getDrawable(R.drawable.no_photo));
-    }
-
-    public static void setImageFromBase64String(ImageView imageView, String base64String) {
-        try {
-            if (!base64String.isEmpty()) {
-                imageView.setImageBitmap(CoolFormatter.getImageBitmap(base64String));
-            }
-        } catch (Throwable e) {
-            Log.e("IWMY", "Image setting failed", e);
-        }
     }
 
     public static String getBase64StringFromBitmap(Bitmap bitmap, int quality) {

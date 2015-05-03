@@ -23,6 +23,7 @@ public abstract class ProfileEditFragment extends EditFragment {
 
     @Override
     public void onClick(View view) {
+        super.onClick(view);
         switch (view.getId()) {
             case R.id.button_select_date:
                 openDatePicker();
@@ -65,6 +66,8 @@ public abstract class ProfileEditFragment extends EditFragment {
             ImageManager.setUserPhoto(getImageView(R.id.photo), user.getGender(),
                     user.getPhoto());
             ((Button) getViewById(R.id.button_photo)).setText(R.string.button_remove_photo);
+            defaultPhotoLink = user.getPhoto();
+            defaultThumbnailLink = user.getThumbnail();
         }
     }
 
@@ -83,8 +86,10 @@ public abstract class ProfileEditFragment extends EditFragment {
         user.setUsername(getEditText(R.id.input_username));
         user.setGroup(User.USER);
         user.setNameAndSurname(getEditText(R.id.input_name_and_surname));
-        user.setPhoto(ImageManager.getBase64StringFromBitmap(photoBitmap, 90));
-        user.setThumbnail(ImageManager.getBase64StringFromBitmap(thumbnailBitmap, 85));
+        user.setPhoto(photoChanged
+                ? ImageManager.getBase64StringFromBitmap(photoBitmap, 90) : defaultPhotoLink);
+        user.setThumbnail(photoChanged
+                ? ImageManager.getBase64StringFromBitmap(thumbnailBitmap, 85) : defaultThumbnailLink);
         user.setPhone(getEditText(R.id.input_phone));
         user.setBirthDate(getLabelText(R.id.label_birth_date));
         user.setGender(isRadioButtonChecked(R.id.gender_male) ? User.MALE : User.FEMALE);
