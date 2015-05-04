@@ -1,12 +1,12 @@
 <resources>
     <dimen name="margin">10dp</dimen>
-    <dimen name="start_screen_button_margin">25dp</dimen>
+    <dimen name="start_screen_margin">30dp</dimen>
     <dimen name="label_margin">10dp</dimen>
 
     <dimen name="image_preview_size">50dp</dimen>
     <dimen name="toolbar_height">60dp</dimen>
 
-    <dimen name="start_title_text_size">50sp</dimen>
+    <dimen name="start_title_text_size">30sp</dimen>
     <dimen name="toolbar_text_size">25sp</dimen>
     <dimen name="label_text_size">20sp</dimen>
 

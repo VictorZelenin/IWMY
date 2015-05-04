@@ -18,26 +18,31 @@
 
     <ImageView
         android:src="@drawable/logo_big"
+        android:background="@drawable/logo_big_gradient"
+        android:paddingLeft="@dimen/start_screen_margin"
+        android:paddingRight="@dimen/start_screen_margin"
+        android:paddingTop="@dimen/start_screen_margin"
+        android:paddingBottom="@dimen/start_screen_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/button_login"
         android:text="@string/button_login"
-        android:layout_marginLeft="@dimen/start_screen_button_margin"
-        android:layout_marginStart="@dimen/start_screen_button_margin"
-        android:layout_marginRight="@dimen/start_screen_button_margin"
-        android:layout_marginEnd="@dimen/start_screen_button_margin"
+        android:layout_marginLeft="@dimen/start_screen_margin"
+        android:layout_marginStart="@dimen/start_screen_margin"
+        android:layout_marginRight="@dimen/start_screen_margin"
+        android:layout_marginEnd="@dimen/start_screen_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/button_register"
         android:text="@string/button_register"
-        android:layout_marginLeft="@dimen/start_screen_button_margin"
-        android:layout_marginStart="@dimen/start_screen_button_margin"
-        android:layout_marginRight="@dimen/start_screen_button_margin"
-        android:layout_marginEnd="@dimen/start_screen_button_margin"
+        android:layout_marginLeft="@dimen/start_screen_margin"
+        android:layout_marginStart="@dimen/start_screen_margin"
+        android:layout_marginRight="@dimen/start_screen_margin"
+        android:layout_marginEnd="@dimen/start_screen_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -81,14 +86,23 @@
 
     </LinearLayout-->
 
+    <!-- spacer -->
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="13dp"
+        android:enabled="false"
+        android:layout_marginLeft="@dimen/start_screen_margin"
+        android:layout_marginStart="@dimen/start_screen_margin"
+        android:layout_marginRight="@dimen/start_screen_margin"
+        android:layout_marginEnd="@dimen/start_screen_margin" />
+
     <Button
         android:id="@+id/button_for_organizers"
         android:text="@string/button_for_organizers"
-        android:layout_marginTop="@dimen/margin"
-        android:layout_marginLeft="@dimen/start_screen_button_margin"
-        android:layout_marginStart="@dimen/start_screen_button_margin"
-        android:layout_marginRight="@dimen/start_screen_button_margin"
-        android:layout_marginEnd="@dimen/start_screen_button_margin"
+        android:layout_marginLeft="@dimen/start_screen_margin"
+        android:layout_marginStart="@dimen/start_screen_margin"
+        android:layout_marginRight="@dimen/start_screen_margin"
+        android:layout_marginEnd="@dimen/start_screen_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
