@@ -36,9 +36,9 @@ public class WaitFragment extends AppFragment {
     private boolean usersReceived = false;
 
     private UserRecyclerAdapter userRecyclerAdapterGuys
-            = new UserRecyclerAdapter(userListGuys, Color.BLUE);
+            = new UserRecyclerAdapter(userListGuys, Color.GREEN);
     private UserRecyclerAdapter userRecyclerAdapterLadies
-            = new UserRecyclerAdapter(userListLadies, Color.BLUE);
+            = new UserRecyclerAdapter(userListLadies, Color.GREEN);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
