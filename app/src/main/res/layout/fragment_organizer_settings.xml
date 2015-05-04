@@ -22,12 +22,6 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <Button
-        android:id="@+id/button_logout"
-        android:text="@string/button_logout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
     <TextView
         android:id="@+id/label_max_ratings"
         android:text="@string/label_name_and_surname"
@@ -40,5 +34,11 @@
         android:max="19"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"  />
+
+    <Button
+        android:id="@+id/button_logout"
+        android:text="@string/button_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

@@ -23,15 +23,15 @@
     </android.support.v7.widget.Toolbar>
 
     <Button
-        android:id="@+id/button_logout"
-        android:text="@string/button_logout"
+        android:id="@+id/button_edit_my_profile"
+        android:text="@string/button_edit_my_profile"
+        android:paddingTop="@dimen/margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/button_edit_my_profile"
-        android:text="@string/button_edit_my_profile"
-        android:paddingTop="@dimen/margin"
+        android:id="@+id/button_logout"
+        android:text="@string/button_logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
