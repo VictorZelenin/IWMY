@@ -34,7 +34,7 @@ public class CoupleUserListFragment extends AppFragment {
     private Event event = null;
 
     private UserRecyclerAdapter coupleUserRecyclerAdapter
-            = new UserRecyclerAdapter(coupleUserList);
+            = new UserRecyclerAdapter(coupleUserList, false);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

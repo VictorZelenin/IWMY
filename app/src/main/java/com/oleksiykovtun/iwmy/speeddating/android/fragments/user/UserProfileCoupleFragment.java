@@ -36,8 +36,6 @@ public class UserProfileCoupleFragment extends AppFragment {
                 coupleUser.getEmail());
         setText(R.id.label_phone, R.string.label_phone,
                 coupleUser.getPhone());
-        setText(R.id.label_birth_date, R.string.label_birth_date,
-                coupleUser.getBirthDate());
         setText(R.id.label_gender, R.string.label_gender,
                 coupleUser.getGender());
         setText(R.id.label_orientation, R.string.label_orientation,
