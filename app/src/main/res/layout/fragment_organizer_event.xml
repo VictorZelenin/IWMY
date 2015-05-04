@@ -52,7 +52,7 @@
             <Button
                 android:id="@+id/button_edit_start"
                 android:text="@string/button_edit_start"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <TextView
@@ -100,7 +100,7 @@
             <Button
                 android:id="@+id/button_participants_list"
                 android:text="@string/button_participants_list"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>

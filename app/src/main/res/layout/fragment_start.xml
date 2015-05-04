@@ -24,13 +24,21 @@
     <Button
         android:id="@+id/button_login"
         android:text="@string/button_login"
-        android:layout_width="wrap_content"
+        android:layout_marginLeft="@dimen/start_screen_button_margin"
+        android:layout_marginStart="@dimen/start_screen_button_margin"
+        android:layout_marginRight="@dimen/start_screen_button_margin"
+        android:layout_marginEnd="@dimen/start_screen_button_margin"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/button_register"
         android:text="@string/button_register"
-        android:layout_width="wrap_content"
+        android:layout_marginLeft="@dimen/start_screen_button_margin"
+        android:layout_marginStart="@dimen/start_screen_button_margin"
+        android:layout_marginRight="@dimen/start_screen_button_margin"
+        android:layout_marginEnd="@dimen/start_screen_button_margin"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <!--LinearLayout todo social login
@@ -77,7 +85,11 @@
         android:id="@+id/button_for_organizers"
         android:text="@string/button_for_organizers"
         android:layout_marginTop="@dimen/margin"
-        android:layout_width="wrap_content"
+        android:layout_marginLeft="@dimen/start_screen_button_margin"
+        android:layout_marginStart="@dimen/start_screen_button_margin"
+        android:layout_marginRight="@dimen/start_screen_button_margin"
+        android:layout_marginEnd="@dimen/start_screen_button_margin"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
 </LinearLayout>
