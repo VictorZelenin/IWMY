@@ -64,8 +64,9 @@ public class UserRecyclerAdapter extends CoolRecyclerAdapter {
     public void onBindViewHolder(CoolRecyclerAdapter.ViewHolder holder, int position) {
         User user = (User) (dataSet.get(position));
         ((ViewHolder) holder).nameTextView.setText(user.getNameAndSurname());
-        ((View)(((ViewHolder) holder).nameTextView.getParent().getParent())).setBackgroundColor(
-                user.getIsChecked().equals("true") ? highlightColor : Color.TRANSPARENT);
+        ((View)(((ViewHolder) holder).nameTextView.getParent().getParent().getParent()))
+                .setBackgroundColor(user.getIsChecked().equals("true")
+                        ? highlightColor : Color.TRANSPARENT);
         ((ViewHolder) holder).ageTextView.setText(showAge
                 ? ", " + TimeConverter.getYearsFromDate(user.getBirthDate()) : "");
         ((ViewHolder) holder).locationTextView.setText(user.getLocation().isEmpty()
