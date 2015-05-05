@@ -24,11 +24,6 @@
 
         <ImageView
             android:src="@drawable/logo_big"
-            android:background="@drawable/logo_big_gradient"
-            android:paddingLeft="@dimen/start_screen_margin"
-            android:paddingRight="@dimen/start_screen_margin"
-            android:paddingTop="@dimen/start_screen_margin"
-            android:paddingBottom="@dimen/start_screen_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
