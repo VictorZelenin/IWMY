@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name" translatable="false">IWMY Speed Dating Developer</string>
+    <string name="app_title" translatable="false">Speed Dating Developer</string>
+
+    <color name="accent_color">#FF7755</color>
+    <color name="main_color">#FFCCAA</color>
+
+</resources>
