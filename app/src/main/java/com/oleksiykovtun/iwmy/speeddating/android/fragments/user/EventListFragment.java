@@ -75,7 +75,14 @@ public class EventListFragment extends AppFragment {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        CoolFragmentManager.showAtTop(new MyEventListFragment());
+        switch (item.getItemId()) {
+            case R.id.menu_my_events:
+                CoolFragmentManager.show(new MyEventListFragment(), null);
+                break;
+            case R.id.menu_all_events:
+                CoolFragmentManager.show(new EventListFragment(), null);
+                break;
+        }
         return true;
     }
 

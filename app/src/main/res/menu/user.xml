@@ -7,4 +7,9 @@
         android:title="@string/menu_my_events"
         app:showAsAction="never"/>
 
+    <item
+        android:id="@+id/menu_all_events"
+        android:title="@string/menu_all_events"
+        app:showAsAction="never"/>
+
 </menu>

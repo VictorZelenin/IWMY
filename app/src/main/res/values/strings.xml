@@ -162,6 +162,7 @@
     <string name="hint_search_email_name_username">Search email/name/username</string>
 
     <string name="menu_my_events">My events</string>
+    <string name="menu_all_events">All events</string>
     <string name="menu_edit">Edit</string>
     <string name="menu_from_camera">From camera</string>
     <string name="menu_from_gallery">From gallery</string>

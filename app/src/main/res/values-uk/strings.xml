@@ -166,4 +166,5 @@
     <string name="menu_from_gallery">З галереї</string>
     <string name="toolbar_editing_event">Зміна заходу</string>
     <string name="message_tap_rotate_photo">Щоб обертати фото, натисніть на нього</string>
+    <string name="menu_all_events">Усі заходи</string>
 </resources>
