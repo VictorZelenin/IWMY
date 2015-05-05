@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.android.cooltools.CoolPagerAdapter;
 import com.oleksiykovtun.iwmy.speeddating.Api;
@@ -69,7 +68,7 @@ public class ParticipantListFragment extends AppFragment {
         registerItemClickListener(userRecyclerAdapterLadies);
         userRecyclerViewLadies.setAdapter(userRecyclerAdapterLadies);
 
-        ViewPager pager = (ViewPager) view.findViewById(R.id.events_pager);
+        ViewPager pager = (ViewPager) view.findViewById(R.id.users_pager);
         pager.setAdapter(new CoolPagerAdapter(this,
                 R.id.page_users_guys, R.id.page_users_ladies));
 
@@ -87,8 +86,7 @@ public class ParticipantListFragment extends AppFragment {
                 userListLadies.add(user);
             }
         }
-        userRecyclerAdapterGuys.notifyDataSetChanged();
-        userRecyclerAdapterLadies.notifyDataSetChanged();
+        updateLists();
     }
 
     @Override
@@ -134,6 +132,18 @@ public class ParticipantListFragment extends AppFragment {
 
                 })
                 .create().show();
+    }
+
+    private void updateLists() {
+        userRecyclerAdapterGuys.notifyDataSetChanged();
+        getViewById(R.id.page_users_guys).setTag(getText(R.string.tab_guys)
+                + ((userListGuys.size() > 0) ? (" (" + userListGuys.size() + ")") : ""));
+
+        userRecyclerAdapterLadies.notifyDataSetChanged();
+        getViewById(R.id.page_users_ladies).setTag(getText(R.string.tab_ladies)
+                + ((userListLadies.size() > 0) ? (" (" + userListLadies.size() + ")") : ""));
+
+        ((ViewPager) getViewById(R.id.users_pager)).getAdapter().notifyDataSetChanged();
     }
 
 }

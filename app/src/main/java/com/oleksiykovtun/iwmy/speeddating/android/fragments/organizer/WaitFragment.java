@@ -60,7 +60,7 @@ public class WaitFragment extends AppFragment {
         registerItemClickListener(userRecyclerAdapterLadies);
         userRecyclerViewLadies.setAdapter(userRecyclerAdapterLadies);
 
-        ViewPager pager = (ViewPager) view.findViewById(R.id.events_pager);
+        ViewPager pager = (ViewPager) view.findViewById(R.id.users_pager);
         pager.setAdapter(new CoolPagerAdapter(this,
                 R.id.page_users_guys, R.id.page_users_ladies));
 
@@ -101,8 +101,7 @@ public class WaitFragment extends AppFragment {
                             userListLadies.add(user);
                         }
                     }
-                    userRecyclerAdapterGuys.notifyDataSetChanged();
-                    userRecyclerAdapterLadies.notifyDataSetChanged();
+                    updateLists();
                     usersReceived = true;
                     startTimer();
                 }
@@ -142,8 +141,31 @@ public class WaitFragment extends AppFragment {
                 user.setIsChecked("true");
             }
         }
+        updateLists();
+    }
+
+    private void updateLists() {
         userRecyclerAdapterGuys.notifyDataSetChanged();
+        int highlightedGuysCount = countHighlightedUsers(userListGuys);
+        getViewById(R.id.page_users_guys).setTag(getText(R.string.tab_guys)
+                + ((highlightedGuysCount > 0) ? (" (" + highlightedGuysCount + ")") : ""));
+
         userRecyclerAdapterLadies.notifyDataSetChanged();
+        int highlightedLadiesCount = countHighlightedUsers(userListLadies);
+        getViewById(R.id.page_users_ladies).setTag(getText(R.string.tab_ladies)
+                + ((highlightedLadiesCount > 0) ? (" (" + highlightedLadiesCount + ")") : ""));
+
+        ((ViewPager) getViewById(R.id.users_pager)).getAdapter().notifyDataSetChanged();
+    }
+
+    private int countHighlightedUsers(List<User> users) {
+        int highlightedUserCount = 0;
+        for (User user : users) {
+            if (user.getIsChecked().equals("true")) {
+                highlightedUserCount++;
+            }
+        }
+        return highlightedUserCount;
     }
 
     @Override

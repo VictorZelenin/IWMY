@@ -62,7 +62,7 @@ public class QuestionnaireListFragment extends AppFragment {
         registerItemClickListener(userRecyclerAdapterLadies);
         userRecyclerViewLadies.setAdapter(userRecyclerAdapterLadies);
 
-        ViewPager pager = (ViewPager) view.findViewById(R.id.events_pager);
+        ViewPager pager = (ViewPager) view.findViewById(R.id.users_pager);
         pager.setAdapter(new CoolPagerAdapter(this,
                 R.id.page_users_guys, R.id.page_users_ladies));
 
@@ -86,15 +86,14 @@ public class QuestionnaireListFragment extends AppFragment {
                         userListLadies.add(user);
                     }
                 }
-                userRecyclerAdapterGuys.notifyDataSetChanged();
-                userRecyclerAdapterLadies.notifyDataSetChanged();
+                updateLists();
                 post(Api.USERS + Api.GET_FOR_EVENT_ACTIVE, User[].class, event);
                 break;
             case Api.USERS + Api.GET_FOR_EVENT_ACTIVE:
                 for (User activeUser : (List<User>)response) {
                     highlightActiveUser(activeUser.getEmail());
                 }
-                updateToolbarTitle();
+                updateLists();
                 break;
             case Api.EVENTS + Api.PUT:
                 showToast(R.string.message_questionnaires_sent);
@@ -108,7 +107,7 @@ public class QuestionnaireListFragment extends AppFragment {
                         highlightInactiveUser(attendance.getUserEmail());
                     }
                 }
-                updateToolbarTitle();
+                updateLists();
                 break;
         }
     }
@@ -128,8 +127,6 @@ public class QuestionnaireListFragment extends AppFragment {
                 selectedCountFemale++;
             }
         }
-        userRecyclerAdapterGuys.notifyDataSetChanged();
-        userRecyclerAdapterLadies.notifyDataSetChanged();
     }
 
     private void highlightInactiveUser(String inactiveUserEmail) {
@@ -147,8 +144,6 @@ public class QuestionnaireListFragment extends AppFragment {
                 selectedCountFemale--;
             }
         }
-        userRecyclerAdapterGuys.notifyDataSetChanged();
-        userRecyclerAdapterLadies.notifyDataSetChanged();
     }
 
 
@@ -177,6 +172,20 @@ public class QuestionnaireListFragment extends AppFragment {
             post(Api.ATTENDANCES + Api.TOGGLE_ACTIVE, Attendance[].class,
                     new Attendance((User) objectAtClicked, event));
         }
+    }
+
+    private void updateLists() {
+        userRecyclerAdapterGuys.notifyDataSetChanged();
+        getViewById(R.id.page_users_guys).setTag(getText(R.string.tab_guys)
+                + ((selectedCountMale > 0) ? (" (" + selectedCountMale + ")") : ""));
+
+        userRecyclerAdapterLadies.notifyDataSetChanged();
+        getViewById(R.id.page_users_ladies).setTag(getText(R.string.tab_ladies)
+                + ((selectedCountFemale > 0) ? (" (" + selectedCountFemale + ")") : ""));
+
+        ((ViewPager) getViewById(R.id.users_pager)).getAdapter().notifyDataSetChanged();
+
+        updateToolbarTitle();
     }
 
     private void updateToolbarTitle() {
