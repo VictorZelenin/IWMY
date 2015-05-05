@@ -3,6 +3,10 @@
     <dimen name="start_screen_margin">30dp</dimen>
     <dimen name="label_margin">10dp</dimen>
 
+    <dimen name="start_screen_spacer_vertical_margin">6dp</dimen>
+    <dimen name="start_screen_spacer_horizontal_margin">36dp</dimen>
+    <dimen name="start_screen_spacer_height">1dp</dimen>
+
     <dimen name="image_preview_size">50dp</dimen>
     <dimen name="toolbar_height">60dp</dimen>
     <dimen name="list_spacer_height">2dp</dimen>

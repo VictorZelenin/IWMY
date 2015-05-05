@@ -1,7 +1,6 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@color/accent_color"
     android:orientation="vertical"
-    android:gravity="center"
     android:paddingLeft="@dimen/margin"
     android:paddingRight="@dimen/margin"
     android:paddingTop="@dimen/margin"
@@ -9,101 +8,82 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:text="@string/label_start_title"
-        android:textSize="@dimen/start_title_text_size"
-        android:gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <ImageView
-        android:src="@drawable/logo_big"
-        android:background="@drawable/logo_big_gradient"
-        android:paddingLeft="@dimen/start_screen_margin"
-        android:paddingRight="@dimen/start_screen_margin"
-        android:paddingTop="@dimen/start_screen_margin"
-        android:paddingBottom="@dimen/start_screen_margin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/button_login"
-        android:text="@string/button_login"
-        android:layout_marginLeft="@dimen/start_screen_margin"
-        android:layout_marginStart="@dimen/start_screen_margin"
-        android:layout_marginRight="@dimen/start_screen_margin"
-        android:layout_marginEnd="@dimen/start_screen_margin"
+    <LinearLayout
+        android:gravity="center"
+        android:layout_above="@+id/buttons"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="fill_parent">
 
-    <Button
-        android:id="@+id/button_register"
-        android:text="@string/button_register"
-        android:layout_marginLeft="@dimen/start_screen_margin"
-        android:layout_marginStart="@dimen/start_screen_margin"
-        android:layout_marginRight="@dimen/start_screen_margin"
-        android:layout_marginEnd="@dimen/start_screen_margin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <!--LinearLayout todo social login
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <ImageButton
-            android:id="@+id/button_vk"
-            android:src="@drawable/social_vk"
-            android:background="@android:color/transparent"
-            android:paddingLeft="@dimen/margin"
-            android:paddingRight="@dimen/margin"
-            android:paddingTop="@dimen/margin"
-            android:paddingBottom="@dimen/margin"
+        <TextView
+            android:text="@string/label_start_title"
+            android:textSize="@dimen/start_title_text_size"
+            android:gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <ImageButton
-            android:id="@+id/button_facebook"
-            android:src="@drawable/social_facebook"
-            android:background="@android:color/transparent"
-            android:paddingLeft="@dimen/margin"
-            android:paddingRight="@dimen/margin"
-            android:paddingTop="@dimen/margin"
-            android:paddingBottom="@dimen/margin"
+        <ImageView
+            android:src="@drawable/logo_big"
+            android:background="@drawable/logo_big_gradient"
+            android:paddingLeft="@dimen/start_screen_margin"
+            android:paddingRight="@dimen/start_screen_margin"
+            android:paddingTop="@dimen/start_screen_margin"
+            android:paddingBottom="@dimen/start_screen_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <ImageButton
-            android:id="@+id/button_google_plus"
-            android:src="@drawable/social_google_plus"
-            android:background="@android:color/transparent"
-            android:paddingLeft="@dimen/margin"
-            android:paddingRight="@dimen/margin"
-            android:paddingTop="@dimen/margin"
-            android:paddingBottom="@dimen/margin"
-            android:layout_width="wrap_content"
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" >
+
+        <Button
+            android:id="@+id/button_login"
+            android:text="@string/button_login"
+            android:layout_marginLeft="@dimen/start_screen_margin"
+            android:layout_marginStart="@dimen/start_screen_margin"
+            android:layout_marginRight="@dimen/start_screen_margin"
+            android:layout_marginEnd="@dimen/start_screen_margin"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-    </LinearLayout-->
+        <Button
+            android:id="@+id/button_register"
+            android:text="@string/button_register"
+            android:layout_marginLeft="@dimen/start_screen_margin"
+            android:layout_marginStart="@dimen/start_screen_margin"
+            android:layout_marginRight="@dimen/start_screen_margin"
+            android:layout_marginEnd="@dimen/start_screen_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <!-- spacer -->
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="13dp"
-        android:enabled="false"
-        android:layout_marginLeft="@dimen/start_screen_margin"
-        android:layout_marginStart="@dimen/start_screen_margin"
-        android:layout_marginRight="@dimen/start_screen_margin"
-        android:layout_marginEnd="@dimen/start_screen_margin" />
+        <!-- spacer -->
+        <LinearLayout
+            android:background="@android:color/black"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/list_spacer_height"
+            android:layout_marginTop="@dimen/start_screen_spacer_vertical_margin"
+            android:layout_marginBottom="@dimen/start_screen_spacer_vertical_margin"
+            android:layout_marginLeft="@dimen/start_screen_spacer_horizontal_margin"
+            android:layout_marginStart="@dimen/start_screen_spacer_horizontal_margin"
+            android:layout_marginRight="@dimen/start_screen_spacer_horizontal_margin"
+            android:layout_marginEnd="@dimen/start_screen_spacer_horizontal_margin" />
 
-    <Button
-        android:id="@+id/button_for_organizers"
-        android:text="@string/button_for_organizers"
-        android:layout_marginLeft="@dimen/start_screen_margin"
-        android:layout_marginStart="@dimen/start_screen_margin"
-        android:layout_marginRight="@dimen/start_screen_margin"
-        android:layout_marginEnd="@dimen/start_screen_margin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/button_for_organizers"
+            android:text="@string/button_for_organizers"
+            android:layout_marginLeft="@dimen/start_screen_margin"
+            android:layout_marginStart="@dimen/start_screen_margin"
+            android:layout_marginRight="@dimen/start_screen_margin"
+            android:layout_marginEnd="@dimen/start_screen_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-</LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

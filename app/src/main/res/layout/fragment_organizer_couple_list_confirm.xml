@@ -15,7 +15,7 @@
 
         <TextView
             android:id="@+id/label_questionnaire"
-            android:text="@string/toolbar_questionnaire"
+            android:text="@string/toolbar_couple_list"
             android:textSize="@dimen/toolbar_text_size"
             android:textColor="@color/white"
             android:layout_width="wrap_content"

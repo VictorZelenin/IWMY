@@ -171,6 +171,7 @@
 
     <color name="white">#FFFFFF</color>
     <color name="gray">#CCCCCC</color>
+    <color name="dark_gray">#999999</color>
 
     <string name="mail_subject_organizer_registering">Organizer registering request</string>
     <string name="mail_subject_organizer_event_successful">The dating was successful</string>
