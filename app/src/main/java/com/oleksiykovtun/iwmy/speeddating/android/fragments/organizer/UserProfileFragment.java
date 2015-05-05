@@ -10,6 +10,7 @@ import android.view.ViewManager;
 
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.R;
+import com.oleksiykovtun.iwmy.speeddating.android.Account;
 import com.oleksiykovtun.iwmy.speeddating.android.ImageManager;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
@@ -30,8 +31,8 @@ public class UserProfileFragment extends AppFragment {
 
         user = (User) getAttachment();
 
-        // only users added by organizer are editable
-        if (user.getPassword().isEmpty()) {
+        // only users added by this organizer are editable
+        if (user.getReferralEmail().equals(Account.getUser().getEmail())) {
             registerClickListener(R.id.button_options);
         } else {
             ((ViewManager)getViewById(R.id.button_options).getParent())
