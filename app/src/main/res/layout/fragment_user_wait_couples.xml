@@ -13,8 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <ImageView
-        android:src="@drawable/loading"
+    <pl.droidsonroids.gif.GifImageView
+        android:src="@drawable/loading_animated"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
