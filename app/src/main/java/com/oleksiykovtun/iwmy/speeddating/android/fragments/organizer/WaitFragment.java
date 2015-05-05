@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewManager;
 
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.android.cooltools.CoolPagerAdapter;
@@ -174,11 +173,8 @@ public class WaitFragment extends AppFragment {
     }
 
     private void updateUserRatingsAllowButton() {
-        if (event.getAllowSendingRatings().equals("true")
-                && getViewById(R.id.button_allow_users_send_ratings) != null) {
-            ((ViewManager) getViewById(R.id.button_allow_users_send_ratings).getParent())
-                    .removeView(getViewById(R.id.button_allow_users_send_ratings));
-        }
+        getViewById(R.id.button_allow_users_send_ratings).setVisibility(
+                event.getAllowSendingRatings().equals("true") ? View.GONE : View.VISIBLE);
     }
 
 }

@@ -26,6 +26,7 @@
     <Button
         android:id="@+id/button_allow_users_send_ratings"
         android:text="@string/button_allow_users_send_ratings"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
