@@ -58,7 +58,9 @@ android {
         exclude 'META-INF/NOTICE'
     }
 
-    def version = new SimpleDateFormat("yyyy.MM.dd-HH.mm").format(System.currentTimeMillis())
+    def buildTimeMillis = System.currentTimeMillis()
+    def buildTimeMinute = (int) (buildTimeMillis / 1000 / 60)
+    def buildDateTime = new SimpleDateFormat("yyyy.MM.dd-HH.mm").format(buildTimeMillis)
 
     signingConfigs {
         release {
@@ -74,8 +76,8 @@ android {
         buildConfigField "String", "BACKEND_URL", "\"https://iwmy-speed-dating.appspot.com\""
         minSdkVersion 14
         targetSdkVersion 22
-        versionCode 1
-        versionName version
+        versionCode buildTimeMinute
+        versionName buildDateTime
     }
 
     buildTypes {
@@ -103,7 +105,7 @@ android {
             applicationId "com.oleksiykovtun.iwmy.speeddating.developer"
             buildConfigField "String",
                     "BACKEND_URL", "\"http://iwmy-speed-dating.oleksiykovtun.com:8082\""
-            versionName version + "-developer"
+            versionName buildDateTime + "-developer"
         }
         general {
         }
