@@ -13,6 +13,7 @@ import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
+import com.oleksiykovtun.iwmy.speeddating.android.Account;
 import com.oleksiykovtun.iwmy.speeddating.android.adapters.EventRecyclerAdapter;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
@@ -37,7 +38,7 @@ public class EventListFragment extends AppFragment {
         registerClickListener(R.id.button_options);
         registerClickListener(R.id.button_settings);
 
-        post(Api.EVENTS + Api.GET_ALL, Event[].class);
+        post(Api.EVENTS + Api.GET_ALL_FOR_USER, Event[].class, Account.getUser());
 
         RecyclerView eventRecyclerView = (RecyclerView) view.findViewById(R.id.event_list_holder);
         eventRecyclerView.setHasFixedSize(true);

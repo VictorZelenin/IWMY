@@ -22,7 +22,8 @@ public class Api {
     public static final String REMOVE_ATTENDANCE = "remove/attendance";
 
     public static final String EVENTS = "/events/";
-    public static final String GET_ALL = "get/all";
+    public static final String GET_ALL_FOR_USER = "get/all/for/user";
+    @Deprecated public static final String GET_ALL = "get/all";
     public static final String GET_FOR_USER = "get/for/user";
     public static final String GET_FOR_TIME = "get/for/time";
     public static final String SET_UNACTUAL = "set/unactual";

@@ -85,8 +85,27 @@ public class EventRestService extends GeneralRestService {
         return EventRestService.getForTime(wildcardUserEvents);
     }
 
+    @Path(Api.GET_ALL_FOR_USER) @POST @Consumes(JSON) @Produces(JSON)
+    public static List getAllForUser(List<User> users) {
+        List<Event> userEvents = new ArrayList<>();
+        if (users.size() == 1) {
+            int userAge = Integer.parseInt(TimeConverter.getYearsFromDate(users.get(0).getBirthDate()));
+            List<Event> allEvents = getAll();
+            for (Event event : allEvents) {
+                int minEventAllowedAge = (event.getMinAllowedAge().length() == 0)
+                        ? Integer.MIN_VALUE : Integer.parseInt(event.getMinAllowedAge().trim());
+                int maxEventAllowedAge = (event.getMaxAllowedAge().length() == 0)
+                        ? Integer.MAX_VALUE : Integer.parseInt(event.getMaxAllowedAge().trim());
+                if (minEventAllowedAge <= userAge && userAge <= maxEventAllowedAge) {
+                    userEvents.add(event);
+                }
+            }
+        }
+        return userEvents;
+    }
+
     @Path(Api.GET_ALL) @POST @Consumes(JSON) @Produces(JSON)
-    public static List getAll() {
+    public static List<Event> getAll() {
         return new ArrayList<>(ObjectifyService.ofy().load().type(Event.class).list());
     }
 
