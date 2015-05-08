@@ -51,6 +51,7 @@ public class Api {
     public static final String MAIL = "/mail/";
     public static final String SEND = "send";
     public static final String REQUEST_ORGANIZER = "request/organizer";
+    public static final String RESET_PASSWORD = "reset/password";
     public static final String DEBUG_SEND = "debug/send";
 
     public static final String GENERAL = "/";

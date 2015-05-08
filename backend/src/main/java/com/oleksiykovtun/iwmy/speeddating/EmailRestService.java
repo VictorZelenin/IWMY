@@ -77,6 +77,35 @@ public class EmailRestService extends GeneralRestService {
         return send(emailList);
     }
 
+    @Path(Api.RESET_PASSWORD) @POST @Consumes(JSON) @Produces(JSON)
+    public static List resetPassword(List<Email> emailList) {
+        if (emailList.size() == 1) {
+            Email email = emailList.get(0);
+            String usernameOrEmail = email.getToAddress();
+            User wildcardLoginUser = new User(usernameOrEmail, "", usernameOrEmail,
+                    "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+            List<User> existingUsers = UserRestService.getUnique(Arrays.asList(wildcardLoginUser));
+            if (existingUsers.size() == 1) {
+                User realUser = existingUsers.get(0);
+                email.setToAddress(realUser.getEmail());
+                if (ObjectifyService.ofy().load().type(Email.class)
+                        .filter("toAddress", email.getToAddress())
+                        .filter("fromAddress", email.getFromAddress()).list().size() <= 2) { // todo make labels
+                    email.setMessage(email.getMessage().replace("PASSWORD", realUser.getPassword()));
+                    email.setMessage(email.getMessage().replace("CONTACTS_SPEED_DATING", Api.APP_EMAIL));
+                    send(emailList);
+                    return emailList;
+                } else {
+                    email.setToAddress("TOO_OFTEN " + email.getToAddress());
+                }
+            } else {
+                email.setToAddress("WRONG " + email.getToAddress());
+            }
+        }
+        put(emailList);
+        return new ArrayList();
+    }
+
     public static List getAll() {
         return new ArrayList<>(ObjectifyService.ofy().load().type(Email.class).list());
     }

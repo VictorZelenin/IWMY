@@ -140,6 +140,12 @@
 Контакти закладу-організатора: \nCONTACTS_ORGANIZER\n\n
 Наші контакти: \nCONTACTS_SPEED_DATING
     </string>
+    <string name="mail_text_password_reset">
+Нагадування паролю було запитане для Вашого облікового запису на IWMY Speed Dating.\n\n
+Ваш пароль\nPASSWORD\n\n
+Якщо це були не Ви, будь ласка, зв\'яжіться з нами.\n\n
+Наші контакти: \nCONTACTS_SPEED_DATING
+    </string>
     <string name="label_couple">Пара:</string>
     <string name="label_rating_username">Нік</string>
     <string name="menu_edit">Змінити</string>
@@ -172,4 +178,8 @@
     <string name="message_input_error">перевірте це поле, будь ласка.</string>
     <string name="label_event_max_allowed_age">Максимальний вік учасників:</string>
     <string name="label_event_min_allowed_age">Мінімальний вік учасників:</string>
+    <string name="button_forgot_password">Забув(-ла) пароль</string>
+    <string name="message_password_reset_suspicious">Немає такого користувача, або багато спроб нагадати пароль. Будь ласка, напишіть нам на email.</string>
+    <string name="message_password_reset_sent">Ваш пароль надіслано на Ваш email.</string>
+    <string name="mail_subject_password_reset">IWMY Speed Dating - нагадування паролю</string>
 </resources>

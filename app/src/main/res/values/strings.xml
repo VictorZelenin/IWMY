@@ -93,6 +93,7 @@
     <string name="label_empty" translatable="false">-</string>
 
     <string name="button_login">Login</string>
+    <string name="button_forgot_password">Forgot password</string>
     <string name="button_register">Register</string>
     <string name="button_choose_photo">Choose photo</string>
     <string name="button_remove_photo">Remove this photo</string>
@@ -153,6 +154,10 @@
     <string name="message_you_cannot_add_more_ratings">You cannot add more ratings</string>
     <string name="message_you_cannot_add_ratings_user">You cannot add ratings for this user</string>
     <string name="message_tap_rotate_photo">Tap photo if you want to rotate it</string>
+    <string name="message_password_reset_suspicious">
+        No such user, or too many attempts to remind password. Please contact us by email.
+    </string>
+    <string name="message_password_reset_sent">Your password is sent to your email.</string>
 
     <string name="hint_email_or_username">Email or username</string>
     <string name="hint_password">Password</string>
@@ -183,6 +188,7 @@
     <string name="mail_subject_organizer_event_successful">The dating was successful</string>
     <string name="mail_subject_user_you_found">You found each other!</string>
     <string name="mail_subject_user_thank_you">Thank you for participating in the speed dating!</string>
+    <string name="mail_subject_password_reset">IWMY Speed Dating - password reminding</string>
     <string name="mail_text_organizer_event_successful">
 The dating was successful. The number of matching couples: COUPLE_COUNT. Contacts of matching couples: \n\nCONTACTS_COUPLE_LIST\n\n
 Thank you for using our application! Our contact info: info@want2meetu.com
@@ -203,6 +209,12 @@ Our contact info: \nCONTACTS_SPEED_DATING
 Thank you for attending our event. We hope you had good time there! Unfortunately, this time reciprocity wasn\'t achieved, but it will be all right.\n\n
 We are gladly waiting for you at the next dating! Luck will be with you!\n\n
 Organizer\'s contact info: \nCONTACTS_ORGANIZER\n\n
+Our contact info: \nCONTACTS_SPEED_DATING
+    </string>
+    <string name="mail_text_password_reset">
+Password reminding was requested for your account at IWMY Speed Dating.\n\n
+Your password is\nPASSWORD\n\n
+If it was not you, please contact us.\n\n
 Our contact info: \nCONTACTS_SPEED_DATING
     </string>
 
