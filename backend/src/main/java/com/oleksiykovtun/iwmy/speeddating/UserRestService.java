@@ -273,6 +273,18 @@ public class UserRestService extends GeneralRestService {
         return getForEvent(wildcardEvents);
     }
 
+    @Path(Api.GET_COUNT_ORGANIZERS) @GET @Produces(JSON)
+    public String getCountOrganizers() {
+        return "" + ObjectifyService.ofy().load().type(User.class)
+                .filter("group", User.ORGANIZER).list().size();
+    }
+
+    @Path(Api.GET_COUNT_USERS) @GET @Produces(JSON)
+    public String getCountUsers() {
+        return "" + ObjectifyService.ofy().load().type(User.class)
+                .filter("group", User.USER).list().size();
+    }
+
     @Path(Api.DEBUG_GET + "/email={email}") @GET @Produces(JSON)
     public static List debugGet(@PathParam("email") String email) {
         return get(Arrays.asList(new User(email)));

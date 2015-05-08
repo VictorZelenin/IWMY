@@ -28,13 +28,16 @@ public class RequestAuthorizationFilter implements ContainerRequestFilter {
 
     private boolean authorizationRequired(ContainerRequest request) {
         String path = "/" + request.getPath();
-        // The exceptions are when a new user is being registered or logs in, or for images
+        // The exceptions are when a new user is being registered or logs in,
+        // or for images or counters
         return !path.equals(Api.USERS + Api.GET_LOGIN)
                 && !path.equals(Api.USERS + Api.ADD)
                 && !path.equals(Api.MAIL + Api.REQUEST_ORGANIZER)
                 && !path.equals(Api.USERS + Api.ADD_PENDING_ORGANIZER)
                 && !path.startsWith(Api.USERS + Api.ACTIVATE_PENDING_ORGANIZER)
-                && !path.startsWith(Api.IMAGES);
+                && !path.startsWith(Api.IMAGES)
+                && !path.equals(Api.USERS + Api.GET_COUNT_ORGANIZERS)
+                && !path.equals(Api.USERS + Api.GET_COUNT_USERS);
     }
 
     private List<User> getAuthorizedUsers(ContainerRequest request) {

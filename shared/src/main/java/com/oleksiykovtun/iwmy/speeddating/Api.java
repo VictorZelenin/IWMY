@@ -20,6 +20,8 @@ public class Api {
     public static final String GET_FOR_EVENT_ACTIVE = "get/for/event/active";
     public static final String GET_FOR_EVENT_ACTIVE_RESET = "get/for/event/active/reset";
     public static final String REMOVE_ATTENDANCE = "remove/attendance";
+    public static final String GET_COUNT_ORGANIZERS = "get/count/organizers";
+    public static final String GET_COUNT_USERS = "get/count/users";
 
     public static final String EVENTS = "/events/";
     public static final String GET_ALL_FOR_USER = "get/all/for/user";
