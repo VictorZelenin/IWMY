@@ -40,8 +40,6 @@ public class NewEventFragment extends EventEditFragment {
                 Event event = makeEvent();
                 if (checkEvent(event)) {
                     post(Api.EVENTS + Api.ADD, Event[].class, event);
-                } else {
-                    showToast(R.string.message_inputs_error);
                 }
                 break;
         }

@@ -134,7 +134,7 @@ public class MyEventListFragment extends AppFragment {
         final Event event = (Event) objectAtClicked;
         new AlertDialog.Builder(getActivity()).setTitle(R.string.label_delete)
                 .setMessage(getText(R.string.label_delete_this_event_from_yours)
-                        + event.getPlace() + " " + event.getStreetAddress())
+                        + event.getPlace() + " " + event.getFullStreetAddress())
                 .setPositiveButton(R.string.button_delete, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int whichButton) {

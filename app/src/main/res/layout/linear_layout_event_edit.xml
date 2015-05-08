@@ -71,6 +71,32 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:text="@string/label_event_city"
+        android:textSize="@dimen/label_text_size" />
+
+    <EditText
+        android:id="@+id/input_event_city"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:maxLength="@integer/edit_text_max_length"
+        android:inputType="text" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_event_country"
+        android:textSize="@dimen/label_text_size" />
+
+    <EditText
+        android:id="@+id/input_event_country"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:maxLength="@integer/edit_text_max_length"
+        android:inputType="text" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:text="@string/label_event_places"
         android:textSize="@dimen/label_text_size" />
 

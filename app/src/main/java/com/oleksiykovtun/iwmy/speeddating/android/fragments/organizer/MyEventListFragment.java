@@ -127,7 +127,7 @@ public class MyEventListFragment extends AppFragment {
         final Event event = (Event) objectAtClicked;
         new AlertDialog.Builder(getActivity()).setTitle(R.string.label_delete)
                 .setMessage(getText(R.string.label_delete_this_event) + event.getPlace() +
-                        "\n" + event.getStreetAddress())
+                        "\n" + event.getFullStreetAddress())
                 .setPositiveButton(R.string.button_delete, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
@@ -148,7 +148,7 @@ public class MyEventListFragment extends AppFragment {
 
     private void requestEventList() {
         Event eventWildcard = new Event(Account.getUser().getEmail(), "", "", "", "", "", "",
-                "", "");
+                "", "", "", "");
         post(Api.EVENTS + Api.GET, Event[].class, eventWildcard);
     }
 

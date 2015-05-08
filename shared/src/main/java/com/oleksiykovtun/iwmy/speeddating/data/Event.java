@@ -23,25 +23,32 @@ public class Event implements Serializable, Comparable<Event> {
     private String organizerEmail;
     private String time; // format "2099-12-31 23:59"
     private String place;
-    private String streetAddress;
-    private String actual;
-    private String allowSendingRatings;
-    private String maxRatingsPerUser;
 
+    private String streetAddress;
+    private String city;
+    private String country;
     private String photo; // url
     private String thumbnail; // url
+
     private String freePlaces;
     private String cost;
     private String description;
 
+    private String actual;
+    private String allowSendingRatings;
+    private String maxRatingsPerUser;
+
     public Event() { }
 
-    public Event(String organizerEmail, String time, String place, String streetAddress,
-                 String photo, String thumbnail, String freePlaces, String cost, String description) {
+    public Event(String organizerEmail, String time, String place,
+                 String streetAddress, String city, String country, String photo, String thumbnail,
+                 String freePlaces, String cost, String description) {
         this._eventId = time + "_" + organizerEmail;
         this.organizerEmail = organizerEmail;
         this.place = place;
         this.streetAddress = streetAddress;
+        this.city = city;
+        this.country = country;
         this.time = time;
         this.actual = "true";
         this.allowSendingRatings = "false";
@@ -100,6 +107,26 @@ public class Event implements Serializable, Comparable<Event> {
 
     public void setStreetAddress(String streetAddress) {
         this.streetAddress = streetAddress;
+    }
+
+    public String getFullStreetAddress() {
+        return getCommaSeparated(getStreetAddress(), getCity(), getCountry());
+    }
+
+    public String getCity() {
+        return getNotNull(city);
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return getNotNull(country);
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getActual() {
@@ -177,5 +204,14 @@ public class Event implements Serializable, Comparable<Event> {
 
     private String getNotNull(String possiblyNullValue) {
         return (possiblyNullValue == null) ? "" : possiblyNullValue;
+    }
+
+    private String getCommaSeparated(String... values) {
+        String returnValue = "";
+        for (String value : values) {
+            returnValue += (returnValue.isEmpty() || value.isEmpty()) ? "" : ", ";
+            returnValue += value;
+        }
+        return returnValue;
     }
 }

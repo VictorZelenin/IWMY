@@ -46,6 +46,8 @@ public abstract class EventEditFragment extends EditFragment {
         }
         setText(R.id.input_event_place, event.getPlace());
         setText(R.id.input_event_address, event.getStreetAddress());
+        setText(R.id.input_event_city, event.getCity());
+        setText(R.id.input_event_country, event.getCountry());
         setText(R.id.input_event_places, event.getFreePlaces());
         setText(R.id.input_event_cost, event.getCost());
         setText(R.id.input_event_description, event.getDescription());
@@ -59,8 +61,29 @@ public abstract class EventEditFragment extends EditFragment {
     }
 
     protected boolean checkEvent(Event event) {
-        return CoolFormatter.isDateTimeValid(event.getTime())
-                && event.getOrganizerEmail().contains("@");
+        if (event.getPlace().isEmpty()) {
+            showToast(getText(R.string.label_event_place)
+                    + " " + getText(R.string.message_input_error));
+            return false;
+        } else if (! CoolFormatter.isDateTimeValid(event.getTime())) {
+            showToast(getText(R.string.label_event_date) + " " + getText(R.string.label_event_time)
+                    + " " + getText(R.string.message_input_error));
+            return false;
+        } else if (event.getStreetAddress().isEmpty()) {
+            showToast(getText(R.string.label_event_address)
+                    + " " + getText(R.string.message_input_error));
+            return false;
+        } else if (event.getCity().isEmpty()) {
+            showToast(getText(R.string.label_event_city)
+                    + " " + getText(R.string.message_input_error));
+            return false;
+        } else if (event.getCountry().isEmpty()) {
+            showToast(getText(R.string.label_event_country)
+                    + " " + getText(R.string.message_input_error));
+            return false;
+        } else {
+            return true;
+        }
     }
 
     protected Event makeEvent() {
@@ -72,12 +95,14 @@ public abstract class EventEditFragment extends EditFragment {
         String thumbnail = photoChanged
                 ? ImageManager.getBase64StringFromBitmap(thumbnailBitmap, 85) : defaultThumbnailLink;
         String streetAddress = getEditText(R.id.input_event_address);
+        String city = getEditText(R.id.input_event_city);
+        String country = getEditText(R.id.input_event_country);
         String freePlaces = getEditText(R.id.input_event_places);
         String cost = getEditText(R.id.input_event_cost);
         String description = getEditText(R.id.input_event_description);
 
         return new Event(Account.getUser().getEmail(), time, place,
-                streetAddress, photo, thumbnail, freePlaces, cost, description);
+                streetAddress, city, country, photo, thumbnail, freePlaces, cost, description);
     }
 
 }

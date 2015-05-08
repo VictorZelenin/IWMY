@@ -124,7 +124,7 @@ public class CoupleListConfirmFragment extends AppFragment {
             message = message.replace("CONTACTS_ONE_COUPLE", getUserContactInfo(coupleUsers[0]));
             message = message.replace("CONTACTS_MANY_COUPLES", getUsersContactInfo(coupleUsers));
             message = message.replace("CONTACTS_ORGANIZER", event.getOrganizerEmail() + "\n"
-                    + Account.getUser().getPhone() + "\n" + event.getStreetAddress());
+                    + Account.getUser().getPhone() + "\n" + event.getFullStreetAddress());
             message = message.replace("CONTACTS_SPEED_DATING", Api.APP_EMAIL);
             userEmail.setSubject(subject);
             userEmail.setMessage(message);

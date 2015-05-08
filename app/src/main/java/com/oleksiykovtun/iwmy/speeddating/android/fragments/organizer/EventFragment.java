@@ -35,7 +35,7 @@ public class EventFragment extends AppFragment {
         ImageManager.setEventPhoto(getImageView(R.id.photo), event.getPhoto());
         setText(R.id.label_organizer, event.getPlace());
         setText(R.id.label_event_address,
-                R.string.label_event_address, event.getStreetAddress());
+                R.string.label_event_address, event.getFullStreetAddress());
         setText(R.id.label_event_cost,
                 R.string.label_event_cost, event.getCost());
         setText(R.id.label_event_description,

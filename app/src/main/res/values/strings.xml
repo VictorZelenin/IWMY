@@ -66,6 +66,8 @@
     <string name="label_attitude_to_smoking">Attitude to smoking: </string>
     <string name="label_attitude_to_alcohol">Attitude to alcohol: </string>
     <string name="label_event_place">Place: </string>
+    <string name="label_event_city">City: </string>
+    <string name="label_event_country">Country: </string>
     <string name="label_event_date">Date: </string>
     <string name="label_out_of" translatable="false">/</string>
     <string name="label_delete">Delete</string>
@@ -140,6 +142,7 @@
     <string name="message_event_exists">You already created an event at this place or time. Please enter other place or time, or edit/delete the older event.</string>
     <string name="message_participant_added">Participant added</string>
     <string name="message_event_added">Event added</string>
+    <string name="message_input_error">please check this field.</string>
     <string name="message_inputs_error">Please check your inputs and try again.</string>
     <string name="message_questionnaires_sent">Questionnaires sent</string>
     <string name="message_select_equal">Please select equal number of guys and ladies.</string>

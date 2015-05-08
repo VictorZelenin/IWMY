@@ -61,7 +61,7 @@ public class EventRestService extends GeneralRestService {
         List<Event> wildcardUserEvents = new ArrayList<>();
         for (Attendance activeAttendance : activeAttendances) {
             wildcardUserEvents.add(new Event(activeAttendance.getEventOrganizerEmail(),
-                    activeAttendance.getEventTime(), "", "", "", "", "", "", ""));
+                    activeAttendance.getEventTime(), "", "", "", "", "", "", "", "", ""));
         }
         List<Event> activeEvents = EventRestService.getForTime(wildcardUserEvents);
         // finally, getting only started events
@@ -80,7 +80,7 @@ public class EventRestService extends GeneralRestService {
         List<Event> wildcardUserEvents = new ArrayList<>();
         for (Attendance userAttendance : userAttendances) {
             wildcardUserEvents.add(new Event(userAttendance.getEventOrganizerEmail(),
-                    userAttendance.getEventTime(), "", "", "", "", "", "", ""));
+                    userAttendance.getEventTime(), "", "", "", "", "", "", "", "", ""));
         }
         return EventRestService.getForTime(wildcardUserEvents);
     }

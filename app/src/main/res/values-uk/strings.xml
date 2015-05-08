@@ -167,4 +167,7 @@
     <string name="toolbar_editing_event">Зміна заходу</string>
     <string name="message_tap_rotate_photo">Щоб обертати фото, натисніть на нього</string>
     <string name="menu_all_events">Усі заходи</string>
+    <string name="label_event_country">Країна:</string>
+    <string name="label_event_city">Місто:</string>
+    <string name="message_input_error">перевірте це поле, будь ласка.</string>
 </resources>
