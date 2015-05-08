@@ -28,7 +28,7 @@ import java.util.List;
 public class EventListFragment extends AppFragment {
 
     private List<Event> eventList = new ArrayList<Event>();
-    private EventRecyclerAdapter eventRecyclerAdapter = new EventRecyclerAdapter(eventList);
+    private EventRecyclerAdapter eventRecyclerAdapter = new EventRecyclerAdapter(eventList, true);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

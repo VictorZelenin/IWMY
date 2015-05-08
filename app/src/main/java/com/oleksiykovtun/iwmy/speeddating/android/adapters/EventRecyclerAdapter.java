@@ -18,8 +18,15 @@ import java.util.List;
  */
 public class EventRecyclerAdapter extends CoolRecyclerAdapter {
 
+    private boolean showCity = false;
+
     public EventRecyclerAdapter(List dataSet) {
         super(dataSet);
+    }
+
+    public EventRecyclerAdapter(List dataSet, boolean showCity) {
+        super(dataSet);
+        this.showCity = showCity;
     }
 
     public class ViewHolder extends CoolRecyclerAdapter.ViewHolder {
@@ -47,7 +54,9 @@ public class EventRecyclerAdapter extends CoolRecyclerAdapter {
     public void onBindViewHolder(CoolRecyclerAdapter.ViewHolder holder, int position) {
         Event event = (Event) (dataSet.get(position));
         ((ViewHolder) holder).placeTextView.setText(event.getPlace());
-        ((ViewHolder) holder).timeTextView.setText(event.getTime());
+        ((ViewHolder) holder).timeTextView.setText(event.getTime()
+                + ((showCity && !event.getCity().isEmpty()) ? (", " + event.getCity()) : "")
+                + ((showCity && !event.getCountry().isEmpty()) ? (", " + event.getCountry()) : ""));
         ImageManager.setEventThumbnail(((ViewHolder) holder).photoImageView, event.getThumbnail());
     }
 
