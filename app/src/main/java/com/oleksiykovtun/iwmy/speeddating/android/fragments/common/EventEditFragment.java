@@ -50,6 +50,8 @@ public abstract class EventEditFragment extends EditFragment {
         setText(R.id.input_event_country, event.getCountry());
         setText(R.id.input_event_places, event.getFreePlaces());
         setText(R.id.input_event_cost, event.getCost());
+        setText(R.id.input_event_min_allowed_age, event.getMinAllowedAge());
+        setText(R.id.input_event_max_allowed_age, event.getMaxAllowedAge());
         setText(R.id.input_event_description, event.getDescription());
 
         if (! event.getPhoto().isEmpty()) {
@@ -81,8 +83,23 @@ public abstract class EventEditFragment extends EditFragment {
             showToast(getText(R.string.label_event_country)
                     + " " + getText(R.string.message_input_error));
             return false;
+        } else if (! checkRange(event.getMinAllowedAge(), event.getMaxAllowedAge())) {
+            showToast(getText(R.string.label_event_min_allowed_age)
+                    + " " + getText(R.string.label_event_max_allowed_age)
+                    + " " + getText(R.string.message_input_error));
+            return false;
         } else {
             return true;
+        }
+    }
+
+    private boolean checkRange(String lowString, String highString) {
+        try {
+            int lowValue = lowString.isEmpty() ? Integer.MIN_VALUE : Integer.parseInt(lowString);
+            int highValue = highString.isEmpty() ? Integer.MAX_VALUE : Integer.parseInt(highString);
+            return highValue >= lowValue;
+        } catch (Throwable e) {
+            return false;
         }
     }
 
@@ -99,10 +116,13 @@ public abstract class EventEditFragment extends EditFragment {
         String country = getEditText(R.id.input_event_country);
         String freePlaces = getEditText(R.id.input_event_places);
         String cost = getEditText(R.id.input_event_cost);
+        String minAllowedAge = getEditText(R.id.input_event_min_allowed_age);
+        String maxAllowedAge = getEditText(R.id.input_event_max_allowed_age);
         String description = getEditText(R.id.input_event_description);
 
         return new Event(Account.getUser().getEmail(), time, place,
-                streetAddress, city, country, photo, thumbnail, freePlaces, cost, description);
+                streetAddress, city, country, photo, thumbnail, freePlaces, cost, minAllowedAge,
+                maxAllowedAge, description);
     }
 
 }

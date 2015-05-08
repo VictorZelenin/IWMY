@@ -170,4 +170,6 @@
     <string name="label_event_country">Країна:</string>
     <string name="label_event_city">Місто:</string>
     <string name="message_input_error">перевірте це поле, будь ласка.</string>
+    <string name="label_event_max_allowed_age">Максимальний вік учасників:</string>
+    <string name="label_event_min_allowed_age">Мінімальний вік учасників:</string>
 </resources>

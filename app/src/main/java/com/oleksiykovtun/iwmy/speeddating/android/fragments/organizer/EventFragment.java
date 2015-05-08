@@ -47,6 +47,10 @@ public class EventFragment extends AppFragment {
                 R.string.label_event_time, event.getTime());
         setText(R.id.label_event_places,
                 R.string.label_event_places, event.getFreePlaces());
+        setText(R.id.label_event_min_allowed_age,
+                R.string.label_event_min_allowed_age, event.getMinAllowedAge());
+        setText(R.id.label_event_max_allowed_age,
+                R.string.label_event_max_allowed_age, event.getMaxAllowedAge());
 
         return view;
     }

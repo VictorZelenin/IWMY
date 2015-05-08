@@ -50,7 +50,7 @@ public class RatingRestService extends GeneralRestService {
             Attendance wildcardAttendance = wildcardAttendances.get(0);
             List<Event> eventsWildcard = new ArrayList<>();
             eventsWildcard.add(new Event(wildcardAttendance.getEventOrganizerEmail(),
-                    wildcardAttendance.getEventTime(), "", "", "", "", "", "", "", "", ""));
+                    wildcardAttendance.getEventTime(), "", "", "", "", "", "", "", "", "", "", ""));
             // listing active event-related attendances
             List<Attendance> activeAttendances
                     = AttendanceRestService.getForEventActive(eventsWildcard);

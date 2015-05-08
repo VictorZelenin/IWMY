@@ -41,6 +41,8 @@
     <string name="label_event_time">Time: </string>
     <string name="label_event_places">Number of attenders: </string>
     <string name="label_event_cost">Cost: </string>
+    <string name="label_event_min_allowed_age">Min age of participants: </string>
+    <string name="label_event_max_allowed_age">Max age of participants: </string>
     <string name="label_event_description">Description: </string>
     <string name="label_you_will_be_contacted">Thank you. You will be contacted soon</string>
     <string name="label_event_organizer">Organizer: </string>

@@ -32,6 +32,9 @@ public class Event implements Serializable, Comparable<Event> {
 
     private String freePlaces;
     private String cost;
+    private String minAllowedAge;
+    private String maxAllowedAge;
+
     private String description;
 
     private String actual;
@@ -42,7 +45,8 @@ public class Event implements Serializable, Comparable<Event> {
 
     public Event(String organizerEmail, String time, String place,
                  String streetAddress, String city, String country, String photo, String thumbnail,
-                 String freePlaces, String cost, String description) {
+                 String freePlaces, String cost, String minAllowedAge, String maxAllowedAge,
+                 String description) {
         this._eventId = time + "_" + organizerEmail;
         this.organizerEmail = organizerEmail;
         this.place = place;
@@ -57,6 +61,8 @@ public class Event implements Serializable, Comparable<Event> {
         this.thumbnail = thumbnail;
         this.freePlaces = freePlaces;
         this.cost = cost;
+        this.minAllowedAge = minAllowedAge;
+        this.maxAllowedAge = maxAllowedAge;
         this.description = description;
         generateId();
     }
@@ -192,6 +198,22 @@ public class Event implements Serializable, Comparable<Event> {
 
     public void setCost(String cost) {
         this.cost = cost;
+    }
+
+    public String getMinAllowedAge() {
+        return getNotNull(minAllowedAge);
+    }
+
+    public void setMinAllowedAge(String minAllowedAge) {
+        this.minAllowedAge = minAllowedAge;
+    }
+
+    public String getMaxAllowedAge() {
+        return getNotNull(maxAllowedAge);
+    }
+
+    public void setMaxAllowedAge(String maxAllowedAge) {
+        this.maxAllowedAge = maxAllowedAge;
     }
 
     public String getDescription() {

@@ -123,6 +123,32 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:text="@string/label_event_min_allowed_age"
+        android:textSize="@dimen/label_text_size" />
+
+    <EditText
+        android:id="@+id/input_event_min_allowed_age"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:maxLength="@integer/edit_text_max_length"
+        android:inputType="number" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_event_max_allowed_age"
+        android:textSize="@dimen/label_text_size" />
+
+    <EditText
+        android:id="@+id/input_event_max_allowed_age"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:maxLength="@integer/edit_text_max_length"
+        android:inputType="number" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:text="@string/label_event_description"
         android:textSize="@dimen/label_text_size" />
 
