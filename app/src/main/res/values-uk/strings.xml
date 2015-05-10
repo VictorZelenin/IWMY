@@ -178,7 +178,7 @@
     <string name="message_input_error">перевірте це поле, будь ласка.</string>
     <string name="label_event_max_allowed_age">Максимальний вік учасників:</string>
     <string name="label_event_min_allowed_age">Мінімальний вік учасників:</string>
-    <string name="button_forgot_password">Забув(-ла) пароль</string>
+    <string name="button_forgot_password">Забули пароль</string>
     <string name="message_password_reset_suspicious">Немає такого користувача, або багато спроб нагадати пароль. Будь ласка, напишіть нам на email.</string>
     <string name="message_password_reset_sent">Ваш пароль надіслано на Ваш email.</string>
     <string name="mail_subject_password_reset">IWMY Speed Dating - нагадування паролю</string>
