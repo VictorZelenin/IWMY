@@ -120,7 +120,7 @@
     <string name="mail_subject_user_thank_you">Дякуємо за участь у спід-дейтингу!</string>
     <string name="mail_text_organizer_event_successful">
 Зустріч пройшла успішно. Кількість утворених пар – COUPLE_COUNT. Контакти утворених пар: \n\nCONTACTS_COUPLE_LIST\n\n
-Дякуємо, що скористалися нашою програмою! Наші контакти: info@want2meetu.com
+Дякуємо, що скористалися нашою програмою! Наші контакти: CONTACTS_SPEED_DATING
     </string>
     <string name="mail_text_user_one_couple">
 На зустрічі спід-дейтингу Ви разом з одним з учасників утворили пару! Це означає, що зараз саме час налагодити контакти! Наші вітання! Контакти для зв\'язку: \n\nCONTACTS_ONE_COUPLE\n\n

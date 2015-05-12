@@ -125,7 +125,7 @@ public class CoupleListConfirmFragment extends AppFragment {
             message = message.replace("CONTACTS_MANY_COUPLES", getUsersContactInfo(coupleUsers));
             message = message.replace("CONTACTS_ORGANIZER", event.getOrganizerEmail() + "\n"
                     + Account.getUser().getPhone() + "\n" + event.getFullStreetAddress());
-            message = message.replace("CONTACTS_SPEED_DATING", Api.APP_EMAIL);
+            message = message.replace("CONTACTS_SPEED_DATING", Api.APP_SUPPORT_EMAIL);
             userEmail.setSubject(subject);
             userEmail.setMessage(message);
             emails.add(userEmail);
@@ -188,6 +188,7 @@ public class CoupleListConfirmFragment extends AppFragment {
         String message = "" + getText(R.string.mail_text_organizer_event_successful);
         message = message.replace("COUPLE_COUNT", "" + coupleList.size());
         message = message.replace("CONTACTS_COUPLE_LIST", getCouplesContactInfo());
+        message = message.replace("CONTACTS_SPEED_DATING", Api.APP_SUPPORT_EMAIL);
         return new Email(Api.APP_EMAIL, "" + getText(R.string.app_name),
                 event.getOrganizerEmail(), event.getPlace(),
                 "" + getText(R.string.mail_subject_organizer_event_successful),

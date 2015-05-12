@@ -197,7 +197,7 @@ The IWMY team
     </string>
     <string name="mail_text_organizer_event_successful">
 The dating was successful. The number of matching couples: COUPLE_COUNT. Contacts of matching couples: \n\nCONTACTS_COUPLE_LIST\n\n
-Thank you for using our application! Our contact info: info@want2meetu.com
+Thank you for using our application! Our contact info: CONTACTS_SPEED_DATING
     </string>
     <string name="mail_text_user_one_couple">
 At the speed dating you and one of the participants made a couple! It\'s time to know each other better! Congratulations! Their contact info: \n\nCONTACTS_ONE_COUPLE\n\n

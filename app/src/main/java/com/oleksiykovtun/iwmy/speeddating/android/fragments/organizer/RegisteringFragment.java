@@ -104,7 +104,7 @@ public class RegisteringFragment extends AppFragment {
                 organizerUser.getNameAndSurname(),
                 "" + getText(R.string.mail_subject_organizer_confirmation),
                 ("" + getText(R.string.mail_text_organizer_confirmation))
-                        .replace("CONTACTS_SPEED_DATING", Api.APP_EMAIL));
+                        .replace("CONTACTS_SPEED_DATING", Api.APP_SUPPORT_EMAIL));
     }
 
     private Email getOrganizerRequestEmail(User organizerUser) {
@@ -121,7 +121,7 @@ public class RegisteringFragment extends AppFragment {
         message += "/:" + organizerUser.getEmail();
         message += "\n\nThe organizer will be informed about activation by email automatically.\n";
 
-        return new Email(Api.APP_EMAIL, "" + getText(R.string.app_name), Api.APP_EMAIL,
+        return new Email(Api.APP_EMAIL, "" + getText(R.string.app_name), Api.APP_SUPPORT_EMAIL,
                 "" + getText(R.string.app_name), "" + getText(R.string.mail_subject_organizer_registering), message);
     }
 

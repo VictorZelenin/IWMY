@@ -3,6 +3,7 @@ package com.oleksiykovtun.iwmy.speeddating;
 public class Api {
 
     public static final String APP_EMAIL = "iwmy.speed.dating@gmail.com";
+    public static final String APP_SUPPORT_EMAIL = "info@want2meetu.com";
 
     public static final String USERS = "/users/";
     public static final String ADD = "add";

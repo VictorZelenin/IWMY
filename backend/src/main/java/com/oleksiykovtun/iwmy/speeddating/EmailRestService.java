@@ -111,8 +111,6 @@ public class EmailRestService extends GeneralRestService {
                             .filter("fromAddress", email.getFromAddress()).list().size() <= 2) { // todo make labels
                         email.setMessage(email.getMessage()
                                 .replace("PASSWORD", realUser.getPassword()));
-                        email.setMessage(email.getMessage()
-                                .replace("CONTACTS_SPEED_DATING", Api.APP_EMAIL));
                         send(emailList);
                         return emailList;
                     } else {

@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.Api;
-import com.oleksiykovtun.iwmy.speeddating.BuildConfig;
 import com.oleksiykovtun.iwmy.speeddating.R;
 import com.oleksiykovtun.iwmy.speeddating.android.Account;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.organizer.MyEventListFragment;
@@ -59,7 +58,8 @@ public class AuthorizationFragment extends AppFragment {
     private Email getPasswordResetEmail(String usernameOrEmail) {
         return new Email(Api.APP_EMAIL, "" + getText(R.string.app_name), usernameOrEmail,
                 usernameOrEmail, "" + getText(R.string.mail_subject_password_reset),
-                "" + getText(R.string.mail_text_password_reset));
+                ("" + getText(R.string.mail_text_password_reset))
+                        .replace("CONTACTS_SPEED_DATING", Api.APP_SUPPORT_EMAIL));
     }
 
     @Override
@@ -82,7 +82,7 @@ public class AuthorizationFragment extends AppFragment {
                     showToastLong(R.string.message_password_reset_sent);
                 } else {
                     showToastLong(R.string.message_password_reset_suspicious);
-                    setText(R.id.label_support, Api.APP_EMAIL);
+                    setText(R.id.label_support, Api.APP_SUPPORT_EMAIL);
                 }
                 break;
         }
