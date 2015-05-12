@@ -185,10 +185,16 @@
     <color name="dark_gray">#999999</color>
 
     <string name="mail_subject_organizer_registering">Organizer registering request</string>
+    <string name="mail_subject_organizer_confirmation">Your IWMY Speed Dating account was confirmed</string>
     <string name="mail_subject_organizer_event_successful">The dating was successful</string>
     <string name="mail_subject_user_you_found">You found each other!</string>
     <string name="mail_subject_user_thank_you">Thank you for participating in the speed dating!</string>
     <string name="mail_subject_password_reset">IWMY Speed Dating - password reminding</string>
+    <string name="mail_text_organizer_confirmation">
+Your request for registering your IWMY Speed Dating account as an organizer was satisfied! Now you can create and edit events using your device. We hope our app will become an effective discovery for you! If you have any questions regarding the app or collaboration, feel free to write an email to us, we will answer shortly:\nCONTACTS_SPEED_DATING\n\n
+Best regards,\n
+The IWMY team
+    </string>
     <string name="mail_text_organizer_event_successful">
 The dating was successful. The number of matching couples: COUPLE_COUNT. Contacts of matching couples: \n\nCONTACTS_COUPLE_LIST\n\n
 Thank you for using our application! Our contact info: info@want2meetu.com

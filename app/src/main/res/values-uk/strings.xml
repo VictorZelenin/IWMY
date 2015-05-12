@@ -182,4 +182,10 @@
     <string name="message_password_reset_suspicious">Немає такого користувача, або багато спроб нагадати пароль. Будь ласка, напишіть нам на email.</string>
     <string name="message_password_reset_sent">Ваш пароль надіслано на Ваш email.</string>
     <string name="mail_subject_password_reset">IWMY Speed Dating - нагадування паролю</string>
+    <string name="mail_subject_organizer_confirmation">Вашу заявку в IWMY - Speed dating було підтверджено</string>
+    <string name="mail_text_organizer_confirmation">
+Вітаємо! Вашу заявку на реєстрацію у програмі IWMY - Speed dating у якості організатора було підтверджено! Тепер Ви можете створювати заходи на Вашому мобільному пристрої, а також керувати ними. Сподіваємося, що наша програма стане для Вас яскравим та ефективним відкриттям! Якщо у Вас виникли питання стосовно програми або співробітництва - напишіть нам на електронну скриньку і ми відповімо у найкоротші терміни:\nCONTACTS_SPEED_DATING\n\n
+Приємного користування!\n\n
+Команда IWMY
+    </string>
 </resources>

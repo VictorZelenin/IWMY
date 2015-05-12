@@ -65,14 +65,12 @@ public class EmailRestService extends GeneralRestService {
             Email email = emailList.get(0);
             email.setToAddress(Api.APP_EMAIL);
             // Finding which pending organizer activation to request
-            int emailDelimiterPosition = email.getMessage().lastIndexOf(":");
-            String pendingOrganizerEmail = email.getMessage().substring(emailDelimiterPosition + 1);
             List<User> pendingOrganizers = UserRestService.getPendingOrganizers();
             for (User user : pendingOrganizers) {
-                if (user.getEmail().equals(pendingOrganizerEmail)) {
+                if (email.getMessage().contains(user.getEmail())) {
                     // Setting activation id to the password-locking secret
-                    email.setMessage(email.getMessage().substring(0, emailDelimiterPosition)
-                            + user.getPassword().substring(0, user.getPassword().indexOf("_")));
+                    email.setMessage(email.getMessage().replace(":" + user.getEmail(),
+                            user.getPassword().substring(0, user.getPassword().indexOf("_"))));
                 }
             }
             // sending email to admin
@@ -86,10 +84,13 @@ public class EmailRestService extends GeneralRestService {
     }
 
     public static List sendOrganizerActivated(List<User> users) {
-        // only confirmation emails can exist for this user so far
-        List<Email> confirmationEmails = ObjectifyService.ofy().load().type(Email.class)
+        List<Email> emailsToUser = ObjectifyService.ofy().load().type(Email.class)
                 .filter("toAddress", users.get(0).getEmail()).list();
-        return send(confirmationEmails);
+        // the first email to this user saved is a confirmation email
+        while (emailsToUser.size() > 1) {
+            emailsToUser.remove(1);
+        }
+        return send(emailsToUser);
     }
 
     @Path(Api.RESET_PASSWORD) @POST @Consumes(JSON) @Produces(JSON)

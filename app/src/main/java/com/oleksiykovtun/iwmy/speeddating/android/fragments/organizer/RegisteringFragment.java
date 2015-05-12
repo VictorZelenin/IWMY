@@ -77,7 +77,8 @@ public class RegisteringFragment extends AppFragment {
             case Api.USERS + Api.ADD_PENDING_ORGANIZER:
                 if (!response.isEmpty()) {
                     post(Api.MAIL + Api.REQUEST_ORGANIZER, Email[].class,
-                            getOrganizerRequestEmail(impliedUser));
+                            getOrganizerRequestEmail(impliedUser),
+                            getOrganizerConfirmationEmail(impliedUser));
                 } else {
                     showToastLong(R.string.message_user_exists);
                 }
@@ -98,6 +99,14 @@ public class RegisteringFragment extends AppFragment {
                 && !user.getWebsite().isEmpty();
     }
 
+    private Email getOrganizerConfirmationEmail(User organizerUser) {
+        return new Email(Api.APP_EMAIL, "" + getText(R.string.app_name), organizerUser.getEmail(),
+                organizerUser.getNameAndSurname(),
+                "" + getText(R.string.mail_subject_organizer_confirmation),
+                ("" + getText(R.string.mail_text_organizer_confirmation))
+                        .replace("CONTACTS_SPEED_DATING", Api.APP_EMAIL));
+    }
+
     private Email getOrganizerRequestEmail(User organizerUser) {
         String message = "A new organizer wants to be registered:\n";
         message += "\nEmail: " + organizerUser.getEmail();
@@ -107,9 +116,10 @@ public class RegisteringFragment extends AppFragment {
         message += "\nOrganization: " + organizerUser.getOrganization();
         message += "\nWebsite: " + organizerUser.getWebsite() + "\n\n";
 
-        message += "Follow the link to add the organizer:\n";
+        message += "Follow the link to activate this organizer:\n";
         message += BuildConfig.BACKEND_URL + Api.USERS + Api.ACTIVATE_PENDING_ORGANIZER;
         message += "/:" + organizerUser.getEmail();
+        message += "\n\nThe organizer will be informed about activation by email automatically.\n";
 
         return new Email(Api.APP_EMAIL, "" + getText(R.string.app_name), Api.APP_EMAIL,
                 "" + getText(R.string.app_name), "" + getText(R.string.mail_subject_organizer_registering), message);
