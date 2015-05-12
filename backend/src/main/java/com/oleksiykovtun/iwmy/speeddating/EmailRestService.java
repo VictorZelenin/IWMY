@@ -102,16 +102,23 @@ public class EmailRestService extends GeneralRestService {
             List<User> existingUsers = UserRestService.getUnique(Arrays.asList(wildcardLoginUser));
             if (existingUsers.size() == 1) {
                 User realUser = existingUsers.get(0);
-                email.setToAddress(realUser.getEmail());
-                if (ObjectifyService.ofy().load().type(Email.class)
-                        .filter("toAddress", email.getToAddress())
-                        .filter("fromAddress", email.getFromAddress()).list().size() <= 2) { // todo make labels
-                    email.setMessage(email.getMessage().replace("PASSWORD", realUser.getPassword()));
-                    email.setMessage(email.getMessage().replace("CONTACTS_SPEED_DATING", Api.APP_EMAIL));
-                    send(emailList);
-                    return emailList;
+                if (realUser.getGroup().equals(User.USER) && realUser.getReferralEmail().length() == 0
+                        || realUser.getGroup().equals(User.ORGANIZER)) {
+                    email.setToAddress(realUser.getEmail());
+                    if (ObjectifyService.ofy().load().type(Email.class)
+                            .filter("toAddress", email.getToAddress())
+                            .filter("fromAddress", email.getFromAddress()).list().size() <= 2) { // todo make labels
+                        email.setMessage(email.getMessage()
+                                .replace("PASSWORD", realUser.getPassword()));
+                        email.setMessage(email.getMessage()
+                                .replace("CONTACTS_SPEED_DATING", Api.APP_EMAIL));
+                        send(emailList);
+                        return emailList;
+                    } else {
+                        email.setToAddress("TOO_OFTEN " + email.getToAddress());
+                    }
                 } else {
-                    email.setToAddress("TOO_OFTEN " + email.getToAddress());
+                    email.setToAddress("NOT_ALLOWED " + email.getToAddress());
                 }
             } else {
                 email.setToAddress("WRONG " + email.getToAddress());
