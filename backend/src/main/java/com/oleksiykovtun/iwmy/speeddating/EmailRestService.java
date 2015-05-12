@@ -48,7 +48,9 @@ public class EmailRestService extends GeneralRestService {
                 message.setSubject(email.getSubject(), "utf-8");
                 message.setText(email.getMessage(), "utf-8");
                 Transport.send(message);
+                email.setSentTime(Time.getFullDateTimeNow());
             } catch (Throwable t) {
+                email.setSentTime(Time.getFullDateTimeNow() + " FAILED");
                 unsentEmailList.add(email);
             }
         }
@@ -58,7 +60,7 @@ public class EmailRestService extends GeneralRestService {
 
     @Path(Api.REQUEST_ORGANIZER) @POST @Consumes(JSON) @Produces(JSON)
     public static List requestOrganizer(List<Email> emailList) {
-        if (emailList.size() == 1) {
+        if (emailList.size() == 1 || emailList.size() == 2) {
             // Forcing email to admin
             Email email = emailList.get(0);
             email.setToAddress(Api.APP_EMAIL);
@@ -73,8 +75,21 @@ public class EmailRestService extends GeneralRestService {
                             + user.getPassword().substring(0, user.getPassword().indexOf("_")));
                 }
             }
+            // sending email to admin
+            send(emailList.subList(0, 1));
+            // saving email for confirmation
+            if (emailList.size() == 2) {
+                put(emailList.subList(1, 2));
+            }
         }
-        return send(emailList);
+        return new ArrayList();
+    }
+
+    public static List sendOrganizerActivated(List<User> users) {
+        // only confirmation emails can exist for this user so far
+        List<Email> confirmationEmails = ObjectifyService.ofy().load().type(Email.class)
+                .filter("toAddress", users.get(0).getEmail()).list();
+        return send(confirmationEmails);
     }
 
     @Path(Api.RESET_PASSWORD) @POST @Consumes(JSON) @Produces(JSON)
@@ -111,6 +126,9 @@ public class EmailRestService extends GeneralRestService {
     }
 
     public static List put(List<Email> items) {
+        for (Email item : items) {
+            item.setCreationTime(Time.getFullDateTimeNow());
+        }
         ObjectifyService.ofy().save().entities(items).now();
         return items;
     }

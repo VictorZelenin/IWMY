@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 /**
  * Created by alx on 2015-03-31.
  */
-public class TimeConverter {
+public class Time {
 
     public static String getYearsFromDate(String dateString) {
         final String dateFormat = "yyyy-MM-dd";
@@ -24,5 +24,8 @@ public class TimeConverter {
         return "" + value;
     }
 
-
+    public static String getFullDateTimeNow() {
+        final String dateTimeFormat = "yyyy-MM-dd HH:mm:ss.SSS";
+        return new SimpleDateFormat(dateTimeFormat).format(System.currentTimeMillis());
+    }
 }

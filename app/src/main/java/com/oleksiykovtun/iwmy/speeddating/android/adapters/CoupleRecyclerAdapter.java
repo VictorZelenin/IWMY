@@ -1,6 +1,5 @@
 package com.oleksiykovtun.iwmy.speeddating.android.adapters;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +8,11 @@ import android.widget.TextView;
 
 import com.oleksiykovtun.android.cooltools.CoolRecyclerAdapter;
 import com.oleksiykovtun.iwmy.speeddating.R;
-import com.oleksiykovtun.iwmy.speeddating.TimeConverter;
+import com.oleksiykovtun.iwmy.speeddating.Time;
 import com.oleksiykovtun.iwmy.speeddating.android.ImageManager;
 import com.oleksiykovtun.iwmy.speeddating.data.Couple;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
-import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -58,9 +56,9 @@ public class CoupleRecyclerAdapter extends CoolRecyclerAdapter {
         Couple couple = (Couple) (dataSet.get(position));
         ((ViewHolder) holder).nameTextView1.setText(couple.getName1());
         ((ViewHolder) holder).nameTextView2.setText(couple.getName2());
-        ((ViewHolder) holder).ageTextView1.setText(TimeConverter.getYearsFromDate(couple
+        ((ViewHolder) holder).ageTextView1.setText(Time.getYearsFromDate(couple
                 .getBirthDate1()));
-        ((ViewHolder) holder).ageTextView2.setText(TimeConverter.getYearsFromDate(couple
+        ((ViewHolder) holder).ageTextView2.setText(Time.getYearsFromDate(couple
                 .getBirthDate2()));
         ImageManager.setUserThumbnail(((ViewHolder) holder).photoImageView1, User.MALE,
                 couple.getThumbnail1());

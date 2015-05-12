@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.oleksiykovtun.android.cooltools.CoolRecyclerAdapter;
 import com.oleksiykovtun.iwmy.speeddating.R;
-import com.oleksiykovtun.iwmy.speeddating.TimeConverter;
+import com.oleksiykovtun.iwmy.speeddating.Time;
 import com.oleksiykovtun.iwmy.speeddating.android.ImageManager;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
 
@@ -68,7 +68,7 @@ public class UserRecyclerAdapter extends CoolRecyclerAdapter {
                 .setBackgroundColor(user.getIsChecked().equals("true")
                         ? highlightColor : Color.TRANSPARENT);
         ((ViewHolder) holder).ageTextView.setText(showAge
-                ? ", " + TimeConverter.getYearsFromDate(user.getBirthDate()) : "");
+                ? ", " + Time.getYearsFromDate(user.getBirthDate()) : "");
         ((ViewHolder) holder).locationTextView.setText(user.getLocation().isEmpty()
                 ? "" : ", " + user.getLocation());
         ImageManager.setUserThumbnail(((ViewHolder) holder).photoImageView, user.getGender(),

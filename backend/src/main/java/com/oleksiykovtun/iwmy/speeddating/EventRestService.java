@@ -89,7 +89,7 @@ public class EventRestService extends GeneralRestService {
     public static List getAllForUser(List<User> users) {
         List<Event> userEvents = new ArrayList<>();
         if (users.size() == 1) {
-            int userAge = Integer.parseInt(TimeConverter.getYearsFromDate(users.get(0).getBirthDate()));
+            int userAge = Integer.parseInt(Time.getYearsFromDate(users.get(0).getBirthDate()));
             List<Event> allEvents = getAll();
             for (Event event : allEvents) {
                 int minEventAllowedAge = (event.getMinAllowedAge().length() == 0)

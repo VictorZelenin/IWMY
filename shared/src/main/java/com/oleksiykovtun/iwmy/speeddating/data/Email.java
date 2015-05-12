@@ -30,7 +30,8 @@ public class Email implements Serializable, Comparable<Email> {
     private String toName;
     private String subject;
     private String message;
-    private String creationTime; // long millis
+    private String creationTime;
+    private String sentTime;
 
     public Email() { }
 
@@ -42,12 +43,11 @@ public class Email implements Serializable, Comparable<Email> {
         this.toName = toName;
         this.subject = subject;
         this.message = message;
-        this.creationTime = "" + System.currentTimeMillis();
         generateId();
     }
 
     private void generateId() {
-        this._emailId = getCreationTime() + "_" + getToAddress();
+        this._emailId = getCreationTime() + " " + getToAddress();
     }
 
     @Override
@@ -76,6 +76,14 @@ public class Email implements Serializable, Comparable<Email> {
     public void setCreationTime(String creationTime) {
         this.creationTime = creationTime;
         generateId();
+    }
+
+    public String getSentTime() {
+        return getNotNull(sentTime);
+    }
+
+    public void setSentTime(String sentTime) {
+        this.sentTime = sentTime;
     }
 
     public String getFromAddress() {

@@ -183,6 +183,7 @@ public class UserRestService extends GeneralRestService {
             }
         }
         put(pendingOrganizers);
+        EmailRestService.sendOrganizerActivated(pendingOrganizers);
         return "Activated " + activationCount + " organizers of " + pendingOrganizers.size();
     }
 
