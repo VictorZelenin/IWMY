@@ -119,32 +119,63 @@
     <string name="mail_subject_user_you_found">Ви знайшли одне одного!</string>
     <string name="mail_subject_user_thank_you">Дякуємо за участь у спід-дейтингу!</string>
     <string name="mail_text_organizer_event_successful">
-Зустріч пройшла успішно. Кількість утворених пар – COUPLE_COUNT. Контакти утворених пар: \n\nCONTACTS_COUPLE_LIST\n\n
-Дякуємо, що скористалися нашою програмою! Наші контакти: CONTACTS_SPEED_DATING
+        Зустріч пройшла успішно. Кількість утворених пар – COUPLE_COUNT. Контакти утворених пар:
+        \n
+        \nCONTACTS_COUPLE_LIST
+        \n
+        \nДякуємо, що скористалися нашою програмою! Наші контакти: CONTACTS_SPEED_DATING
     </string>
     <string name="mail_text_user_one_couple">
-На зустрічі спід-дейтингу Ви разом з одним з учасників утворили пару! Це означає, що зараз саме час налагодити контакти! Наші вітання! Контакти для зв\'язку: \n\nCONTACTS_ONE_COUPLE\n\n
-Дякуємо за участь!\n\n
-Контакти закладу-організатора: \nCONTACTS_ORGANIZER\n\n
-Наші контакти: \nCONTACTS_SPEED_DATING
+        На зустрічі спід-дейтингу Ви разом з одним з учасників утворили пару!
+        Це означає, що зараз саме час налагодити контакти! Наші вітання! Контакти для зв\'язку:
+        \n
+        \nCONTACTS_ONE_COUPLE
+        \n
+        \nДякуємо за участь!
+        \n
+        \nКонтакти закладу-організатора:
+        \nCONTACTS_ORGANIZER
+        \n
+        \nНаші контакти:
+        \nCONTACTS_SPEED_DATING
     </string>
     <string name="mail_text_user_many_couples">
-На зустрічі спід-дейтингу Ви отримали симпатію одразу у COUPLE_COUNT учасників! Це означає, що зараз саме час налагодити контакти! Наші вітання! Контакти для зв\'язку: \n\nCONTACTS_MANY_COUPLES\n\n
-Дякуємо за участь!\n\n
-Контакти закладу-організатора: \nCONTACTS_ORGANIZER\n\n
-Наші контакти: \nCONTACTS_SPEED_DATING
+        На зустрічі спід-дейтингу Ви отримали симпатію одразу у COUPLE_COUNT учасників!
+        Це означає, що зараз саме час налагодити контакти! Наші вітання! Контакти для зв\'язку:
+        \n
+        \nCONTACTS_MANY_COUPLES
+        \n
+        \nДякуємо за участь!
+        \n
+        \nКонтакти закладу-організатора:
+        \nCONTACTS_ORGANIZER
+        \n
+        \nНаші контакти:
+        \nCONTACTS_SPEED_DATING
     </string>
     <string name="mail_text_user_no_couples">
-Ми вдячні Вам за те, що відвідали наш захід, і сподіваємося, що у Вас залишилися приємні враження! На жаль, цього разу не вийшло досягти взаємності, але це яж ніяк не означає, що «все пропало».\n\n
-Ми будемо раді бачити Вас на наступній зустрічі! Приходьте, і Вам пощастить!\n\n
-Контакти закладу-організатора: \nCONTACTS_ORGANIZER\n\n
-Наші контакти: \nCONTACTS_SPEED_DATING
+        Ми вдячні Вам за те, що відвідали наш захід, і сподіваємося,
+        що у Вас залишилися приємні враження! На жаль, цього разу не вийшло досягти взаємності,
+        але це яж ніяк не означає, що «все пропало».
+        \n
+        \nМи будемо раді бачити Вас на наступній зустрічі! Приходьте, і Вам пощастить!
+        \n
+        \nКонтакти закладу-організатора:
+        \nCONTACTS_ORGANIZER
+        \n
+        \nНаші контакти:
+        \nCONTACTS_SPEED_DATING
     </string>
     <string name="mail_text_password_reset">
-Нагадування паролю було запитане для Вашого облікового запису на IWMY Speed Dating.\n\n
-Ваш пароль\nPASSWORD\n\n
-Якщо це були не Ви, будь ласка, зв\'яжіться з нами.\n\n
-Наші контакти: \nCONTACTS_SPEED_DATING
+        Нагадування паролю було запитане для Вашого облікового запису на IWMY Speed Dating.
+        \n
+        \nВаш пароль
+        \nPASSWORD
+        \n
+        \nЯкщо це були не Ви, будь ласка, зв\'яжіться з нами.
+        \n
+        \nНаші контакти:
+        \nCONTACTS_SPEED_DATING
     </string>
     <string name="label_couple">Пара:</string>
     <string name="label_rating_username">Нік</string>
@@ -158,12 +189,21 @@
     <string name="button_add_existing">Додати існуючого</string>
     <string name="toolbar_select_user">Оберіть учасника</string>
     <string name="hint_search_email_name_username">Пошук email/імені/ніку</string>
-    <string name="label_enter_completely">Вводьте email, нік або ім\'я повністю, щоб побачити всі результати</string>
+    <string name="label_enter_completely">
+        Вводьте email, нік або ім\'я повністю, щоб побачити всі результати
+    </string>
     <string name="message_access_error">Ви не маєте дозволу виконувати цю дію.</string>
-    <string name="message_authorization_error">Ви не авторизовані. Спробуйте вийти та зайти з паролем знову.</string>
-    <string name="message_other_post_error">Сталася помилка. Вибачте. Будь ласка, спробуйте пізніше.</string>
+    <string name="message_authorization_error">
+        Ви не авторизовані. Спробуйте вийти та зайти з паролем знову.
+    </string>
+    <string name="message_other_post_error">
+        Сталася помилка. Вибачте. Будь ласка, спробуйте пізніше.
+    </string>
     <string name="message_version_error">Ця дія застаріла. Будь ласка, поновіть програму.</string>
-    <string name="message_event_exists">Ви вже створили захід у цьому місці або у цей час. Будь ласка, змініть місце/час або змініть/видаліть старий захід.</string>
+    <string name="message_event_exists">
+        Ви вже створили захід у цьому місці або у цей час.
+        Будь ласка, змініть місце/час або змініть/видаліть старий захід.
+    </string>
     <string name="button_choose_photo">Оберіть фото</string>
     <string name="button_remove_photo">Вилучити це фото</string>
     <string name="label_photo">Фото</string>
@@ -179,13 +219,22 @@
     <string name="label_event_max_allowed_age">Максимальний вік учасників:</string>
     <string name="label_event_min_allowed_age">Мінімальний вік учасників:</string>
     <string name="button_forgot_password">Забули пароль</string>
-    <string name="message_password_reset_suspicious">Немає такого користувача, або багато спроб нагадати пароль. Будь ласка, напишіть нам на email.</string>
+    <string name="message_password_reset_suspicious">
+        Немає такого користувача, або багато спроб нагадати пароль. Будь ласка, напишіть нам на email.
+    </string>
     <string name="message_password_reset_sent">Ваш пароль надіслано на Ваш email.</string>
     <string name="mail_subject_password_reset">IWMY Speed Dating - нагадування паролю</string>
     <string name="mail_subject_organizer_confirmation">Вашу заявку в IWMY - Speed dating було підтверджено</string>
     <string name="mail_text_organizer_confirmation">
-Вітаємо! Вашу заявку на реєстрацію у програмі IWMY - Speed dating у якості організатора було підтверджено! Тепер Ви можете створювати заходи на Вашому мобільному пристрої, а також керувати ними. Сподіваємося, що наша програма стане для Вас яскравим та ефективним відкриттям! Якщо у Вас виникли питання стосовно програми або співробітництва - напишіть нам на електронну скриньку і ми відповімо у найкоротші терміни:\nCONTACTS_SPEED_DATING\n\n
-Приємного користування!\n\n
-Команда IWMY
+        Вітаємо! Вашу заявку на реєстрацію у програмі IWMY - Speed dating у якості організатора
+        було підтверджено! Тепер Ви можете створювати заходи на Вашому мобільному пристрої,
+        а також керувати ними. Сподіваємося, що наша програма стане для Вас яскравим та ефективним
+        відкриттям! Якщо у Вас виникли питання стосовно програми або співробітництва - напишіть
+        нам на електронну скриньку і ми відповімо у найкоротші терміни:
+        \nCONTACTS_SPEED_DATING
+        \n
+        \nПриємного користування!
+        \n
+        \nКоманда IWMY
     </string>
 </resources>

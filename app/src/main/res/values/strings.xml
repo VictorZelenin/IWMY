@@ -142,7 +142,10 @@
     </string>
     <string name="message_photo_getting_error">Error. Cannot get a photo.</string>
     <string name="message_user_exists">User already exists. Please enter other email or username</string>
-    <string name="message_event_exists">You already created an event at this place or time. Please enter other place or time, or edit/delete the older event.</string>
+    <string name="message_event_exists">
+        You already created an event at this place or time.
+        Please enter other place or time, or edit/delete the older event.
+    </string>
     <string name="message_participant_added">Participant added</string>
     <string name="message_event_added">Event added</string>
     <string name="message_input_error">please check this field.</string>
@@ -191,37 +194,73 @@
     <string name="mail_subject_user_thank_you">Thank you for participating in the speed dating!</string>
     <string name="mail_subject_password_reset">IWMY Speed Dating - password reminding</string>
     <string name="mail_text_organizer_confirmation">
-Your request for registering your IWMY Speed Dating account as an organizer was satisfied! Now you can create and edit events using your device. We hope our app will become an effective discovery for you! If you have any questions regarding the app or collaboration, feel free to write an email to us, we will answer shortly:\nCONTACTS_SPEED_DATING\n\n
-Best regards,\n
-The IWMY team
+        Your request for registering your IWMY Speed Dating account as an organizer was satisfied!
+        Now you can create and edit events using your device.
+        We hope our app will become an effective discovery for you!
+        If you have any questions regarding the app or collaboration,
+        feel free to write an email to us, we will answer shortly:
+        \nCONTACTS_SPEED_DATING
+        \n
+        \nBest regards,
+        \nThe IWMY team
     </string>
     <string name="mail_text_organizer_event_successful">
-The dating was successful. The number of matching couples: COUPLE_COUNT. Contacts of matching couples: \n\nCONTACTS_COUPLE_LIST\n\n
-Thank you for using our application! Our contact info: CONTACTS_SPEED_DATING
+        The dating was successful. The number of matching couples: COUPLE_COUNT.
+        Contacts of matching couples:
+        \n
+        \nCONTACTS_COUPLE_LIST
+        \n
+        \nThank you for using our application! Our contact info: CONTACTS_SPEED_DATING
     </string>
     <string name="mail_text_user_one_couple">
-At the speed dating you and one of the participants made a couple! It\'s time to know each other better! Congratulations! Their contact info: \n\nCONTACTS_ONE_COUPLE\n\n
-Thank you for participation!\n\n
-Organizer\'s contact info: \nCONTACTS_ORGANIZER\n\n
-Our contact info: \nCONTACTS_SPEED_DATING
+        At the speed dating you and one of the participants made a couple!
+        It\'s time to know each other better! Congratulations! Their contact info:
+        \n
+        \nCONTACTS_ONE_COUPLE
+        \n
+        \nThank you for participation!
+        \n
+        \nOrganizer\'s contact info:
+        \nCONTACTS_ORGANIZER
+        \n
+        \nOur contact info:
+        \nCONTACTS_SPEED_DATING
     </string>
     <string name="mail_text_user_many_couples">
-At the speed dating COUPLE_COUNT people liked you! It\'s time to know each other better! Our congratulations! Their contact info: \n\nCONTACTS_MANY_COUPLES\n\n
-Thank you for participation!\n\n
-Organizer\'s contact info: \nCONTACTS_ORGANIZER\n\n
-Our contact info: \nCONTACTS_SPEED_DATING
+        At the speed dating COUPLE_COUNT people liked you!
+        It\'s time to know each other better! Our congratulations! Their contact info:
+        \n
+        \nCONTACTS_MANY_COUPLES
+        \n
+        \nThank you for participation!
+        \n
+        \nOrganizer\'s contact info:
+        \nCONTACTS_ORGANIZER
+        \n
+        \nOur contact info:
+        \nCONTACTS_SPEED_DATING
     </string>
     <string name="mail_text_user_no_couples">
-Thank you for attending our event. We hope you had good time there! Unfortunately, this time reciprocity wasn\'t achieved, but it will be all right.\n\n
-We are gladly waiting for you at the next dating! Luck will be with you!\n\n
-Organizer\'s contact info: \nCONTACTS_ORGANIZER\n\n
-Our contact info: \nCONTACTS_SPEED_DATING
+        Thank you for attending our event. We hope you had good time there!
+        Unfortunately, this time reciprocity wasn\'t achieved, but it will be all right.
+        \n
+        \nWe are gladly waiting for you at the next dating! Luck will be with you!
+        \n
+        \nOrganizer\'s contact info: \nCONTACTS_ORGANIZER
+        \n
+        \nOur contact info:
+        \nCONTACTS_SPEED_DATING
     </string>
     <string name="mail_text_password_reset">
-Password reminding was requested for your account at IWMY Speed Dating.\n\n
-Your password is\nPASSWORD\n\n
-If it was not you, please contact us.\n\n
-Our contact info: \nCONTACTS_SPEED_DATING
+        Password reminding was requested for your account at IWMY Speed Dating.
+        \n
+        \nYour password is
+        \nPASSWORD
+        \n
+        \nIf it was not you, please contact us.
+        \n
+        \nOur contact info:
+        \nCONTACTS_SPEED_DATING
     </string>
 
 </resources>
