@@ -11,6 +11,8 @@
     <dimen name="toolbar_height">60dp</dimen>
     <dimen name="list_spacer_height">2dp</dimen>
     <dimen name="list_spacer_height_overlap">-2.5dp</dimen>
+    <dimen name="progress_bar_height">2dp</dimen>
+    <dimen name="progress_bar_height_overlap">-2.5dp</dimen>
 
     <dimen name="start_title_text_size">30sp</dimen>
     <dimen name="toolbar_text_size">25sp</dimen>

@@ -42,6 +42,8 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <include layout="@layout/progress_bar"/>
+
     <LinearLayout
         android:background="@color/gray"
         android:orientation="horizontal"

@@ -22,6 +22,8 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <include layout="@layout/progress_bar"/>
+
     <Button
         android:id="@+id/button_edit_my_profile"
         android:text="@string/button_edit_my_profile"

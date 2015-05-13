@@ -31,6 +31,8 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <include layout="@layout/progress_bar"/>
+
     <EditText
         android:id="@+id/input_search_email_name_username"
         android:hint="@string/hint_search_email_name_username"

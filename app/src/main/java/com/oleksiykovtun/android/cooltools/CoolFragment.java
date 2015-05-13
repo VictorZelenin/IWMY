@@ -190,12 +190,8 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
     protected void onTimerTick() {
     }
 
-    public void onPostReceive(List responseObjectList) {
-    }
-
     @Override
-    public void onPostReceive(String tag, List responseObjectList) {
-        onPostReceive(responseObjectList);
+    public void onPostReceiveObjectList(String tag, List responseObjectList) {
     }
 
     @Override

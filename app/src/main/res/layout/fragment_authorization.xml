@@ -22,6 +22,8 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <include layout="@layout/progress_bar"/>
+
     <EditText
         android:id="@+id/input_username"
         android:hint="@string/hint_email_or_username"

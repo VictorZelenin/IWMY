@@ -30,6 +30,8 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <include layout="@layout/progress_bar"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/event_list_holder"
         android:scrollbars="vertical"
