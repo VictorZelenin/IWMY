@@ -181,10 +181,9 @@
     <string name="menu_from_gallery">From gallery</string>
 
     <integer-array name="app_theme_colors">
-        <item>@color/main_color</item>
         <item>@color/accent_color</item>
-        <item>@color/main_color</item>
         <item>@color/white</item>
+        <item>@color/accent_color</item>
     </integer-array>
 
     <color name="accent_color">#0098FF</color>

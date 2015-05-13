@@ -4,6 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="@dimen/progress_bar_height"
-    android:layout_marginBottom="@dimen/progress_bar_height_overlap"
+    android:layout_marginTop="@dimen/progress_bar_height_overlap"
     android:visibility="invisible"
     android:indeterminate="true"/>

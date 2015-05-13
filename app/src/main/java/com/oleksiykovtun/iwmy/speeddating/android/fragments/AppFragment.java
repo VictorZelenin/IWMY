@@ -70,7 +70,6 @@ public abstract class AppFragment extends CoolFragment {
     public void onPause() {
         super.onPause();
         stopUpdatingProgressBar();
-        hideUpdatingProgressBar();
     }
 
 
@@ -84,12 +83,6 @@ public abstract class AppFragment extends CoolFragment {
     private void stopUpdatingProgressBar() {
         if (getUpdatingProgressBar() != null) {
             getUpdatingProgressBar().progressiveStop();
-        }
-    }
-
-    private void hideUpdatingProgressBar() {
-        if (getUpdatingProgressBar() != null) {
-            getUpdatingProgressBar().setVisibility(View.INVISIBLE);
         }
     }
 
