@@ -39,12 +39,13 @@ public class EmailRestService extends GeneralRestService {
             try {
                 MimeMessage message
                         = new MimeMessage(Session.getDefaultInstance(new Properties(), null));
-                message.setFrom(new InternetAddress(email.getFromAddress(), email.getFromName()));
+                message.setFrom(new InternetAddress(email.getFromAddress(), email.getFromName(),
+                        "utf-8"));
                 if (! email.getToAddress().matches(Email.VALIDATION_REGEX)) {
                     throw new Exception("Receiver's email address is invalid");
                 }
                 message.addRecipient(Message.RecipientType.TO,
-                        new InternetAddress(email.getToAddress(), email.getToName()));
+                        new InternetAddress(email.getToAddress(), email.getToName(), "utf-8"));
                 message.setSubject(email.getSubject(), "utf-8");
                 message.setText(email.getMessage(), "utf-8");
                 Transport.send(message);
