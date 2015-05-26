@@ -38,27 +38,6 @@ public class UserProfileCoupleFragment extends AppFragment {
                 coupleUser.getPhone());
         setText(R.id.label_gender, R.string.label_gender,
                 coupleUser.getGender());
-        setText(R.id.label_orientation, R.string.label_orientation,
-                coupleUser.getOrientation());
-        // todo add missing field to User
-        setText(R.id.label_appearance, R.string.label_appearance,
-                "");
-        setText(R.id.label_goal, R.string.label_goal,
-                "");
-        setText(R.id.label_affairs, R.string.label_affairs,
-                "");
-        // todo add missing field to User
-        setText(R.id.label_children, R.string.label_children,
-                "");
-        setText(R.id.label_height, R.string.label_height,
-                coupleUser.getHeight());
-        setText(R.id.label_weight, R.string.label_weight,
-                coupleUser.getWeight());
-        setText(R.id.label_attitude_to_smoking, R.string.label_attitude_to_smoking,
-                coupleUser.getAttitudeToSmoking());
-        setText(R.id.label_attitude_to_alcohol, R.string.label_attitude_to_alcohol,
-                coupleUser.getAttitudeToAlcohol());
-
         return view;
     }
 

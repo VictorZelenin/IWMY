@@ -90,69 +90,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <TextView
-                android:id="@+id/label_orientation"
-                android:text="@string/label_orientation"
-                android:textSize="@dimen/label_text_size"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/label_appearance"
-                android:text="@string/label_appearance"
-                android:textSize="@dimen/label_text_size"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/label_goal"
-                android:text="@string/label_goal"
-                android:textSize="@dimen/label_text_size"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/label_affairs"
-                android:text="@string/label_affairs"
-                android:textSize="@dimen/label_text_size"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/label_children"
-                android:text="@string/label_children"
-                android:textSize="@dimen/label_text_size"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/label_height"
-                android:text="@string/label_height"
-                android:textSize="@dimen/label_text_size"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/label_weight"
-                android:text="@string/label_weight"
-                android:textSize="@dimen/label_text_size"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/label_attitude_to_smoking"
-                android:text="@string/label_attitude_to_smoking"
-                android:textSize="@dimen/label_text_size"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/label_attitude_to_alcohol"
-                android:text="@string/label_attitude_to_alcohol"
-                android:textSize="@dimen/label_text_size"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
         </LinearLayout>
 
     </ScrollView>
