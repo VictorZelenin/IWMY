@@ -8,6 +8,17 @@ import java.text.SimpleDateFormat;
  */
 public class Time {
 
+    public static long getMillisFromDateTime(String dateTimeString) {
+        final String dateTimeFormat = "yyyy-MM-dd HH:mm";
+        long unixTimeOfDate;
+        try {
+            unixTimeOfDate = new SimpleDateFormat(dateTimeFormat).parse(dateTimeString).getTime();
+        } catch (ParseException e) {
+            return 0;
+        }
+        return System.currentTimeMillis() - unixTimeOfDate;
+    }
+
     public static String getYearsFromDate(String dateString) {
         final String dateFormat = "yyyy-MM-dd";
         long unixTimeOfDate;

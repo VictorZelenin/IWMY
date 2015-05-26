@@ -13,6 +13,7 @@ import com.oleksiykovtun.android.cooltools.CoolFragment;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
+import com.oleksiykovtun.iwmy.speeddating.Time;
 import com.oleksiykovtun.iwmy.speeddating.android.Account;
 import com.oleksiykovtun.iwmy.speeddating.android.adapters.EventRecyclerAdapter;
 import com.oleksiykovtun.iwmy.speeddating.android.fragments.AppFragment;
@@ -52,8 +53,14 @@ public class EventListFragment extends AppFragment {
 
     @Override
     public void onPostReceive(List response) {
+        // filtering by expiration time on device to ensure relativity to device time
+        final long eventExpirationTimeMillis = 3600000;
         eventList.clear();
-        eventList.addAll(response);
+        for (Event event : (List<Event>)response) {
+            if (Time.getMillisFromDateTime(event.getTime()) < eventExpirationTimeMillis) {
+                eventList.add(event);
+            }
+        }
         eventRecyclerAdapter.notifyDataSetChanged();
     }
 

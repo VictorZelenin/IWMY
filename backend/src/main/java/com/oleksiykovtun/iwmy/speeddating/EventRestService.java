@@ -96,7 +96,8 @@ public class EventRestService extends GeneralRestService {
                         ? Integer.MIN_VALUE : Integer.parseInt(event.getMinAllowedAge().trim());
                 int maxEventAllowedAge = (event.getMaxAllowedAge().length() == 0)
                         ? Integer.MAX_VALUE : Integer.parseInt(event.getMaxAllowedAge().trim());
-                if (minEventAllowedAge <= userAge && userAge <= maxEventAllowedAge) {
+                if (minEventAllowedAge <= userAge && userAge <= maxEventAllowedAge
+                        && ! event.getActual().equals("false")) {
                     userEvents.add(event);
                 }
             }
