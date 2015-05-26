@@ -241,6 +241,17 @@ public class EventRestService extends GeneralRestService {
         return newEvents;
     }
 
+    @Path(Api.GET_COUNT) @GET @Produces(JSON)
+    public String getCount() {
+        return "" + ObjectifyService.ofy().load().type(Event.class).list().size();
+    }
+
+    @Path(Api.GET_COUNT_ACTUAL) @GET @Produces(JSON)
+    public String getCountActual() {
+        return "" + ObjectifyService.ofy().load().type(Event.class)
+                .filter("actual", "true").list().size();
+    }
+
     @Path(Api.DEBUG_GET_ALL) @GET @Produces(JSON)
     public static List debugGetAll() {
         return getAll();

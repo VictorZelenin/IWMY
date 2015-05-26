@@ -150,6 +150,10 @@ public class CoupleRestService extends GeneralRestService {
         return put(eventRelatedItems);
     }
 
+    @Path(Api.GET_COUNT) @GET @Produces(JSON)
+    public String getCount() {
+        return "" + ObjectifyService.ofy().load().type(Couple.class).list().size();
+    }
 
     public static List getAll() {
         return new ArrayList<>(ObjectifyService.ofy().load().type(Couple.class).list());
