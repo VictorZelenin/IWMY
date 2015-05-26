@@ -1,84 +1,96 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/main_color"
-    android:gravity="center_horizontal"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/list_spacer_height_overlap">
+
+    <include layout="@layout/linear_layout_list_spacer"/>
 
     <LinearLayout
-        android:layout_weight="1"
-        android:layout_width="0dp"
+        android:background="@color/main_color"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/image_user_pic_1"
-            android:src="@drawable/no_photo_man"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            android:layout_width="@dimen/image_preview_size"
-            android:layout_height="@dimen/image_preview_size" />
-
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_marginStart="@dimen/label_margin"
-            android:layout_marginLeft="@dimen/label_margin"
-            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/label_user_name_1"
-                android:text="@string/label_user_name"
-                android:textSize="@dimen/label_text_size"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/image_user_pic_1"
+                android:src="@drawable/no_photo_man"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:layout_width="@dimen/image_preview_size"
+                android:layout_height="@dimen/image_preview_size" />
 
-            <TextView
-                android:id="@+id/label_user_age_1"
-                android:text="@string/label_user_age"
-                android:textSize="@dimen/label_text_size"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/label_margin"
+                android:layout_marginLeft="@dimen/label_margin"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/label_user_name_1"
+                    android:text="@string/label_user_name"
+                    android:textSize="@dimen/label_text_size"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/label_user_age_1"
+                    android:text="@string/label_user_age"
+                    android:textSize="@dimen/label_text_size"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image_user_pic_2"
+                android:src="@drawable/no_photo_woman"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:layout_width="@dimen/image_preview_size"
+                android:layout_height="@dimen/image_preview_size" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/label_margin"
+                android:layout_marginLeft="@dimen/label_margin"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/label_user_name_2"
+                    android:text="@string/label_user_name"
+                    android:textSize="@dimen/label_text_size"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/label_user_age_2"
+                    android:text="@string/label_user_age"
+                    android:textSize="@dimen/label_text_size"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/image_user_pic_2"
-            android:src="@drawable/no_photo_woman"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            android:layout_width="@dimen/image_preview_size"
-            android:layout_height="@dimen/image_preview_size" />
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_marginStart="@dimen/label_margin"
-            android:layout_marginLeft="@dimen/label_margin"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/label_user_name_2"
-                android:text="@string/label_user_name"
-                android:textSize="@dimen/label_text_size"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/label_user_age_2"
-                android:text="@string/label_user_age"
-                android:textSize="@dimen/label_text_size"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-    </LinearLayout>
+    <include layout="@layout/linear_layout_list_spacer"/>
 
 </LinearLayout>
