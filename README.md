@@ -1,6 +1,6 @@
 # IWMY Speed Dating
 
-This app for the social service [want2meetu.com](http://want2meetu.com) is currently released [at Google Play](https://play.google.com/store/apps/details?id=com.oleksiykovtun.iwmy.speeddating).
+This app for the social service [want2meetu.com](http://want2meetu.com) is currently released [on Google Play](https://play.google.com/store/apps/details?id=com.oleksiykovtun.iwmy.speeddating).
 
 
 ## For Developers
@@ -77,7 +77,7 @@ The release certificate is used for signing this flavor of the app. You should p
 
 For building the signed app, run the command:
 
-    gradlew installGeneralRelease
+    gradlew assembleGeneralRelease
 
 You will be prompted for your keystore/key password.
 
