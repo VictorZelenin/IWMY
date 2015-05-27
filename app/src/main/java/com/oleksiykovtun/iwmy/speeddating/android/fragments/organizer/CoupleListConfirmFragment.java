@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.oleksiykovtun.android.cooltools.CoolFragment;
+import com.oleksiykovtun.android.cooltools.CoolApplication;
 import com.oleksiykovtun.android.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.R;
@@ -100,37 +100,43 @@ public class CoupleListConfirmFragment extends AppFragment {
     private List<Email> getCouplesConfirmationEmails() {
         List<Email> emails = new ArrayList<>();
         emails.add(getEmailForOrganizer());
-        for (User user : getUniqueUsersFromCouples()) {
-            Email userEmail = new Email(Api.APP_EMAIL, "" + getText(R.string.app_name),
-                    user.getEmail(), user.getNameAndSurname(), "", "");
-            String subject;
-            String message;
-            User[] coupleUsers = getCoupleUsersForUser(user);
-            switch (coupleUsers.length) {
-                case 0:
-                    subject = "" + getText(R.string.mail_subject_user_thank_you);
-                    message = "" + getText(R.string.mail_text_user_no_couples);
-                    break;
-                case 1:
-                    subject = "" + getText(R.string.mail_subject_user_you_found);
-                    message = "" + getText(R.string.mail_text_user_one_couple);
-                    break;
-                default:
-                    subject = "" + getText(R.string.mail_subject_user_you_found);
-                    message = "" + getText(R.string.mail_text_user_many_couples);
-                    break;
+        if (isSendingCoupleEmails()) {
+            for (User user : getUniqueUsersFromCouples()) {
+                Email userEmail = new Email(Api.APP_EMAIL, "" + getText(R.string.app_name),
+                        user.getEmail(), user.getNameAndSurname(), "", "");
+                String subject;
+                String message;
+                User[] coupleUsers = getCoupleUsersForUser(user);
+                switch (coupleUsers.length) {
+                    case 0:
+                        subject = "" + getText(R.string.mail_subject_user_thank_you);
+                        message = "" + getText(R.string.mail_text_user_no_couples);
+                        break;
+                    case 1:
+                        subject = "" + getText(R.string.mail_subject_user_you_found);
+                        message = "" + getText(R.string.mail_text_user_one_couple);
+                        break;
+                    default:
+                        subject = "" + getText(R.string.mail_subject_user_you_found);
+                        message = "" + getText(R.string.mail_text_user_many_couples);
+                        break;
+                }
+                message = message.replace("COUPLE_COUNT", "" + coupleUsers.length);
+                message = message.replace("CONTACTS_ONE_COUPLE", getUserContactInfo(coupleUsers[0]));
+                message = message.replace("CONTACTS_MANY_COUPLES", getUsersContactInfo(coupleUsers));
+                message = message.replace("CONTACTS_ORGANIZER", event.getOrganizerEmail() + "\n"
+                        + Account.getUser().getPhone() + "\n" + event.getFullStreetAddress());
+                message = message.replace("CONTACTS_SPEED_DATING", Api.APP_SUPPORT_EMAIL);
+                userEmail.setSubject(subject);
+                userEmail.setMessage(message);
+                emails.add(userEmail);
             }
-            message = message.replace("COUPLE_COUNT", "" + coupleUsers.length);
-            message = message.replace("CONTACTS_ONE_COUPLE", getUserContactInfo(coupleUsers[0]));
-            message = message.replace("CONTACTS_MANY_COUPLES", getUsersContactInfo(coupleUsers));
-            message = message.replace("CONTACTS_ORGANIZER", event.getOrganizerEmail() + "\n"
-                    + Account.getUser().getPhone() + "\n" + event.getFullStreetAddress());
-            message = message.replace("CONTACTS_SPEED_DATING", Api.APP_SUPPORT_EMAIL);
-            userEmail.setSubject(subject);
-            userEmail.setMessage(message);
-            emails.add(userEmail);
         }
         return emails;
+    }
+
+    private boolean isSendingCoupleEmails() {
+        return CoolApplication.readPreferences(SettingsFragment.SEND_COUPLE_EMAILS, true);
     }
 
     private String getUserContactInfo(User user) {

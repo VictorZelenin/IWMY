@@ -26,7 +26,7 @@
 
     <TextView
         android:id="@+id/label_max_ratings"
-        android:text="@string/label_name_and_surname"
+        android:text="@string/label_max_ratings"
         android:textSize="@dimen/label_text_size"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -36,6 +36,16 @@
         android:max="19"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"  />
+
+    <CheckBox
+        android:id="@+id/checkbox_send_couple_emails"
+        android:text="@string/label_send_couple_emails"
+        android:checked="true"
+        android:textSize="@dimen/label_text_size"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_marginBottom="@dimen/margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/button_logout"

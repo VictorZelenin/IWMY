@@ -237,4 +237,5 @@
         \n
         \nКоманда IWMY
     </string>
+    <string name="label_send_couple_emails">Надсилати email новим парам</string>
 </resources>

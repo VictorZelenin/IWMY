@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.SeekBar;
 
 import com.oleksiykovtun.android.cooltools.CoolApplication;
@@ -21,6 +23,7 @@ import com.oleksiykovtun.iwmy.speeddating.android.fragments.StartFragment;
 public class SettingsFragment extends AppFragment {
 
     public static final String MAX_RATINGS = "maxRatings";
+    public static final String SEND_COUPLE_EMAILS = "sendCoupleEmails";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,11 +32,27 @@ public class SettingsFragment extends AppFragment {
         registerContainerView(view);
         registerClickListener(R.id.button_logout);
 
+        setMaxRatingsPerUser();
+        setSendCoupleEmails();
+
+        return view;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.button_logout:
+                Account.removeUser();
+                CoolFragmentManager.showAtBottom(new StartFragment());
+        }
+    }
+
+    private void setMaxRatingsPerUser() {
         int maxRatingsPerUser = CoolApplication.readPreferences(MAX_RATINGS, 1);
 
         setText(R.id.label_max_ratings, R.string.label_max_ratings, " " + maxRatingsPerUser);
 
-        SeekBar maxRatingsSeekBar = (SeekBar)getViewById(R.id.seekbar_max_ratings);
+        SeekBar maxRatingsSeekBar = (SeekBar) getViewById(R.id.seekbar_max_ratings);
         maxRatingsSeekBar.setProgress(maxRatingsPerUser - 1);
 
         maxRatingsSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -52,17 +71,19 @@ public class SettingsFragment extends AppFragment {
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
-
-        return view;
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.button_logout:
-                Account.removeUser();
-                CoolFragmentManager.showAtBottom(new StartFragment());
-        }
-    }
+    private void setSendCoupleEmails() {
+        boolean sendCoupleEmails = CoolApplication.readPreferences(SEND_COUPLE_EMAILS, true);
 
+        CheckBox sendCoupleEmailsCheckBox = (CheckBox) getViewById(R.id.checkbox_send_couple_emails);
+        sendCoupleEmailsCheckBox.setChecked(sendCoupleEmails);
+
+        sendCoupleEmailsCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                CoolApplication.writePreferences(SEND_COUPLE_EMAILS, isChecked);
+            }
+        });
+    }
 }

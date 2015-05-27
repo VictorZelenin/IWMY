@@ -38,6 +38,16 @@ public class CoolFormatter {
         return result;
     }
 
+    public static boolean parseBoolean(String string, boolean defaultValue) {
+        boolean result = defaultValue;
+        try {
+            result =  Boolean.parseBoolean(string);
+        } catch (Exception e) {
+            Log.d("IWMY", "Parsing error");
+        }
+        return result;
+    }
+
     private static boolean isDateOrTimeValid(String dateString, String formatString) {
         boolean value = true;
         try {

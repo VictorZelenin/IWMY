@@ -90,6 +90,7 @@
     <string name="label_event_is_old">This is an old event</string>
     <string name="label_enter_completely">Enter email, name or username completely to see all results</string>
     <string name="label_photo">Photo</string>
+    <string name="label_send_couple_emails">Send emails to matching couples</string>
     <string name="label_empty" translatable="false">-</string>
 
     <string name="button_login">Login</string>
