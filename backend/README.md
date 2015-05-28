@@ -30,7 +30,7 @@ the field is for use in the backend, or for purposes not yet implemented, and it
 must be not changed by the app in the existing objects and must be set empty in the new objects):
 
 | Field | Type | Description |
-| - | - | - |
+| ----- | ---- | ----------- |
 | _userId | String |  |
 | affair | String |  |
 | attitudeToAlcohol | String |  |
@@ -97,7 +97,7 @@ The event created by an organizer and attended by "normal users".
 Description of data fields:
 
 | Field | Type | Description |
-| - | - | - |
+| ----- | ---- | ----------- |
 | _eventId | String |  |
 | actual | String | Shows if this event is not yet actually held (`true`, the default value) or it is already (`false`) |
 | allowSendingRatings | String | Defines if the organizer of this event allows (`true`) or does not allow (`false`, the default value) "normal users" to start giving votes (ratings) at this event |
@@ -148,7 +148,7 @@ The record about a user attending an event.
 Description of data fields:
 
 | Field | Type | Description |
-| - | - | - |
+| ----- | ---- | ----------- |
 | _attendanceId | String |  |
 | active | String | Defines if the organizer of the event selected (`true`) the attending "normal user" of this event for giving votes (ratings) at this event, or not (`false`, the default value) |
 | creationTime | String |  |
@@ -181,7 +181,7 @@ The record about a pair of 2 users.
 Description of data fields:
 
 | Field | Type | Description |
-| - | - | - |
+| ----- | ---- | ----------- |
 | _coupleId | String |  |
 | birthDate1 | String | Birth date of the user 1 of the couple, in format `yyyy-MM-dd`, for example, `1970-01-01` |
 | birthDate2 | String | Birth date of the user 2 of the couple, in format `yyyy-MM-dd`, for example, `1970-01-01` |
@@ -228,7 +228,7 @@ The vote of a user for another user.
 Description of data fields:
 
 | Field | Type | Description |
-| - | - | - |
+| ----- | ---- | ----------- |
 | _ratingId | String |  |
 | actual | String | Defines if the voting (rating) is submitted (`true`) or still is supposed to be edited (`false`, the default value) |
 | comment | String | A note which the "normal user" temporarily, privately creates about the other "normal user" |
@@ -265,7 +265,7 @@ The record about an email sent or not sent from/to a user or the backend.
 Description of data fields:
 
 | Field | Type | Description |
-| - | - | - |
+| ----- | ---- | ----------- |
 | _emailId | String |  |
 | fromAddress | String | The sender's email address |
 | fromName | String | The email sender's name |
