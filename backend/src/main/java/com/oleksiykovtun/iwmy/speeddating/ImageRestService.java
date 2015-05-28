@@ -32,6 +32,7 @@ public class ImageRestService extends GeneralRestService {
                     + base64data.length();
             byte[] binaryData = Base64Converter.getBytesFromBase64String(base64data);
             Thumbnail thumbnail = new Thumbnail(path, binaryData);
+            thumbnail.setCreationTime(Time.getFullDateTimeNow());
             ObjectifyService.ofy().save().entity(thumbnail).now();
         }
         return path;
@@ -49,6 +50,7 @@ public class ImageRestService extends GeneralRestService {
                     + base64data.length();
             byte[] binaryData = Base64Converter.getBytesFromBase64String(base64data);
             Image image = new Image(path, binaryData);
+            image.setCreationTime(Time.getFullDateTimeNow());
             ObjectifyService.ofy().save().entity(image).now();
         }
         return path;

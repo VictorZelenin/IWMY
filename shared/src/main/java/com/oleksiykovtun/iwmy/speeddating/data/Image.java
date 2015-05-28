@@ -18,6 +18,7 @@ public class Image implements Serializable {
 
     private String path;
     private byte[] binaryData;
+    private String creationTime;
 
     public Image() { }
 
@@ -28,7 +29,7 @@ public class Image implements Serializable {
     }
 
     private void generateId() {
-        this._id = System.currentTimeMillis() + "_" + getPath();
+        this._id = getCreationTime() + " " + getPath();
     }
 
     public String getPath() {
@@ -37,6 +38,15 @@ public class Image implements Serializable {
 
     public void setPath(String path) {
         this.path = path;
+        generateId();
+    }
+
+    public String getCreationTime() {
+        return getNotNull(creationTime);
+    }
+
+    public void setCreationTime(String creationTime) {
+        this.creationTime = creationTime;
         generateId();
     }
 

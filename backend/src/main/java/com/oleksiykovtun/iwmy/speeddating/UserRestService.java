@@ -148,6 +148,7 @@ public class UserRestService extends GeneralRestService {
             // Forcing group
             for (User user : items) {
                 user.setGroup(User.USER);
+                user.setCreationTime(Time.getFullDateTimeNow());
             }
             return put(savePhotos(items));
         } else {
@@ -161,6 +162,7 @@ public class UserRestService extends GeneralRestService {
             // Forcing group and invalidating password
             for (User user : items) {
                 user.setGroup(User.PENDING_ORGANIZER);
+                user.setCreationTime(Time.getFullDateTimeNow());
                 String passwordLock = Math.abs(new Random(System.currentTimeMillis()).nextLong()) + "_";
                 user.setPassword(passwordLock + user.getPassword());
             }

@@ -52,6 +52,7 @@ public class User implements Serializable, Comparable<User> {
     private String website;
     private String isChecked;
     private String referralEmail;
+    private String creationTime;
 
     public User() { }
 
@@ -111,6 +112,14 @@ public class User implements Serializable, Comparable<User> {
 
     public void set_userId(String _userId) {
         this._userId = _userId;
+    }
+
+    public String getCreationTime() {
+        return getNotNull(creationTime);
+    }
+
+    public void setCreationTime(String creationTime) {
+        this.creationTime = creationTime;
     }
 
     public String group() {
