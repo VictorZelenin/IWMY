@@ -276,13 +276,13 @@ public class UserRestService extends GeneralRestService {
         return getForEvent(wildcardEvents);
     }
 
-    @Path(Api.GET_COUNT_ORGANIZERS) @GET @Produces(JSON)
+    @Path(Api.GET_COUNT_ORGANIZERS) @GET @Produces(TEXT)
     public String getCountOrganizers() {
         return "" + ObjectifyService.ofy().load().type(User.class)
                 .filter("group", User.ORGANIZER).list().size();
     }
 
-    @Path(Api.GET_COUNT_USERS) @GET @Produces(JSON)
+    @Path(Api.GET_COUNT_USERS) @GET @Produces(TEXT)
     public String getCountUsers() {
         return "" + ObjectifyService.ofy().load().type(User.class)
                 .filter("group", User.USER).list().size();
@@ -293,7 +293,7 @@ public class UserRestService extends GeneralRestService {
         return get(Arrays.asList(new User(email)));
     }
 
-    @Path(Api.DEBUG_DELETE + "/email={email}") @GET @Produces(JSON)
+    @Path(Api.DEBUG_DELETE + "/email={email}") @GET @Produces(TEXT)
     public String debugDelete(@PathParam("email") String email) {
         List usersToDelete = get(Arrays.asList(new User(email)));
         ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(User.class)

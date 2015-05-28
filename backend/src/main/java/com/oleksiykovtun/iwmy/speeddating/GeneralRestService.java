@@ -26,6 +26,7 @@ public class GeneralRestService {
     protected static final String CHARSET_UTF_8 = ";charset=utf-8";
     protected static final String JSON = MediaType.APPLICATION_JSON + CHARSET_UTF_8;
     protected static final String TEXT = MediaType.TEXT_PLAIN + CHARSET_UTF_8;
+    protected static final String JPEG = "image/jpeg";
 
     static {
         ObjectifyService.register(Attendance.class);

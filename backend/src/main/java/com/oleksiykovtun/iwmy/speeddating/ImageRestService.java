@@ -56,7 +56,7 @@ public class ImageRestService extends GeneralRestService {
         return path;
     }
 
-    @Path(Api.GET_THUMBNAIL + "/{path}") @GET @Produces("image/jpeg")
+    @Path(Api.GET_THUMBNAIL + "/{path}") @GET @Produces(JPEG)
     public static byte[] getThumbnail(@PathParam("path") String path) {
         List<Thumbnail> thumbnails = ObjectifyService.ofy().load().type(Thumbnail.class)
                 .filter("path", path).list();
@@ -67,7 +67,7 @@ public class ImageRestService extends GeneralRestService {
         }
     }
 
-    @Path(Api.GET + "/{path}") @GET @Produces("image/jpeg") // todo reuse thumbnail code
+    @Path(Api.GET + "/{path}") @GET @Produces(JPEG) // todo reuse thumbnail code
     public static byte[] get(@PathParam("path") String path) {
         List<Image> images = ObjectifyService.ofy().load().type(Image.class)
                 .filter("path", path).list();

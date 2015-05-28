@@ -242,12 +242,12 @@ public class EventRestService extends GeneralRestService {
         return newEvents;
     }
 
-    @Path(Api.GET_COUNT) @GET @Produces(JSON)
+    @Path(Api.GET_COUNT) @GET @Produces(TEXT)
     public String getCount() {
         return "" + ObjectifyService.ofy().load().type(Event.class).list().size();
     }
 
-    @Path(Api.GET_COUNT_ACTUAL) @GET @Produces(JSON)
+    @Path(Api.GET_COUNT_ACTUAL) @GET @Produces(TEXT)
     public String getCountActual() {
         return "" + ObjectifyService.ofy().load().type(Event.class)
                 .filter("actual", "true").list().size();
