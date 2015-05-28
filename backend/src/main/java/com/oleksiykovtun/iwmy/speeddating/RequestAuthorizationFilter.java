@@ -35,7 +35,7 @@ public class RequestAuthorizationFilter implements ContainerRequestFilter {
                 && !path.equals(Api.MAIL + Api.REQUEST_ORGANIZER)
                 && !path.equals(Api.USERS + Api.ADD_PENDING_ORGANIZER)
                 && !path.startsWith(Api.USERS + Api.ACTIVATE_PENDING_ORGANIZER)
-                && !path.startsWith(Api.IMAGES)
+                && !path.startsWith(Api.IMAGES + Api.GET)
                 && !path.equals(Api.USERS + Api.GET_COUNT_ORGANIZERS)
                 && !path.equals(Api.USERS + Api.GET_COUNT_USERS)
                 && !path.equals(Api.COUPLES + Api.GET_COUNT)

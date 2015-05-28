@@ -76,4 +76,16 @@ public class ImageRestService extends GeneralRestService {
         }
     }
 
+    @Path(Api.DEBUG_DELETE + "/{path}") @GET @Produces(TEXT)
+    public String debugDelete(@PathParam("path") String path) {
+        final int deletedImagesCount = ObjectifyService.ofy().load().type(Image.class)
+                .filter("path", path).count() + ObjectifyService.ofy().load().type(Thumbnail.class)
+                .filter("path", path).count();
+        ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(Image.class)
+                .filter("path", path).keys()).now();
+        ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(Thumbnail.class)
+                .filter("path", path).keys()).now();
+        return deletedImagesCount + " image(s) deleted";
+    }
+
 }
