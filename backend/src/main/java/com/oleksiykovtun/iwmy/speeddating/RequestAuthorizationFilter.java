@@ -4,6 +4,7 @@ import com.oleksiykovtun.iwmy.speeddating.data.User;
 import com.sun.jersey.spi.container.ContainerRequest;
 import com.sun.jersey.spi.container.ContainerRequestFilter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,11 +18,8 @@ public class RequestAuthorizationFilter implements ContainerRequestFilter {
 
     @Override
     public ContainerRequest filter(ContainerRequest request) throws WebApplicationException {
-        if (authorizationRequired(request)) {
-            List<User> authorizedUsers = getAuthorizedUsers(request);
-            if (authorizedUsers.size() != 1) {
-                throw new WebApplicationException(Response.Status.UNAUTHORIZED);
-            }
+        if (authorizationRequired(request) && getAuthorizedUsers(request).size() != 1) {
+            throw new WebApplicationException(Response.Status.UNAUTHORIZED);
         }
         return request;
     }
@@ -44,10 +42,19 @@ public class RequestAuthorizationFilter implements ContainerRequestFilter {
                 && !path.equals(Api.MAIL + Api.RESET_PASSWORD);
     }
 
+    private boolean isOnlyAdminAllowed(ContainerRequest request) {
+        return request.getPath().contains("/debug/");
+    }
+
     private List<User> getAuthorizedUsers(ContainerRequest request) {
         User wildcardUserToAuthorize
                 = new User(getAuthorizationId(request), getAuthorizationPassword(request),
                 "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+        // forbidding unauthorized admin requests
+        if (isOnlyAdminAllowed(request)
+                && ! wildcardUserToAuthorize.getEmail().equals(Api.APP_EMAIL)) {
+            return new ArrayList<>();
+        }
         return UserRestService.getLogin(Arrays.asList(wildcardUserToAuthorize));
     }
 
