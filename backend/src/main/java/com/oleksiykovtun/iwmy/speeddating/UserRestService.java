@@ -172,7 +172,7 @@ public class UserRestService extends GeneralRestService {
         }
     }
 
-    @Path(Api.ACTIVATE_PENDING_ORGANIZER + "/{token}") @GET @Produces(JSON)
+    @Path(Api.ACTIVATE_PENDING_ORGANIZER + "/{token}") @GET @Produces(TEXT)
     public String activatePendingOrganizer(@PathParam("token") String secretToken) {
         List<User> pendingOrganizers = getPendingOrganizers();
         int activationCount = 0;
