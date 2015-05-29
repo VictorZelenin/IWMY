@@ -316,7 +316,7 @@ will be `https://iwmy-speed-dating.appspot.com/events/get/count`.
 2. They consume and produce media type `application/json;charset=utf-8`
 (thus they require the HTTP header `Content-Type: application/json;charset=utf-8`).
 
-3. They produce and consume JSON arrays of objects in the bodies of the HTTP requests and responses.
+3. They consume and produce JSON arrays of objects in the bodies of the HTTP requests and responses.
 All JSON objects of the request or the response are of the same type.
 The types of JSON objects are specified for each API method,
 for the request and response, individually.
@@ -343,15 +343,262 @@ where `version` is the version of your application, including its name and platf
 For example, for an iOS app it can be `Content-Version: IWMY Speed Dating 2.1.4 for iOS`.
 It's recommended to include this header in your API calls permanently for debugging purposes.
 
-The list of General methods:
+The list of General method paths:
 
-*Coming soon*
+#### /users/get/for/event/active/reset
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Event | User | Yes |
+
+#### /users/remove/attendance
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Attendance | User | Yes |
+
+#### /users/get/for/event/active
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Event | User | Yes |
+
+#### /users/get/for/event
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Event | User | Yes |
+
+#### /users/get/for/event/lock
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Event | User | Yes |
+
+#### /users/get
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| User | User | Yes |
+
+#### /users/get/login
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| User | User | No |
+
+#### /users/add
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| User | User | No |
+
+#### /users/add/pending/organizer
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| User | User | No |
+
+#### /users/add/by/organizer
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| User | User | Yes |
+
+#### /users/replace
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| User | User | Yes |
+
+#### /users/get/other/for/event
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Event | User | Yes |
+
+#### /events/get
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Event | Event | Yes |
+
+#### /events/get/for/time
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Event | Event | Yes |
+
+#### /events/get/for/attendance/active
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Attendance | Event | Yes |
+
+#### /events/get/for/user
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| User | Event | Yes |
+
+#### /events/get/all/for/user
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| User | Event | Yes |
+
+#### /events/add
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Event | Event | Yes |
+
+#### /events/put
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Event | Event | Yes |
+
+#### /events/delete
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Event | Event | Yes |
+
+#### /events/set/unactual
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Event | Event | Yes |
+
+#### /events/set/user/ratings/allow
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Event | Event | Yes |
+
+#### /events/replace
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Event | Event | Yes |
+
+#### /attendances/toggle/active
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Attendance | Attendance | Yes |
+
+#### /attendances/get
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Attendance | Attendance | Yes |
+
+#### /attendances/get/for/event/active/check/voted
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Event | Attendance | Yes |
+
+#### /attendances/put
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Attendance | Attendance | Yes |
+
+#### /attendances/delete
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Attendance | Attendance | Yes |
+
+#### /couples/generate/for/event
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Event | Couple | Yes |
+
+#### /couples/put
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Couple | Couple | Yes |
+
+#### /couples/get/for/attendance
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Attendance | Couple | Yes |
+
+#### /couples/get/for/event
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Event | Couple | Yes |
+
+#### /ratings/get/for/attendance/active
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Attendance | Rating | Yes |
+
+#### /ratings/put/actual
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Rating | Rating | Yes |
+
+#### /ratings/put
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Rating | Rating | Yes |
+
+#### /mail/send
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Email | Email | Yes |
+
+#### /mail/request/organizer
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Email | Email | No |
+
+#### /mail/reset/password
+
+| Consumes | Produces | Basic Authorization |
+| -------- | -------- | ------------------- |
+| Email | Email | No |
 
 
 ### Special API methods
 
 The Special API methods have at least one characteristic different from the General methods
-(for example, a Special method is a HTTP GET method, not a POST one).
-They are described individually:
+(for example, a Special method can be an HTTP GET method, not a POST one).
+The characteristics not mentioned are the same as for the General methods.
 
-*Coming soon*
+***Note.*** GET methods do not consume content in requests,
+but still may require HTTP headers described above in characteristics.
+
+The list of Special method paths:
+
+#### /users/activate/pending/organizer/token
+
+| HTTP Method | Produces (Content-Type header) | Basic Authorization |
+| ----------- | ------------------------------ | ------------------- |
+| GET | *Plain text* (`Content-Type: text/plain;charset=utf-8`) | No |
+
+#### /images/get/thumbnail/path
+
+| HTTP Method | Produces (Content-Type header) | Basic Authorization |
+| ----------- | ------------------------------ | ------------------- |
+| GET | *JPEG image* (`Content-Type: image/jpeg`) | No |
+
+#### /images/get/path
+
+| HTTP Method | Produces (Content-Type header) | Basic Authorization |
+| ----------- | ------------------------------ | ------------------- |
+| GET | *JPEG image* (`Content-Type: image/jpeg`) | No |
