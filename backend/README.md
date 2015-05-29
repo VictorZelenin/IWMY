@@ -579,8 +579,9 @@ The thumbnail binary data size must be less than 5 kB (1 kB = 1000 bytes).
 The photo binary data size must be less than 500 kB.
 
 Produces an array of 1 User object which is stored in the backend database after replacement
-(if the new user data has `username` and `email` field values not yet used) or an empty array
-(if such username or email are already taken by other user before).
+(if the new user data has either new `username` and `email` field values not yet used,
+or the same ones),
+or an empty array (if such username or email were already taken by other user before).
 
 The value of the field `password` of the second User object passed to the method must be not empty.
 
@@ -609,11 +610,23 @@ returned in the array by the method.
 | ----------------- | ----------------- | ------------------- |
 | Event | Event | Yes |
 
+Gets all events created by the organizer whose email address equals the value
+of the field `organizerEmail` of the single Event object passed to the method.
+Other fields of the Event object passed to the method are ignored.
+
 #### /events/get/for/time
 
 | Consumes array of | Produces array of | Basic Authorization |
 | ----------------- | ----------------- | ------------------- |
 | Event | Event | Yes |
+
+Gets the event created by the organizer whose email address equals the value
+of the field `organizerEmail` and having start time which equals the value of the field `time`
+of the single Event object passed to the method.
+Other fields of the Event object passed to the method are ignored.
+
+Produces an array of 1 Event object if such event exists in the backend database,
+or an empty array otherwise.
 
 #### /events/get/for/attendance/active
 
@@ -621,11 +634,34 @@ returned in the array by the method.
 | ----------------- | ----------------- | ------------------- |
 | Attendance | Event | Yes |
 
+Gets all events attended by a user, Attendance record's
+`eventOrganizerEmail` field value of which equals the `organizerEmail` field value of each event
+returned by the method,
+`eventTime` field value of which equals the `time` field value of each event returned by the method,
+and `active` field value of which equals `true`
+which means that the "normal users" who attend the event are selected by the event organizer
+for giving votes (ratings) for other "normal users".
+
+Only those events are included which have the `maxRatingsPerUser` property set to `0`.
+It means that those events are not yet started by the organizer,
+and apps must not allow users to give votes (ratings) to other users at the event.
+
+If the attendance record doesn't apply to any user existing in the backend database
+attending the existing event, or there are no such an event which the user attends
+and the organizer of which selected him for giving votes (ratings) for other users,
+an empty list is returned.
+
 #### /events/get/for/user
 
 | Consumes array of | Produces array of | Basic Authorization |
 | ----------------- | ----------------- | ------------------- |
 | User | Event | Yes |
+
+Gets events attended by the user defined in the single User object sent to the method,
+and more precisely, by the `email` field value (other fields are ignored).
+
+If the user doesn't exist in the backend database or doesn't attend eny existing events,
+an empty array is returned.
 
 #### /events/get/all/for/user
 
@@ -633,11 +669,44 @@ returned in the array by the method.
 | ----------------- | ----------------- | ------------------- |
 | User | Event | Yes |
 
+Gets events attended by or available for attending by the user defined in the single User object
+sent to the method, and more precisely, by the `email` field value (other fields are ignored).
+
+The user's age (an integer number) is calculated by the backend from his birth date.
+If the user's age does not fall into the range between the `minAllowedAge` and `maxAllowedAge`
+field values of an event, that event is not included into the list to return by the method.
+The empty `minAllowedAge` and `maxAllowedAge` field value means 0 and infinity, respectively.
+
+If an event is already held (its `actual` field value is `false`),
+that event is not included into the list to return by the method.
+
+If the user doesn't exist in the backend database or doesn't attend eny existing events
+and no actual and age-fitting existing events are available for him, an empty array is returned.
+
 #### /events/add
 
 | Consumes array of | Produces array of | Basic Authorization |
 | ----------------- | ----------------- | ------------------- |
 | Event | Event | Yes |
+
+Adds the event, data of which is passed to the method in a single Event object,
+to the backend database. It's called when an organizer creates the event.
+
+The Event object passed to the method can have a user photo attached.
+In this case the `thumbnail` and `photo` field values must be not empty,
+but Base64-encoded binary data of the JPEG photo preview (thumbnail) and JPEG photo, respectively.
+The thumbnail binary data size must be less than 5 kB (1 kB = 1000 bytes).
+The photo binary data size must be less than 500 kB.
+
+Produces an array of 1 Event object if the event was successfully added,
+or an empty array if the actual event with such `organizerEmail` or `time` or `place` properties
+already exists, or if the non-actual event with such `organizerEmail` or `time` properties
+already exists in the backend database.
+(The actual event, with the `actual` property value `false`,
+is that one which was not yet actually held).
+
+If the event with photo (graphics) is added, the `photo` and `thumbnail` fields in the Event object
+in the response contain photo and thumbnail IDs instead of Base64 data, respectively.
 
 #### /events/put
 
@@ -645,11 +714,26 @@ returned in the array by the method.
 | ----------------- | ----------------- | ------------------- |
 | Event | Event | Yes |
 
+Saves the Event object passed to the method to the backend database.
+Used for overwriting some properties of the existing event.
+The event must already exist in the backend database.
+(The unique events are destinguished by `organizerEmail` and `time` properties.)
+
+Produces an array of 1 Event object, the same which was passed to the method.
+
 #### /events/delete
 
 | Consumes array of | Produces array of | Basic Authorization |
 | ----------------- | ----------------- | ------------------- |
 | Event | Event | Yes |
+
+Removes the event, defined by field values `organizerEmail` and `time`
+of the Event object passed to the method, to the backend database.
+Other fields on the Event object passed to the method are ignored
+
+Produces an empty array if the event was deleted,
+or the array of 1 Event object, the same which was passed to the method,
+if no such event existed in the backend database.
 
 #### /events/set/unactual
 
@@ -657,17 +741,63 @@ returned in the array by the method.
 | ----------------- | ----------------- | ------------------- |
 | Event | Event | Yes |
 
+Sets the event already held.
+In other words, for the event, defined by field values `organizerEmail` and `time`
+of the Event object passed to the method, the property `actual` is set to `false`.
+Other fields on the Event object passed to the method are ignored.
+
+This method is called when the previously "new" event was actually held
+and is marked as already held (and not anymore available for attending and holding).
+It's done when the couples are created in the event.
+
+Produces the array of 1 Event object which already has the `actual` field value `false`,
+or, if no such event existed in the backend database, an empty array.
+
 #### /events/set/user/ratings/allow
 
 | Consumes array of | Produces array of | Basic Authorization |
 | ----------------- | ----------------- | ------------------- |
 | Event | Event | Yes |
 
+Sets the event, for attending users who are selected by the event organizer
+for giving votes (ratings) for other users, available for actually submitting the votes (ratings).
+In other words, it sets the `allowSendingRatings` property of the event to `true`.
+The event is defined by by field values `organizerEmail` and `time` of the Event object
+passed to the method, other fields are ignored.
+
+This method is called when the event organizer finishes giving votes (ratings) for other users
+from behalf of the users whose accounts he created,
+and allows other users to submit their votes (ratings).
+
+Produces the array of 1 Event object which already has the `actual` field value `false`,
+or, if no such event existed in the backend database, an empty array.
+
 #### /events/replace
 
 | Consumes array of | Produces array of | Basic Authorization |
 | ----------------- | ----------------- | ------------------- |
 | Event | Event | Yes |
+
+Consumes the array of 2 Event objects: the first one contains the current organizer email and time
+as `organizerEmail` and `time` field values respectively (other fields are ignored),
+and the second one contains the full new data for the event to be put to the backend database
+instead of old data.
+
+This method is called when the organizer changes his event's data in the app.
+
+The second Event object passed to the method can have a photo (graphics) attached.
+In this case the `thumbnail` and `photo` field values must be not empty,
+but Base64-encoded binary data of the JPEG photo preview (thumbnail) and JPEG photo, respectively.
+The thumbnail binary data size must be less than 5 kB (1 kB = 1000 bytes).
+The photo binary data size must be less than 500 kB.
+
+Produces an array of 1 Event object which is stored in the backend database after replacement
+(if the new event data has either new `organizerEmail` and `time` field values not yet used,
+or they these field values remain the same)
+or an empty array (if such organizer email and time were already used in other event before).
+
+If the event photo is replaced with the new one, the `photo` and `thumbnail` fields in the Event
+object in the response contain new photo and thumbnail IDs instead of Base64 data, respectively.
 
 #### /attendances/toggle/active
 
@@ -795,11 +925,20 @@ The method also changes the organizer's `group` from `pendingOrganizer` to `orga
 | ----------- | ------------------------------ | ------------------- |
 | GET | *JPEG image* (`Content-Type: image/jpeg`) | No |
 
+Returns the small sized JPEG image, a preview (thumbnail) of the full-sized image.
+The `path` part of the whole path is the thumbnail ID
+which a User or Event object can contain as the value of the field `thumbnail`.
+The path is randomly generated by the backend when the thumbnail is uploaded.
+
 #### /images/get/path
 
 | HTTP Method | Produces (Content-Type header) | Basic Authorization |
 | ----------- | ------------------------------ | ------------------- |
 | GET | *JPEG image* (`Content-Type: image/jpeg`) | No |
+
+Returns the full-sized JPEG image. The `path` part of the whole path is the image ID
+which a User or Event object can contain as the value of the field `photo`.
+The path is randomly generated by the backend when the image is uploaded.
 
 #### /_ah/admin
 
