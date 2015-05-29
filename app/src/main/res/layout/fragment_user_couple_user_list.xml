@@ -39,6 +39,8 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/label_text_size" />
 
+    <include layout="@layout/linear_layout_list_spacer"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/couple_user_list_holder"
         android:scrollbars="vertical"

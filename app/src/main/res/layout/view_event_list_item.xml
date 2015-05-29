@@ -2,7 +2,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/list_spacer_height_overlap"
+    android:layout_marginTop="@dimen/list_spacer_height_overlap"
     android:longClickable="true">
 
     <include layout="@layout/linear_layout_list_spacer"/>

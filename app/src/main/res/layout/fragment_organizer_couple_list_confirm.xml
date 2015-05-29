@@ -40,6 +40,8 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/label_text_size" />
 
+    <include layout="@layout/linear_layout_list_spacer"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="fill_parent">
