@@ -692,7 +692,7 @@ and no actual and age-fitting existing events are available for him, an empty ar
 Adds the event, data of which is passed to the method in a single Event object,
 to the backend database. It's called when an organizer creates the event.
 
-The Event object passed to the method can have a user photo attached.
+The Event object passed to the method can have an event photo (graphics) attached.
 In this case the `thumbnail` and `photo` field values must be not empty,
 but Base64-encoded binary data of the JPEG photo preview (thumbnail) and JPEG photo, respectively.
 The thumbnail binary data size must be less than 5 kB (1 kB = 1000 bytes).
