@@ -107,7 +107,7 @@ Description of data fields:
 | description | String | The textual description of the event |
 | freePlaces | String | The number of attenders which are supposed to attend the event |
 | maxAllowedAge | String | Maximal age of "normal users" who can see and attend the event. An integer number. Empty if no limitation |
-| maxRatingsPerUser | String | Maximal quantity of other "normal users" to whom a "normal user" can give votes (positive ratings) at the event. An integer number. The default value is 1 |
+| maxRatingsPerUser | String | Maximal quantity of other "normal users" to whom a "normal user" can give votes (positive ratings) at the event. An integer number. The default value is 0 |
 | minAllowedAge | String | Minimal age of "normal users" who can see and attend the event. An integer number. Empty if no limitation |
 | organizerEmail | String | Email addredd of the organizer who created the event |
 | photo | String | Event photo or graphics ID |
@@ -347,230 +347,416 @@ The list of General method paths:
 
 #### /users/get/for/event/active/reset
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Event | User | Yes |
+
+For the event defined by the values of fields `organizerEmail` and `time` (other fields are ignored)
+of the single Event object passed to this method, the method does the following actions:
+
+1. Deletes all Rating and Couple entities which could be previously created at this event.
+
+2. Sets the `maxRatingsPerUser` property of the event to `0`.
+Apps must not allow users to give votes (ratings) to other users at the event
+if the `maxRatingsPerUser` property of the event is `0`.
+
+3. Sets the `allowSendingRatings` property of the event to `false`.
+Apps must not allow users who give votes (ratings) to other users at the event to submit them
+if the `allowSendingRatings` property of the event is not `true`.
+
+4. The "normal users" who attend the event are set to be not selected by the event organizer
+for giving votes (ratings) for other "normal users".
+
+5. Returns the "normal users" who attend the event.
+
+The users who attend the event are returned in the array of User objects.
+
+Sensitive information (the `password` field value) may be empty in each User object
+returned in the array by the method.
 
 #### /users/remove/attendance
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Attendance | User | Yes |
+
+Removes a "normal user" from an event by removing his attendance.
+The event and the attending user are defined by the values
+of fields `eventOrganizerEmail`, `eventTime` and `userEmail` of the single Attendance object.
+Other fields of the Attendance object are ignored.
+
+The users who remain attending the event are returned in the array of User objects.
+
+Sensitive information (the `password` field value) may be empty in each User object
+returned in the array by the method.
 
 #### /users/get/for/event/active
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Event | User | Yes |
+
+Gets the "normal users" who attend the event and are selected by the event organizer
+for giving votes (ratings) for other "normal users".
+The event is defined by the values of fields `organizerEmail` and `time` of the single Event object.
+Other fields of the Event object are ignored.
+
+The users who attend the event and are selected by the event organizer
+for giving votes (ratings) for other "normal users" are returned in the array of User objects.
+
+Sensitive information (the `password` field value) may be empty in each User object
+returned in the array by the method.
 
 #### /users/get/for/event
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Event | User | Yes |
+
+Gets the "normal users" who attend the event defined by
+the values of fields `organizerEmail` and `time` of the single Event object.
+Other fields of the Event object are ignored.
+
+The users who attend the event are returned in the array of User objects.
+
+Sensitive information (the `password` field value) may be empty in each User object
+returned in the array by the method.
 
 #### /users/get/for/event/lock
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Event | User | Yes |
+
+Prevents the "normal users" who attend the event defined by
+the values of fields `organizerEmail` and `time` of the single Event object
+from giving and submitting votes (ratings).
+Other fields of the Event object are ignored.
+
+Sets `maxRatingsPerUser` property of the event to `0` and `allowSendingRatings` property to `false`.
+
+Apps must not allow users to give votes (ratings) to other users at the event
+if the `maxRatingsPerUser` property of the event is `0`.
+
+Apps must not allow users who give votes (ratings) to other users at the event to submit them
+if the `allowSendingRatings` property of the event is not `true`.
+
+The users who attend the event are returned in the array of User objects.
+
+Sensitive information (the `password` field value) may be empty in each User object
+returned in the array by the method.
 
 #### /users/get
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | User | User | Yes |
+
+Gets the "normal user" whose email address equals the value of field `email`
+of the single User object passed to the method.
+Other fields of the User object passed to the method are ignored.
+
+Produces an array of 1 User object if such user exists in the backend database,
+or an empty array otherwise.
+
+Sensitive information (the `password` field value) may be empty in the User object
+returned in the array by the method.
 
 #### /users/get/login
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | User | User | No |
+
+Gets the "normal user" whose email address equals the value of field `email`
+and/or username equals the value of field `username`,
+and password equals the value of field `password`
+of the single User object passed to the method.
+Other fields of the User object passed to the method are ignored.
+
+The data of the User object returned by the method should be stored in the app as user account data.
+The Basic Authorization header is formed from the account data as well.
+
+Produces an array of 1 User object if such user exists in the backend database,
+and the password is correct, or an empty array otherwise.
 
 #### /users/add
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | User | User | No |
+
+Adds the "normal user" (`group` field value is forced to `user`)
+whose data is passed to the method in a single User object to the backend database.
+It's called when the "normal user" signs up.
+
+The User object passed to the method can have a user photo attached.
+In this case the `thumbnail` and `photo` field values must be not empty,
+but Base64-encoded binary data of the JPEG photo preview (thumbnail) and JPEG photo, respectively.
+The thumbnail binary data size must be less than 5 kB (1 kB = 1000 bytes).
+The photo binary data size must be less than 500 kB.
+
+The value of the field `password` must be not empty.
+
+Produces an array of 1 User object if the user was successfully added,
+or an empty array if the user with this username or email address already exists
+in the backend database.
+
+If the user with photo is added, the `photo` and `thumbnail` fields in the User object
+in the response contain photo and thumbnail IDs instead of Base64 data, respectively.
 
 #### /users/add/pending/organizer
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | User | User | No |
+
+Adds the not yet activated organizer (`group` field value is forced to `pendingOrganizer`)
+whose data is passed to the method in a single User object to the backend database.
+It's called when the organizer signs up.
+
+After signing up, the organizer cannot log in until he is activated manually by the admin.
+This is achieved by temporarily appending `_token` to the organizer's password,
+where `token` is a randomly generated secret number.
+The admin activates the pending organizer
+by calling the Special method `/users/activate/pending/organizer/token`
+which recovers the original password of the organizer (he can then log in)
+and changes his `group` from `pendingOrganizer` to `organizer`.
+
+The value of the field `password` must be not empty.
+
+Produces an array of 1 User object if the not yet activated organizer was successfully added,
+or an empty array if the user with this username or email address already exists
+in the backend database.
 
 #### /users/add/by/organizer
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | User | User | Yes |
+
+Adds the "normal user" (`group` field value is forced to `user`)
+whose data is passed to the method in a single User object to the backend database.
+It's called when the "normal user" is being registered by the organizer.
+
+The User object passed to the method can have a user photo attached.
+In this case the `thumbnail` and `photo` field values must be not empty,
+but Base64-encoded binary data of the JPEG photo preview (thumbnail) and JPEG photo, respectively.
+The thumbnail binary data size must be less than 5 kB (1 kB = 1000 bytes).
+The photo binary data size must be less than 500 kB.
+
+The value of the field `referralEmail` must be the email address of the organizer
+who registers the "normal user".
+
+The value of the field `password` must be empty.
+
+Produces an array of 1 User object if the user was successfully added,
+or an empty array if the user with this username or email address already exists
+in the backend database.
+
+If the user with photo is added, the `photo` and `thumbnail` fields in the User object
+in the response contain photo and thumbnail IDs instead of Base64 data, respectively.
 
 #### /users/replace
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | User | User | Yes |
+
+Consumes the array of 2 User objects: the first one contains the current username and email as
+`username` and `email` field values respectively (other fields are ignored),
+and the second one contains the full new data for the user to be put to the backend database
+instead of old data.
+
+This method is called when the user account data is being changed in the app.
+A "normal user" can change his own account data
+and an organizer can change the account data of a user whom he added personally.
+
+The second User object passed to the method can have a user photo attached.
+In this case the `thumbnail` and `photo` field values must be not empty,
+but Base64-encoded binary data of the JPEG photo preview (thumbnail) and JPEG photo, respectively.
+The thumbnail binary data size must be less than 5 kB (1 kB = 1000 bytes).
+The photo binary data size must be less than 500 kB.
+
+Produces an array of 1 User object which is stored in the backend database after replacement
+(if the new user data has `username` and `email` field values not yet used) or an empty array
+(if such username or email are already taken by other user before).
+
+The value of the field `password` of the second User object passed to the method must be not empty.
+
+If the user photo is replaced with the new one, the `photo` and `thumbnail` fields in the User
+object in the response contain new photo and thumbnail IDs instead of Base64 data, respectively.
 
 #### /users/get/other/for/event
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Event | User | Yes |
+
+Gets all "normal users" who are added by all organizers and are not attending the event defined by
+the values of fields `organizerEmail` and `time` of the single Event object passed to the method.
+Other fields of the Event object are ignored.
+
+This method is called to get the lists of existing "normal users"
+whom the organizer of the event can set to attend the event.
+
+Sensitive information (the `password` field value) may be empty in each User object
+returned in the array by the method.
 
 #### /events/get
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Event | Event | Yes |
 
 #### /events/get/for/time
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Event | Event | Yes |
 
 #### /events/get/for/attendance/active
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Attendance | Event | Yes |
 
 #### /events/get/for/user
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | User | Event | Yes |
 
 #### /events/get/all/for/user
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | User | Event | Yes |
 
 #### /events/add
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Event | Event | Yes |
 
 #### /events/put
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Event | Event | Yes |
 
 #### /events/delete
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Event | Event | Yes |
 
 #### /events/set/unactual
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Event | Event | Yes |
 
 #### /events/set/user/ratings/allow
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Event | Event | Yes |
 
 #### /events/replace
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Event | Event | Yes |
 
 #### /attendances/toggle/active
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Attendance | Attendance | Yes |
 
 #### /attendances/get
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Attendance | Attendance | Yes |
 
 #### /attendances/get/for/event/active/check/voted
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Event | Attendance | Yes |
 
 #### /attendances/put
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Attendance | Attendance | Yes |
 
 #### /attendances/delete
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Attendance | Attendance | Yes |
 
 #### /couples/generate/for/event
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Event | Couple | Yes |
 
 #### /couples/put
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Couple | Couple | Yes |
 
 #### /couples/get/for/attendance
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Attendance | Couple | Yes |
 
 #### /couples/get/for/event
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Event | Couple | Yes |
 
 #### /ratings/get/for/attendance/active
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Attendance | Rating | Yes |
 
 #### /ratings/put/actual
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Rating | Rating | Yes |
 
 #### /ratings/put
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Rating | Rating | Yes |
 
 #### /mail/send
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Email | Email | Yes |
 
 #### /mail/request/organizer
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Email | Email | No |
 
 #### /mail/reset/password
 
-| Consumes | Produces | Basic Authorization |
-| -------- | -------- | ------------------- |
+| Consumes array of | Produces array of | Basic Authorization |
+| ----------------- | ----------------- | ------------------- |
 | Email | Email | No |
 
 
@@ -591,6 +777,18 @@ The list of Special method paths:
 | ----------- | ------------------------------ | ------------------- |
 | GET | *Plain text* (`Content-Type: text/plain;charset=utf-8`) | No |
 
+Used only by admin and developers to activate the pending organizer.
+
+The `token` is a secret number randomly generated by the backend.
+Developers can find it after the last `_` in the pending organizer's password
+by using the Special method `/_ah/admin` when running the local (Developer) backend.
+In the production backend, the `token` is not known by anyone but the admin
+who receives it from the backend in an email.
+
+Removes the `_token` part from the organizer's password and recovers the original password.
+After that the organizer can log in with his password.
+The method also changes the organizer's `group` from `pendingOrganizer` to `organizer`.
+
 #### /images/get/thumbnail/path
 
 | HTTP Method | Produces (Content-Type header) | Basic Authorization |
@@ -602,3 +800,9 @@ The list of Special method paths:
 | HTTP Method | Produces (Content-Type header) | Basic Authorization |
 | ----------- | ------------------------------ | ------------------- |
 | GET | *JPEG image* (`Content-Type: image/jpeg`) | No |
+
+#### /_ah/admin
+
+This path should be used in the URL in browser, only when running the local (Developer) backend.
+It provides access to the Google App Engine Development Console
+where in Datastore Viewer the developer can see and delete the entities stored at the backend.
