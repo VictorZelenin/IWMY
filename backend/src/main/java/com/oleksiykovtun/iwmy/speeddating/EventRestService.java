@@ -242,15 +242,51 @@ public class EventRestService extends GeneralRestService {
         return newEvents;
     }
 
-    @Path(Api.GET_COUNT) @GET @Produces(TEXT)
+    @Deprecated @Path(Api.GET_COUNT) @GET @Produces(TEXT)
     public String getCount() {
         return "" + ObjectifyService.ofy().load().type(Event.class).list().size();
     }
 
-    @Path(Api.GET_COUNT_ACTUAL) @GET @Produces(TEXT)
+    @Deprecated @Path(Api.GET_COUNT_ACTUAL) @GET @Produces(TEXT)
     public String getCountActual() {
         return "" + ObjectifyService.ofy().load().type(Event.class)
                 .filter("actual", "true").list().size();
+    }
+
+    /**
+     * Gives the number of future actual events as plain text
+     * Event time is treated as UTC
+     * @return number of future actual events as plain text
+     */
+    @Path(Api.GET_COUNT_ACTUAL_FUTURE) @GET @Produces(TEXT)
+    public String getCountActualFuture() {
+        List<Event> actualEvents = ObjectifyService.ofy().load().type(Event.class)
+                .filter("actual", "true").list();
+        int futureEventCount = 0;
+        for (Event event : actualEvents) {
+            if (Time.getMillisFromDateTime(event.getTime()) < 0) {
+                ++futureEventCount;
+            }
+        }
+        return "" + futureEventCount;
+    }
+
+    /**
+     * Gives the number of future unactual events as plain text
+     * Event time is treated as UTC
+     * @return number of future unactual events as plain text
+     */
+    @Path(Api.GET_COUNT_UNACTUAL_FUTURE) @GET @Produces(TEXT)
+    public String getCountUnctualFuture() {
+        List<Event> unactualEvents = ObjectifyService.ofy().load().type(Event.class)
+                .filter("actual", "false").list();
+        int futureEventCount = 0;
+        for (Event event : unactualEvents) {
+            if (Time.getMillisFromDateTime(event.getTime()) < 0) {
+                ++futureEventCount;
+            }
+        }
+        return "" + futureEventCount;
     }
 
     @Path(Api.DEBUG_GET_ALL) @GET @Produces(JSON)

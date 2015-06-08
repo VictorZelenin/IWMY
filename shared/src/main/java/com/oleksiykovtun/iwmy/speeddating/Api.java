@@ -33,7 +33,9 @@ public class Api {
     public static final String SET_USER_RATINGS_ALLOW = "set/user/ratings/allow";
     public static final String DELETE = "delete";
     public static final String GET_COUNT = "get/count";
-    public static final String GET_COUNT_ACTUAL = "get/count/actual";
+    @Deprecated public static final String GET_COUNT_ACTUAL = "get/count/actual";
+    public static final String GET_COUNT_ACTUAL_FUTURE = "get/count/actual/future";
+    public static final String GET_COUNT_UNACTUAL_FUTURE = "get/count/unactual/future";
 
     public static final String ATTENDANCES = "/attendances/";
     public static final String TOGGLE_ACTIVE = "toggle/active";
