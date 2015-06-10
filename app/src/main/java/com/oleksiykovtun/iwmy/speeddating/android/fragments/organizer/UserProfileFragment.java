@@ -45,6 +45,8 @@ public class UserProfileFragment extends AppFragment {
         setText(R.id.label_name_and_surname,
                 R.string.label_name_and_surname, user.getNameAndSurname());
         setText(R.id.label_birth_date, R.string.label_birth_date, user.getBirthDate());
+        setText(R.id.label_city, R.string.label_city, user.getCity());
+        setText(R.id.label_country, R.string.label_country, user.getCountry());
         setText(R.id.label_gender, R.string.label_gender, user.getGender());
         setText(R.id.label_email, R.string.label_email, user.getEmail());
         setText(R.id.label_phone, R.string.label_phone, user.getPhone());

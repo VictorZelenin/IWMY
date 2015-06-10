@@ -71,7 +71,7 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/label_event_city"
+        android:text="@string/label_city"
         android:textSize="@dimen/label_text_size" />
 
     <EditText
@@ -84,7 +84,7 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/label_event_country"
+        android:text="@string/label_country"
         android:textSize="@dimen/label_text_size" />
 
     <EditText

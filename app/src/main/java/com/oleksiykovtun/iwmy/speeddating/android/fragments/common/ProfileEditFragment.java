@@ -61,6 +61,8 @@ public abstract class ProfileEditFragment extends EditFragment {
                 user.getGender().equals(User.MALE));
         ((RadioButton) getViewById(R.id.gender_female)).setChecked(
                 user.getGender().equals(User.FEMALE));
+        setText(R.id.input_city, user.getCity());
+        setText(R.id.input_country, user.getCountry());
 
         if (! user.getPhoto().isEmpty()) {
             ImageManager.setUserPhoto(getImageView(R.id.photo), user.getGender(),
@@ -76,6 +78,7 @@ public abstract class ProfileEditFragment extends EditFragment {
                 && !user.getNameAndSurname().isEmpty()
                 && (!includingPassword || !user.getPassword().isEmpty())
                 && !user.getUsername().isEmpty()
+                && !user.getPhone().isEmpty()
                 && CoolFormatter.isDateValid(user.getBirthDate());
     }
 
@@ -93,6 +96,8 @@ public abstract class ProfileEditFragment extends EditFragment {
         user.setPhone(getEditText(R.id.input_phone));
         user.setBirthDate(getLabelText(R.id.label_birth_date));
         user.setGender(isRadioButtonChecked(R.id.gender_male) ? User.MALE : User.FEMALE);
+        user.setCity(getEditText(R.id.input_city));
+        user.setCountry(getEditText(R.id.input_country));
         user.setOrientation("");
         user.setGoal("");
         user.setAffair("");

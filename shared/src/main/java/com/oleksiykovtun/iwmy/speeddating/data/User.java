@@ -36,6 +36,8 @@ public class User implements Serializable, Comparable<User> {
     private String thumbnail; // url
     private String phone;
     private String birthDate; // format "2099-12-31"
+    private String city;
+    private String country;
 
     private String gender;
     private String orientation;
@@ -62,7 +64,8 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public User(String email, String password, String username, String group,
-                String nameAndSurname, String photo, String thumbnail, String phone, String birthDate,
+                String nameAndSurname, String photo, String thumbnail, String phone,
+                String birthDate, String city, String country,
                 String gender, String orientation, String goal, String affair,
                 String height, String weight, String attitudeToSmoking, String attitudeToAlcohol,
                 String location, String organization, String website, String referralEmail) {
@@ -75,6 +78,8 @@ public class User implements Serializable, Comparable<User> {
         this.thumbnail = thumbnail;
         this.phone = phone;
         this.birthDate = birthDate;
+        this.city = city;
+        this.country = country;
         this.gender = gender;
         this.orientation = orientation;
         this.goal = goal;
@@ -162,6 +167,22 @@ public class User implements Serializable, Comparable<User> {
 
     public void setNameAndSurname(String nameAndSurname) {
         this.nameAndSurname = nameAndSurname;
+    }
+
+    public String getCity() {
+        return getNotNull(city);
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return getNotNull(country);
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getPhoto() {

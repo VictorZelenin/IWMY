@@ -67,8 +67,8 @@ public class CoupleUserListFragment extends AppFragment {
                     String coupleUserEmail
                             = (Account.getUser().getEmail().equals(couple.getUserEmail2()))
                             ? couple.getUserEmail1() : couple.getUserEmail2();
-                    coupleUserWildcards.add(new User(coupleUserEmail, "", "", "", "", "", "", "", "",
-                            "", "", "", "", "", "", "", "", "", "", "", ""));
+                    coupleUserWildcards.add(new User(coupleUserEmail, "", "", "", "", "", "", "",
+                            "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""));
                 }
                 post(Api.USERS + Api.GET, User[].class, coupleUserWildcards.toArray());
                 break;

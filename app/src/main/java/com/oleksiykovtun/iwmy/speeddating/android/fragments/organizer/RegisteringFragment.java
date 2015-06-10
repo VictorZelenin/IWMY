@@ -45,6 +45,8 @@ public class RegisteringFragment extends AppFragment {
                 String thumbnail = "";
                 String phone = getEditText(R.id.input_phone);
                 String birthDate = "";
+                String city = "";
+                String country = "";
                 String gender = "";
                 String orientation = "";
                 String goal = "";
@@ -59,9 +61,9 @@ public class RegisteringFragment extends AppFragment {
                 String referralEmail = "";
 
                 impliedUser = new User(email, password, username, group, nameAndSurname,
-                        photo, thumbnail, phone, birthDate, gender, orientation, goal, affair, height,
-                        weight, attitudeToSmoking, attitudeToAlcohol, location, organization,
-                        website, referralEmail);
+                        photo, thumbnail, phone, birthDate, city, country, gender, orientation,
+                        goal, affair, height, weight, attitudeToSmoking, attitudeToAlcohol,
+                        location, organization, website, referralEmail);
                 if (checkUser(impliedUser)) {
                     post(Api.USERS + Api.ADD_PENDING_ORGANIZER, User[].class, impliedUser);
                 } else {

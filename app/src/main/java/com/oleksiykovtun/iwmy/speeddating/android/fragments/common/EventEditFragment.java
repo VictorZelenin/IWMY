@@ -76,11 +76,11 @@ public abstract class EventEditFragment extends EditFragment {
                     + " " + getText(R.string.message_input_error));
             return false;
         } else if (event.getCity().isEmpty()) {
-            showToast(getText(R.string.label_event_city)
+            showToast(getText(R.string.label_city)
                     + " " + getText(R.string.message_input_error));
             return false;
         } else if (event.getCountry().isEmpty()) {
-            showToast(getText(R.string.label_event_country)
+            showToast(getText(R.string.label_country)
                     + " " + getText(R.string.message_input_error));
             return false;
         } else if (! checkRange(event.getMinAllowedAge(), event.getMaxAllowedAge())) {
