@@ -36,6 +36,8 @@ must be not changed by the app in the existing objects and must be set empty in 
 | attitudeToAlcohol | String |  |
 | attitudeToSmoking | String |  |
 | birthDate | String | Birth date in format `yyyy-MM-dd`, for example, `1970-01-01` |
+| city | String | City the user lives in |
+| country | String | Country the user lives in |
 | creationTime | String |  |
 | email | String | User email. Is unique for users. Must contain `@`. Must not contain `&#124;` |
 | gender | String | User gender, `male` or `female` |
@@ -67,6 +69,8 @@ Example of an array of 1 User object (formatted for readability):
             "attitudeToAlcohol":"",
             "attitudeToSmoking":"",
             "birthDate":"1970-01-01",
+            "city":"Dallas",
+            "country":"USA",
             "creationTime":"",
             "email":"susan@example.com",
             "gender":"female",
