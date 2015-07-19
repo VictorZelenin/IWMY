@@ -8,8 +8,7 @@ This app for the social service [want2meetu.com](http://want2meetu.com) is curre
 
 The project includes the following modules:
 
-`app` - the Android application. Its design is currently based on the UI design prototype
-*(link temporarily unavailable)*.
+`app` - the Android application. Its design is currently based on the [UI design prototype](http://test.arhangel-studio.com.ua/mockups).
 This is a reference app. The apps for other platforms are created based on this one.
 If you develop an app for the other platform, you can use the code of this app for help.
 
