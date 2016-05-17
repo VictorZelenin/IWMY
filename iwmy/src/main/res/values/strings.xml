@@ -1,0 +1,156 @@
+<resources>
+    <string name="app_name">IWMY</string>
+
+    <string name="logo">I want 2 meet U</string>
+    <string name="tutorial_button">Хочу на дейтинг</string>
+    <string name="button_login">Войти</string>
+    <string name="hint_emeil">E-mail</string>
+    <string name="hint_password">Пароль</string>
+    <string name="forgot_password"><u>Забыли пароль?</u></string>
+    <string name="registration"><u>Регистрация</u></string>
+    <string name="or_choose_sn">Или войдите через любимую соцю сеть</string>
+    <string name="how_to_become_org">Как стать организатором?</string>
+    <string name="how_to_become_user">Как стать участником</string>
+    <string name="restore_pass_button">Восстановить пароль</string>
+    <string name="rules_buttons">
+        Используя приложение IWMY вы соглашаетесь с условиями использования и политикой конфиденциальности
+    </string>
+
+    <string name="message_connection_error">Connection error! Please check your internet connection and try again.</string>
+    <string name="message_authorization_error">You are not authorized. Please try to logout and login again.</string>
+    <string name="message_access_error">You do not have permission to proceed with this action.</string>
+    <string name="message_version_error">This action is no longer supported. Please update your application.</string>
+    <string name="message_other_post_error">This action resulted in an error. Please try again later.</string>
+    <string name="message_photo_getting_error">Error. Cannot get a photo.</string>
+    <string name="message_no_user_wrong_password">No such user or incorrect password</string>
+    <string name="message_participant_added">Participant added</string>
+    <string name="message_event_added">Event added</string>
+    <string name="message_input_error">please check this field.</string>
+    <string name="message_inputs_error">Please check your inputs and try again.</string>
+    <string name="message_questionnaires_sent">Questionnaires sent</string>
+    <string name="message_select_equal">Please select equal number of guys and ladies.</string>
+    <string name="message_couples_sent">Couples sent</string>
+    <string name="message_you_cannot_add_more_ratings">You cannot add more ratings</string>
+    <string name="message_you_cannot_add_ratings_user">You cannot add ratings for this user</string>
+    <string name="message_tap_rotate_photo">Tap photo if you want to rotate it</string>
+    <string name="message_password_reset_suspicious">
+        No such user, or too many attempts to remind password. Please contact us by email.
+    </string>
+    <string name="message_password_reset_sent">Your password is sent to your email.</string>
+
+    <string name="drawer_item_all_datings">Все дейтинги</string>
+    <string name="drawer_item_my_datings">Мои дейтинги</string>
+    <string name="drawer_item_previous_datings">Прошедшие мероприятия</string>
+    <string name="drawer_item_favorites">Избранное</string>
+    <string name="drawer_item_couples">Пары</string>
+    <string name="drawer_item_profile">Профиль</string>
+    <string name="drawer_item_config">Настройки</string>
+    <string name="drawer_item_pay">Оплатить</string>
+
+    <string name="rules">some rules</string>
+    <string name="politics">some politics</string>
+    <string name="forgot_pass_text">Введите ваш емеил и мы отправил вам информацию о востановлении пароля</string>
+    
+    <string name="profile_birth_date">Дата рождения</string>
+    <string name="profile_cotacts">Контактные данные</string>
+    <string name="profile_personal_data">Ваши личные данные</string>
+    <string name="profile_password">Изменить пароль</string>
+    <string name="profile_hint_phone">Телефон</string>
+    <string name="profile_hint_city">Город</string>
+    <string name="profile_hint_country">Страна</string>
+    <string name="profile_hint_language">Язык</string>
+    <string name="profile_hint_name">Имя</string>
+    <string name="profile_hint_last_name">Фамилия</string>
+    <string name="profile_hint_nickname">Никнейм</string>
+    <string name="profile_hint_password">Пароль</string>
+    <string name="profile_hint_repeat_password">Подтвердите пароль</string>
+    <string name="profile_button_save">Сохранить изменения</string>
+    <string name="profile_button_male">Мужской</string>
+    <string name="profile_button_female">Женский</string>
+
+    <string-array name="tutorial_text">
+        <item>"Горизонтальная прокрутка экранов — удобная и модная вещь."</item>
+        <item>"Использовать эту библиотеку можно для версий Android 1.6 и старше.
+            Конкретно нам понадобятся классы ViewPager и PagerAdapter."</item>
+        <item>"Как видно из примера, использовать ViewPager и PagerAdapter достаточно легко."</item>
+    </string-array>
+
+    <string name="menu_from_camera">From camera</string>
+    <string name="menu_from_gallery">From gallery</string>
+
+    <string name="mail_subject_organizer_registering">Organizer registering request</string>
+    <string name="mail_subject_organizer_confirmation">Your IWMY Speed Dating account was confirmed</string>
+    <string name="mail_subject_organizer_event_successful">The dating was successful</string>
+    <string name="mail_subject_user_you_found">You found each other!</string>
+    <string name="mail_subject_user_thank_you">Thank you for participating in the speed dating!</string>
+    <string name="mail_subject_password_reset">IWMY Speed Dating - password reminding</string>
+    <string name="mail_text_organizer_confirmation">
+        Your request for registering your IWMY Speed Dating account as an organizer was satisfied!
+        Now you can create and edit events using your device.
+        We hope our app will become an effective discovery for you!
+        If you have any questions regarding the app or collaboration,
+        feel free to write an email to us, we will answer shortly:
+        \nCONTACTS_SPEED_DATING
+        \n
+        \nBest regards,
+        \nThe IWMY team
+    </string>
+    <string name="mail_text_organizer_event_successful">
+        The dating was successful. The number of matching couples: COUPLE_COUNT.
+        Contacts of matching couples:
+        \n
+        \nCONTACTS_COUPLE_LIST
+        \n
+        \nThank you for using our application! Our contact info: CONTACTS_SPEED_DATING
+    </string>
+    <string name="mail_text_user_one_couple">
+        At the speed dating you and one of the participants made a couple!
+        It\'s time to know each other better! Congratulations! Their contact info:
+        \n
+        \nCONTACTS_ONE_COUPLE
+        \n
+        \nThank you for participation!
+        \n
+        \nOrganizer\'s contact info:
+        \nCONTACTS_ORGANIZER
+        \n
+        \nOur contact info:
+        \nCONTACTS_SPEED_DATING
+    </string>
+    <string name="mail_text_user_many_couples">
+        At the speed dating COUPLE_COUNT people liked you!
+        It\'s time to know each other better! Our congratulations! Their contact info:
+        \n
+        \nCONTACTS_MANY_COUPLES
+        \n
+        \nThank you for participation!
+        \n
+        \nOrganizer\'s contact info:
+        \nCONTACTS_ORGANIZER
+        \n
+        \nOur contact info:
+        \nCONTACTS_SPEED_DATING
+    </string>
+    <string name="mail_text_user_no_couples">
+        Thank you for attending our event. We hope you had good time there!
+        Unfortunately, this time reciprocity wasn\'t achieved, but it will be all right.
+        \n
+        \nWe are gladly waiting for you at the next dating! Luck will be with you!
+        \n
+        \nOrganizer\'s contact info: \nCONTACTS_ORGANIZER
+        \n
+        \nOur contact info:
+        \nCONTACTS_SPEED_DATING
+    </string>
+    <string name="mail_text_password_reset">
+        Password reminding was requested for your account at IWMY Speed Dating.
+        \n
+        \nYour password is
+        \nPASSWORD
+        \n
+        \nIf it was not you, please contact us.
+        \n
+        \nOur contact info:
+        \nCONTACTS_SPEED_DATING
+    </string>
+</resources>

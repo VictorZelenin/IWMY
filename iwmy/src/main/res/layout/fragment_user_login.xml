@@ -1,0 +1,82 @@
+ <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:orientation="vertical"
+     android:background="@color/white"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:paddingLeft="@dimen/margin"
+     android:paddingStart="@dimen/margin"
+     android:paddingRight="@dimen/margin"
+     android:paddingEnd="@dimen/margin">
+
+     <LinearLayout
+         android:id="@+id/logo_buttons"
+         android:orientation="vertical"
+         android:layout_alignParentTop="true"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content">
+
+        <include layout="@layout/logo"/>
+        <include layout="@layout/login_buttons"/>
+     </LinearLayout>
+
+
+     <TextView
+         android:id="@+id/text_unrer_soc"
+         android:text="@string/or_choose_sn"
+         android:layout_below="@id/logo_buttons"
+         android:layout_marginTop="@dimen/margin"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_centerHorizontal="true"
+         />
+
+     <LinearLayout
+         android:id="@+id/social"
+         android:orientation="horizontal"
+         android:layout_below="@id/text_unrer_soc"
+         android:layout_marginTop="@dimen/margin"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content">
+
+         <ImageView
+             android:id="@+id/social_vk"
+             android:src="@drawable/social_vk"
+             android:layout_width="@dimen/social_image_size"
+             android:layout_height="@dimen/social_image_size"
+             android:layout_weight="1"/>
+
+         <ImageView
+             android:id="@+id/social_google"
+             android:src="@drawable/social_google"
+             android:layout_width="@dimen/social_image_size"
+             android:layout_height="@dimen/social_image_size"
+             android:layout_weight="1"/>
+
+         <ImageView
+             android:id="@+id/social_fb"
+             android:src="@drawable/social_fb"
+             android:layout_width="@dimen/social_image_size"
+             android:layout_height="@dimen/social_image_size"
+             android:layout_weight="1"/>
+
+     </LinearLayout>
+
+     <TextView
+         android:id="@+id/how_to_become_org"
+         android:text="@string/how_to_become_org"
+         android:clickable="true"
+         android:layout_centerHorizontal="true"
+         android:layout_below="@id/social"
+         android:layout_marginTop="@dimen/margin"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content" />
+
+     <TextView
+         android:id="@+id/rules"
+         android:gravity="center_horizontal"
+         android:layout_alignParentBottom="true"
+         android:layout_centerHorizontal="true"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content" />
+
+</RelativeLayout>

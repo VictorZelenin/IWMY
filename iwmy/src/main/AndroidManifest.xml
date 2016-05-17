@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.jacksonsmolenko.iwmy">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name="com.jacksonsmolenko.iwmy.cooltools.CoolApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+
+        <activity android:name=".StartActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".fragments.user.UserMainActivity"/>
+        <activity android:name=".fragments.organizer.OrganizerMainActivity"/>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="8b48b9d53b0ac8c01bb072257204e57957e078dc" />
+    </application>
+
+</manifest>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:paddingLeft="@dimen/margin"
+    android:paddingStart="@dimen/margin"
+    android:paddingRight="@dimen/margin"
+    android:paddingEnd="@dimen/margin">
+
+    <RelativeLayout
+        android:id="@+id/logo"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+            <include layout="@layout/logo"/>
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_below="@id/logo"
+        android:layout_above="@id/start"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"/>
+
+    <Button
+        android:id="@+id/start"
+        android:text="@string/tutorial_button"
+        android:textColor="@color/white"
+        android:background="@color/colorAccent"
+        android:textSize="@dimen/text_size"
+        android:layout_margin="@dimen/margin"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+</RelativeLayout>

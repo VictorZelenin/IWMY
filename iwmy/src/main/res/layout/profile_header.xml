@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content">
+
+    <ImageView
+        android:id="@+id/photo"
+        android:src="@drawable/no_photo"
+        android:clickable="true"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        />
+    
+    <TextView
+        android:id="@+id/label_name"
+        android:textColor="@color/primary"
+        android:textSize="@dimen/logo_text_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginStart="@dimen/margin"
+        android:layout_marginTop="@dimen/small_margin"
+        android:layout_toRightOf="@+id/photo"
+        android:layout_toEndOf="@+id/photo"
+        />
+
+    <TextView
+        android:id="@+id/label_age_city"
+        android:textSize="@dimen/logo_text_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginStart="@dimen/margin"
+        android:layout_marginTop="@dimen/small_margin"
+        android:layout_below="@+id/label_name"
+        android:layout_toRightOf="@+id/photo"
+        android:layout_toEndOf="@+id/photo"
+        />
+
+    <!-- spacer -->
+    <LinearLayout
+        android:background="@color/grey"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacer_height"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_below="@+id/label_age_city"
+        />
+
+</RelativeLayout>
