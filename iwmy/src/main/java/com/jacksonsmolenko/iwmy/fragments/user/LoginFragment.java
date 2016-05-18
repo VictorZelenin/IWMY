@@ -1,5 +1,6 @@
 package com.jacksonsmolenko.iwmy.fragments.user;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -91,9 +92,11 @@ public class LoginFragment extends AppFragment {
                 } else {
                     Account.saveUser(response.get(0));
                     if (Account.getUser().getGroup().equals(User.ORGANIZER)) {
-                        CoolFragmentManager.showAtBottom(new MyEventListFragment());
+                        /*CoolFragmentManager.showAtBottom(new MyEventListFragment());*/
                     } else {
-                        CoolFragmentManager.showAtBottom(new EventListFragment());
+                        Intent intent = new Intent(getActivity(), UserMainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
                     }
                 }
                 break;

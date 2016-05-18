@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.jacksonsmolenko.iwmy.Account;
 import com.jacksonsmolenko.iwmy.R;
 import com.jacksonsmolenko.iwmy.cooltools.CoolFragmentManager;
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -15,6 +16,7 @@ import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 public class UserMainActivity extends FragmentActivity{
 
@@ -27,7 +29,7 @@ public class UserMainActivity extends FragmentActivity{
 
         CoolFragmentManager.setup(this, R.id.fragment_holder_user);
 
-        CoolFragmentManager.showAtBottom(new Welcome()); // show the first fragment
+        CoolFragmentManager.showAtBottom(new EventListFragment()); // show the first fragment
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -63,7 +65,7 @@ public class UserMainActivity extends FragmentActivity{
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         switch (position){
                             case 1:
-
+                                CoolFragmentManager.showAtBottom(new EventListFragment());
                                 break;
                             case 2:
 
@@ -78,7 +80,7 @@ public class UserMainActivity extends FragmentActivity{
 
                                 break;
                             case 6:
-                                CoolFragmentManager.showAtTop(new ProfileEditFragment());
+                                CoolFragmentManager.showAtBottom(new ProfileEditFragment());
                                 break;
                             case 7:
 
@@ -105,8 +107,8 @@ public class UserMainActivity extends FragmentActivity{
 
     private AccountHeader createAccountHeader(){
         ProfileDrawerItem profile = new ProfileDrawerItem()
-                .withName("Sasha Frolova")
-                .withEmail("22 года")
+                .withName(Account.getUser().getNameAndSurname())
+                .withEmail(Account.getUser().getBirthDate())
                 .withIcon(R.drawable.no_photo);
 
         return new AccountHeaderBuilder()
