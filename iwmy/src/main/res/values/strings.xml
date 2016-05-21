@@ -67,6 +67,10 @@
     <string name="profile_button_save">Сохранить изменения</string>
     <string name="profile_button_male">Мужской</string>
     <string name="profile_button_female">Женский</string>
+    
+    <string name="button_more">Подробнее</string>
+    <string name="button_favorite">В избранное</string>
+    <string name="button_about_org">Об оранизаторе</string>
 
     <string-array name="tutorial_text">
         <item>"Горизонтальная прокрутка экранов — удобная и модная вещь."</item>

@@ -1,53 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:padding="@dimen/small_margin"
+    android:layout_margin="@dimen/micro_margin"
+    android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-        
-        <GridLayout
-            android:columnCount="4"
-            android:rowCount="4"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_gravity="fill"
-                android:layout_rowSpan="2"
-                android:layout_columnSpan="2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/f"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/f"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/f"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/f"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/f"/>
-
-        </GridLayout>
+    <ImageView
+        android:id="@+id/event_photo"
+        android:layout_margin="@dimen/small_margin"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:src="@drawable/f"/>
 
     <TextView
         android:id="@+id/label_event_organizer_and_place"
+        android:textSize="@dimen/logo_text_size"
+        android:textColor="@color/primary"
+        android:layout_marginTop="@dimen/small_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <TextView
+        android:layout_marginTop="@dimen/margin"
         android:id="@+id/label_event_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_marginTop="@dimen/small_margin"
+        android:textColor="@color/md_black_1000"
+        android:id="@+id/label_event_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!-- spacer -->
+    <LinearLayout
+        android:background="@color/grey"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacer_height"
+        android:layout_marginTop="@dimen/margin" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:background="@color/white"
+            android:text="@string/button_more"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/grey"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:background="@color/white"
+            android:text="@string/button_favorite"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/grey"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:background="@color/white"
+            android:text="@string/button_about_org"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/grey"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
 </LinearLayout>

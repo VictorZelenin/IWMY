@@ -27,15 +27,17 @@ public class EventRecyclerAdapter extends CoolRecyclerAdapter {
     }
 
     public class ViewHolder extends CoolRecyclerAdapter.ViewHolder {
-        public TextView placeTextView;
-        public TextView timeTextView;
+        public TextView nameAndAgeTextView;
+        public TextView dateTextView;
+        public TextView descriptionView;
         public ImageView photoImageView;
 
         public ViewHolder(View view) {
             super(view);
-            placeTextView = (TextView) view.findViewById(R.id.label_event_organizer_and_place);
-            timeTextView = (TextView) view.findViewById(R.id.label_event_time);
-            photoImageView = (ImageView) view.findViewById(R.id.photo);
+            nameAndAgeTextView = (TextView) view.findViewById(R.id.label_event_organizer_and_place);
+            dateTextView = (TextView) view.findViewById(R.id.label_event_time);
+            descriptionView = (TextView) view.findViewById(R.id.label_event_description);
+            photoImageView = (ImageView) view.findViewById(R.id.event_photo);
         }
 
     }
@@ -50,10 +52,11 @@ public class EventRecyclerAdapter extends CoolRecyclerAdapter {
     @Override
     public void onBindViewHolder(CoolRecyclerAdapter.ViewHolder holder, int position) {
         Event event = (Event) (dataSet.get(position));
-        ((ViewHolder) holder).placeTextView.setText(event.getPlace());
-        ((ViewHolder) holder).timeTextView.setText(event.getTime()
-                + ((showCity && !event.getCity().isEmpty()) ? (" / " + event.getCity()) : "")
-                + ((showCity && !event.getCountry().isEmpty()) ? (", " + event.getCountry()) : ""));
+        ((ViewHolder) holder).nameAndAgeTextView.setText(event.getPlace() + " ("
+                + event.getMinAllowedAge() + " - " + event.getMaxAllowedAge() + ")");
+        ((ViewHolder) holder).dateTextView.setText(event.getTime()
+                + ((showCity && !event.getCity().isEmpty()) ? (" / " + event.getCity()) : ""));
+        ((ViewHolder) holder).descriptionView.setText(event.getDescription());
         ImageManager.setEventThumbnail(((ViewHolder) holder).photoImageView, event.getThumbnail());
     }
 
