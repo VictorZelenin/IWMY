@@ -16,7 +16,9 @@
 
         <include layout="@layout/profile_header"/>
 
-        <TextView
+        <include layout="@layout/fragment_registration"/>
+
+        <!--<TextView
             android:text="@string/profile_personal_data"
             android:textColor="@color/primary"
             android:textSize="@dimen/logo_text_size"
@@ -124,7 +126,7 @@
             android:layout_margin="@dimen/margin"
             android:textSize="@dimen/text_size"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content" />-->
 
     </LinearLayout>
 </ScrollView>

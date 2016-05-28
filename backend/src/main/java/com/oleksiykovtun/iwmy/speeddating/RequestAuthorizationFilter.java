@@ -51,7 +51,7 @@ public class RequestAuthorizationFilter implements ContainerRequestFilter {
     private List<User> getAuthorizedUsers(ContainerRequest request) {
         User wildcardUserToAuthorize
                 = new User(getAuthorizationId(request), getAuthorizationPassword(request),
-                "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+                "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
         // forbidding unauthorized admin requests
         if (isOnlyAdminAllowed(request)
                 && ! wildcardUserToAuthorize.getEmail().equals(Api.APP_EMAIL)) {

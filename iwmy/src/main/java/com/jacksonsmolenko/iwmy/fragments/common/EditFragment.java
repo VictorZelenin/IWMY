@@ -31,20 +31,9 @@ public abstract class EditFragment extends AppFragment {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.photo:
+            case R.id.button_choose_photo:
                 openMenu(view);
-                /*if (((Button) view).getText().equals(getText(R.string.button_choose_photo))) {
-                    // setting photo
-                    openMenu(view);
-                } else {
-                    // removing photo
-                    getImageView(R.id.photo).setImageResource(R.drawable.no_photo);
-                    photoBitmap = null;
-                    thumbnailBitmap = null;
-                    photoChanged = true;
-                    ((Button) getViewById(R.id.button_photo)).setText(R.string.button_choose_photo);
-                }
-                break;*/
+                break;
         }
     }
 
@@ -61,13 +50,13 @@ public abstract class EditFragment extends AppFragment {
                 photoBitmap = ImageManager.scaleBitmapToMinSideSize(rawBitmap, 640);
                 thumbnailBitmap = ImageManager.cropCenterSquare(ImageManager
                         .scaleBitmapToMinSideSize(rawBitmap, 80));
-                getImageView(R.id.photo).setImageBitmap(photoBitmap);
-                getImageView(R.id.photo).setOnClickListener(new View.OnClickListener() {
+                getImageView(R.id.button_choose_photo).setImageBitmap(photoBitmap);
+                getImageView(R.id.button_choose_photo).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         photoBitmap = ImageManager.rotateRight(photoBitmap);
                         thumbnailBitmap = ImageManager.rotateRight(thumbnailBitmap);
-                        getImageView(R.id.photo).setImageBitmap(photoBitmap);
+                        getImageView(R.id.button_choose_photo).setImageBitmap(photoBitmap);
                     }
                 });
                 photoChanged = true;

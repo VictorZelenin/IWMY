@@ -29,6 +29,7 @@
             />
 
         <ImageButton
+            android:clickable="true"
             android:id="@+id/button_select_date"
             android:src="@drawable/calendar"
             android:background="@color/primary"
@@ -95,6 +96,7 @@
         />
 
     <EditText
+        android:id="@+id/input_language"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:hint="@string/profile_hint_language"

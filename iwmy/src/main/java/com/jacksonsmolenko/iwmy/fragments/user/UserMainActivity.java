@@ -16,7 +16,6 @@ import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
-import com.oleksiykovtun.iwmy.speeddating.data.User;
 
 public class UserMainActivity extends FragmentActivity{
 
@@ -80,7 +79,7 @@ public class UserMainActivity extends FragmentActivity{
 
                                 break;
                             case 6:
-                                CoolFragmentManager.showAtBottom(new ProfileEditFragment());
+                                CoolFragmentManager.showAtBottom(new UserProfileEditFragment());
                                 break;
                             case 7:
 
@@ -107,8 +106,8 @@ public class UserMainActivity extends FragmentActivity{
 
     private AccountHeader createAccountHeader(){
         ProfileDrawerItem profile = new ProfileDrawerItem()
-                .withName(Account.getUser().getNameAndSurname())
-                .withEmail(Account.getUser().getBirthDate())
+                .withName(getName())
+                .withEmail(Account.getUser().getUsername())
                 .withIcon(R.drawable.no_photo);
 
         return new AccountHeaderBuilder()
@@ -117,5 +116,13 @@ public class UserMainActivity extends FragmentActivity{
                 .withSelectionListEnabledForSingleProfile(false)
                 .addProfiles(profile)
                 .build();
+    }
+
+    private String getName(){
+        if (Account.getUser().getNameAndSurname() != ""){
+            return Account.getUser().getNameAndSurname();
+        } else  {
+            return Account.getUser().getName() + " " + Account.getUser().getSurname();
+        }
     }
 }

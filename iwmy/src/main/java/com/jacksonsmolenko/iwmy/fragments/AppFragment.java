@@ -18,7 +18,7 @@ public abstract class AppFragment extends CoolFragment {
     protected void post(String path, Class responseClass, Object... postData) {
         post(BuildConfig.BACKEND_URL, path, Account.getUser().getEmail(),
                 Account.getUser().getPassword(), BuildConfig.VERSION_NAME, responseClass, postData);
-        /*startUpdatingProgressBar();*/
+        startUpdatingProgressBar();
     }
 
     public void onPostReceive(String tag, List responseObjectList) {

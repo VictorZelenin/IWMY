@@ -52,15 +52,12 @@ public class LoginFragment extends AppFragment {
                 if (!usernameOrEmail.isEmpty() && !password.isEmpty()) {
                     // todo security
                     User wildcardLoginUser = new User(usernameOrEmail, password, usernameOrEmail,
-                            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+                            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                             "", "");
                     post(Api.USERS + Api.GET_LOGIN, User[].class, wildcardLoginUser);
                 } else {
                     showToastLong(R.string.message_no_user_wrong_password);
                 }
-                /*Intent intent = new Intent(getActivity(), UserMainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);*/
                 break;
             case R.id.forgotPassword:
                 CoolFragmentManager.showAtTop(new RestorePasswordFragment());

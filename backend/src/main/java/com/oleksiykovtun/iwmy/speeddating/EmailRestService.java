@@ -100,7 +100,7 @@ public class EmailRestService extends GeneralRestService {
             Email email = emailList.get(0);
             String usernameOrEmail = email.getToAddress();
             User wildcardLoginUser = new User(usernameOrEmail, "", usernameOrEmail,
-                    "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+                    "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
             List<User> existingUsers = UserRestService.getUnique(Arrays.asList(wildcardLoginUser));
             if (existingUsers.size() == 1) {
                 User realUser = existingUsers.get(0);

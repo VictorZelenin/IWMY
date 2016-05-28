@@ -14,8 +14,6 @@
         android:paddingRight="@dimen/small_margin"
         android:paddingEnd="@dimen/small_margin">
 
-        <include layout="@layout/profile_header"/>
-
         <TextView
             android:text="@string/profile_personal_data"
             android:textColor="@color/primary"
@@ -113,6 +111,7 @@
             />
 
         <EditText
+            android:id="@+id/input_password_repeat"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:inputType="textPassword"
@@ -124,6 +123,7 @@
             />
 
         <Button
+            android:id="@+id/button_register"
             android:text="@string/profile_button_save"
             android:textColor="@color/white"
             android:background="@color/colorAccent"

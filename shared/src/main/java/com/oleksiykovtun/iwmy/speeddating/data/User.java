@@ -32,6 +32,8 @@ public class User implements Serializable, Comparable<User> {
     private String group;
 
     private String nameAndSurname;
+    private String name;
+    private String surname;
     private String photo; // url
     private String thumbnail; // url
     private String phone;
@@ -64,7 +66,7 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public User(String email, String password, String username, String group,
-                String nameAndSurname, String photo, String thumbnail, String phone,
+                String name, String surname, String photo, String thumbnail, String phone,
                 String birthDate, String city, String country,
                 String gender, String orientation, String goal, String affair,
                 String height, String weight, String attitudeToSmoking, String attitudeToAlcohol,
@@ -74,6 +76,8 @@ public class User implements Serializable, Comparable<User> {
         this.email = email;
         this.password = password;
         this.nameAndSurname = nameAndSurname;
+        this.name = name;
+        this.surname = surname;
         this.photo = photo;
         this.thumbnail = thumbnail;
         this.phone = phone;
@@ -97,6 +101,7 @@ public class User implements Serializable, Comparable<User> {
     }
 
     private void generateId() {
+        // todo with name and surname separately
         this._userId = getNameAndSurname() + "_" + getEmail();
     }
 
@@ -167,6 +172,22 @@ public class User implements Serializable, Comparable<User> {
 
     public void setNameAndSurname(String nameAndSurname) {
         this.nameAndSurname = nameAndSurname;
+    }
+
+    public String getName() {
+        return getNotNull(name);
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return getNotNull(surname);
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getCity() {

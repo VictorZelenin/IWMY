@@ -55,6 +55,7 @@ public class Couple implements Serializable, Comparable<Couple> {
     public void setUser1(User user1) {
         this.userEmail1 = user1.getEmail();
         this.username1 = user1.getUsername();
+        // todo with name and surname separately
         this.name1 = user1.getNameAndSurname();
         this.phone1 = user1.getPhone();
         this.birthDate1 = user1.getBirthDate();
@@ -65,6 +66,7 @@ public class Couple implements Serializable, Comparable<Couple> {
     public void setUser2(User user2) {
         this.userEmail2 = user2.getEmail();
         this.username2 = user2.getUsername();
+        // todo with name and surname separately
         this.name2 = user2.getNameAndSurname();
         this.phone2 = user2.getPhone();
         this.birthDate2 = user2.getBirthDate();
