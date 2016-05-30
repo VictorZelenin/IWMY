@@ -49,6 +49,11 @@ public class LoginFragment extends AppFragment {
             case R.id.button_login:
                 String usernameOrEmail = getEditText(R.id.input_login_username);
                 String password = getEditText(R.id.input_login_password);
+
+                //dev tips
+                setText(R.id.input_login_username, "1234@gmail.com");
+                setText(R.id.input_login_password, "1234");
+
                 if (!usernameOrEmail.isEmpty() && !password.isEmpty()) {
                     // todo security
                     User wildcardLoginUser = new User(usernameOrEmail, password, usernameOrEmail,

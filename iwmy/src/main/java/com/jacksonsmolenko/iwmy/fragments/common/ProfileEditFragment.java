@@ -55,8 +55,10 @@ public abstract class ProfileEditFragment extends EditFragment {
             setText(R.id.input_password, user.getPassword());
         }
         setText(R.id.input_username, user.getUsername());
-        setText(R.id.input_name, user.getName());
-        setText(R.id.input_surname, user.getSurname());
+        setText(R.id.input_name, user.getNameAndSurname());
+
+        // todo name and surname
+
         setText(R.id.input_phone, user.getPhone());
         setText(R.id.label_birth_date, user.getBirthDate());
         ((RadioButton) getViewById(R.id.gender_male)).setChecked(
@@ -78,8 +80,8 @@ public abstract class ProfileEditFragment extends EditFragment {
 
     private boolean check(User user, boolean includingPassword) {
         return user.getEmail().contains("@") && !user.getEmail().contains(":")
-                && !user.getName().isEmpty()
-                && !user.getSurname().isEmpty()
+                && !user.getNameAndSurname().isEmpty()
+                // todo name and surname
                 && (!includingPassword || !user.getPassword().isEmpty())
                 && !user.getUsername().isEmpty()
                 && !user.getPhone().isEmpty()

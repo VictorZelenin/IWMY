@@ -52,7 +52,7 @@
     <string name="forgot_pass_text">Введите ваш емеил и мы отправил вам информацию о востановлении пароля</string>
     
     <string name="profile_birth_date">Дата рождения</string>
-    <string name="profile_cotacts">Контактные данные</string>
+    <string name="profile_contacts">Контактные данные</string>
     <string name="profile_personal_data">Ваши личные данные</string>
     <string name="profile_password">Изменить пароль</string>
     <string name="profile_hint_phone">Телефон</string>
@@ -64,7 +64,8 @@
     <string name="profile_hint_nickname">Никнейм</string>
     <string name="profile_hint_password">Пароль</string>
     <string name="profile_hint_repeat_password">Подтвердите пароль</string>
-    <string name="profile_button_save">Сохранить изменения</string>
+    <string name="profile_button_update_profile">Сохранить изменения</string>
+    <string name="profile_button_register">Регистрация</string>
     <string name="profile_button_male">Мужской</string>
     <string name="profile_button_female">Женский</string>
     

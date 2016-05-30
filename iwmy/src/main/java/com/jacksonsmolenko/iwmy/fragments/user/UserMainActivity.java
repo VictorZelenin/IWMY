@@ -79,7 +79,7 @@ public class UserMainActivity extends FragmentActivity{
 
                                 break;
                             case 6:
-                                CoolFragmentManager.showAtBottom(new UserProfileEditFragment());
+                                CoolFragmentManager.showAtTop(new UserProfileEditFragment());
                                 break;
                             case 7:
 

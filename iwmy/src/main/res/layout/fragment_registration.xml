@@ -124,7 +124,6 @@
 
         <Button
             android:id="@+id/button_register"
-            android:text="@string/profile_button_save"
             android:textColor="@color/white"
             android:background="@color/colorAccent"
             android:layout_margin="@dimen/margin"
