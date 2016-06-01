@@ -10,6 +10,7 @@ import com.jacksonsmolenko.iwmy.R;
 import com.jacksonsmolenko.iwmy.cooltools.CoolFragmentManager;
 import com.jacksonsmolenko.iwmy.fragments.AboutFragment;
 import com.jacksonsmolenko.iwmy.fragments.AppFragment;
+import com.jacksonsmolenko.iwmy.fragments.ChangePasswordFragment;
 
 public class SettingsFragment extends AppFragment{
 
@@ -42,7 +43,7 @@ public class SettingsFragment extends AppFragment{
 
                 break;
             case R.id.change_password:
-
+                CoolFragmentManager.showAtTop(new ChangePasswordFragment());
                 break;
             case R.id.exit:
 

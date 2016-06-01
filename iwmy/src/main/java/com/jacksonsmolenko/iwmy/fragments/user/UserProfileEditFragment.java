@@ -35,8 +35,8 @@ public class UserProfileEditFragment extends ProfileEditFragment {
         super.onClick(view);
         switch (view.getId()){
             case R.id.button_register:
-                User newUser = makeUser();
-                if (check(newUser)) {
+                User newUser = updateUser(user);
+                if (checkWithoutPassword(newUser)) {
                     post(Api.USERS + Api.REPLACE, User[].class, user, newUser);
                 } else {
                     showToast(R.string.message_inputs_error);

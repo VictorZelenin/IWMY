@@ -27,6 +27,14 @@ public abstract class ProfileEditFragment extends EditFragment {
         }
     }
 
+    protected boolean checkPassword(String password1, String password2){
+        return password1.equals(password2);
+    }
+
+    protected User changePassword(User user, String password){
+        user.setPassword(password);
+        return user;
+    }
 
     protected boolean check(User user) {
         return check(user, true);
@@ -50,7 +58,7 @@ public abstract class ProfileEditFragment extends EditFragment {
 
         setText(R.id.label_age_city, user.getCity());
 
-        setText(R.id.input_email, user.getEmail());
+        //setText(R.id.input_email, user.getEmail());
         /*if (!user.getPassword().isEmpty()) {
             setText(R.id.input_password, user.getPassword());
         }*/
@@ -118,6 +126,24 @@ public abstract class ProfileEditFragment extends EditFragment {
         user.setReferralEmail(includingPassword ? "" : Account.getUser().getEmail());
         return user;
     }
+
+    //провкрить необходимость
+    protected User updateUser(User user){
+        user.setPhoto(photoChanged
+                ? ImageManager.getBase64StringFromBitmap(photoBitmap, 90) : defaultPhotoLink);
+        user.setThumbnail(photoChanged
+                ? ImageManager.getBase64StringFromBitmap(thumbnailBitmap, 85) : defaultThumbnailLink);
+        user.setNameAndSurname(getEditText(R.id.input_name));
+        user.setGender(isRadioButtonChecked(R.id.gender_male) ? User.MALE : User.FEMALE);
+        user.setUsername(getEditText(R.id.input_username));
+        user.setBirthDate(getLabelText(R.id.label_birth_date));
+        user.setPhone(getEditText(R.id.input_phone));
+        user.setCity(getEditText(R.id.input_city));
+        user.setCountry(getEditText(R.id.input_country));
+        return user;
+    }
+
+
 
     //update method make user, after delete previous
     /*private User makeUser(boolean includingPassword) {
