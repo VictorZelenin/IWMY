@@ -47,6 +47,7 @@
     <string name="drawer_item_config">Настройки</string>
     <string name="drawer_item_pay">Оплатить</string>
 
+    <string name="about">something about app</string>
     <string name="rules">some rules</string>
     <string name="politics">some politics</string>
     <string name="forgot_pass_text">Введите ваш емеил и мы отправил вам информацию о востановлении пароля</string>

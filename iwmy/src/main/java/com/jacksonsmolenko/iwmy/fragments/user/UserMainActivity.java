@@ -82,7 +82,7 @@ public class UserMainActivity extends FragmentActivity{
                                 CoolFragmentManager.showAtTop(new UserProfileEditFragment());
                                 break;
                             case 7:
-
+                                CoolFragmentManager.showAtTop(new SettingsFragment());
                                 break;
                         }
                         return false;
