@@ -45,15 +45,15 @@ public abstract class ProfileEditFragment extends EditFragment {
     }
 
     protected void fillForms(User user) {
-        setText(R.id.label_name, user.getName());
-        setText(R.id.label_surname, user.getSurname());
+        setText(R.id.label_name, user.getNameAndSurname());
+        //setText(R.id.label_surname, user.getSurname());
 
         setText(R.id.label_age_city, user.getCity());
 
         setText(R.id.input_email, user.getEmail());
-        if (!user.getPassword().isEmpty()) {
+        /*if (!user.getPassword().isEmpty()) {
             setText(R.id.input_password, user.getPassword());
-        }
+        }*/
         setText(R.id.input_username, user.getUsername());
         setText(R.id.input_name, user.getNameAndSurname());
 

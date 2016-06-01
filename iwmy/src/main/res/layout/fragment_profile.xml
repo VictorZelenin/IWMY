@@ -9,14 +9,215 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/small_margin"
-        android:paddingStart="@dimen/small_margin"
-        android:paddingRight="@dimen/small_margin"
-        android:paddingEnd="@dimen/small_margin">
+        style="@style/side_padding_16dp">
 
         <include layout="@layout/profile_header"/>
 
-        <include layout="@layout/fragment_registration"/>
+        <TextView
+            android:text="@string/profile_personal_data"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/logo_text_size"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/input_name"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:hint="@string/profile_hint_name"
+            android:paddingStart="@dimen/small_margin"
+            android:paddingLeft="@dimen/small_margin"
+            android:layout_marginTop="@dimen/margin"
+            android:background="@drawable/edit_text_rectangle"
+            />
+
+        <EditText
+            android:id="@+id/input_surname"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:hint="@string/profile_hint_last_name"
+            android:paddingStart="@dimen/small_margin"
+            android:paddingLeft="@dimen/small_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:background="@drawable/edit_text_rectangle"
+            />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/small_margin">
+
+            <RadioButton
+                android:id="@+id/gender_male"
+                android:text="@string/profile_button_male"
+                android:textColor="@color/white"
+                android:background="@color/colorPrimary"
+                android:textSize="@dimen/text_size"
+                android:padding="@dimen/small_margin"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_marginEnd="@dimen/margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:id="@+id/gender_female"
+                android:text="@string/profile_button_female"
+                android:textColor="@color/white"
+                android:background="@color/colorPrimary"
+                android:textSize="@dimen/text_size"
+                android:padding="@dimen/small_margin"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/input_username"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:hint="@string/profile_hint_nickname"
+            android:paddingStart="@dimen/small_margin"
+            android:paddingLeft="@dimen/small_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:background="@drawable/edit_text_rectangle"
+            />
+
+        <TextView
+            android:text="@string/profile_birth_date"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/logo_text_size"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/margin"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/label_birth_date"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/logo_text_size"
+                android:background="@drawable/edit_text_rectangle"
+                />
+
+            <ImageButton
+                android:clickable="true"
+                android:id="@+id/button_select_date"
+                android:src="@drawable/calendar"
+                android:background="@color/primary"
+                android:scaleType="fitCenter"
+                android:padding="5dp"
+                android:layout_width="45dp"
+                android:layout_height="35dp"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:text="@string/profile_contacts"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/logo_text_size"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/input_phone"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:inputType="phone"
+            android:hint="@string/profile_hint_phone"
+            android:paddingStart="@dimen/small_margin"
+            android:paddingLeft="@dimen/small_margin"
+            android:layout_marginTop="@dimen/margin"
+            android:background="@drawable/edit_text_rectangle"
+            />
+
+        <EditText
+            android:id="@+id/input_city"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:hint="@string/profile_hint_city"
+            android:paddingStart="@dimen/small_margin"
+            android:paddingLeft="@dimen/small_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:background="@drawable/edit_text_rectangle"
+            />
+
+        <EditText
+            android:id="@+id/input_country"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:hint="@string/profile_hint_country"
+            android:paddingStart="@dimen/small_margin"
+            android:paddingLeft="@dimen/small_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:background="@drawable/edit_text_rectangle"
+            />
+
+        <EditText
+            android:id="@+id/input_language"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:hint="@string/profile_hint_language"
+            android:paddingStart="@dimen/small_margin"
+            android:paddingLeft="@dimen/small_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:background="@drawable/edit_text_rectangle"
+            />
+
+        <!--<TextView
+            android:text="@string/profile_password"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/logo_text_size"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/input_password"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:inputType="textPassword"
+            android:hint="@string/profile_hint_password"
+            android:paddingStart="@dimen/small_margin"
+            android:paddingLeft="@dimen/small_margin"
+            android:layout_marginTop="@dimen/margin"
+            android:background="@drawable/edit_text_rectangle"
+            />
+
+        <EditText
+            android:id="@+id/input_password_repeat"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:inputType="textPassword"
+            android:hint="@string/profile_hint_repeat_password"
+            android:paddingStart="@dimen/small_margin"
+            android:paddingLeft="@dimen/small_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:background="@drawable/edit_text_rectangle"
+            />-->
+
+        <Button
+            android:id="@+id/button_register"
+            android:textColor="@color/white"
+            android:text="@string/profile_button_update_profile"
+            android:background="@color/colorAccent"
+            android:layout_margin="@dimen/margin"
+            android:textSize="@dimen/text_size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 </ScrollView>

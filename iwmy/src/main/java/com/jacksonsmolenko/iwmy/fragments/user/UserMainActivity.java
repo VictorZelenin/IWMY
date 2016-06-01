@@ -107,7 +107,7 @@ public class UserMainActivity extends FragmentActivity{
     private AccountHeader createAccountHeader(){
         ProfileDrawerItem profile = new ProfileDrawerItem()
                 .withName(getName())
-                .withEmail(Account.getUser().getUsername())
+                .withEmail(Account.getUser().getEmail())
                 .withIcon(R.drawable.no_photo);
 
         return new AccountHeaderBuilder()
@@ -119,7 +119,7 @@ public class UserMainActivity extends FragmentActivity{
     }
 
     private String getName(){
-        if (Account.getUser().getNameAndSurname() != ""){
+        if (!Account.getUser().getNameAndSurname().equals("")){
             return Account.getUser().getNameAndSurname();
         } else  {
             return Account.getUser().getName() + " " + Account.getUser().getSurname();

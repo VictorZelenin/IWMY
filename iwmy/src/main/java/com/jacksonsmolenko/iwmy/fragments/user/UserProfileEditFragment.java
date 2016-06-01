@@ -24,7 +24,6 @@ public class UserProfileEditFragment extends ProfileEditFragment {
         registerContainerView(view);
         registerClickListener(R.id.button_select_date);
         registerClickListener(R.id.button_register);
-        setText(R.id.button_register, R.string.profile_button_update_profile);
 
         user = Account.getUser();
         fillForms(user);

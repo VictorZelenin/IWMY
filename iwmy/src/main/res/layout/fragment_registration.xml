@@ -88,7 +88,7 @@
             android:background="@drawable/edit_text_rectangle"
             />
 
-        <include layout="@layout/profie_body"/>
+        <include layout="@layout/profile_body"/>
 
         <TextView
             android:text="@string/profile_password"
@@ -125,6 +125,7 @@
         <Button
             android:id="@+id/button_register"
             android:textColor="@color/white"
+            android:text="@string/registration"
             android:background="@color/colorAccent"
             android:layout_margin="@dimen/margin"
             android:textSize="@dimen/text_size"

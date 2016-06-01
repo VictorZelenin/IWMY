@@ -21,7 +21,6 @@ public class RegistrationFragment extends ProfileEditFragment {
         registerContainerView(view);
         registerClickListener(R.id.button_select_date);
         registerClickListener(R.id.button_register);
-        setText(R.id.button_register, R.string.profile_button_register);
         password1 = getEditText(R.id.input_password);
         password2 = getEditText(R.id.input_password);
         return view;

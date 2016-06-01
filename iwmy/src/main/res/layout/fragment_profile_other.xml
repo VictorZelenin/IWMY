@@ -9,6 +9,6 @@
     android:paddingEnd="@dimen/small_margin">
 
     <include layout="@layout/profile_header"/>
-    <include layout="@layout/profie_body"/>
+    <include layout="@layout/profile_body"/>
 
 </LinearLayout>
