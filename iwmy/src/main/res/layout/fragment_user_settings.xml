@@ -1,112 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:clickable="true"
-    android:paddingTop="8dp"
-    style="@style/side_padding_16dp">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/about"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:gravity="center_vertical"
-        android:text="@string/button_settings_about"
-        android:textSize="@dimen/logo_text_size"
-        android:textColor="@color/md_black_1000"
-        style="@style/side_padding_16dp"/>
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:clickable="true"
+        android:paddingTop="8dp"
+        style="@style/side_padding_16dp">
 
-    <!-- spacer -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/spacer_height"
-        android:background="@color/grey"
-        />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:text="@string/label_settings_account"
+            android:textSize="@dimen/logo_text_size"
+            android:textColor="@color/md_black_1000"
+            />
 
-    <TextView
-        android:id="@+id/comment"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:gravity="center_vertical"
-        android:text="@string/button_settings_comment"
-        android:textSize="@dimen/logo_text_size"
-        android:textColor="@color/md_black_1000"
-        style="@style/side_padding_16dp"/>
+        <!-- spacer -->
+        <LinearLayout
+            android:background="@color/grey"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacer_height"
+            />
 
-    <!-- spacer -->
-    <LinearLayout
-        android:background="@color/grey"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/spacer_height"
-        />
+        <TextView
+            android:id="@+id/profile"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:text="@string/button_settings_profile"
+            android:textSize="@dimen/logo_text_size"
+            android:textColor="@color/md_black_1000"
+            style="@style/side_padding_16dp"/>
 
-    <TextView
-        android:id="@+id/change_email"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:gravity="center_vertical"
-        android:text="@string/button_settings_change_email"
-        android:textSize="@dimen/logo_text_size"
-        android:textColor="@color/md_black_1000"
-        style="@style/side_padding_16dp"/>
+        <!-- spacer -->
+        <LinearLayout
+            android:background="@color/grey"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacer_height"
+            />
 
-    <!-- spacer -->
-    <LinearLayout
-        android:background="@color/grey"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/spacer_height"
-        />
+        <TextView
+            android:id="@+id/change_email"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:text="@string/button_settings_change_email"
+            android:textSize="@dimen/logo_text_size"
+            android:textColor="@color/md_black_1000"
+            style="@style/side_padding_16dp"/>
 
-    <TextView
-        android:id="@+id/change_password"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:gravity="center_vertical"
-        android:text="@string/button_settings_change_password"
-        android:textSize="@dimen/logo_text_size"
-        android:textColor="@color/md_black_1000"
-        style="@style/side_padding_16dp"/>
+        <!-- spacer -->
+        <LinearLayout
+            android:background="@color/grey"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacer_height"
+            />
 
-    <!-- spacer -->
-    <LinearLayout
-        android:background="@color/grey"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/spacer_height"
-        />
+        <TextView
+            android:id="@+id/change_password"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:text="@string/button_settings_change_password"
+            android:textSize="@dimen/logo_text_size"
+            android:textColor="@color/md_black_1000"
+            style="@style/side_padding_16dp"/>
 
-    <TextView
-        android:id="@+id/exit"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:gravity="center_vertical"
-        android:text="@string/button_settings_exit"
-        android:textSize="@dimen/logo_text_size"
-        android:textColor="@color/md_black_1000"
-        style="@style/side_padding_16dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:text="@string/label_settings_about"
+            android:textSize="@dimen/logo_text_size"
+            android:textColor="@color/md_black_1000"
+            />
 
-    <!-- spacer -->
-    <LinearLayout
-        android:background="@color/grey"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/spacer_height"
-        />
+        <TextView
+            android:id="@+id/version"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:text="@string/button_setting_version"
+            android:textSize="@dimen/logo_text_size"
+            android:textColor="@color/md_black_1000"
+            style="@style/side_padding_16dp"/>
 
-    <TextView
-        android:id="@+id/delete_profile"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:gravity="center_vertical"
-        android:text="@string/button_settings_delete_profile"
-        android:textSize="@dimen/logo_text_size"
-        android:textColor="@color/md_black_1000"
-        style="@style/side_padding_16dp"/>
+        <!-- spacer -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacer_height"
+            android:background="@color/grey"
+            />
 
-    <LinearLayout
-        android:background="@color/grey"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/spacer_height"
-        />
+        <TextView
+            android:id="@+id/rules"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:text="@string/button_settings_rules"
+            android:textSize="@dimen/logo_text_size"
+            android:textColor="@color/md_black_1000"
+            style="@style/side_padding_16dp"/>
 
-</LinearLayout>
+        <!-- spacer -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacer_height"
+            android:background="@color/grey"
+            />
+
+        <TextView
+            android:id="@+id/politics"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:text="@string/button_settings_politics"
+            android:textSize="@dimen/logo_text_size"
+            android:textColor="@color/md_black_1000"
+            style="@style/side_padding_16dp"/>
+
+        <!-- spacer -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacer_height"
+            android:background="@color/grey"
+            />
+
+        <TextView
+            android:id="@+id/comment"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:text="@string/button_settings_comment"
+            android:textSize="@dimen/logo_text_size"
+            android:textColor="@color/md_black_1000"
+            style="@style/side_padding_16dp"/>
+
+        <!-- spacer -->
+        <LinearLayout
+            android:background="@color/grey"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacer_height"
+            />
+
+        <TextView
+            android:id="@+id/exit"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:text="@string/button_settings_exit"
+            android:textSize="@dimen/logo_text_size"
+            android:textColor="@color/md_black_1000"
+            style="@style/side_padding_16dp"/>
+
+        <!-- spacer -->
+        <LinearLayout
+            android:background="@color/grey"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacer_height"
+            />
+
+        <TextView
+            android:id="@+id/delete_profile"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:text="@string/button_settings_delete_profile"
+            android:textSize="@dimen/logo_text_size"
+            android:textColor="@color/md_black_1000"
+            style="@style/side_padding_16dp"/>
+
+        <LinearLayout
+            android:background="@color/grey"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacer_height"
+            />
+
+    </LinearLayout>
+</ScrollView>
