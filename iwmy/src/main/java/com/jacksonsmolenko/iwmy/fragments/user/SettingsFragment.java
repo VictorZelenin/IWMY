@@ -25,7 +25,7 @@ public class SettingsFragment extends AppFragment{
         registerClickListener(R.id.profile);
         registerClickListener(R.id.change_email);
         registerClickListener(R.id.change_password);
-        registerClickListener(R.id.about);
+        registerClickListener(R.id.version);
         registerClickListener(R.id.rules);
         registerClickListener(R.id.politics);
         registerClickListener(R.id.comment);
@@ -43,7 +43,7 @@ public class SettingsFragment extends AppFragment{
                 CoolFragmentManager.showAtTop(new UserProfileEditFragment());
                 break;
             case R.id.change_email:
-                CoolFragmentManager.showAtTop(new ChangePasswordFragment());
+                
                 break;
             case R.id.change_password:
                 CoolFragmentManager.showAtTop(new ChangePasswordFragment());

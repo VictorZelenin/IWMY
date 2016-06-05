@@ -51,8 +51,8 @@ public class LoginFragment extends AppFragment {
                 String password = getEditText(R.id.input_login_password);
 
                 //dev tips
-                setText(R.id.input_login_username, "1234@gmail.com");
-                setText(R.id.input_login_password, "1234");
+                setText(R.id.input_login_username, "jase@gmail.com");
+                setText(R.id.input_login_password, "jase");
 
                 if (!usernameOrEmail.isEmpty() && !password.isEmpty()) {
                     // todo security

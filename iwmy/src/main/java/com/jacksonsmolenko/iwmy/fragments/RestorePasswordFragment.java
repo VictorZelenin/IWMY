@@ -3,11 +3,13 @@ package com.jacksonsmolenko.iwmy.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.jacksonsmolenko.iwmy.R;
+import com.jacksonsmolenko.iwmy.cooltools.CoolFragmentManager;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.data.Email;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
@@ -30,14 +32,14 @@ public class RestorePasswordFragment extends AppFragment {
         switch (view.getId()){
             case R.id.button_reset_password:
                 post(Api.MAIL + Api.RESET_PASSWORD, Email[].class,
-                        getPasswordResetEmail(getEditText(R.id.input_username)));
+                        getPasswordResetEmail(getEditText(R.id.input_email)));
                 break;
         }
     }
 
-    private Email getPasswordResetEmail(String usernameOrEmail) {
-        return new Email(Api.APP_EMAIL, "" + getText(R.string.app_name), usernameOrEmail,
-                usernameOrEmail, "" + getText(R.string.mail_subject_password_reset),
+    private Email getPasswordResetEmail(String email) {
+        return new Email(Api.APP_EMAIL, "" + getText(R.string.app_name), email,
+                email, "" + getText(R.string.mail_subject_password_reset),
                 ("" + getText(R.string.mail_text_password_reset))
                         .replace("CONTACTS_SPEED_DATING", Api.APP_SUPPORT_EMAIL));
     }
@@ -54,5 +56,6 @@ public class RestorePasswordFragment extends AppFragment {
                 }
                 break;
         }
+        CoolFragmentManager.showPrevious();
     }
 }
