@@ -50,7 +50,7 @@
 
         <Button
             android:background="@color/white"
-            android:text="@string/button_more"
+            android:text="@string/event_button_more"
             android:textSize="@dimen/text_size"
             android:textColor="@color/grey"
             android:layout_weight="1"
@@ -59,7 +59,7 @@
 
         <Button
             android:background="@color/white"
-            android:text="@string/button_favorite"
+            android:text="@string/event_button_favorite"
             android:textSize="@dimen/text_size"
             android:textColor="@color/grey"
             android:layout_weight="1"
@@ -68,7 +68,7 @@
 
         <Button
             android:background="@color/white"
-            android:text="@string/button_about_org"
+            android:text="@string/event_button_about_org"
             android:textSize="@dimen/text_size"
             android:textColor="@color/grey"
             android:layout_weight="1"

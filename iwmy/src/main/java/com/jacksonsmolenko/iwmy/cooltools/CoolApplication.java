@@ -3,6 +3,10 @@ package com.jacksonsmolenko.iwmy.cooltools;
 import android.app.Application;
 import android.content.Context;
 
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+import com.vk.sdk.VKSdk;
+
 public class CoolApplication extends Application {
 
     private static Context context;
@@ -10,6 +14,9 @@ public class CoolApplication extends Application {
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
+        VKSdk.initialize(this);
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
     }
 
     public static void writePreferences(String label, int message) {

@@ -88,6 +88,7 @@ public abstract class CoolFragmentManager {
     /**
      * Shows the previous fragment.
      */
+
     public static void showPrevious() {
         pop().onDetach();
         Fragment fragment = pop();

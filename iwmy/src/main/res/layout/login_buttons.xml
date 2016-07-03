@@ -13,8 +13,8 @@
         >
 
         <EditText
-            android:id="@+id/input_login_username"
-            android:hint="@string/hint_emeil"
+            android:id="@+id/input_login_email"
+            android:hint="@string/hint_email"
             android:inputType="textEmailAddress"
             android:maxLength="@integer/edit_text_max_length"
             android:layout_width="match_parent"
@@ -51,7 +51,7 @@
         <TextView
             android:id="@+id/forgotPassword"
             android:clickable="true"
-            android:text="@string/forgot_password"
+            android:text="@string/label_forgot_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -60,7 +60,7 @@
         <TextView
             android:id="@+id/button_registration"
             android:clickable="true"
-            android:text="@string/registration"
+            android:text="@string/label_registration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

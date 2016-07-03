@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:gravity="center_vertical"
-            android:text="@string/label_settings_account"
+            android:text="@string/settings_label_account"
             android:textSize="@dimen/logo_text_size"
             android:textColor="@color/md_black_1000"
             />
@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:gravity="center_vertical"
-            android:text="@string/button_settings_profile"
+            android:text="@string/settings_button_profile"
             android:textSize="@dimen/logo_text_size"
             android:textColor="@color/md_black_1000"
             style="@style/side_padding_16dp"/>
@@ -51,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:gravity="center_vertical"
-            android:text="@string/button_settings_change_email"
+            android:text="@string/settings_button_change_email"
             android:textSize="@dimen/logo_text_size"
             android:textColor="@color/md_black_1000"
             style="@style/side_padding_16dp"/>
@@ -68,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:gravity="center_vertical"
-            android:text="@string/button_settings_change_password"
+            android:text="@string/settings_button_change_password"
             android:textSize="@dimen/logo_text_size"
             android:textColor="@color/md_black_1000"
             style="@style/side_padding_16dp"/>
@@ -77,7 +77,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:gravity="center_vertical"
-            android:text="@string/label_settings_about"
+            android:text="@string/settings_label_about"
             android:textSize="@dimen/logo_text_size"
             android:textColor="@color/md_black_1000"
             />
@@ -87,7 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:gravity="center_vertical"
-            android:text="@string/button_setting_version"
+            android:text="@string/settings_button_version"
             android:textSize="@dimen/logo_text_size"
             android:textColor="@color/md_black_1000"
             style="@style/side_padding_16dp"/>
@@ -104,7 +104,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:gravity="center_vertical"
-            android:text="@string/button_settings_rules"
+            android:text="@string/settings_button_rules"
             android:textSize="@dimen/logo_text_size"
             android:textColor="@color/md_black_1000"
             style="@style/side_padding_16dp"/>
@@ -121,7 +121,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:gravity="center_vertical"
-            android:text="@string/button_settings_politics"
+            android:text="@string/settings_button_politics"
             android:textSize="@dimen/logo_text_size"
             android:textColor="@color/md_black_1000"
             style="@style/side_padding_16dp"/>
@@ -138,7 +138,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:gravity="center_vertical"
-            android:text="@string/button_settings_comment"
+            android:text="@string/settings_button_comment"
             android:textSize="@dimen/logo_text_size"
             android:textColor="@color/md_black_1000"
             style="@style/side_padding_16dp"/>
@@ -155,7 +155,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:gravity="center_vertical"
-            android:text="@string/button_settings_exit"
+            android:text="@string/settings_button_exit"
             android:textSize="@dimen/logo_text_size"
             android:textColor="@color/md_black_1000"
             style="@style/side_padding_16dp"/>
@@ -172,7 +172,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:gravity="center_vertical"
-            android:text="@string/button_settings_delete_profile"
+            android:text="@string/settings_button_delete_profile"
             android:textSize="@dimen/logo_text_size"
             android:textColor="@color/md_black_1000"
             style="@style/side_padding_16dp"/>

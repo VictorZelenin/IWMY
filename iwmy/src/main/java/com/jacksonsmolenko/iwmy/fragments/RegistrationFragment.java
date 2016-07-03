@@ -5,10 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.jacksonsmolenko.iwmy.Account;
 import com.jacksonsmolenko.iwmy.R;
+import com.jacksonsmolenko.iwmy.cooltools.CoolFragmentManager;
 import com.jacksonsmolenko.iwmy.fragments.common.ProfileEditFragment;
+import com.jacksonsmolenko.iwmy.fragments.user.EventListFragment;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
+
+import java.util.List;
 
 public class RegistrationFragment extends ProfileEditFragment {
 
@@ -43,6 +48,17 @@ public class RegistrationFragment extends ProfileEditFragment {
                     }
                 }
                 break;
+        }
+    }
+
+    @Override
+    public void onPostReceive(List response) {
+        if (!response.isEmpty()) {
+            Account.saveUser(response.get(0));
+            showToast(R.string.message_registered);
+            CoolFragmentManager.showAtBottom(new EventListFragment());
+        } else {
+            showToastLong(R.string.message_user_exists);
         }
     }
 }

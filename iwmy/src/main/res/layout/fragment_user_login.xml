@@ -22,7 +22,7 @@
 
      <TextView
          android:id="@+id/text_unrer_soc"
-         android:text="@string/or_choose_sn"
+         android:text="@string/label_social"
          android:layout_below="@id/logo_buttons"
          android:layout_marginTop="@dimen/margin"
          android:layout_width="wrap_content"
@@ -63,7 +63,7 @@
 
      <TextView
          android:id="@+id/how_to_become_org"
-         android:text="@string/how_to_become_org"
+         android:text="@string/button_how_to_become_org"
          android:clickable="true"
          android:layout_centerHorizontal="true"
          android:layout_below="@id/social"

@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jacksonsmolenko.iwmy">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:name="com.jacksonsmolenko.iwmy.cooltools.CoolApplication"
         android:allowBackup="true"
@@ -11,7 +9,8 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".StartActivity">
+        <activity android:name=".StartActivity"
+            android:screenOrientation="portrait">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,12 +18,29 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".fragments.user.UserMainActivity"/>
-        <activity android:name=".fragments.organizer.OrganizerMainActivity"/>
+        <activity android:name=".fragments.user.UserMainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".fragments.organizer.OrganizerMainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.vk.sdk.VKServiceActivity"
+            android:label="ServiceActivity"
+            android:theme="@style/VK.Transparent" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="8b48b9d53b0ac8c01bb072257204e57957e078dc" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
     </application>
+
+    <!-- client -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+
+    <!-- Authenticator -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
 
 </manifest>

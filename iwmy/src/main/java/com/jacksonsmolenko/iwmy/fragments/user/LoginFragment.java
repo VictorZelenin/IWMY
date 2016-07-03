@@ -1,11 +1,11 @@
 package com.jacksonsmolenko.iwmy.fragments.user;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,21 +14,23 @@ import android.widget.TextView;
 import com.jacksonsmolenko.iwmy.Account;
 import com.jacksonsmolenko.iwmy.R;
 import com.jacksonsmolenko.iwmy.cooltools.CoolFragmentManager;
-import com.jacksonsmolenko.iwmy.fragments.AppFragment;
 import com.jacksonsmolenko.iwmy.fragments.PoliticsFragment;
 import com.jacksonsmolenko.iwmy.fragments.RegistrationFragment;
 import com.jacksonsmolenko.iwmy.fragments.RestorePasswordFragment;
 import com.jacksonsmolenko.iwmy.fragments.RulesFragment;
-import com.oleksiykovtun.iwmy.speeddating.Api;
-import com.oleksiykovtun.iwmy.speeddating.data.User;
+import com.jacksonsmolenko.iwmy.fragments.common.AuthorizationFragment;
+import com.vk.sdk.VKUIHelper;
+import com.vk.sdk.api.VKApi;
+import com.vk.sdk.api.VKRequest;
 
-import java.util.List;
+public class LoginFragment extends AuthorizationFragment {
 
-public class LoginFragment extends AppFragment {
+    private final static String TAG = "LoginFragment";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d(TAG, "startActivity onCraeteView");
         View view = inflater.inflate(R.layout.fragment_user_login, container, false);
         registerContainerView(view);
         registerClickListener(R.id.button_login);
@@ -47,22 +49,7 @@ public class LoginFragment extends AppFragment {
         super.onClick(view);
         switch (view.getId()){
             case R.id.button_login:
-                String usernameOrEmail = getEditText(R.id.input_login_username);
-                String password = getEditText(R.id.input_login_password);
-
-                //dev tips
-                setText(R.id.input_login_username, "jase@gmail.com");
-                setText(R.id.input_login_password, "jase");
-
-                if (!usernameOrEmail.isEmpty() && !password.isEmpty()) {
-                    // todo security
-                    User wildcardLoginUser = new User(usernameOrEmail, password, usernameOrEmail,
-                            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-                            "", "");
-                    post(Api.USERS + Api.GET_LOGIN, User[].class, wildcardLoginUser);
-                } else {
-                    showToastLong(R.string.message_no_user_wrong_password);
-                }
+                login();
                 break;
             case R.id.forgotPassword:
                 CoolFragmentManager.showAtTop(new RestorePasswordFragment());
@@ -71,13 +58,13 @@ public class LoginFragment extends AppFragment {
                 CoolFragmentManager.showAtTop(new RegistrationFragment());
                 break;
             case R.id.social_vk:
-                CoolFragmentManager.showAtTop(new Welcome());
+                vkSingIn();
                 break;
             case R.id.social_google:
-                CoolFragmentManager.showAtTop(new Welcome());
+                googleSingIn();
                 break;
             case R.id.social_fb:
-                CoolFragmentManager.showAtTop(new Welcome());
+                fbSingIn();
                 break;
             case R.id.how_to_become_org:
                 CoolFragmentManager.showAtTop(new com.jacksonsmolenko.iwmy.fragments.organizer.LoginFragment());
@@ -86,23 +73,9 @@ public class LoginFragment extends AppFragment {
     }
 
     @Override
-    public void onPostReceive(String tag, List response) {
-        switch (tag) {
-            case Api.USERS + Api.GET_LOGIN:
-                if (response.size() != 1) {
-                    showToastLong(R.string.message_no_user_wrong_password);
-                } else {
-                    Account.saveUser(response.get(0));
-                    if (Account.getUser().getGroup().equals(User.ORGANIZER)) {
-                        /*CoolFragmentManager.showAtBottom(new MyEventListFragment());*/
-                    } else {
-                        Intent intent = new Intent(getActivity(), UserMainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                    }
-                }
-                break;
-        }
+    public void onResume(){
+        Log.d(TAG, "onResume");
+        super.onResume();
     }
 
     private void additionText(){

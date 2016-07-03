@@ -125,7 +125,7 @@
         <Button
             android:id="@+id/button_register"
             android:textColor="@color/white"
-            android:text="@string/registration"
+            android:text="@string/label_registration"
             android:background="@color/colorAccent"
             android:layout_margin="@dimen/margin"
             android:textSize="@dimen/text_size"

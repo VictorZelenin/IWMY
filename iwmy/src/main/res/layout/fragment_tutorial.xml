@@ -28,7 +28,7 @@
 
     <Button
         android:id="@+id/start"
-        android:text="@string/tutorial_button"
+        android:text="@string/button_tutorial"
         android:textColor="@color/white"
         android:background="@color/colorAccent"
         android:textSize="@dimen/text_size"

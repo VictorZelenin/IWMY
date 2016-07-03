@@ -66,7 +66,7 @@ public class User implements Serializable, Comparable<User> {
     }
 
     public User(String email, String password, String username, String group,
-                String name, String surname, String photo, String thumbnail, String phone,
+                String name, /*String surname,*/ String photo, String thumbnail, String phone,
                 String birthDate, String city, String country,
                 String gender, String orientation, String goal, String affair,
                 String height, String weight, String attitudeToSmoking, String attitudeToAlcohol,

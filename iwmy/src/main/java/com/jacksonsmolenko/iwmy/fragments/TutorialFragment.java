@@ -11,7 +11,6 @@ import android.widget.Button;
 import com.jacksonsmolenko.iwmy.R;
 import com.jacksonsmolenko.iwmy.adapters.TutorialPagerAdapter;
 import com.jacksonsmolenko.iwmy.cooltools.CoolFragmentManager;
-import com.jacksonsmolenko.iwmy.fragments.AppFragment;
 import com.jacksonsmolenko.iwmy.fragments.user.LoginFragment;
 
 

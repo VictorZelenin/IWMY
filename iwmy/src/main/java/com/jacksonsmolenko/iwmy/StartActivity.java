@@ -6,12 +6,16 @@ import android.view.View;
 
 import com.jacksonsmolenko.iwmy.cooltools.CoolFragmentManager;
 import com.jacksonsmolenko.iwmy.fragments.TutorialFragment;
+import com.vk.sdk.VKSdk;
 
 import java.util.List;
 
 public class StartActivity extends FragmentActivity {
 
-    List<View> pages = null;
+    public final static String ARG_ACCOUNT_TYPE = "ACCOUNT_TYPE";
+    public final static String ARG_AUTH_TYPE = "AUTH_TYPE";
+    public final static String ARG_ACCOUNT_NAME = "ACCOUNT_NAME";
+    public final static String ARG_IS_ADDING_NEW_ACCOUNT = "IS_ADDING_ACCOUNT";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -40,10 +40,10 @@ public class AuthorizationFragment extends AppFragment {
                 String password = getEditText(R.id.input_password);
                 if (!usernameOrEmail.isEmpty() && !password.isEmpty()) {
                     // to do security
-                    User wildcardLoginUser = new User(usernameOrEmail, password, usernameOrEmail,
+                    /*User wildcardLoginUser = new User(usernameOrEmail, password, usernameOrEmail,
                             "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-                            "", "");
-                    post(Api.USERS + Api.GET_LOGIN, User[].class, wildcardLoginUser);
+                            "", "");*/
+                    /*post(Api.USERS + Api.GET_LOGIN, User[].class, wildcardLoginUser);*/
                 } else {
                     showToastLong(R.string.message_no_user_wrong_password);
                 }

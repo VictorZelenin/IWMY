@@ -21,7 +21,7 @@
 
     <TextView
         android:id="@+id/how_to_become_user"
-        android:text="@string/how_to_become_user"
+        android:text="@string/button_how_to_become_user"
         android:clickable="true"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/logo_buttons"
