@@ -2,6 +2,7 @@ package com.jacksonsmolenko.iwmy.fragments.common;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -12,8 +13,6 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
-import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.Auth;
@@ -28,8 +27,14 @@ import com.jacksonsmolenko.iwmy.fragments.organizer.OrganizerMainActivity;
 import com.jacksonsmolenko.iwmy.fragments.user.UserMainActivity;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.data.User;
+import com.vk.sdk.VKAccessToken;
+import com.vk.sdk.VKCallback;
 import com.vk.sdk.VKScope;
 import com.vk.sdk.VKSdk;
+import com.vk.sdk.api.VKError;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.List;
@@ -53,7 +58,7 @@ public class AuthorizationFragment extends AppFragment {
         if (!userEmail.isEmpty() && !password.isEmpty()) {
             // todo security
 
-            makeUser(userEmail, password, "");
+            makeUser(userEmail, password, "", "", "");
         } else {
             showToastLong(R.string.message_no_user_wrong_password);
         }
@@ -96,27 +101,20 @@ public class AuthorizationFragment extends AppFragment {
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG, "fb success");
 
-                Profile profile = Profile.getCurrentProfile();
-                String name = profile.getName();
-                String id = profile.getId();
-
-                new GraphRequest(
+                GraphRequest request = GraphRequest.newMeRequest(
                         accessToken,
-                        id,
-                        null,
-                        HttpMethod.GET,
-                        new GraphRequest.Callback() {
-                            public void onCompleted(GraphResponse response) {
-
+                        new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+                                Log.d(TAG, object.toString());
+                                handleSignInResult(object);
                             }
-                        }
-                ).executeAsync();
+                        });
 
-                // todo after change backend, make name divided
-                /*String first = profile.getFirstName();
-                String last = profile.getLastName();*/
-
-                Log.d(TAG, "fb result " + name + " " + id);
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id,name,email,birthday,gender,link,picture");
+                request.setParameters(parameters);
+                request.executeAsync();
             }
 
             @Override
@@ -137,25 +135,33 @@ public class AuthorizationFragment extends AppFragment {
         Log.d(TAG, "onResult " + requestCode + " " + resultCode);
         super.onActivityResult(requestCode, resultCode, data);
 
+        //vk
+        if (!VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
+            @Override
+            public void onResult(VKAccessToken res) {
+                Log.d(TAG, "vk login" + res.toString());
+                String id = res.userId;
+                String email = res.email;
+
+            }
+            @Override
+            public void onError(VKError error) {
+        // Произошла ошибка авторизации (например, пользователь запретил авторизацию)
+            }
+        })) {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+
         //fb
         if (requestCode == 64206) {
             callbackManager.onActivityResult(requestCode, resultCode, data);
-            /*AccessToken.getCurrentAccessToken();
-
-            Profile.getCurrentProfile();
-            Log.d(TAG, "fb token " + Profile.getCurrentProfile().getFirstName() +
-                    Profile.getCurrentProfile().getLastName() +
-                    Profile.getCurrentProfile().getId());
-*/
-        }
+            }
 
         // google
         if (requestCode == GOOGLE_REQUEST) {
 
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-
             if(result.isSuccess()) {
-
                 if (result.isSuccess()) {
 
                     handleSignInResult(result);
@@ -171,16 +177,32 @@ public class AuthorizationFragment extends AppFragment {
         String email = acct.getEmail();
         String name = acct.getDisplayName();
         String id = acct.getId();
-        Uri photo = acct.getPhotoUrl();
+        /*Uri photo = acct.getPhotoUrl();*/
 
-        makeUser(email, id, name);
+        makeUser(email, id, name, "", "");
     }
 
-    private void makeUser(String email, String password, String name){
+    private void handleSignInResult(JSONObject object){
+        try {
+            String id = object.getString("id");
+            String name = object.getString("name");
+            String email = object.getString("email");
+            String birthday = object.getString("birthday");
+            String gender = object.getString("gender");
+            /*String link = object.getString("link");
+            String photoURL = object.getString("url");*/
+
+            makeUser(email, id, name, birthday, gender);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void makeUser(String email, String password, String name, String birthday, String gender){
         Log.d(TAG, "singed in " + email + " " + password + " " + name);
 
         User wildcardLoginUser = new User(email, password, name,
-                "", name, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+                "", name, "", "", "", birthday, "", "", gender, "", "", "", "", "", "", "", "", "", "",
                 "");
         post(Api.USERS + Api.GET_LOGIN, User[].class, wildcardLoginUser);
     }
