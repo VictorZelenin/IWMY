@@ -1,5 +1,6 @@
 package com.jacksonsmolenko.iwmy.fragments.organizer;
 
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,7 +86,8 @@ public class RegistrationFragment extends com.jacksonsmolenko.iwmy.fragments.com
                 }
                 break;
             case Api.MAIL + Api.REQUEST_ORGANIZER:
-                new AppliedDialogFragment();
+                DialogFragment dialog = new AppliedDialogFragment();
+                dialog.show(getActivity().getFragmentManager(), "dialog");
                 break;
         }
     }

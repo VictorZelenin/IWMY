@@ -26,7 +26,7 @@ public class OrganizerMainActivity extends FragmentActivity {
 
         CoolFragmentManager.setup(this, R.id.fragment_holder_org);
 
-        CoolFragmentManager.showAtBottom(new Welcome()); // show the first fragment
+        //CoolFragmentManager.showAtBottom(); // show the first fragment
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
