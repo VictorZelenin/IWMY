@@ -1,4 +1,4 @@
-package com.jacksonsmolenko.iwmy.fragments;
+package com.jacksonsmolenko.iwmy.fragments.user;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,8 +17,8 @@ import java.util.List;
 
 public class RegistrationFragment extends ProfileEditFragment {
 
-    String password1;
-    String password2;
+    private String password1;
+    private String password2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.jacksonsmolenko.iwmy.R;
 import com.jacksonsmolenko.iwmy.fragments.common.EditFragment;
 
-public class ProfileEditFragment extends EditFragment{
+public class OrganizerProfileEditFragment extends EditFragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

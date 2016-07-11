@@ -13,14 +13,12 @@ import android.widget.TextView;
 
 import com.jacksonsmolenko.iwmy.R;
 import com.jacksonsmolenko.iwmy.cooltools.CoolFragmentManager;
-import com.jacksonsmolenko.iwmy.fragments.AppFragment;
 import com.jacksonsmolenko.iwmy.fragments.PoliticsFragment;
-import com.jacksonsmolenko.iwmy.fragments.RegistrationFragment;
 import com.jacksonsmolenko.iwmy.fragments.RestorePasswordFragment;
 import com.jacksonsmolenko.iwmy.fragments.RulesFragment;
-import com.jacksonsmolenko.iwmy.fragments.user.UserMainActivity;
+import com.jacksonsmolenko.iwmy.fragments.common.AuthorizationFragment;
 
-public class LoginFragment extends AppFragment{
+public class LoginFragment extends AuthorizationFragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

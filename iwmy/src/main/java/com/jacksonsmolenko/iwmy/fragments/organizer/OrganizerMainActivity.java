@@ -67,7 +67,7 @@ public class OrganizerMainActivity extends FragmentActivity {
 
                                 break;
                             case 4:
-                                CoolFragmentManager.showAtTop(new com.jacksonsmolenko.iwmy.fragments.organizer.ProfileEditFragment());
+                                CoolFragmentManager.showAtTop(new OrganizerProfileEditFragment());
                                 break;
                             case 5:
 
