@@ -38,9 +38,7 @@ public class LoginFragment extends AuthorizationFragment{
         super.onClick(view);
         switch (view.getId()){
             case R.id.button_login:
-                Intent intent = new Intent(getActivity(), OrganizerMainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+                login();
                 break;
             case R.id.forgotPassword:
                 CoolFragmentManager.showAtTop(new RestorePasswordFragment());
