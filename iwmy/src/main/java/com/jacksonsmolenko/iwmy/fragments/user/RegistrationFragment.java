@@ -56,7 +56,7 @@ public class RegistrationFragment extends ProfileEditFragment {
         if (!response.isEmpty()) {
             Account.saveUser(response.get(0));
             showToast(R.string.message_registered);
-            CoolFragmentManager.showAtBottom(new EventListFragment());
+            CoolFragmentManager.showAtBottom(new LoginFragment());
         } else {
             showToastLong(R.string.message_user_exists);
         }

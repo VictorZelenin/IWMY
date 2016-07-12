@@ -6,9 +6,9 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.jacksonsmolenko.iwmy.Account;
 import com.jacksonsmolenko.iwmy.R;
 import com.jacksonsmolenko.iwmy.cooltools.CoolFragmentManager;
-import com.jacksonsmolenko.iwmy.fragments.user.*;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -26,7 +26,7 @@ public class OrganizerMainActivity extends FragmentActivity {
 
         CoolFragmentManager.setup(this, R.id.fragment_holder_org);
 
-        //CoolFragmentManager.showAtBottom(); // show the first fragment
+        CoolFragmentManager.showAtBottom(new EventListFragment()); // show the first fragment
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -92,8 +92,8 @@ public class OrganizerMainActivity extends FragmentActivity {
 
     private AccountHeader createAccountHeader(){
         ProfileDrawerItem profile = new ProfileDrawerItem()
-                .withName("Sasha Frolova")
-                .withEmail("22 года")
+                .withName(Account.getUser().getName())
+                .withEmail(Account.getUser().getBirthDate())
                 .withIcon(R.drawable.no_photo);
 
         return new AccountHeaderBuilder()
