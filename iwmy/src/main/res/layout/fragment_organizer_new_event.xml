@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        style="@style/side_padding_16dp">
+
+        <TextView
+            android:text="Общие данные о дейтинге"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/logo_text_size"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/input_event_name"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:hint="Название мероприятия"
+            android:paddingStart="@dimen/small_margin"
+            android:paddingLeft="@dimen/small_margin"
+            android:layout_marginTop="@dimen/margin"
+            android:background="@drawable/edit_text_rectangle"
+            />
+
+        <EditText
+            android:id="@+id/input_event_description"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:hint="Общие сведения о мероприятии"
+            android:paddingStart="@dimen/small_margin"
+            android:paddingLeft="@dimen/small_margin"
+            android:layout_marginTop="@dimen/margin"
+            android:background="@drawable/edit_text_rectangle"
+            />
+
+        <Button
+            android:textColor="@color/white"
+            android:text="Участники мероприятия"
+            android:background="@color/colorAccent"
+            android:layout_margin="@dimen/margin"
+            android:textSize="@dimen/text_size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="Фотографии места проведения"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/logo_text_size"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="Время и место проведения"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/logo_text_size"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/input_event_address"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:hint="Точный адрес проведения"
+            android:paddingStart="@dimen/small_margin"
+            android:paddingLeft="@dimen/small_margin"
+            android:layout_marginTop="@dimen/margin"
+            android:background="@drawable/edit_text_rectangle"
+            />
+
+        <EditText
+            android:id="@+id/input_event_city"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:hint="Город"
+            android:paddingStart="@dimen/small_margin"
+            android:paddingLeft="@dimen/small_margin"
+            android:layout_marginTop="@dimen/margin"
+            android:background="@drawable/edit_text_rectangle"
+            />
+
+        <EditText
+            android:id="@+id/input_event_country"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:hint="Страна"
+            android:paddingStart="@dimen/small_margin"
+            android:paddingLeft="@dimen/small_margin"
+            android:layout_marginTop="@dimen/margin"
+            android:background="@drawable/edit_text_rectangle"
+            android:clickable="true"
+            />
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/margin"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/label_event_date"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingStart="@dimen/small_margin"
+                android:paddingLeft="@dimen/small_margin"
+                android:hint="Дата"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/logo_text_size"
+                android:background="@drawable/edit_text_rectangle"
+                />
+
+            <ImageButton
+                android:clickable="true"
+                android:id="@+id/button_select_date"
+                android:src="@drawable/calendar"
+                android:background="@color/primary"
+                android:scaleType="fitCenter"
+                android:padding="5dp"
+                android:layout_width="45dp"
+                android:layout_height="35dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/margin"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/label_event_time"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingStart="@dimen/small_margin"
+                android:paddingLeft="@dimen/small_margin"
+                android:hint="Время"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/logo_text_size"
+                android:background="@drawable/edit_text_rectangle"
+                />
+
+            <ImageButton
+                android:clickable="true"
+                android:id="@+id/button_select_time"
+                android:src="@drawable/calendar"
+                android:background="@color/primary"
+                android:scaleType="fitCenter"
+                android:padding="5dp"
+                android:layout_width="45dp"
+                android:layout_height="35dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Стоимость участия"
+                android:layout_weight="1"
+                android:paddingTop="16dp"
+                />
+
+            <EditText
+                android:id="@+id/input_event_cost"
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:hint="0"
+                android:paddingStart="@dimen/small_margin"
+                android:paddingLeft="@dimen/small_margin"
+                android:background="@drawable/edit_text_rectangle"
+                android:layout_weight="1"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Грн"
+                android:paddingTop="16dp"
+                android:layout_weight="0"
+                />
+
+        </LinearLayout>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:hint="Язык мероприятия"
+            android:paddingStart="@dimen/small_margin"
+            android:paddingLeft="@dimen/small_margin"
+            android:layout_marginTop="@dimen/margin"
+            android:background="@drawable/edit_text_rectangle"
+            />
+
+        <TextView
+            android:text="Аудитория мероприятия"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/logo_text_size"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Возраст"
+            android:paddingTop="16dp"
+            />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="От"
+                android:layout_weight="0"
+                android:paddingTop="16dp"
+                />
+
+            <EditText
+                android:id="@+id/input_event_min_allowed_age"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:hint="0"
+                android:paddingStart="@dimen/small_margin"
+                android:paddingLeft="@dimen/small_margin"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/edit_text_rectangle"
+                android:layout_weight="1"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="До"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:paddingTop="16dp"
+                android:layout_weight="0"
+                />
+
+            <EditText
+                android:id="@+id/input_event_max_allowed_age"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:hint="0"
+                android:paddingStart="@dimen/small_margin"
+                android:paddingLeft="@dimen/small_margin"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/edit_text_rectangle"
+                android:layout_weight="1"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Колличество участников"
+            android:paddingTop="16dp"
+            />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="От"
+                android:layout_weight="0"
+                android:paddingTop="16dp"
+                />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:hint="0"
+                android:gravity="center"
+                android:paddingStart="@dimen/small_margin"
+                android:paddingLeft="@dimen/small_margin"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/edit_text_rectangle"
+                android:layout_weight="1"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="До"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:paddingTop="16dp"
+                android:layout_weight="0"
+                />
+
+            <EditText
+                android:id="@+id/input_event_places"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:hint="0"
+                android:paddingStart="@dimen/small_margin"
+                android:paddingLeft="@dimen/small_margin"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/edit_text_rectangle"
+                android:layout_weight="1"
+                />
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/button_apply"
+            android:textColor="@color/white"
+            android:text="Сохранить мероприятие"
+            android:background="@color/colorAccent"
+            android:layout_margin="@dimen/margin"
+            android:textSize="@dimen/text_size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</ScrollView>

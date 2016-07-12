@@ -76,7 +76,7 @@ public class EventListFragment extends AppFragment{
         super.onClick(view);
         switch (view.getId()){
             case R.id.fab:
-                Toast.makeText(getContext(), "CLICK!", Toast.LENGTH_SHORT).show();
+                CoolFragmentManager.showAtTop(new NewEventEditFragment());
         }
     }
 
