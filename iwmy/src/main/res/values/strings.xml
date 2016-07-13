@@ -17,9 +17,7 @@
     <string name="buttons_rules">
         Используя приложение IWMY вы соглашаетесь с условиями использования и политикой конфиденциальности
     </string>
-    <string name="button_ok">Ok!</string>
 
-    <string name="dialog_registr_message_send">Registering message send to your mail</string>
     <string name="message_user_exists">User already exists. Please enter other email or username</string>
     <string name="message_registered">Thank you for registering!</string>
     <string name="message_connection_error">Connection error! Please check your internet connection and try again.</string>
@@ -103,7 +101,6 @@
     <string name="menu_from_camera">From camera</string>
     <string name="menu_from_gallery">From gallery</string>
 
-
     <string name="mail_subject_organizer_registering">Organizer registering request</string>
     <string name="mail_subject_organizer_confirmation">Your IWMY Speed Dating account was confirmed</string>
     <string name="mail_subject_organizer_event_successful">The dating was successful</string>
@@ -179,4 +176,10 @@
         \nOur contact info:
         \nCONTACTS_SPEED_DATING
     </string>
+    <string name="delete_label">Delete</string>
+    <string name="delete_user">Do you want to delete your profile?</string>
+    <string name="button_delete_user">Delete</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="accept">Accept</string>
+
 </resources>

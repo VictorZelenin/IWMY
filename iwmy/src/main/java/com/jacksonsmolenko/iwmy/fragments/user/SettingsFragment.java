@@ -1,11 +1,14 @@
 package com.jacksonsmolenko.iwmy.fragments.user;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.jacksonsmolenko.iwmy.Account;
 import com.jacksonsmolenko.iwmy.R;
 import com.jacksonsmolenko.iwmy.cooltools.CoolFragmentManager;
 import com.jacksonsmolenko.iwmy.fragments.AboutFragment;
@@ -13,8 +16,13 @@ import com.jacksonsmolenko.iwmy.fragments.AppFragment;
 import com.jacksonsmolenko.iwmy.fragments.ChangePasswordFragment;
 import com.jacksonsmolenko.iwmy.fragments.PoliticsFragment;
 import com.jacksonsmolenko.iwmy.fragments.RulesFragment;
+import com.jacksonsmolenko.iwmy.fragments.TutorialFragment;
+import com.oleksiykovtun.iwmy.speeddating.Api;
+import com.oleksiykovtun.iwmy.speeddating.data.Attendance;
+import com.oleksiykovtun.iwmy.speeddating.data.Event;
+import com.oleksiykovtun.iwmy.speeddating.data.User;
 
-public class SettingsFragment extends AppFragment{
+public class SettingsFragment extends AppFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,12 +46,12 @@ public class SettingsFragment extends AppFragment{
     @Override
     public void onClick(View view) {
         super.onClick(view);
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.profile:
                 CoolFragmentManager.showAtTop(new UserProfileEditFragment());
                 break;
             case R.id.change_email:
-                
+
                 break;
             case R.id.change_password:
                 CoolFragmentManager.showAtTop(new ChangePasswordFragment());
@@ -61,11 +69,39 @@ public class SettingsFragment extends AppFragment{
 
                 break;
             case R.id.exit:
-
+                Account.removeUser();
+                CoolFragmentManager.showAtBottom(new LoginFragment());
                 break;
             case R.id.delete_profile:
-
+                showDialogWindow();
                 break;
         }
+    }
+
+    private void showDialogWindow() {
+        new AlertDialog.Builder(getActivity()).setTitle(R.string.delete_label)
+                .setMessage(getText(R.string.delete_user))
+                .setPositiveButton(R.string.button_delete_user,
+                        new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                // TODO post method doesn't work
+                                post(Api.USERS + Api.DELETE, User[].class, Account.getUser());
+                                dialog.dismiss();
+                                CoolFragmentManager.showAtBottom(new LoginFragment());
+
+                            }
+
+                        })
+
+                .setNegativeButton(R.string.button_cancel, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+
+                })
+                .create().show();
+
     }
 }
