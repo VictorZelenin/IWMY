@@ -5,7 +5,7 @@ android {
     signingConfigs {
         config {
             storePassword 'sss666'
-            storeFile file('C:/Users/boss/.android/keystore.jks')
+            storeFile file('keystore.jks')
             keyPassword 'iwmy2016'
             keyAlias 'iwmy'
         }
@@ -20,7 +20,7 @@ android {
     }
     defaultConfig {
         applicationId "com.jacksonsmolenko.iwmy"
-        buildConfigField "String", "BACKEND_URL", "\"http://192.168.56.1:8082\"" //http://192.168.56.1:8082
+        buildConfigField "String", "BACKEND_URL", "\"http://10.1.19.232:8082\"" //http://192.168.56.1:8082
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1

@@ -27,10 +27,14 @@ public class UserRestService extends GeneralRestService {
 
     /**
      * Set active=false for event participants and delete associated ratings and couples
+     *
      * @param wildcardEvents
      * @return
      */
-    @Path(Api.GET_FOR_EVENT_ACTIVE_RESET) @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.GET_FOR_EVENT_ACTIVE_RESET)
+    @POST
+    @Consumes(JSON)
+    @Produces(JSON)
     public static List getForEventActiveReset(List<Event> wildcardEvents) {
         // current ratings and previous couples cleanup - before the couple selection process
         RatingRestService.deleteForEvent(wildcardEvents);
@@ -54,10 +58,14 @@ public class UserRestService extends GeneralRestService {
 
     /**
      * Removes attendances and returns remaining users for events in given attendances
+     *
      * @param wildcardAttendances attendances to delete
      * @return remaining users for events in given attendances
      */
-    @Path(Api.REMOVE_ATTENDANCE) @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.REMOVE_ATTENDANCE)
+    @POST
+    @Consumes(JSON)
+    @Produces(JSON)
     public List removeAttendance(List<Attendance> wildcardAttendances) {
         for (Attendance eventAttendance : wildcardAttendances) {
             ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load()
@@ -70,7 +78,10 @@ public class UserRestService extends GeneralRestService {
         return getForEventByAttendance(wildcardAttendances);
     }
 
-    @Path(Api.GET_FOR_EVENT_ACTIVE) @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.GET_FOR_EVENT_ACTIVE)
+    @POST
+    @Consumes(JSON)
+    @Produces(JSON)
     public List getForEventActive(List<Event> wildcardEvents) {
         List<User> users = new ArrayList<>();
         // listing event-related attendances
@@ -85,7 +96,10 @@ public class UserRestService extends GeneralRestService {
         return users;
     }
 
-    @Path(Api.GET_FOR_EVENT) @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.GET_FOR_EVENT)
+    @POST
+    @Consumes(JSON)
+    @Produces(JSON)
     public static List<User> getForEvent(List<Event> wildcardEvents) {
         List<User> users = new ArrayList<>();
         // listing event-related attendances
@@ -98,13 +112,19 @@ public class UserRestService extends GeneralRestService {
         return users;
     }
 
-    @Path(Api.GET_FOR_EVENT_LOCK) @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.GET_FOR_EVENT_LOCK)
+    @POST
+    @Consumes(JSON)
+    @Produces(JSON)
     public static List<User> getForEventLock(List<Event> wildcardEvents) {
         EventRestService.lock(wildcardEvents);
         return getForEvent(wildcardEvents);
     }
 
-    @Path(Api.GET) @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.GET)
+    @POST
+    @Consumes(JSON)
+    @Produces(JSON)
     public static List<User> get(List<User> wildcardUsers) {
         Set<User> users = new TreeSet<>();
         for (User wildcardUser : wildcardUsers) {
@@ -125,7 +145,10 @@ public class UserRestService extends GeneralRestService {
         return Arrays.asList(users.toArray(new User[users.size()]));
     }
 
-    @Path(Api.GET_LOGIN) @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.GET_LOGIN)
+    @POST
+    @Consumes(JSON)
+    @Produces(JSON)
     public static List<User> getLogin(List<User> wildcardUsers) {
         List<User> users = new ArrayList<>();
         if (wildcardUsers.size() == 1) {
@@ -142,7 +165,10 @@ public class UserRestService extends GeneralRestService {
         return users;
     }
 
-    @Path(Api.ADD) @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.ADD)
+    @POST
+    @Consumes(JSON)
+    @Produces(JSON)
     public List add(List<User> items) {
         if (UserRestService.getUnique(items).isEmpty()) {
             // Forcing group
@@ -156,7 +182,10 @@ public class UserRestService extends GeneralRestService {
         }
     }
 
-    @Path(Api.ADD_PENDING_ORGANIZER) @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.ADD_PENDING_ORGANIZER)
+    @POST
+    @Consumes(JSON)
+    @Produces(JSON)
     public List addPendingOrganizer(List<User> items) {
         if (UserRestService.getUnique(items).isEmpty()) {
             // Forcing group and invalidating password
@@ -172,7 +201,9 @@ public class UserRestService extends GeneralRestService {
         }
     }
 
-    @Path(Api.ACTIVATE_PENDING_ORGANIZER + "/{token}") @GET @Produces(TEXT)
+    @Path(Api.ACTIVATE_PENDING_ORGANIZER + "/{token}")
+    @GET
+    @Produces(TEXT)
     public String activatePendingOrganizer(@PathParam("token") String secretToken) {
         List<User> pendingOrganizers = getPendingOrganizers();
         int activationCount = 0;
@@ -194,7 +225,10 @@ public class UserRestService extends GeneralRestService {
                 .filter("group", User.PENDING_ORGANIZER).list();
     }
 
-    @Path(Api.ADD_BY_ORGANIZER) @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.ADD_BY_ORGANIZER)
+    @POST
+    @Consumes(JSON)
+    @Produces(JSON)
     public List addByOrganizer(List<User> items) {
         return add(items);
     }
@@ -206,31 +240,35 @@ public class UserRestService extends GeneralRestService {
 
     /**
      * Saving images separately and replacing them with links if they are not already links
+     *
      * @param users users with base64 image data
      * @return users with image links
      */
     private static List<User> savePhotos(List<User> users) {
         for (User user : users) {
-            if (! user.getPhoto().startsWith("_")) {
+            if (!user.getPhoto().startsWith("_")) {
                 user.setPhoto(ImageRestService.put(user.getPhoto()));
             }
-            if (! user.getThumbnail().startsWith("_")) {
+            if (!user.getThumbnail().startsWith("_")) {
                 user.setThumbnail(ImageRestService.putThumbnail(user.getThumbnail()));
             }
         }
         return users;
     }
 
-    @Path(Api.REPLACE) @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.REPLACE)
+    @POST
+    @Consumes(JSON)
+    @Produces(JSON)
     public List replace(List<User> users) {
         if (users.size() == 2) {
             User oldUser = users.get(0);
             List<User> usersMatchingOldOrNewUser = UserRestService.getUnique(users);
             // replace if the new user matches no one or the old same one
             if (usersMatchingOldOrNewUser.isEmpty()
-                || usersMatchingOldOrNewUser.size() == 1
-                && usersMatchingOldOrNewUser.get(0).getEmail().equals(oldUser.getEmail())
-                && usersMatchingOldOrNewUser.get(0).getUsername().equals(oldUser.getUsername())) {
+                    || usersMatchingOldOrNewUser.size() == 1
+                    && usersMatchingOldOrNewUser.get(0).getEmail().equals(oldUser.getEmail())
+                    && usersMatchingOldOrNewUser.get(0).getUsername().equals(oldUser.getUsername())) {
                 return replaceForUser(users);
             }
         }
@@ -256,7 +294,10 @@ public class UserRestService extends GeneralRestService {
         return new ArrayList<>(ObjectifyService.ofy().load().type(User.class).list());
     }
 
-    @Path(Api.GET_OTHER_FOR_EVENT) @POST @Consumes(JSON) @Produces(JSON)
+    @Path(Api.GET_OTHER_FOR_EVENT)
+    @POST
+    @Consumes(JSON)
+    @Produces(JSON)
     public List<User> getOtherForEvent(List<Event> events) {
         Set<User> usersAddedByOrganizers = new TreeSet<>();
         // first, get all users referred by organizers
@@ -276,24 +317,54 @@ public class UserRestService extends GeneralRestService {
         return getForEvent(wildcardEvents);
     }
 
-    @Path(Api.GET_COUNT_ORGANIZERS) @GET @Produces(TEXT)
+    @Path(Api.GET_COUNT_ORGANIZERS)
+    @GET
+    @Produces(TEXT)
     public String getCountOrganizers() {
         return "" + ObjectifyService.ofy().load().type(User.class)
                 .filter("group", User.ORGANIZER).list().size();
     }
 
-    @Path(Api.GET_COUNT_USERS) @GET @Produces(TEXT)
+    @Path(Api.GET_COUNT_USERS)
+    @GET
+    @Produces(TEXT)
     public String getCountUsers() {
         return "" + ObjectifyService.ofy().load().type(User.class)
                 .filter("group", User.USER).list().size();
     }
 
-    @Path(Api.DEBUG_GET + "/email={email}") @GET @Produces(JSON)
+    @Path(Api.DEBUG_GET + "/email={email}")
+    @GET
+    @Produces(JSON)
     public static List debugGet(@PathParam("email") String email) {
         return get(Arrays.asList(new User(email)));
     }
 
-    @Path(Api.DEBUG_DELETE + "/email={email}") @GET @Produces(TEXT)
+    /**
+     * delete user from db
+     * throws http error(404)
+     */
+    @Path(Api.DELETE)
+    @POST
+    @Consumes(JSON)
+    @Produces(JSON)
+    public List delete(List<User> users) {
+        for (User user : users) {
+            ObjectifyService.ofy()
+                    .delete()
+                    .keys(ObjectifyService.ofy()
+                            .load()
+                            .type(User.class)
+                            .filter("email", user.getEmail()).keys())
+                    .now();
+        }
+        return get(users);
+    }
+
+
+    @Path(Api.DEBUG_DELETE + "/email={email}")
+    @GET
+    @Produces(TEXT)
     public String debugDelete(@PathParam("email") String email) {
         List usersToDelete = get(Arrays.asList(new User(email)));
         ObjectifyService.ofy().delete().keys(ObjectifyService.ofy().load().type(User.class)
@@ -302,7 +373,9 @@ public class UserRestService extends GeneralRestService {
         return "" + usersToDelete.size() + " user(s) deleted";
     }
 
-    @Path(Api.DEBUG_GET_ALL) @GET @Produces(JSON)
+    @Path(Api.DEBUG_GET_ALL)
+    @GET
+    @Produces(JSON)
     public static List debugGetAll() {
         return getAll();
     }

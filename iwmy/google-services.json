@@ -1,0 +1,79 @@
+{
+  "project_info": {
+    "project_number": "76138689897",
+    "project_id": "iwmy-2753"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:76138689897:android:ecbb96b3a2ce1352",
+        "android_client_info": {
+          "package_name": "com.jacksonsmolenko"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "76138689897-td3tb09dln8js64dnf316va3gh5kpram.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1dout5InpJfuK1Xv3QCMIwgZcx7fY8eM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:76138689897:android:60a314e6f566c4f1",
+        "android_client_info": {
+          "package_name": "com.jacksonsmolenko.iwmy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "76138689897-f39pedrc5fku2uisal932r912o7fls05.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jacksonsmolenko.iwmy",
+            "certificate_hash": "B847305330F629237846EE526B29471976821862"
+          }
+        },
+        {
+          "client_id": "76138689897-td3tb09dln8js64dnf316va3gh5kpram.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1dout5InpJfuK1Xv3QCMIwgZcx7fY8eM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
