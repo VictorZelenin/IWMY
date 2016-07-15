@@ -55,7 +55,8 @@
             android:textColor="@color/grey"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:id="@+id/details_button" />
 
         <Button
             android:background="@color/white"

@@ -23,7 +23,6 @@ public abstract class CoolRecyclerAdapter extends RecyclerView
         void onClick(Serializable residingObject, View view);
 
         void onLongClick(Serializable residingObject);
-
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,

@@ -28,13 +28,14 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
         CoolRecyclerAdapter.CoolClickListener, CoolWebAsyncTask.CoolWebAsyncResponse,
         CoolDatePickerFragment.DateSetListener, CoolTimePickerFragment.TimeSetListener {
 
+    private static CountDownTimer timer = null;
+
     private View containerView;
     private CoolWebAsyncTask task = null;
     private Toast toast = null;
-    private static CountDownTimer timer = null;
 
-    public CoolFragment() {
-    }
+//    public CoolFragment() {
+//    }
 
     protected boolean isRadioButtonChecked(int radioButtonId) {
         return ((RadioButton) getViewById(radioButtonId)).isChecked();
@@ -50,15 +51,15 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
     }
 
     protected void setButtonEnabled(int buttonId, boolean isEnabled) {
-        ((Button) getViewById(buttonId)).setEnabled(isEnabled);
+        getViewById(buttonId).setEnabled(isEnabled);
     }
 
     protected String getEditText(int editTextId) {
-        return "" + ((EditText) getViewById(editTextId)).getText();
+        return String.valueOf(((EditText) getViewById(editTextId)).getText());
     }
 
     protected String getLabelText(int textViewId) {
-        return "" + ((TextView) getViewById(textViewId)).getText();
+        return String.valueOf(((TextView) getViewById(textViewId)).getText());
     }
 
     protected void openDatePicker() {
@@ -92,7 +93,7 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
     }
 
     protected void registerClickListener(int clickableId) {
-        (getViewById(clickableId)).setOnClickListener(this);
+        getViewById(clickableId).setOnClickListener(this);
     }
 
     protected void registerItemClickListener(CoolRecyclerAdapter recyclerAdapter) {
@@ -100,7 +101,7 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
     }
 
     protected ImageView getImageView(int imageViewId) {
-        return  ((ImageView) getViewById(imageViewId));
+        return ((ImageView) getViewById(imageViewId));
     }
 
     private void showToast(String message, int length) {
@@ -131,6 +132,10 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
         return CoolFragmentManager.getAttachment(this);
     }
 
+    /**
+     * @param textViewId constant id of EditText element
+     * @param text       expected text
+     */
     protected void setText(int textViewId, String text) {
         try {
             ((TextView) getViewById(textViewId)).setText(text);
@@ -140,7 +145,7 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
     }
 
     protected void setText(int textViewId, int textId) {
-        setText(textViewId, "" + getText(textId));
+        setText(textViewId, String.valueOf(getText(textId)));
     }
 
     protected void setText(int textViewId, int textId, String text) {
@@ -219,7 +224,7 @@ public abstract class CoolFragment extends Fragment implements View.OnClickListe
     }
 
     private void hideKeyboard() {
-        if (getActivity()!= null) {
+        if (getActivity() != null) {
             View view = getActivity().getCurrentFocus();
             if (view != null) {
                 InputMethodManager inputManager = (InputMethodManager) getActivity()

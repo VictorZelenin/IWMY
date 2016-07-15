@@ -15,6 +15,7 @@ public class Authenticator extends AbstractAccountAuthenticator{
         mContext = context;
     }
 
+
     @Override
     public Bundle editProperties(AccountAuthenticatorResponse response, String accountType) {
         return null;

@@ -27,7 +27,7 @@ public class TutorialFragment extends AppFragment {
             }
         });
 
-        ViewPager pager=(ViewPager)view.findViewById(R.id.pager);
+        ViewPager pager = (ViewPager) view.findViewById(R.id.pager);
         pager.setAdapter(new TutorialPagerAdapter(getFragmentManager()));
         return view;
     }

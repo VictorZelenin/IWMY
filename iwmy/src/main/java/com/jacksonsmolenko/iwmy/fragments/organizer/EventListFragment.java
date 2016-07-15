@@ -15,6 +15,7 @@ import com.jacksonsmolenko.iwmy.R;
 import com.jacksonsmolenko.iwmy.adapters.EventRecyclerAdapter;
 import com.jacksonsmolenko.iwmy.cooltools.CoolFragmentManager;
 import com.jacksonsmolenko.iwmy.fragments.AppFragment;
+import com.jacksonsmolenko.iwmy.fragments.user.EventDetailsFragment;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.Time;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
@@ -22,7 +23,7 @@ import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventListFragment extends AppFragment{
+public class EventListFragment extends AppFragment {
 
     private List<Event> actualEventList = new ArrayList<Event>();
 
@@ -46,6 +47,7 @@ public class EventListFragment extends AppFragment{
         actualEventRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         registerItemClickListener(actualEventRecyclerAdapter);
         registerClickListener(R.id.fab);
+        registerClickListener(R.id.details_button);
         actualEventRecyclerView.setAdapter(actualEventRecyclerAdapter);
 
 
@@ -74,9 +76,13 @@ public class EventListFragment extends AppFragment{
     @Override
     public void onClick(View view) {
         super.onClick(view);
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.fab:
                 CoolFragmentManager.showAtTop(new NewEventEditFragment());
+                break;
+//            case R.id.details_button:
+//                CoolFragmentManager.showAtTop(new EventDetailsFragment());
+//                break;
         }
     }
 
@@ -84,9 +90,5 @@ public class EventListFragment extends AppFragment{
         Event eventWildcard = new Event(Account.getUser().getEmail(), "", "", "", "", "", "",
                 "", "", "", "", "", "");
         post(Api.EVENTS + Api.GET, Event[].class, eventWildcard);
-
-
-
     }
-
 }

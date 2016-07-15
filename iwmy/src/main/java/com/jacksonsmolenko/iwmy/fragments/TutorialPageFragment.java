@@ -11,13 +11,13 @@ import android.widget.TextView;
 
 import com.jacksonsmolenko.iwmy.R;
 
-public class TutorialPageFragment extends Fragment{
+public class TutorialPageFragment extends Fragment {
 
     private int pageNumber;
 
     public static TutorialPageFragment newInstance(int page) {
         TutorialPageFragment fragment = new TutorialPageFragment();
-        Bundle args=new Bundle();
+        Bundle args = new Bundle();
         args.putInt("num", page);
         fragment.setArguments(args);
         return fragment;
@@ -35,9 +35,9 @@ public class TutorialPageFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View result=inflater.inflate(R.layout.tutorial_page, container, false);
-        TextView pageHeader = (TextView)result.findViewById(R.id.label_tutorial_page);
-        ImageView pageImage = (ImageView)result.findViewById(R.id.image_tutuorial_page);
+        View result = inflater.inflate(R.layout.tutorial_page, container, false);
+        TextView pageHeader = (TextView) result.findViewById(R.id.label_tutorial_page);
+        ImageView pageImage = (ImageView) result.findViewById(R.id.image_tutuorial_page);
 
         int[] images = new int[]{R.drawable.j, R.drawable.f, R.drawable.i};
         String[] pagerText = getResources().getStringArray(R.array.tutorial_text);

@@ -113,7 +113,7 @@ public abstract class CoolFragmentManager {
      * @return boolean presence
      */
     public static boolean isNotEmpty() {
-        return (! fragmentStack.isEmpty());
+        return (!fragmentStack.isEmpty());
     }
 
     private static void replaceWith(Fragment fragment, Serializable object) {
@@ -146,6 +146,7 @@ public abstract class CoolFragmentManager {
         if (isNotEmpty()) {
             return fragmentStack.remove(fragmentStack.size() - 1);
         } else {
+            // maybe throw RuntimeException??
             return null;
         }
     }
@@ -155,5 +156,4 @@ public abstract class CoolFragmentManager {
             fragmentStack.add(fragment);
         }
     }
-
 }

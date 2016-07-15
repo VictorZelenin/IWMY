@@ -24,7 +24,8 @@ public class Account {
     }
 
     public static User getUser() {
-        User user = new User();
+        // don't need to create new User instance here
+        User user = null;
         try {
             user = new Gson().fromJson(CoolApplication.readPreferences(USER, ""), User.class);
         } catch (Throwable e) {

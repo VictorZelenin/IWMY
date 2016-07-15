@@ -13,14 +13,15 @@ public class AppliedDialogFragment extends DialogFragment{
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
-                .setMessage(R.string.dialog_registr_message_send)
-                .setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dismiss();
-                    }
-                });
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+//                .setMessage(R.string.dialog_registr_message_send)
+//                .setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int id) {
+//                        dismiss();
+//                    }
+//                });
         // Create the AlertDialog object and return it
-        return builder.create();
+//        return builder.create();
+        return null;
     }
 }

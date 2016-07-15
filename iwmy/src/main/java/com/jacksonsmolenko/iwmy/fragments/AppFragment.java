@@ -21,6 +21,7 @@ public abstract class AppFragment extends CoolFragment {
         startUpdatingProgressBar();
     }
 
+    // abstract ?
     public void onPostReceive(String tag, List responseObjectList) {
     }
 
@@ -87,5 +88,4 @@ public abstract class AppFragment extends CoolFragment {
     private SmoothProgressBar getUpdatingProgressBar() {
         return (SmoothProgressBar) getViewById(R.id.progress_bar);
     }
-
 }

@@ -85,7 +85,6 @@ public class SettingsFragment extends AppFragment {
                         new DialogInterface.OnClickListener() {
 
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                // TODO post method doesn't work
                                 post(Api.USERS + Api.DELETE, User[].class, Account.getUser());
                                 dialog.dismiss();
                                 CoolFragmentManager.showAtBottom(new LoginFragment());

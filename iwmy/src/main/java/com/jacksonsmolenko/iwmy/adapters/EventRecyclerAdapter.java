@@ -1,14 +1,18 @@
 package com.jacksonsmolenko.iwmy.adapters;
 
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jacksonsmolenko.iwmy.ImageManager;
 import com.jacksonsmolenko.iwmy.R;
+import com.jacksonsmolenko.iwmy.cooltools.CoolFragmentManager;
 import com.jacksonsmolenko.iwmy.cooltools.CoolRecyclerAdapter;
+import com.jacksonsmolenko.iwmy.fragments.user.EventDetailsFragment;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
 
 import java.util.List;
@@ -24,6 +28,9 @@ public class EventRecyclerAdapter extends CoolRecyclerAdapter {
     public EventRecyclerAdapter(List dataSet, boolean showCity) {
         super(dataSet);
         this.showCity = showCity;
+        super.dataSet.add(null);
+        super.dataSet.add(null);
+        super.dataSet.add(null);
     }
 
     public class ViewHolder extends CoolRecyclerAdapter.ViewHolder {
@@ -31,6 +38,7 @@ public class EventRecyclerAdapter extends CoolRecyclerAdapter {
         public TextView dateTextView;
         public TextView descriptionView;
         public ImageView photoImageView;
+        public Button details;
 
         public ViewHolder(View view) {
             super(view);
@@ -38,8 +46,15 @@ public class EventRecyclerAdapter extends CoolRecyclerAdapter {
             dateTextView = (TextView) view.findViewById(R.id.label_event_time);
             descriptionView = (TextView) view.findViewById(R.id.label_event_description);
             photoImageView = (ImageView) view.findViewById(R.id.event_photo);
+            details = (Button) view.findViewById(R.id.details_button);
         }
 
+    }
+
+    // TODO delete this one :)
+    @Override
+    public int getItemCount(){
+        return 3;
     }
 
     @Override
@@ -51,13 +66,20 @@ public class EventRecyclerAdapter extends CoolRecyclerAdapter {
 
     @Override
     public void onBindViewHolder(CoolRecyclerAdapter.ViewHolder holder, int position) {
-        Event event = (Event) (dataSet.get(position));
-        ((ViewHolder) holder).nameAndAgeTextView.setText(event.getPlace() + " ("
-                + event.getMinAllowedAge() + " - " + event.getMaxAllowedAge() + ")");
-        ((ViewHolder) holder).dateTextView.setText(event.getTime()
-                + ((showCity && !event.getCity().isEmpty()) ? (" / " + event.getCity()) : ""));
-        ((ViewHolder) holder).descriptionView.setText(event.getDescription());
-        ImageManager.setEventThumbnail(((ViewHolder) holder).photoImageView, event.getThumbnail());
+//        Event event = (Event) (dataSet.get(position));
+//        ((ViewHolder) holder).nameAndAgeTextView.setText(event.getPlace() + " ("
+//                + event.getMinAllowedAge() + " - " + event.getMaxAllowedAge() + ")");
+//        ((ViewHolder) holder).dateTextView.setText(event.getTime()
+//                + ((showCity && !event.getCity().isEmpty()) ? (" / " + event.getCity()) : ""));
+//        ((ViewHolder) holder).descriptionView.setText(event.getDescription());
+//        ImageManager.setEventThumbnail(((ViewHolder) holder).photoImageView, event.getThumbnail());
+        ((ViewHolder) holder).details.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CoolFragmentManager.showAtTop(new EventDetailsFragment());
+            }
+        });
     }
+
 
 }

@@ -53,13 +53,13 @@ public class LoginFragment extends AuthorizationFragment {
                 CoolFragmentManager.showAtTop(new RegistrationFragment());
                 break;
             case R.id.social_vk:
-                vkSingIn();
+                vkSignIn();
                 break;
             case R.id.social_google:
-                googleSingIn();
+                googleSignIn();
                 break;
             case R.id.social_fb:
-                fbSingIn();
+                fbSignIn();
                 break;
             case R.id.how_to_become_org:
                 CoolFragmentManager.showAtTop(new com.jacksonsmolenko.iwmy.fragments.organizer.LoginFragment());

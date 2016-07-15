@@ -44,7 +44,8 @@ public class AuthorizationFragment extends AppFragment {
     private final static String TAG = "Auth";
     private String scope = VKScope.EMAIL;
     private GoogleApiClient mGoogleApiClient;
-    CallbackManager callbackManager;
+    // private??
+    /*private*/ CallbackManager callbackManager;
 
     public void login() {
         String userEmail = getEditText(R.id.input_login_email);
@@ -63,9 +64,9 @@ public class AuthorizationFragment extends AppFragment {
         }
     }
 
-    public void googleSingIn() {
+    public void googleSignIn() {
 
-        if(mGoogleApiClient != null) {
+        if (mGoogleApiClient != null) {
             mGoogleApiClient.disconnect();
         }
 
@@ -82,12 +83,12 @@ public class AuthorizationFragment extends AppFragment {
         startActivityForResult(signInIntent, GOOGLE_REQUEST);
     }
 
-    public void vkSingIn() {
+    public void vkSignIn() {
         VKSdk.login(getActivity(), scope);
 
     }
 
-    public void fbSingIn() {
+    public void fbSignIn() {
 
         FacebookSdk.sdkInitialize(getContext());
         final AccessToken accessToken = AccessToken.getCurrentAccessToken();
@@ -143,9 +144,10 @@ public class AuthorizationFragment extends AppFragment {
                 String email = res.email;
 
             }
+
             @Override
             public void onError(VKError error) {
-        // Произошла ошибка авторизации (например, пользователь запретил авторизацию)
+                // Произошла ошибка авторизации (например, пользователь запретил авторизацию)
             }
         })) {
             super.onActivityResult(requestCode, resultCode, data);
@@ -154,13 +156,13 @@ public class AuthorizationFragment extends AppFragment {
         //fb
         if (requestCode == 64206) {
             callbackManager.onActivityResult(requestCode, resultCode, data);
-            }
+        }
 
         // google
         if (requestCode == GOOGLE_REQUEST) {
 
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            if(result.isSuccess()) {
+            if (result.isSuccess()) {
                 if (result.isSuccess()) {
 
                     handleSignInResult(result);
@@ -181,7 +183,7 @@ public class AuthorizationFragment extends AppFragment {
         makeUser(email, id, name, "", "");
     }
 
-    private void handleSignInResult(JSONObject object){
+    private void handleSignInResult(JSONObject object) {
         try {
             String id = object.getString("id");
             String name = object.getString("name");
@@ -192,12 +194,12 @@ public class AuthorizationFragment extends AppFragment {
             String photoURL = object.getString("url");*/
 
             makeUser(email, id, name, birthday, gender);
-        }catch (JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    private void makeUser(String email, String password, String name, String birthday, String gender){
+    private void makeUser(String email, String password, String name, String birthday, String gender) {
         Log.d(TAG, "singed in " + email + " " + password + " " + name);
 
         User wildcardLoginUser = new User(email, password, name,

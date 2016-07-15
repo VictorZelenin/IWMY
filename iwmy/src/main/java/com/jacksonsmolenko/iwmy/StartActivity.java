@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.jacksonsmolenko.iwmy.cooltools.CoolFragmentManager;
 import com.jacksonsmolenko.iwmy.fragments.TutorialFragment;
+import com.jacksonsmolenko.iwmy.fragments.user.EventDetailsFragment;
 import com.vk.sdk.VKSdk;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class StartActivity extends FragmentActivity {
 
         CoolFragmentManager.setup(this, R.id.fragment_holder);
 
-        if (! CoolFragmentManager.isNotEmpty()) {
+        if (!CoolFragmentManager.isNotEmpty()) {
             CoolFragmentManager.showAtBottom(new TutorialFragment()); // show the first fragment
         }
     }

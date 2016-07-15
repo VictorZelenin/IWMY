@@ -48,5 +48,4 @@ public class CoolApplication extends Application {
     public static Context getContext() {
         return context;
     }
-
 }
