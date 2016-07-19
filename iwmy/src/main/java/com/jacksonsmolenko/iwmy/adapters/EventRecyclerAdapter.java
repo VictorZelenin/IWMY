@@ -28,9 +28,6 @@ public class EventRecyclerAdapter extends CoolRecyclerAdapter {
     public EventRecyclerAdapter(List dataSet, boolean showCity) {
         super(dataSet);
         this.showCity = showCity;
-        super.dataSet.add(null);
-        super.dataSet.add(null);
-        super.dataSet.add(null);
     }
 
     public class ViewHolder extends CoolRecyclerAdapter.ViewHolder {
@@ -66,6 +63,12 @@ public class EventRecyclerAdapter extends CoolRecyclerAdapter {
 
     @Override
     public void onBindViewHolder(CoolRecyclerAdapter.ViewHolder holder, int position) {
+        ((ViewHolder)holder).details.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CoolFragmentManager.showAtTop(new EventDetailsFragment());
+            }
+        });
 //        Event event = (Event) (dataSet.get(position));
 //        ((ViewHolder) holder).nameAndAgeTextView.setText(event.getPlace() + " ("
 //                + event.getMinAllowedAge() + " - " + event.getMaxAllowedAge() + ")");
@@ -73,12 +76,12 @@ public class EventRecyclerAdapter extends CoolRecyclerAdapter {
 //                + ((showCity && !event.getCity().isEmpty()) ? (" / " + event.getCity()) : ""));
 //        ((ViewHolder) holder).descriptionView.setText(event.getDescription());
 //        ImageManager.setEventThumbnail(((ViewHolder) holder).photoImageView, event.getThumbnail());
-        ((ViewHolder) holder).details.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CoolFragmentManager.showAtTop(new EventDetailsFragment());
-            }
-        });
+//        ((ViewHolder) holder).details.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                CoolFragmentManager.showAtTop(new EventDetailsFragment());
+//            }
+//        });
     }
 
 

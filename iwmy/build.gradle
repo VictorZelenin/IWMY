@@ -20,7 +20,8 @@ android {
     }
     defaultConfig {
         applicationId "com.jacksonsmolenko.iwmy"
-        buildConfigField "String", "BACKEND_URL", "\"http://192.168.1.103:8082\"" //http://192.168.56.1:8082
+        buildConfigField "String", "BACKEND_URL", "\"https://iwmy-2753.appspot.com\""
+        //http://10.1.22.27:8082  https://iwmy-2753.appspot.com
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1

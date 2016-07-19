@@ -36,7 +36,7 @@ public class StartActivity extends FragmentActivity {
             CoolFragmentManager.showPrevious(); // pop the top fragment from the stack
         }
         // If there are no fragments in the stack to show, go back from the activity itself
-        if (! CoolFragmentManager.isNotEmpty()) {
+        if (!CoolFragmentManager.isNotEmpty()) {
             super.onBackPressed();
         }
     }

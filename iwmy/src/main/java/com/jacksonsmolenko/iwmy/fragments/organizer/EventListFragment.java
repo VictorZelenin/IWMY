@@ -47,7 +47,7 @@ public class EventListFragment extends AppFragment {
         actualEventRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         registerItemClickListener(actualEventRecyclerAdapter);
         registerClickListener(R.id.fab);
-        registerClickListener(R.id.details_button);
+//        registerClickListener(R.id.details_button);
         actualEventRecyclerView.setAdapter(actualEventRecyclerAdapter);
 
 
@@ -80,9 +80,9 @@ public class EventListFragment extends AppFragment {
             case R.id.fab:
                 CoolFragmentManager.showAtTop(new NewEventEditFragment());
                 break;
-//            case R.id.details_button:
-//                CoolFragmentManager.showAtTop(new EventDetailsFragment());
-//                break;
+            case R.id.details_button:
+                CoolFragmentManager.showAtTop(new EventDetailsFragment());
+                break;
         }
     }
 

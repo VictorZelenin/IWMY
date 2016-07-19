@@ -10,7 +10,9 @@ import android.view.ViewGroup;
 import com.jacksonsmolenko.iwmy.Account;
 import com.jacksonsmolenko.iwmy.R;
 import com.jacksonsmolenko.iwmy.adapters.EventRecyclerAdapter;
+import com.jacksonsmolenko.iwmy.cooltools.CoolFragmentManager;
 import com.jacksonsmolenko.iwmy.fragments.AppFragment;
+import com.jacksonsmolenko.iwmy.fragments.organizer.NewEventEditFragment;
 import com.oleksiykovtun.iwmy.speeddating.Api;
 import com.oleksiykovtun.iwmy.speeddating.Time;
 import com.oleksiykovtun.iwmy.speeddating.data.Event;
@@ -18,7 +20,7 @@ import com.oleksiykovtun.iwmy.speeddating.data.Event;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventListFragment extends AppFragment{
+public class EventListFragment extends AppFragment {
 
     private List<Event> eventList = new ArrayList<Event>();
     private EventRecyclerAdapter eventRecyclerAdapter = new EventRecyclerAdapter(eventList, true);
@@ -37,6 +39,7 @@ public class EventListFragment extends AppFragment{
         eventRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         registerItemClickListener(eventRecyclerAdapter);
+
         eventRecyclerView.setAdapter(eventRecyclerAdapter);
 
         return view;
@@ -47,11 +50,25 @@ public class EventListFragment extends AppFragment{
         // filtering by expiration time on device to ensure relativity to device time
         final long eventExpirationTimeMillis = 3600000;
         eventList.clear();
-        for (Event event : (List<Event>)response) {
+        for (Event event : (List<Event>) response) {
             if (Time.getMillisFromDateTime(event.getTime()) < eventExpirationTimeMillis) {
                 eventList.add(event);
             }
         }
         eventRecyclerAdapter.notifyDataSetChanged();
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        super.onClick(view);
+        switch (view.getId()) {
+            case R.id.fab:
+                CoolFragmentManager.showAtTop(new NewEventEditFragment());
+                break;
+            case R.id.details_button:
+                CoolFragmentManager.showAtTop(new EventDetailsFragment());
+                break;
+        }
     }
 }
